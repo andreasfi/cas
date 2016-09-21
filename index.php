@@ -1,6 +1,7 @@
 <?php
 
 phpinfo();
+phpinfo();
 /**
  * Created by PhpStorm.
  * User: andreasfi
