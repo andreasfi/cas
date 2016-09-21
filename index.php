@@ -2,11 +2,7 @@
 
 phpinfo();
 phpinfo();
-sdkjfskdjfhskdjfhks
-	
-	
-	
-	sdkfjhsdkfjhsdkfjhsjkdh
+echo 'hello;';
 /**
  * Created by PhpStorm.
  * User: andreasfi
