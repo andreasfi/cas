@@ -8,4 +8,6 @@
  * Time: 13:56
  */
 
+echo 'hello world';
+
 ?>
