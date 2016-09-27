@@ -14,4 +14,7 @@ class sortiesController extends Controller{
     function propositions(){
 
     }
+    function details(){
+
+    }
 }

@@ -75,8 +75,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h2 class="pull-left"></i id ="pageTitle"> <?php  echo $pageTitle ?></h2>
-                    <div class="pull-right heading-meta"><?php  echo $pageMessage ?></div>
+                    <h2 class="pull-left"></i id ="pageTitle"> <?php  if(isset($pageTitle)){ echo $pageTitle;}; ?></h2>
+                    <div class="pull-right heading-meta"><?php  if(isset($pageMessage)){ echo $pageMessage; }; ?></div>
                 </div>
             </div>
         </div>
