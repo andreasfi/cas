@@ -31,3 +31,4 @@ session_start();
 //Call controller method and view
 require_once 'Class.Routing.php';
 Routing::getInstance()->route();
+?>

@@ -9,6 +9,8 @@ include_once ROOT_DIR.'views/header.inc';
 
 
 ?>
+
+
 <br><br>
 <form action="<?php echo URL_DIR.'login/connection';?>" method="post">
 	<table align="center">		
