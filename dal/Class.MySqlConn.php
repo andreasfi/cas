@@ -7,7 +7,7 @@
 class MySqlConn {
 	const HOST = "127.0.0.1";
 	const PORT = "3306";
-	const DATABASE = "php_mvc";
+	const DATABASE = "cas_php";
 	const USER = "root";
 	const PWD = "";
 	
