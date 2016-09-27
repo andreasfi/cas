@@ -21,5 +21,9 @@ class sortiesController extends Controller{
     function inscription(){
 
     }
+	
+	function ajoutsortie(){
+		
+	}
     
 }
