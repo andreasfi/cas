@@ -43,18 +43,29 @@ class Routing{
 		$parts = explode("/", substr($path['path'], 1));
 
 		//Get the controller and the view or method
-		$controller = strtolower((@$parts[1]) ? $parts[1] : "login");
-		$method = strtolower((@$parts[2]) ? $parts[2] : "login");
+		$controller = strtolower((@$parts[1]) ? $parts[1] : "home");
+		$method = strtolower((@$parts[2]) ? $parts[2] : "");
+
+        if (!method_exists("{$controller}Controller", "{$method}")) {
+            $method = $controller;
+        }
 
 		//Check if controller and method exist
 		if(!file_exists(ROOT_DIR."controllers/Class.{$controller}Controller.php")) {
 			$controller = "error";
 			$method = "http404";
 		}
-		elseif (!method_exists("{$controller}Controller", "{$method}")){
-			$controller = "error";
-			$method = "http404";
-		}
+		/*elseif (isset($method)){
+            $method = $controller;
+		    if (!method_exists("{$controller}Controller", "{$method}")) {
+                $controller = "error";
+                $method = "http404";
+            } else {
+                $method = $controller;
+            }
+		}*/
+
+
 
 		//Instantiate controller class
 		$class = $controller . "Controller";

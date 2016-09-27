@@ -8,7 +8,7 @@
 
 
 class sortiesController extends Controller{
-    function programme(){
+    function sorties(){
 
     }
     function propositions(){

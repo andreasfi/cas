@@ -28,9 +28,12 @@ class Controller {
     function display(){
 
     	$view = "{$this->controller}/{$this->method}.php";
+        if(file_exists('views/'."{$this->method}.php")){
+            include 'views/'."{$this->method}.php";
+        } elseif(file_exists('views/'.$view)){
+            include 'views/'.$view;
+        }
 
-    	if(file_exists('views/'.$view))
-			include 'views/'.$view;
     }
     
     /**

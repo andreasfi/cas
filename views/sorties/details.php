@@ -15,7 +15,7 @@ include_once  'views/header.inc'; ?>
             </div>
             <div class="col-lg-6">
 
-                <a  href="#" class="btn btn-danger btn-large pull-right">Je veux participer <i class="fa fa-angle-double-right"></i></a>
+                <a  href="sorties/inscription" class="btn btn-danger btn-large pull-right">Je veux participer <i class="fa fa-angle-double-right"></i></a>
                 <a  href="#" class="btn btn-info btn-large pull-right">Trouver itinéraire <i class="fa fa-angle-double-right"></i></a>
             </div>
 
@@ -37,9 +37,6 @@ include_once  'views/header.inc'; ?>
 
             <div class="col-lg-12">
                 <img class="center-block" src="http://placehold.it/600x150">
-            </div>
-            <div class="col-lg-12">
-                <img class="center-block" src="http://placehold.it/300x150">
             </div>
 
 

@@ -82,7 +82,7 @@
                             <a href="index.html"><i class="fa fa-photo blue"></i></a>
                         </div>
                         <div class="logo-text">
-                            <h1><a href="index.html">CA<span class="lightblue">S</span></a></h1>
+                            <h1><a href="home">CA<span class="lightblue">S</span></a></h1>
                             <div class="logo-meta">SWISS ALPINE CLUB</div>
                         </div>
                         <div class="clearfix"></div>
@@ -94,9 +94,9 @@
                         <div id="ddtopmenubar" class="mattblackmenu">
                             <ul>
 
-                                <li><a href="login/login" class="bblue"> <i class="fa fa-lock"></i> Connection</a></li>
-                                <li><a href="" class="bblue"> <i class="fa fa-map-marker"></i>A proximité</a></li>
-                                <li><a href="sorties/programme" class="bblue"> <i class="fa fa-calendar"></i> Sorties</a></li>
+                                <li><a href="login" class="bblue"> <i class="fa fa-lock"></i> Connection</a></li>
+                                <li><a href="proximite" class="bblue"> <i class="fa fa-map-marker"></i>A proximité</a></li>
+                                <li><a href="sorties" class="bblue"> <i class="fa fa-calendar"></i> Sorties</a></li>
                                 <li><a href="contact" class="bblue"> <i class="fa fa-envelope-o"></i> Contact</a></li>
                                 <li><a  class="bblue"><img src ="./img/French_Flag_Small_Icon.jpg"><img src ="./img/English_Flag_Small_Icon.png"></a></li>
                             </ul>

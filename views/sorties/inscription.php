@@ -1,4 +1,6 @@
-<?php include_once ROOT_DIR.'views/header.inc';
+<?php
+include_once ROOT_DIR.'views/header.inc';
+
 ?>
 
 <br><br>
