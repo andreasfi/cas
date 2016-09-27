@@ -9,7 +9,8 @@
 include_once  'views/header.inc'; ?>
 <style>
 	.formgroup{
-		margin-bottom: 25px;
+		margin-top: 10px;
+		margin-bottom: 15px;
 	}
 	
 	.formgroup p{
@@ -19,8 +20,7 @@ include_once  'views/header.inc'; ?>
 </style>
 <div class="container">
 	<div class="row">
-		<div class="col-md-3 col-xs-1"></div>
-		<div class="col-md-6 col-xs-10 text-center">
+		<div class="col-md-5 col-xs-1">
 			<form>
 				<div class="formgroup">
 					<p>Titre de la randonnée</p>
@@ -54,23 +54,39 @@ include_once  'views/header.inc'; ?>
 					<p>Description</p>
 					<textarea rows="6" cols="50" name="description"></textarea>
 				</div>
-				<div id="#map" style="width:100%; height:250px;"></div>
+		</div>
+		<div class="col-md-7 col-xs-10 text-center">
+			<div class="formgroup">
+				<h2>Parcours</h2>
+				<p>cliquez sur la carte pour dessiner le parcours</p>
+				<p/>
+				<input id="geocodeInput" type=text placeholder="Entrer un lieu"></textarea><button id="searchGeo">Go</button>
+				<div id="map" style="width:100%; height:400px; margin-top:10px"></div>
+			</div>
+		</div>
+	</div>
+	<div class="row" style="margin-bottom:50px">
+		<div class="col-md-12 text-center">
+			<input type="submit">
 			</form>
 		</div>
-		<div class="col-ms-3 col-xs-1"></div>
 	</div>
 </div>
 <script>
-	var map;
-	function initMap() {
-		map = new google.maps.Map(document.getElementById('map'), {
-			center: {lat: -34.397, lng: 150.644},
-			zoom: 8
-		});
-	}
-</script>
-
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAR9yaAK5avHng7msvuDKUMtWGa_hDnAVA&callback=initMap"
+      function initMap() {
+		  
+		  	var mapCanvas = document.getElementById('map');
+			var mapOptions = {
+				center: {lat: 46.307174, lng: 7.473367},
+				zoom: 9,
+				mapTypeId: 'terrain'
+			};
+		  	var map = new google.maps.Map(mapCanvas, mapOptions);
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfHSiXZQseH8j-pPHb9PiWwvGvpOUSDGw&callback=initMap"
     async defer></script>
+
+
 <?php
 include_once 'views/footer.inc';
