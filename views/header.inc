@@ -4,7 +4,7 @@
      
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<title>PHP MVC</title>
+		<title>CAS</title>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
 
         <meta name="description" content=" ">
@@ -49,9 +49,9 @@
                         <div id="ddtopmenubar" class="mattblackmenu">
                             <ul>
 
-                                <li><a href="login/login" class="borange"> <i class="fa fa-camera"></i> Login</a></li>
-                                <li><a href="sorties/programme" class="bviolet"> <i class="fa fa-envelope-o"></i> Programme</a></li>
-                                <li><a href="sorties/propositions" class="bred"> <i class="fa fa-envelope-o"></i> Propositions</a></li>
+                                <li><a href="login/login" class="bblue"> <i class="fa fa-camera"></i> Login</a></li>
+                                <li><a href="sorties/programme" class="bblue"> <i class="fa fa-envelope-o"></i> Programme</a></li>
+                                <li><a href="sorties/propositions" class="bblue"> <i class="fa fa-envelope-o"></i> Propositions</a></li>
                                 <li><a href="contact" class="bblue"> <i class="fa fa-envelope-o"></i> Contact</a></li>
 
 
