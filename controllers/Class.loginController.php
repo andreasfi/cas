@@ -6,17 +6,17 @@ class loginController extends Controller{
 
     function connection(){
         //Get data posted by the form
-        $uname = $_POST['username'];
+        $mail = $_POST['mail'];
         $pwd = $_POST['password'];
 
         //Check if data valid
-        if(empty($uname) or empty($pwd)){
+        if(empty($mail) or empty($pwd)){
             $_SESSION['msg'] = '<span class="error">A required field is empty!</span>';
             $this->redirect('login', 'login');
         }
         else{
             //Load user from DB if exists
-            $result = User::connect($uname, $pwd);
+            $result = User::connect($mail, $pwd);
 
             //Put user in session if exists or return error msg
             if(!$result){
