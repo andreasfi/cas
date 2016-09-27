@@ -17,12 +17,12 @@ include_once ROOT_DIR.'views/header.inc';
 		<tr>
 			<td>
 				<?php echo $msg;?>
-				<h1>Login</h1>				
-				Username:<br><input type="text" name="username" size="25"/><br>
-				Password:<br><input type="password" name="password" size="25"/><br><br>			
+				<h1>Se connecter</h1>
+				E-mail:<br><input type="text" name="mail" size="25"/><br>
+				Mot de passe:<br><input type="password" name="password" size="25"/><br><br>
 				<input class="btn btn-primary" type="submit" name="Submit" value="  OK  "/>
 				<br/><br/>							
-				<a href="<?php echo 'login/newuser';?>">Register</a>
+				Pas de compte ? <a href="<?php echo 'login/newuser';?>">(S'enregistrer)</a>
 			</td>
 		</tr>
 	</table>

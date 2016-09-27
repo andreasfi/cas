@@ -86,15 +86,15 @@ class User{
 		return  MySqlConn::getInstance()->executeQuery($query);
 	}
 	
-	public static function connect($uname, $pwd){
+	public static function connect($mail, $pwd){
 		$pwd = sha1($pwd);
-		$query = "SELECT * FROM user WHERE username='$uname' AND password='$pwd'";
+		$query = "SELECT * FROM users WHERE mail='$mail' AND pwd='$pwd'";
 		$result = MySqlConn::getInstance()->selectDB($query);
 		$row = $result->fetch();
 		if(!$row) return false;
 		
 		return new User($row['id'], $row['firstname'], $row['lastname'],
-				$row['username'], $row['password']);
+				$row['mail'], $row['tel'],$row['fk_idUserTypes'], $row['pwd']);
 	}
 	
 }

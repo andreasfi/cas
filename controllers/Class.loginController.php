@@ -6,17 +6,17 @@ class loginController extends Controller{
 
     function connection(){
         //Get data posted by the form
-        $uname = $_POST['username'];
+        $mail = $_POST['mail'];
         $pwd = $_POST['password'];
 
         //Check if data valid
-        if(empty($uname) or empty($pwd)){
+        if(empty($mail) or empty($pwd)){
             $_SESSION['msg'] = '<span class="error">A required field is empty!</span>';
             $this->redirect('login', 'login');
         }
         else{
             //Load user from DB if exists
-            $result = User::connect($uname, $pwd);
+            $result = User::connect($mail, $pwd);
 
             //Put user in session if exists or return error msg
             if(!$result){
@@ -26,7 +26,7 @@ class loginController extends Controller{
             else{
                 $_SESSION['msg'] = '<span class="success">Welcome '. $result->getFirstname(). ' '.$result->getLastname().'!</span>';
                 $_SESSION['user'] = $result;
-                $this->redirect('login', 'welcome');
+                $this->redirect('welcome');
             }
         }
 
@@ -41,6 +41,7 @@ class loginController extends Controller{
             $this->redirect('login', 'welcome');
             exit;
         }
+
         /*dsda*/
         $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
         $this->vars['pageTitle'] = "Connection";
@@ -53,7 +54,7 @@ class loginController extends Controller{
      */
     function logout(){
         session_destroy();
-        $this->redirect('login', 'login');
+        $this->redirect('login');
     }
 
     /**
@@ -132,7 +133,7 @@ class loginController extends Controller{
     function welcome(){
         //The page cannot be displayed if no user connected
         if(!$this->getActiveUser()){
-            $this->redirect('login', 'login');
+            $this->redirect('login');
             exit;
         }
 
