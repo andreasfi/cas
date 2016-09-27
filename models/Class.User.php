@@ -3,14 +3,18 @@ class User{
 	private $id;
 	private $firstname;
 	private $lastname;
-	private $username;
-	private $password;
-	
-	public function __construct($id=null, $firstname, $lastname, $username, $password){
+	private $mail;
+    private $phone;
+    private $memberType;
+    private $password;
+
+	public function __construct($id=null, $firstname, $lastname, $mail, $phone, $memberType, $password){
 		$this->setId($id);
 		$this->setFirstname($firstname);
 		$this->setLastname($lastname);
-		$this->setUsername($username);
+		$this->setMail($mail);
+        $this->setPhone($phone);
+        $this->setMemberType($memberType);
 		$this->setPassword($password);
 	}	
 	
@@ -38,13 +42,33 @@ class User{
 		$this->lastname = $lastname;
 	}
 	
-	public function getUsername(){
-		return $this->username;
+	public function getMail(){
+		return $this->mail;
 	}
 	
-	public function setUsername($username){
-		$this->username = $username;
+	public function setMail($mail){
+		$this->mail = $mail;
 	}
+
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+    }
+
+    public function getMemberType()
+    {
+        return $this->memberType;
+    }
+
+    public function setMemberType($memberType)
+    {
+        $this->memberType = $memberType;
+    }
 	
 	public function getPassword(){
 		return $this->password;
@@ -56,8 +80,8 @@ class User{
 	
 	public function save(){
 		$pwd = sha1($this->password);
-		$query = "INSERT into user(firstname, lastname, username, password)
-		VALUES('$this->firstname', '$this->lastname', '$this->username', '$pwd');";
+		$query = "INSERT into users( firstname, lastname, mail, tel, fk_idUserTypes, pwd)
+		VALUES('$this->firstname', '$this->lastname', '$this->mail', '$this->phone','$this->memberType','$pwd');";
 			
 		return  MySqlConn::getInstance()->executeQuery($query);
 	}
