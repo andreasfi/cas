@@ -93,7 +93,7 @@ class User{
 		$row = $result->fetch();
 		if(!$row) return false;
 		
-		return new User($row['id'], $row['firstname'], $row['lastname'],
+		return new User($row['idUser'], $row['firstname'], $row['lastname'],
 				$row['mail'], $row['tel'],$row['fk_idUserTypes'], $row['pwd']);
 	}
 	
