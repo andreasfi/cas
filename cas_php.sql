@@ -22,13 +22,7 @@ SET time_zone = "+00:00";
 
 -- --------------------------------------------------------
 
---
--- Table structure for table `defdwf`
---
 
-CREATE TABLE `defdwf` (
-  `xsada` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
