@@ -1,7 +1,12 @@
-<?php include_once ROOT_DIR.'views/header.inc'; 
+
+<?php
+$msg = $this->vars['msg'];
+$pageTitle = $this->vars['pageTitle'];
+$pageMessage = $this->vars['pageMessage'];
+include_once ROOT_DIR.'views/header.inc';
 
 //Collect data from controller
-$msg = $this->vars['msg'];
+
 
 ?>
 <br><br>
@@ -21,7 +26,9 @@ $msg = $this->vars['msg'];
 	</table>
 </form>
 <br/><br/><br/><br/>
+
 <?php 
 unset($_SESSION['msg']);
 include_once ROOT_DIR.'views/footer.inc';
+
 ?>

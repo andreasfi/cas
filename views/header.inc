@@ -49,10 +49,11 @@
                         <div id="ddtopmenubar" class="mattblackmenu">
                             <ul>
 
-                                <li><a href="login/login" class="bblue"> <i class="fa fa-camera"></i> Login</a></li>
-                                <li><a href="sorties/programme" class="bblue"> <i class="fa fa-envelope-o"></i> Programme</a></li>
-                                <li><a href="sorties/propositions" class="bblue"> <i class="fa fa-envelope-o"></i> Propositions</a></li>
+                                <li><a href="login/login" class="bblue"> <i class="fa fa-lock"></i> Connection</a></li>
+                                <li><a href="" class="bblue"> <i class="fa fa-map-marker"></i>A proximité</a></li>
+                                <li><a href="sorties/programme" class="bblue"> <i class="fa fa-calendar"></i> Sorties</a></li>
                                 <li><a href="contact" class="bblue"> <i class="fa fa-envelope-o"></i> Contact</a></li>
+                                <li><a  class="bblue"><img src ="./img/French_Flag_Small_Icon.jpg"><img src ="./img/English_Flag_Small_Icon.png"></a></li>
 
 
                             </ul>
@@ -70,3 +71,14 @@
             </div>
         </div>
     </header>
+    <div class="page-heading blightblue">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="pull-left"></i id ="pageTitle"> <?php  echo $pageTitle ?></h2>
+                    <div class="pull-right heading-meta"><?php  echo $pageMessage ?></div>
+                </div>
+            </div>
+        </div>
+    </div>
+

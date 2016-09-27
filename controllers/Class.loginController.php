@@ -3,6 +3,7 @@ class loginController extends Controller{
 	/**
 	 * Method called by the form of the page login.php
 	 */
+
 	function connection(){
 		//Get data posted by the form
 		$uname = $_POST['username'];
@@ -42,6 +43,9 @@ class loginController extends Controller{
 		}
 		
 		$this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
+        $this->vars['pageTitle'] = "Connection";
+        $this->vars['pageMessage'] = "Connectez vous pour vous inscrire aux évenements."; 
+
 	}
 	
 	/**
