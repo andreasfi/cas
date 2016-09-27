@@ -4,6 +4,8 @@
 $msg = $this->vars['msg'];
 
 ?>
+
+
 <br><br>
 <form action="<?php echo URL_DIR.'login/connection';?>" method="post">
 	<table align="center">		
