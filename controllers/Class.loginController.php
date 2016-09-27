@@ -41,10 +41,10 @@ class loginController extends Controller{
 			$this->redirect('login', 'welcome');
 			exit;
 		}
-		
+		/*dsda*/
 		$this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
         $this->vars['pageTitle'] = "Connection";
-        $this->vars['pageMessage'] = "Connectez vous pour vous inscrire aux évenements."; 
+        $this->vars['pageMessage'] = "Connectez vous pour vous inscrire aux évenements.";
 
 	}
 	
