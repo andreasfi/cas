@@ -21,7 +21,7 @@
 
     var event_type_textcolor = 'white';
 
-    $(document).ready(function(){
+    $(document).ready(function () {
         initCalendar('fr')
         initDataTable();
     });
@@ -33,7 +33,6 @@
         var today_y = today.getYear() + 1900;
 
         var today_string = today_y + '-' + today_m + '-' + today_d;
-        console.log("Today : " + today_string);
 
 
         $('#calendar').fullCalendar({
@@ -55,25 +54,51 @@
                     constraint: 'businessHours',
                     color: event_type_color[0],
                     textcolor: event_type_textcolor,
-                    allDay: true
+                    allDay: true,
+                    description: "Very cool event."
                 },
                 {
                     title: 'Randonnée XY',
                     start: '2016-09-01',
                     constraint: 'availableForMeeting', // defined below
                     color: event_type_color[1],
-                    textcolor: event_type_textcolor
-                },
-            ]
+                    textcolor: event_type_textcolor,
+                    description : "Another very  cool event"
+                }
+            ],
+            eventRender: function(event, element) {
+
+                //TODO : The tooltip must be placed on top of the event, not at the bottom of the page.
+                element.qtip({
+                    content: {
+                        text: event.description
+                    }
+                });
+            }
+
         });
     }
 
-    function initDataTable()
-    {
-            $('#datatable').DataTable({
-                paging : true,
-                scrollY : 300
-            });
-    }
+    function initDataTable() {
 
+        //TODO : fetch the data from the database.
+        var dataset = [
+            ["Tiger Nixon", "27.09.2016", "Sierre", "Crans-Montana", "4"],
+            ["Cours", "27.09.2016", "Sierre", "HES-SO", "2"]
+        ]
+
+
+        $('#datatable').DataTable({
+            paging: true,
+            scrollY: 300,
+            data: dataset,
+            columns: [
+                {title: "Title"},
+                {title: "Date"},
+                {title: "Departure"},
+                {title: "Arrival"},
+                {title: "Difficulty"}
+            ]
+        });
+    }
 </script>

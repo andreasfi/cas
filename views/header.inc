@@ -24,25 +24,9 @@
         <link href="css/font-awesome.min.css" rel="stylesheet">
         <link href="css/style.css" rel="stylesheet">
 
-        <!-- JQUERY PLUGIN -->
-        <script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
-
-        <!-- FULLCALENDAR JQUERY PLUGIN -->
-        <link type="text/css" rel="stylesheet" href="css/fullcalendar.css">
-        <script type="text/javascript" src="js/fullcalendar/moment.min.js"></script>
-        <script type="text/javascript" src="js/fullcalendar/fullcalendar.js"></script>
-        <script type="text/javascript" src="js/fullcalendar/locale/fr.js"></script>
-        <script type="text/javascript" src="js/fullcalendar/locale/de.js"></script>
-        <script type="text/javascript" src="js/fullcalendar/locale/en-gb.js"></script>
-
-        <!-- DATATABLES -->
-
-        <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.12/css/jquery.dataTables.css">
-        <script type="text/javascript" charset="utf8" src="http://cdn.datatables.net/1.10.12/js/jquery.dataTables.js"></script>
-
-
         <link rel="shortcut icon" href="#">
-		<script src="js/jquery.js"></script>
+
+        <script src="js/jquery.js"></script>
 		<!-- Bootstrap JS -->
 		<script src="js/bootstrap.min.js"></script>
 		<!-- SLIDER REVOLUTION 4.x SCRIPTS  -->
@@ -65,6 +49,27 @@
 		<script src="js/html5shiv.js"></script>
 		<!-- Custom JS -->
 		<script src="js/custom.js"></script>
+
+        <!-- QTIP -->
+        <script type="text/javascript" src="js/jquery.qtip.js"></script>
+        <link type="text/css" href="css/jquery.qtip.css">
+
+        <!-- FULLCALENDAR JQUERY PLUGIN -->
+        <link type="text/css" rel="stylesheet" href="css/fullcalendar.css">
+
+        <!-- Don't change the order of the scripts -->
+        <script type="text/javascript" src="js/fullcalendar/moment.min.js"></script>
+        <script type="text/javascript" src="js/fullcalendar/fullcalendar.js"></script>
+        <script type="text/javascript" src="js/fullcalendar/locale/fr.js"></script>
+        <script type="text/javascript" src="js/fullcalendar/locale/de.js"></script>
+        <script type="text/javascript" src="js/fullcalendar/locale/en-gb.js"></script>
+
+        <!-- DATATABLES -->
+
+        <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.12/css/jquery.dataTables.css">
+        <script type="text/javascript" charset="utf8" src="http://cdn.datatables.net/1.10.12/js/jquery.dataTables.js"></script>
+
+
     </head>
 	<body>
 
@@ -94,8 +99,6 @@
                                 <li><a href="sorties/programme" class="bblue"> <i class="fa fa-calendar"></i> Sorties</a></li>
                                 <li><a href="contact" class="bblue"> <i class="fa fa-envelope-o"></i> Contact</a></li>
                                 <li><a  class="bblue"><img src ="./img/French_Flag_Small_Icon.jpg"><img src ="./img/English_Flag_Small_Icon.png"></a></li>
-
-
                             </ul>
                         </div>
                     </div>

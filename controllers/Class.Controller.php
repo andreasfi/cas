@@ -14,7 +14,7 @@ class Controller {
      * @param string $controller
      * @param string $method
      */
-    function Controller($controller, $method) {
+    function __construct($controller, $method) {
         $this->vars['pageTitle'] = "CAS";
         $this->vars['pageMessage'] = "Club Alpin Suisse";
         $this->controller = $controller;
