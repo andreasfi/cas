@@ -11,11 +11,13 @@ $persistence = $this->vars['persistence'];
 	<table align="center">		
 		<tr>
 			<td>
-			<h1>Register</h1>
-			First name:<br><input type="text" name="firstname" value="<?php echo $persistence[0];?>"><br>
-			Last name:<br><input type="text" name="lastname" value="<?php echo $persistence[1];?>"><br>
-			User name:<br><input type="text" name="username" value="<?php echo $persistence[2];?>"><br>
-			Password:<br><input type="password" name="password" value="<?php echo $persistence[3];?>"><br><br>
+			<h1>S'enregistrer</h1>
+			Prenom:<br><input type="text" name="firstname" value="<?php echo $persistence[0];?>"><br>
+			Nom:<br><input type="text" name="lastname" value="<?php echo $persistence[1];?>"><br>
+			Mail:<br><input type="email" name="mail" value="<?php echo $persistence[2];?>"><br>
+			Téléphone:<br><input type="text" name="phone" value="<?php echo $persistence[3];?>"><br>
+			N°Adhérent(si existant):<br><input type="number" name="memberNumber" value="<?php echo $persistence[4];?>"><br>
+			Password:<br><input type="password" name="password" value="<?php echo $persistence[5];?>"><br><br>
 			<input type="submit" name="action" value="Register"><br><br>
 			<a href="<?php echo URL_DIR.'login/login';?>">Login</a>
 			</td>

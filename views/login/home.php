@@ -81,7 +81,7 @@
 </div>
 
 <div class="jumbotron text-center">
-	<h1 class="mytitle">Bienvenue!</h1>
+	<h1 class="mytitle">Bienvenue les cocos!</h1>
 	<p>Club Alpin Suisse, Crans-Montana</p>
 </div>
 
