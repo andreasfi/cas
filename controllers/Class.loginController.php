@@ -26,7 +26,7 @@ class loginController extends Controller{
             else{
                 $_SESSION['msg'] = '<span class="success">Welcome '. $result->getFirstname(). ' '.$result->getLastname().'!</span>';
                 $_SESSION['user'] = $result;
-                $this->redirect('login', 'welcome');
+                $this->redirect('welcome');
             }
         }
 
@@ -41,6 +41,7 @@ class loginController extends Controller{
             $this->redirect('login', 'welcome');
             exit;
         }
+
         /*dsda*/
         $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
         $this->vars['pageTitle'] = "Connection";
@@ -53,7 +54,7 @@ class loginController extends Controller{
      */
     function logout(){
         session_destroy();
-        $this->redirect('login', 'login');
+        $this->redirect('login');
     }
 
     /**
@@ -132,7 +133,7 @@ class loginController extends Controller{
     function welcome(){
         //The page cannot be displayed if no user connected
         if(!$this->getActiveUser()){
-            $this->redirect('login', 'login');
+            $this->redirect('login');
             exit;
         }
 
