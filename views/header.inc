@@ -94,7 +94,14 @@
                         <div id="ddtopmenubar" class="mattblackmenu">
                             <ul>
 
-                                <li><a href="login" class="bblue"> <i class="fa fa-lock"></i> Connection</a></li>
+                                <li><a href="login" class="bblue"> <i class="fa fa-lock"></i>   <?php if(isset($_SESSION['user']))
+                                {
+                                    echo $_SESSION['user']->getFirstname();
+                                    echo ' ';
+                                    echo $_SESSION['user']->getLastname();
+                                    echo '<br>';
+                                    echo 'Déconnection';}
+                                    else{echo 'Connection';};?>    </a></li>
                                 <li><a href="proximite" class="bblue"> <i class="fa fa-map-marker"></i>A proximité</a></li>
                                 <li><a href="sorties" class="bblue"> <i class="fa fa-calendar"></i> Sorties</a></li>
                                 <li><a href="contact" class="bblue"> <i class="fa fa-envelope-o"></i> Contact</a></li>
@@ -124,4 +131,8 @@
             </div>
         </div>
     </div>
+
+
+
+
 
