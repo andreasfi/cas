@@ -25,6 +25,7 @@
         <link href="css/style.css" rel="stylesheet">
 
         <link rel="shortcut icon" href="#">
+		<script src="js/jquery.js"></script>
     </head>
 	<body>
 

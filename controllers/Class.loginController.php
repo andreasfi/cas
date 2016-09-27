@@ -53,6 +53,13 @@ class loginController extends Controller{
 	}
 	
 	/**
+	 * Method called by home hyperling
+	 */
+	function home(){
+		
+	}
+	
+	/**
 	 * Method that controls the page 'newuser.php'
 	 */
 	function newuser(){
