@@ -419,10 +419,10 @@ header .logo-meta{
 	width: 98px;
 	height: 98px;
 	text-align: center;
-	padding: 5px !important; 
+	padding: 5px !important;
 	border-right:0px !important;
 	margin: 0px 2px;
-	font-size: 16px;
+	font-size: 14px;
 }
 
 .mattblackmenu li a > i{
@@ -435,9 +435,14 @@ header .logo-meta{
 }
 
 .mattblackmenu li a > img{
-	margin-left: 2px;
-	width: 7px !important;
-	height: 5px !important;
+	align-self: center;
+	margin-left : 19px;
+	margin-top : 8px;
+	display : block;
+	margin-bottom : 15px;
+
+	width: 45px !important;
+	height: 30px !important;
 }
 
 .rightarrowpointer{
@@ -572,7 +577,7 @@ header .logo-meta{
 /* Page heading */
 
 .page-heading{
-	background: url("../img/heading-back.jpg") !important;
+	background: url("../img/header_background.png") !important;
 	padding: 25px 0px;
 	border-top: 5px solid #ddd !important;
 	border-bottom: 3px solid #ddd !important;

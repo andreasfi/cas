@@ -14,16 +14,21 @@ class Controller {
      * @param string $controller
      * @param string $method
      */
-    function Controller($controller, $method) {    		
+    function Controller($controller, $method) {
+        $this->vars['pageTitle'] = "CAS";
+        $this->vars['pageMessage'] = "Club Alpin Suisse";
         $this->controller = $controller;
-        $this->method = $method;        
+        $this->method = $method;
+
     }
     
     /**
      * Display view associated to a controller method
      */
     function display(){
+
     	$view = "{$this->controller}/{$this->method}.php";
+
     	if(file_exists('views/'.$view))
 			include 'views/'.$view;
     }
