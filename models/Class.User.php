@@ -1,5 +1,6 @@
 <?php
-class User{
+class User implements JsonSerializable {
+
 	private $id;
 	private $firstname;
 	private $lastname;
@@ -19,7 +20,7 @@ class User{
 	}
 
 	public static function empty_construct() {
-		return new self(null, null, null, null, null, null, null);
+		return new self(null, null, null, null,null, null, null);
 	}
 
 
@@ -102,5 +103,16 @@ class User{
 		return new User($row['idUser'], $row['firstname'], $row['lastname'],
 				$row['mail'], $row['tel'],$row['fk_idUserTypes'], $row['pwd']);
 	}
+
+	public function jsonSerialize() {
+		return array('id' => $this->id,
+			'firstname' => $this->firstname,
+			'lastname' => $this->lastname,
+			'mail' => $this->mail,
+			'phone' => $this->phone,
+			'member_type' => $this->memberType);
+	}
+
+
 	
 }

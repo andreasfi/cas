@@ -1,8 +1,4 @@
-<?php include_once ROOT_DIR . 'views/header.inc';
-
-echo json_encode($this->vars['propositions'], JSON_PRETTY_PRINT);
-
-?>
+<?php include_once ROOT_DIR . 'views/header.inc'; ?>
 
 <h1>Planning</h1>
 
@@ -18,10 +14,11 @@ echo json_encode($this->vars['propositions'], JSON_PRETTY_PRINT);
             <thead>
             <tr>
                 <th>Title</th>
-                <th>Date</th>
-                <th>Departure</th>
-                <th>Arrival</th>
+                <th>Start</th>
+                <th>End</th>
                 <th>Difficulty</th>
+                <th>Type</th>
+                <th>Category</th>
             </tr>
             </thead>
         </table>
@@ -32,11 +29,60 @@ echo json_encode($this->vars['propositions'], JSON_PRETTY_PRINT);
 
 <script>
 
+    //0 : sortie
+    //1 : event
     var event_type_color = ["#fa3031", "#52b9e9"];
-
     var event_type_textcolor = 'white';
 
+    var datatable_data = [];
+    var calendar_data = [];
+
+
+    function loadEvents() {
+        //Get JSON data in string format.
+        var json_events = '<?php echo json_encode($this->vars['propositions']); ?>';
+
+        //Parse the string to JSON.
+        json_events = JSON.parse(json_events);
+
+
+        for (var i = 0; i < json_events.length; i++) {
+            //0. Fetch the first event
+            var event = json_events[i];
+            var row_dataset = [];
+
+            //init rows for the datatable
+            row_dataset[0] = event['title'];
+            row_dataset[1] = event['start_date'];
+            row_dataset[2] = event['end_date'];
+            row_dataset[3] = event['difficulty'];
+            row_dataset[4] = event['event_type'];
+            row_dataset[5] = event['event_category'];
+
+            var color = event_type_color[1];
+            if(event['event_type'] == 'sortie')
+            {
+                color = event_type_color[0];
+            }
+
+            //init calendar
+            item_calendar = {};
+            item_calendar['title'] = event['title'];
+            item_calendar['start'] = event['start_date'];
+            item_calendar['constraint'] = 'businessHours';
+            item_calendar['color'] = color;
+            item_calendar['textcolor'] = event_type_textcolor;
+            item_calendar['allDay'] = true;
+            item_calendar['description'] = "Very cool event";
+
+            calendar_data.push(item_calendar);
+            datatable_data.push(row_dataset);
+        }
+    }
+
+
     $(document).ready(function () {
+        loadEvents();
         initCalendar('fr')
         initDataTable();
     });
@@ -48,7 +94,6 @@ echo json_encode($this->vars['propositions'], JSON_PRETTY_PRINT);
         var today_y = today.getYear() + 1900;
 
         var today_string = today_y + '-' + today_m + '-' + today_d;
-
 
         $('#calendar').fullCalendar({
             locale: locale,
@@ -62,26 +107,8 @@ echo json_encode($this->vars['propositions'], JSON_PRETTY_PRINT);
             navLinks: true, // can click day/week names to navigate views
             businessHours: true, // display business hours
             editable: true,
-            events: [
-                {
-                    title: 'Pêche au barrage de Moiry',
-                    start: '2016-09-11',
-                    constraint: 'businessHours',
-                    color: event_type_color[0],
-                    textcolor: event_type_textcolor,
-                    allDay: true,
-                    description: "Very cool event."
-                },
-                {
-                    title: 'Randonnée XY',
-                    start: '2016-09-01',
-                    constraint: 'availableForMeeting', // defined below
-                    color: event_type_color[1],
-                    textcolor: event_type_textcolor,
-                    description : "Another very  cool event"
-                }
-            ],
-            eventRender: function(event, element) {
+            events: calendar_data,
+            eventRender: function (event, element) {
 
                 //TODO : The tooltip must be placed on top of the event, not at the bottom of the page.
                 element.qtip({
@@ -96,17 +123,10 @@ echo json_encode($this->vars['propositions'], JSON_PRETTY_PRINT);
 
     function initDataTable() {
 
-        //TODO : fetch the data from the database.
-        var dataset = [
-            ["Tiger Nixon", "27.09.2016", "Sierre", "Crans-Montana", "4"],
-            ["Cours", "27.09.2016", "Sierre", "HES-SO", "2"]
-        ]
-
-
         $('#datatable').DataTable({
             paging: true,
             scrollY: 300,
-            data: dataset
+            data: datatable_data
         });
     }
 </script>
