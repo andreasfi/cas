@@ -13,7 +13,7 @@ class sortiesController extends Controller{
     }
     function propositions(){
         
-        $result = Event::fetch_all_events();
+        $this->vars['propositions'] = json_encode(Event::fetch_all_events());
 
     }
     function details(){

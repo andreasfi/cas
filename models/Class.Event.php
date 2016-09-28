@@ -1,6 +1,6 @@
 <?php
 
-class Event
+class Event implements JsonSerializable
 {
     private $id;
     private $description;
@@ -165,7 +165,7 @@ class Event
   EVENTS.maxParticipants,
   eventtypes.type,
   eventcategory.category,
-  difficulties.diffName,
+  difficulties.difficultyName,
   users.firstname,
   users.lastname,
   users.mail,
@@ -187,9 +187,41 @@ WHERE
 
         $result = MySqlConn::getInstance()->selectDB($query);
 
-        $row = $result->fetch();
+        $rows = $result->fetchAll();
 
-        var_dump($row);
+        foreach($rows as $r)
+        {
+            $owner = User::empty_construct();
+            $owner->setFirstname($r['firstname']);
+            $owner->setLastname($r['lastname']);
+            $owner->setMail($r['mail']);
+            $owner->setPhone($r['tel']);
 
+
+            $event = new Event($r['idEvent'], $r['description'], $r['startDate'], $r['endDate'], $r['maxParticipants'], $r['type'], $owner,$r['title'], $r['category'], $r['difficultyName'], $r['coordinatesJSON']);
+
+            //Add the event to the array
+            array_push($events, $event);
+        }
+        return $events;
+    }
+
+    //TESTING
+    public function jsonSerialize() {
+        return array('id' => $this->id,
+            'title' => $this->title,
+            'description' => $this->description);
+
+        /*
+        $this->description,
+            $this->difficulty,
+            $this->start_date,
+            $this->end_date,
+            $this->max_participants,
+            $this->event_type,
+            $this->event_category,
+            $this->difficulty,
+            $this->path);
+        */
     }
 }

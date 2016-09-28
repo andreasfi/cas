@@ -1,4 +1,8 @@
-<?php include_once ROOT_DIR . 'views/header.inc'; ?>
+<?php include_once ROOT_DIR . 'views/header.inc';
+
+echo json_encode($this->vars['propositions'], JSON_PRETTY_PRINT);
+
+?>
 
 <h1>Planning</h1>
 
@@ -19,7 +23,6 @@
                 <th>Arrival</th>
                 <th>Difficulty</th>
             </tr>
-
             </thead>
         </table>
         </table>

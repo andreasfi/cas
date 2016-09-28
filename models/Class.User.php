@@ -16,7 +16,13 @@ class User{
         $this->setPhone($phone);
         $this->setMemberType($memberType);
 		$this->setPassword($password);
-	}	
+	}
+
+	public static function empty_construct() {
+		return new self(null, null, null, null, null, null, null);
+	}
+
+
 	
 	public function getId(){
 		return $this->id;
