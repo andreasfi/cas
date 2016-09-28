@@ -49,7 +49,6 @@
 		<script src="js/html5shiv.js"></script>
 		<!-- Custom JS -->
 		<script src="js/custom.js"></script>
-
         <!-- QTIP -->
         <script type="text/javascript" src="js/jquery.qtip.js"></script>
         <link type="text/css" href="css/jquery.qtip.css">
