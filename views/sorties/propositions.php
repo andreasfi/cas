@@ -10,7 +10,19 @@
 
 <div class="content col-lg-12">
     <div class="container">
-        <table id="datatable"></table>
+        <table id="datatable">
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Date</th>
+                <th>Departure</th>
+                <th>Arrival</th>
+                <th>Difficulty</th>
+            </tr>
+
+            </thead>
+        </table>
+        </table>
     </div>
 </div>
 
@@ -91,14 +103,7 @@
         $('#datatable').DataTable({
             paging: true,
             scrollY: 300,
-            data: dataset,
-            columns: [
-                {title: "Title"},
-                {title: "Date"},
-                {title: "Departure"},
-                {title: "Arrival"},
-                {title: "Difficulty"}
-            ]
+            data: dataset
         });
     }
 </script>
