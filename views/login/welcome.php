@@ -4,6 +4,7 @@ include_once ROOT_DIR.'views/header.inc';
 //Collect data from controller and session
 $msg = $this->vars['msg'];
 $user = $_SESSION['user'];
+
 ?>
 <br><br>
 	<table align="center">		
@@ -11,7 +12,8 @@ $user = $_SESSION['user'];
 			<td>
 				<?php echo $msg;?>
 				<h1>Welcome <?php echo ' '.$user->getFirstname().' '.$user->getLastname();?></h1>											
-				<a href="<?php echo URL_DIR.'login/logout';?>">Logout</a>				
+				<a href="<?php echo URL_DIR.'login/logout';?>">Logout</a><br>
+				<a href="<?php echo URL_DIR.'login/changepassword';?>">Change password</a>
 			</td>
 		</tr>
 	</table>

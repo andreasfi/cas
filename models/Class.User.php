@@ -85,6 +85,11 @@ class User{
 			
 		return  MySqlConn::getInstance()->executeQuery($query);
 	}
+	public function changePwd($newPwd){
+	    $newPwd = sha1($newPwd);
+        $query = "UPDATE users set pwd='$newPwd' WHERE idUser='$this->id'";
+        return MySqlConn::getInstance()->executeQuery($query);
+    }
 	
 	public static function connect($mail, $pwd){
 		$pwd = sha1($pwd);
