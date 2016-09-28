@@ -22,13 +22,15 @@ include_once  'views/header.inc'; ?>
 	<div class="row">
 		<div class="col-md-5 col-xs-1">
 			<form>
-				<div class="formgroup">
-					<p>Titre de la randonnée</p>
-					<input name="title" type="text" required>
-				</div>
-				<div class="formgroup">
-					<p>Nombre de personnes max</p>
-					<input name="maxParticipants" type="number" min="1" required>
+				<div class="row">
+					<div class="col-md-6 formgroup">
+						<p>Titre de la randonnée</p>
+						<input name="title" type="text" required>
+					</div>
+					<div class="col-md-6 formgroup">
+						<p>Personnes max</p>
+						<input name="maxParticipants" type="number" min="1" required style="width:50px">
+					</div>
 				</div>
 				<div class="formgroup">
 					<p>Difficulté</p>
@@ -58,9 +60,9 @@ include_once  'views/header.inc'; ?>
 		<div class="col-md-7 col-xs-10 text-center">
 			<div class="formgroup">
 				<h2>Parcours</h2>
-				<p>cliquez sur la carte pour dessiner le parcours</p>
-				<p/>
-				<input id="geocodeInput" type=text placeholder="Entrer un lieu"></textarea><button id="searchGeo">Go</button>
+								<input id="geocodeInput" type=text placeholder="Entrer un lieu"></textarea><button id="searchGeo">Go</button>
+
+				<p style="font-size:12px !important; opacity:0 !important">cliquez sur la carte pour dessiner le parcours</p>
 				<div id="map" style="width:100%; height:400px; margin-top:10px"></div>
 			</div>
 		</div>
