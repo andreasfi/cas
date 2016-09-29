@@ -21,7 +21,8 @@ include_once ROOT_DIR.'views/header.inc';
 				E-mail:<br><input type="text" name="mail" size="25"/><br>
 				Mot de passe:<br><input type="password" name="password" size="25"/><br><br>
 				<input class="btn btn-primary" type="submit" name="Submit" value="  OK  "/>
-				<br/><br/>							
+				<br/><br/>
+				Forgot password? ? <a href="<?php echo 'login/resetpassword';?>">(Reset password)</a><br>
 				Pas de compte ? <a href="<?php echo 'login/newuser';?>">(S'enregistrer)</a>
 			</td>
 		</tr>

@@ -197,7 +197,6 @@ WHERE
             $owner->setMail($r['mail']);
             $owner->setPhone($r['tel']);
 
-
             $event = new Event($r['idEvent'], $r['description'], $r['startDate'], $r['endDate'], $r['maxParticipants'], $r['type'], $owner,$r['title'], $r['category'], $r['difficultyName'], $r['coordinatesJSON']);
 
             //Add the event to the array
@@ -206,22 +205,17 @@ WHERE
         return $events;
     }
 
-    //TESTING
     public function jsonSerialize() {
         return array('id' => $this->id,
             'title' => $this->title,
-            'description' => $this->description);
-
-        /*
-        $this->description,
-            $this->difficulty,
-            $this->start_date,
-            $this->end_date,
-            $this->max_participants,
-            $this->event_type,
-            $this->event_category,
-            $this->difficulty,
-            $this->path);
-        */
+            'description' => $this->description,
+            'start_date' => $this->start_date,
+            'end_date' => $this->end_date,
+            'owner' => $this->owner,
+            'max_participants' => $this->max_participants,
+            'event_type' => $this->event_type,
+            'event_category' => $this->event_category,
+            'difficulty' => $this->difficulty,
+            'path' => $this->path);
     }
 }

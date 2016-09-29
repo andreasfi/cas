@@ -9,13 +9,19 @@
 include_once  'views/header.inc'; ?>
 <style>
 	.formgroup{
-		margin-top: 10px;
-		margin-bottom: 15px;
+		margin-top: 	10px;
+		margin-bottom: 	15px;
 	}
 	
 	.formgroup p{
 		font-size: 15pt !important;
 		
+	}
+	
+	.graphical{
+		width:	100%;
+		height:	400px; 
+		margin:	10px 0
 	}
 </style>
 <div class="container">
@@ -60,10 +66,11 @@ include_once  'views/header.inc'; ?>
 		<div class="col-md-7 col-xs-10 text-center">
 			<div class="formgroup">
 				<h2>Parcours</h2>
-								<input id="geocodeInput" type=text placeholder="Entrer un lieu"></textarea><button id="searchGeo">Go</button>
+				<input id="geocodeInput" type=text placeholder="Entrer un lieu"><button type="button" id="searchGeo" onclick="showAddress()">Go</button>
 
-				<p style="font-size:12px !important; opacity:0 !important">cliquez sur la carte pour dessiner le parcours</p>
-				<div id="map" style="width:100%; height:400px; margin-top:10px"></div>
+				<p id="trailIndication" style="font-size:12px !important; opacity:0 !important">cliquez sur la carte pour dessiner le parcours</p>
+				<div id="map" class="graphical"></div>
+				<div id="chart" class="graphical"></div>
 			</div>
 		</div>
 	</div>
@@ -74,18 +81,127 @@ include_once  'views/header.inc'; ?>
 		</div>
 	</div>
 </div>
+
+<!-- Google Visualizations -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script>
-      function initMap() {
+	
+	var map = null;
+	var geocoder = null;
+	var addressMarker = null;
+	var trailPoints = [];
+	var trailShape = null;
+	var elevator = null;
+	
+	function initMap() {
 		  
-		  	var mapCanvas = document.getElementById('map');
-			var mapOptions = {
+		  var mapCanvas = document.getElementById('map');
+		  geocoder = new google.maps.Geocoder();
+		  elevator = new google.maps.ElevationService();
+		  var mapOptions = {
 				center: {lat: 46.307174, lng: 7.473367},
 				zoom: 9,
 				mapTypeId: 'terrain'
-			};
-		  	var map = new google.maps.Map(mapCanvas, mapOptions);
+		  };
+		  map = new google.maps.Map(mapCanvas, mapOptions);
+		google.maps.event.addListener(map, 'click', function(event){
+			clickMap(event.latLng);
+		});
+		      google.charts.load('current', {'packages':['corechart']});
+
       }
-    </script>
+	
+	function showAddress(){
+		var address = $("#geocodeInput").val();
+		if(geocoder){
+			geocoder.geocode({address: address}, 
+				function(response, status){
+					if(!response || status != google.maps.GeocoderStatus.OK){
+						alert(address + " introuvable");
+					}else{
+						var point = response[0].geometry.location;
+						addressMarker = new google.maps.Marker({
+							position: point,
+							map: map,
+							title: "Point recherché"
+						});
+						
+						map.setCenter(point)
+						map.setZoom(12);
+						
+						$('#trailIndication').css("opacity", "1");
+					}
+				});
+		}
+	}
+	
+	function drawCoordinates(){
+		if(trailShape)
+			trailShape.setMap(null);
+		trailShape = new google.maps.Polyline({
+			path: trailPoints,
+			strokeColor: '#FF0000',
+			map: map
+		});
+	}
+    
+	function clickMap(clickedPoint){
+		if(addressMarker)
+			addressMarker.setMap(null);
+		addressMarker = new google.maps.Marker({
+							position: clickedPoint,
+							map: map
+		});
+		trailPoints.push(clickedPoint);
+		drawCoordinates();
+		if (trailPoints.length >= 2)
+			calculateElevation(getJSON(trailPoints));
+	}
+	
+	function getJSON(points){
+		var output = [];
+		for(var i = 0; i < points.length; i++){
+			var line = null;
+			line = {
+				lat: points[i].lat(),
+				lng: points[i].lng()
+			};
+			output.push(line);
+		}
+		return output;
+	}
+	
+	function calculateElevation(points){
+		if(elevator){
+			elevator.getElevationAlongPath({
+				'path': points,
+				'samples': 256
+			}, plotElevation);
+		}
+	}
+	
+	function plotElevation(elevations, status){
+		var chartCanvas = document.getElementById("chart");	
+		if(status !== 'OK'){
+			chartCanvas.innerHTML= "error " + status;
+			return;
+		}
+		
+		var chart = new google.visualization.LineChart(chartCanvas);
+		var data = new google.visualization.DataTable();
+		data.addColumn('string', 'Sample');
+		data.addColumn('number', 'Altitude');
+		for(var i = 0; i < elevations.length; i++){
+			data.addRow(['', elevations[i].elevation]);
+		}
+		
+		chart.draw(data, {
+			height: 150,
+			legend: 'none',
+			titleY: 'Altitude (m)'
+		});
+	}
+</script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfHSiXZQseH8j-pPHb9PiWwvGvpOUSDGw&callback=initMap"
     async defer></script>
 

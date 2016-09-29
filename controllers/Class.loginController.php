@@ -12,7 +12,7 @@ class loginController extends Controller{
         //Check if data valid
         if(empty($mail) or empty($pwd)){
             $_SESSION['msg'] = '<span class="error">A required field is empty!</span>';
-            $this->redirect('login', 'login');
+            $this->redirect( 'login');
         }
         else{
             //Load user from DB if exists
@@ -21,16 +21,24 @@ class loginController extends Controller{
             //Put user in session if exists or return error msg
             if(!$result){
                 $_SESSION['msg'] = '<span class="error">Username or password incorrect!</span>';
-                $this->redirect('login', 'login');
+                $this->redirect( 'login');
             }
             else{
-                $_SESSION['msg'] = '<span class="success">Welcome '. $result->getFirstname(). ' '.$result->getLastname().'!</span>';
+                $_SESSION['msg'] = '';
                 $_SESSION['user'] = $result;
                 $this->redirect('welcome');
             }
         }
 
     }
+
+    /**
+     * Method called by the change button from changepassword.php
+     */
+
+
+
+
 
     /**
      * Method that controls the page 'login.php'
@@ -50,6 +58,63 @@ class loginController extends Controller{
     }
 
     /**
+     *  Method that controls the page 'resetpassword.php'
+     */
+
+    function resetPassword(){
+
+        $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
+        $this->vars['pageTitle'] = "Récupération de mot de passe";
+        $this->vars['pageMessage'] = "";
+
+    }
+
+    function changePassword(){
+
+        $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
+        $this->vars['pageTitle'] = "Changement de mot de passe";
+        $this->vars['pageMessage'] = "";
+
+        if(!empty($_POST)){
+
+            $newPassword = $_POST['newPassword'];
+            $newPasswordConfirmation = $_POST['newPasswordConfirmation'];
+
+            //check if fields are empty
+            if(empty($newPassword) or empty($newPasswordConfirmation)) {
+
+                $_SESSION['msg'] = '<span class="error">Veuillez remplir les champs</span>';
+                $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
+                return;
+        }
+            //check if passwords match
+            if($newPassword != $newPasswordConfirmation){
+                $_SESSION['msg'] = '<span class="error">Passwords dont match</span>';
+                $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
+                return;
+            }
+            else{
+                $loggeduser = $this->getActiveUser();
+                $result = $loggeduser->changePwd($newPassword);
+                if(is_string($result)){
+                    $_SESSION['msg'] = '<span class="error">'.$result.'</span>';
+                }
+                else{
+                    $_SESSION['msg'] = '<span class="success">Password change successful!</span>';
+                    $this->getActiveUser()->setPassword(sha1($newPassword));
+
+                }
+
+                $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
+
+               $this->redirect( 'welcome');
+            }
+
+
+        }
+    }
+
+    /**
      * Method called by the logout hyperlink
      */
     function logout(){
@@ -57,12 +122,7 @@ class loginController extends Controller{
         $this->redirect('login');
     }
 
-    /**
-     * Method called by home hyperling
-     */
-    function home(){
 
-    }
 
     /**
      * Method that controls the page 'newuser.php'
