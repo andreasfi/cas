@@ -1,29 +1,32 @@
 <?php
-class loginController extends Controller{
+class loginController extends Controller
+{
     /**
      * Method called by the form of the page login.php
      */
 
-    function connection(){
+    function connection()
+    {
         //Get data posted by the form
         $mail = $_POST['mail'];
         $pwd = $_POST['password'];
 
+
         //Check if data valid
-        if(empty($mail) or empty($pwd)){
+        if (empty($mail) or empty($pwd)) {
             $_SESSION['msg'] = '<span class="error">A required field is empty!</span>';
-            $this->redirect( 'login');
-        }
-        else{
+            $this->redirect('login');
+        } else {
             //Load user from DB if exists
             $result = User::connect($mail, $pwd);
 
             //Put user in session if exists or return error msg
-            if(!$result){
+            if (!$result) {
                 $_SESSION['msg'] = '<span class="error">Username or password incorrect!</span>';
-                $this->redirect( 'login');
-            }
-            else{
+                $this->redirect('login');
+
+            } else {
+
                 $_SESSION['msg'] = '';
                 $_SESSION['user'] = $result;
                 $this->redirect('welcome');
@@ -31,45 +34,6 @@ class loginController extends Controller{
         }
 
     }
-
-
-
-
-    function  sendMail($destinationAddress,$destinationName,$subject,$message){
-        require_once 'dependencies/mailer/class.phpmailer.php';
-        require_once 'dependencies/mailer/class.smtp.php';
-
-
-        $mail = new PHPMailer(true);
-
-        //Send mail using gmail
-
-        $mail->IsSMTP(); // telling the class to use SMTP
-        $mail->SMTPAuth = true; // enable SMTP authentication
-        $mail->SMTPSecure = "tls"; // sets the prefix to the servier
-        $mail->Host = "smtp.gmail.com"; // sets GMAIL as the SMTP server
-        $mail->Port = 587; // set the SMTP port for the GMAIL server
-        $mail->Username = "casphphes@gmail.com"; // GMAIL username
-        $mail->Password = "qwertzuio"; // GMAIL password
-
-
-        //Typical mail data
-        $mail->AddAddress($destinationAddress, $destinationName);
-        $mail->SetFrom('casphphes@gmail.com');
-        $mail->Subject = $subject;
-        $mail->Body = $message;
-
-        try{
-            $mail->Send();
-
-
-        } catch(Exception $e){
-            //Something went bad
-
-
-        }
-    }
-
 
     /**
      * Method that controls the page 'login.php'
@@ -80,8 +44,8 @@ class loginController extends Controller{
             $this->redirect('login', 'welcome');
             exit;
         }
+        $this->sendSms('786298541','Salut monsieur, ici c est CAS');
 
-        /*dsda*/
         $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
         $this->vars['pageTitle'] = "Connection";
         $this->vars['pageMessage'] = "Connectez vous pour vous inscrire aux évenements.";
