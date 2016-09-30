@@ -44,7 +44,6 @@ class loginController extends Controller
             $this->redirect('login', 'welcome');
             exit;
         }
-        $this->sendSms('786298541','Salut monsieur, ici c est CAS');
 
         $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
         $this->vars['pageTitle'] = "Connection";

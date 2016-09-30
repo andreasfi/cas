@@ -152,13 +152,13 @@ class Controller {
 
             if (curl_error($curl) || $http_response_code != 200) {
                 $curl_response = print_r($curl_response, true);
-                //$alert_error = 'Error ' . $http_response_code . ' ' . curl_error($curl) . ' API server response: ' . $curl_response;
+                $alert_error = 'Error ' . $http_response_code . ' ' . curl_error($curl) . ' API server response: ' . $curl_response;
                 echo "<br>" . $alert_error;
             } else {
-               // $alert_success = "We sent you a verification code to: +41" . htmlspecialchars($mobile_number) . '.';
+               $alert_success = "We sent you a verification code to: +41" . htmlspecialchars($mobile_number) . '.';
                 echo "<br>" . $alert_success;
             }
             curl_close($curl);
-        */
+            */
     }
 }
