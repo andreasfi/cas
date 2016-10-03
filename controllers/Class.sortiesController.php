@@ -12,7 +12,7 @@ class sortiesController extends Controller{
 
     }
     function propositions(){
-        
+
         $this->vars['propositions'] = json_encode(Event::fetch_all_events());
 
     }
@@ -52,6 +52,73 @@ class sortiesController extends Controller{
 
         // Calcul du denivele
 
+
+
+        // api transport
+
+        $from = isset($_POST['from']) ? $_POST['from'] : false;
+        $response = isset($_POST['response']) ? $_POST['response'] : false;
+        $to = isset($_POST['to']) ? $_POST['to'] : false;
+        $via = isset($_POST['via']) ? $_POST['via'] : false;
+        $datetime = isset($_POST['datetime']) ? $_POST['datetime'] : '';
+        $page = isset($_POST['page']) ? ((int) $_POST['page']) - 1 : 0;
+        $c = isset($_POST['c']) ? (int) $_POST['c'] : false;
+        $stationsFrom = [];
+        $stationsTo = [];
+        $search = $from && $to;
+
+        if ($search) {
+            $query = [
+                'from'  => $from,
+                'to'    => $to,
+                'page'  => $page,
+                'limit' => 6,
+            ];
+            if ($datetime) {
+                $query['date'] = date('Y-m-d', strtotime($datetime));
+                $query['time'] = date('H:i', strtotime($datetime));
+            }
+            if ($via) {
+                $query['via'] = $via;
+            }
+            $url = 'http://transport.opendata.ch/v1/connections?'.http_build_query($query);
+            $url = filter_var($url, FILTER_VALIDATE_URL);
+            $response = json_decode(file_get_contents($url));
+            if ($response->from) {
+                $from = $response->from->name;
+            }
+            if ($response->to) {
+                $to = $response->to->name;
+            }
+            if (isset($response->stations->from[0])) {
+                if ($response->stations->from[0]->score < 101) {
+                    foreach (array_slice($response->stations->from, 1, 3) as $station) {
+                        if ($station->score > 97) {
+                            $stationsFrom[] = $station->name;
+                        }
+                    }
+                }
+            }
+            if (isset($response->stations->to[0])) {
+                if ($response->stations->to[0]->score < 101) {
+                    foreach (array_slice($response->stations->to, 1, 3) as $station) {
+                        if ($station->score > 97) {
+                            $stationsTo[] = $station->name;
+                        }
+                    }
+                }
+            }
+        }
+
+        if(isset($response)){$this->vars['response'] = $response;}else {$response = null;}
+        $this->vars['from'] = $from;
+        $this->vars['to'] = $to;
+        $this->vars['via'] = $via;
+        $this->vars['datetime'] = $datetime;
+        $this->vars['c'] = $c;
+        $this->vars['stationsFrom'] = $stationsFrom;
+        $this->vars['stationsTo'] = $stationsTo;
+        $this->vars['search'] = $search;
     }
     function distance($lat1, $lon1, $lat2, $lon2) {
         // function de calcul de la distance entre deux points
@@ -66,9 +133,9 @@ class sortiesController extends Controller{
     function inscription(){
 
     }
-	
-	function ajoutsortie(){
-		
-	}
-    
+
+    function ajoutsortie(){
+
+    }
+
 }
