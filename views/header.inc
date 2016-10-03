@@ -53,6 +53,11 @@
         <script type="text/javascript" src="js/jquery.qtip.js"></script>
         <link type="text/css" href="css/jquery.qtip.css">
 
+		<!-- TIMEPICKER -->
+        <script type="text/javascript" src="js/jquery.timepicker.js"></script>
+        <link type="text/css" href="css/jquery.timepicker.css">
+
+
         <!-- FULLCALENDAR JQUERY PLUGIN -->
         <link type="text/css" rel="stylesheet" href="css/fullcalendar.css">
 

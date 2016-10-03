@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.2
--- http://www.phpmyadmin.net
+-- version 4.6.4
+-- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Sep 27, 2016 at 02:25 PM
--- Server version: 10.1.16-MariaDB
--- PHP Version: 5.6.24
+-- Client :  127.0.0.1
+-- Généré le :  Jeu 29 Septembre 2016 à 18:37
+-- Version du serveur :  5.7.14
+-- Version de PHP :  5.6.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,20 +17,16 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `cas_php`
+-- Base de données :  `cas_php`
 --
 
 -- --------------------------------------------------------
 
-
-
--- --------------------------------------------------------
-
 --
--- Table structure for table `Difficulties`
+-- Structure de la table `difficulties`
 --
 
-CREATE TABLE `Difficulties` (
+CREATE TABLE `difficulties` (
   `id` int(11) NOT NULL,
   `differenceName` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -38,10 +34,10 @@ CREATE TABLE `Difficulties` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `EventCategory`
+-- Structure de la table `eventcategory`
 --
 
-CREATE TABLE `EventCategory` (
+CREATE TABLE `eventcategory` (
   `idEventCategory` int(11) NOT NULL,
   `category` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -49,10 +45,10 @@ CREATE TABLE `EventCategory` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Events`
+-- Structure de la table `events`
 --
 
-CREATE TABLE `Events` (
+CREATE TABLE `events` (
   `idEvent` int(11) NOT NULL,
   `description` text NOT NULL,
   `startDate` datetime NOT NULL,
@@ -69,10 +65,10 @@ CREATE TABLE `Events` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `EventTypes`
+-- Structure de la table `eventtypes`
 --
 
-CREATE TABLE `EventTypes` (
+CREATE TABLE `eventtypes` (
   `idEventType` int(11) NOT NULL,
   `type` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -80,10 +76,10 @@ CREATE TABLE `EventTypes` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `EventUsers`
+-- Structure de la table `eventusers`
 --
 
-CREATE TABLE `EventUsers` (
+CREATE TABLE `eventusers` (
   `fk_idEvent` int(11) NOT NULL,
   `fk_idUser` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -91,10 +87,29 @@ CREATE TABLE `EventUsers` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Paths`
+-- Structure de la table `password_change_requests`
 --
 
-CREATE TABLE `Paths` (
+CREATE TABLE `password_change_requests` (
+  `idRequest` varchar(100) NOT NULL,
+  `Time` datetime NOT NULL,
+  `fk_idUser` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `password_change_requests`
+--
+
+INSERT INTO `password_change_requests` (`idRequest`, `Time`, `fk_idUser`) VALUES
+('7358b98cd217979862e1628a699c3003f804cae6', '2016-09-29 20:14:13', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `paths`
+--
+
+CREATE TABLE `paths` (
   `idPath` int(11) NOT NULL,
   `coordinatesJSON` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -102,7 +117,7 @@ CREATE TABLE `Paths` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Structure de la table `users`
 --
 
 CREATE TABLE `users` (
@@ -115,52 +130,55 @@ CREATE TABLE `users` (
   `fk_idUserTypes` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Contenu de la table `users`
+--
+
+INSERT INTO `users` (`idUser`, `mail`, `firstname`, `lastname`, `tel`, `pwd`, `fk_idUserTypes`) VALUES
+(1, 'lothgar_pgm@hotmail.com', 'Pierre', 'Baran', '793943353', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 2),
+(2, 'a@a', 'a', 'a', '041241', '7c4a8d09ca3762af61e59520943dc26494f8941b', 2),
+(4, 'pierre.baran@students.hevs.ch', 'a', 'a', '423423', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 3);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `UserTypes`
+-- Structure de la table `usertypes`
 --
 
-CREATE TABLE `UserTypes` (
+CREATE TABLE `usertypes` (
   `idUserType` int(11) NOT NULL,
   `role` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `UserTypes`
+-- Contenu de la table `usertypes`
 --
 
-INSERT INTO `UserTypes` (`idUserType`, `role`) VALUES
+INSERT INTO `usertypes` (`idUserType`, `role`) VALUES
 (1, 'nonMember'),
 (2, 'member'),
 (3, 'trailMaster');
 
 --
--- Indexes for dumped tables
+-- Index pour les tables exportées
 --
 
 --
--- Indexes for table `defdwf`
+-- Index pour la table `difficulties`
 --
-ALTER TABLE `defdwf`
-  ADD PRIMARY KEY (`xsada`);
-
---
--- Indexes for table `Difficulties`
---
-ALTER TABLE `Difficulties`
+ALTER TABLE `difficulties`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `EventCategory`
+-- Index pour la table `eventcategory`
 --
-ALTER TABLE `EventCategory`
+ALTER TABLE `eventcategory`
   ADD PRIMARY KEY (`idEventCategory`);
 
 --
--- Indexes for table `Events`
+-- Index pour la table `events`
 --
-ALTER TABLE `Events`
+ALTER TABLE `events`
   ADD PRIMARY KEY (`idEvent`),
   ADD KEY `fk_idEventType` (`fk_idEventType`),
   ADD KEY `fk_idOwner` (`fk_idOwner`),
@@ -169,108 +187,116 @@ ALTER TABLE `Events`
   ADD KEY `idPath` (`fk_idPath`);
 
 --
--- Indexes for table `EventTypes`
+-- Index pour la table `eventtypes`
 --
-ALTER TABLE `EventTypes`
+ALTER TABLE `eventtypes`
   ADD PRIMARY KEY (`idEventType`);
 
 --
--- Indexes for table `EventUsers`
+-- Index pour la table `eventusers`
 --
-ALTER TABLE `EventUsers`
+ALTER TABLE `eventusers`
   ADD PRIMARY KEY (`fk_idEvent`,`fk_idUser`),
   ADD KEY `fk_idEvent` (`fk_idEvent`),
   ADD KEY `fk_idUser` (`fk_idUser`);
 
 --
--- Indexes for table `Paths`
+-- Index pour la table `password_change_requests`
 --
-ALTER TABLE `Paths`
+ALTER TABLE `password_change_requests`
+  ADD PRIMARY KEY (`idRequest`),
+  ADD KEY `fk_idUser` (`fk_idUser`);
+
+--
+-- Index pour la table `paths`
+--
+ALTER TABLE `paths`
   ADD PRIMARY KEY (`idPath`);
 
 --
--- Indexes for table `users`
+-- Index pour la table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`idUser`),
   ADD KEY `fk_idUserTypes` (`fk_idUserTypes`);
 
 --
--- Indexes for table `UserTypes`
+-- Index pour la table `usertypes`
 --
-ALTER TABLE `UserTypes`
+ALTER TABLE `usertypes`
   ADD PRIMARY KEY (`idUserType`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT pour les tables exportées
 --
 
 --
--- AUTO_INCREMENT for table `defdwf`
+-- AUTO_INCREMENT pour la table `difficulties`
 --
-ALTER TABLE `defdwf`
-  MODIFY `xsada` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `Difficulties`
---
-ALTER TABLE `Difficulties`
+ALTER TABLE `difficulties`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `EventCategory`
+-- AUTO_INCREMENT pour la table `eventcategory`
 --
-ALTER TABLE `EventCategory`
+ALTER TABLE `eventcategory`
   MODIFY `idEventCategory` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `Events`
+-- AUTO_INCREMENT pour la table `events`
 --
-ALTER TABLE `Events`
+ALTER TABLE `events`
   MODIFY `idEvent` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `EventTypes`
+-- AUTO_INCREMENT pour la table `eventtypes`
 --
-ALTER TABLE `EventTypes`
+ALTER TABLE `eventtypes`
   MODIFY `idEventType` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `Paths`
+-- AUTO_INCREMENT pour la table `paths`
 --
-ALTER TABLE `Paths`
+ALTER TABLE `paths`
   MODIFY `idPath` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
--- AUTO_INCREMENT for table `UserTypes`
+-- AUTO_INCREMENT pour la table `usertypes`
 --
-ALTER TABLE `UserTypes`
+ALTER TABLE `usertypes`
   MODIFY `idUserType` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
--- Constraints for dumped tables
+-- Contraintes pour les tables exportées
 --
 
 --
--- Constraints for table `Events`
+-- Contraintes pour la table `events`
 --
-ALTER TABLE `Events`
-  ADD CONSTRAINT `Events_ibfk_1` FOREIGN KEY (`fk_idEventType`) REFERENCES `EventTypes` (`idEventType`) ON DELETE CASCADE ON UPDATE CASCADE,
+ALTER TABLE `events`
+  ADD CONSTRAINT `Events_ibfk_1` FOREIGN KEY (`fk_idEventType`) REFERENCES `eventtypes` (`idEventType`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `Events_ibfk_2` FOREIGN KEY (`fk_idOwner`) REFERENCES `users` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `Events_ibfk_3` FOREIGN KEY (`fk_idEventCategory`) REFERENCES `EventCategory` (`idEventCategory`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `Events_ibfk_4` FOREIGN KEY (`fk_idDifficulty`) REFERENCES `Difficulties` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `Events_ibfk_5` FOREIGN KEY (`fk_idPath`) REFERENCES `Paths` (`idPath`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `Events_ibfk_3` FOREIGN KEY (`fk_idEventCategory`) REFERENCES `eventcategory` (`idEventCategory`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `Events_ibfk_4` FOREIGN KEY (`fk_idDifficulty`) REFERENCES `difficulties` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `Events_ibfk_5` FOREIGN KEY (`fk_idPath`) REFERENCES `paths` (`idPath`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `EventUsers`
+-- Contraintes pour la table `eventusers`
 --
-ALTER TABLE `EventUsers`
-  ADD CONSTRAINT `EventUsers_ibfk_1` FOREIGN KEY (`fk_idEvent`) REFERENCES `Events` (`idEvent`) ON DELETE CASCADE ON UPDATE CASCADE,
+ALTER TABLE `eventusers`
+  ADD CONSTRAINT `EventUsers_ibfk_1` FOREIGN KEY (`fk_idEvent`) REFERENCES `events` (`idEvent`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `EventUsers_ibfk_2` FOREIGN KEY (`fk_idUser`) REFERENCES `users` (`idUser`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `users`
+-- Contraintes pour la table `password_change_requests`
+--
+ALTER TABLE `password_change_requests`
+  ADD CONSTRAINT `password_change_requests_ibfk_1` FOREIGN KEY (`fk_idUser`) REFERENCES `users` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `users`
 --
 ALTER TABLE `users`
-  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`fk_idUserTypes`) REFERENCES `UserTypes` (`idUserType`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`fk_idUserTypes`) REFERENCES `usertypes` (`idUserType`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
