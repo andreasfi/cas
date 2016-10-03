@@ -17,8 +17,12 @@ class sortiesController extends Controller{
 
     }
     function details(){
+        $this->checkUser(0, "/cas/error/http404");
+        $this->checkParam($GLOBALS['value'], "/cas/home");
+
         // Get infos
         $result = Event::fetch_event_by_id($GLOBALS['value']);
+
         // Variables depuis BD
 
         $description = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
@@ -34,8 +38,8 @@ class sortiesController extends Controller{
         $this->vars['path'] = $result->getPath();
         $this->vars['description'] = $result->getDescription();
         $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
-        $this->vars['pageTitle'] = "Details";
-        $this->vars['pageMessage'] = "Détails concernant la sortie";
+        $this->vars['pageTitle'] = $result->getTitle();
+        $this->vars['pageMessage'] = $result->getStartDate();
 
 
         // Calcul de la distance
@@ -66,6 +70,7 @@ class sortiesController extends Controller{
         $stationsFrom = [];
         $stationsTo = [];
         $search = $from && $to;
+        $userLevel = isset($_SESSION['user']) ? $_SESSION['user']->getMemberType() : false;
 
         if ($search) {
             $query = [
@@ -119,6 +124,7 @@ class sortiesController extends Controller{
         $this->vars['stationsFrom'] = $stationsFrom;
         $this->vars['stationsTo'] = $stationsTo;
         $this->vars['search'] = $search;
+        $this->vars['userLevel'] = $userLevel;
     }
     function distance($lat1, $lon1, $lat2, $lon2) {
         // function de calcul de la distance entre deux points
@@ -131,7 +137,7 @@ class sortiesController extends Controller{
         return ($km * 1.609344);
     }
     function inscription(){
-
+        $this->checkUser(2, "/cas/error/http404");
     }
     function ajoutsortie()
     {

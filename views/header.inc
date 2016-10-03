@@ -83,7 +83,7 @@
                 <div class="col-md-3 col-sm-4">
                     <div class="logo">
                         <div class="logo-image">
-                            <a href="index.html"><i class="fa fa-photo blue"></i></a>
+                            <a href="home"><i class="fa fa-photo blue"></i></a>
                         </div>
                         <div class="logo-text">
                             <h1><a href="home">CA<span class="lightblue">S</span></a></h1>
