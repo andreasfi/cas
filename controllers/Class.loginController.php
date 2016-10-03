@@ -38,6 +38,40 @@ class loginController extends Controller{
 
 
 
+    function  sendMail($destinationAddress,$destinationName,$subject,$message){
+        require_once 'dependencies/mailer/class.phpmailer.php';
+        require_once 'dependencies/mailer/class.smtp.php';
+
+
+        $mail = new PHPMailer(true);
+
+        //Send mail using gmail
+
+        $mail->IsSMTP(); // telling the class to use SMTP
+        $mail->SMTPAuth = true; // enable SMTP authentication
+        $mail->SMTPSecure = "tls"; // sets the prefix to the servier
+        $mail->Host = "smtp.gmail.com"; // sets GMAIL as the SMTP server
+        $mail->Port = 587; // set the SMTP port for the GMAIL server
+        $mail->Username = "casphphes@gmail.com"; // GMAIL username
+        $mail->Password = "qwertzuio"; // GMAIL password
+
+
+        //Typical mail data
+        $mail->AddAddress($destinationAddress, $destinationName);
+        $mail->SetFrom('casphphes@gmail.com');
+        $mail->Subject = $subject;
+        $mail->Body = $message;
+
+        try{
+            $mail->Send();
+
+
+        } catch(Exception $e){
+            //Something went bad
+
+
+        }
+    }
 
 
     /**
@@ -55,6 +89,7 @@ class loginController extends Controller{
         $this->vars['pageTitle'] = "Connection";
         $this->vars['pageMessage'] = "Connectez vous pour vous inscrire aux évenements.";
 
+
     }
 
     /**
@@ -67,6 +102,30 @@ class loginController extends Controller{
         $this->vars['pageTitle'] = "Récupération de mot de passe";
         $this->vars['pageMessage'] = "";
 
+        /*
+         * This bit of codes resets the password for the mail entered. it works as such.
+         * 1. It ask the db which users corresponds to the mail entered.
+         * 2. It creates a timed change password requests and stores a sha1 version of a secret key in the database.
+         * 3. It sends by e-mail to the user a link with the secret key and a link to reset the password.
+         * 4. It displays a confirmation or a failure message.
+         */
+
+        if(!empty($_POST)){
+            $secretKey = user::getUserFromMail($_POST['recoveryMail'])->createPwdChangeRequest();
+            try{
+                $messageContent = "Ce message est la pour recuperer votre mdp : \nSuivez ce lien :  http://localhost/cas/login/changepassword/$secretKey";
+                $this->sendMail($_POST['recoveryMail'],$_POST['recoveryMail'],'CAS password recovery',$messageContent);
+                $_SESSION['msg'] = '<span class="success">A recuperation email was sent to your address</span>';
+                $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
+            }catch(Exception $e){
+                $_SESSION['msg'] = '<span class="error">Failed to deliver</span>';
+                $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
+            }
+
+        }
+
+
+
     }
 
     function changePassword(){
@@ -74,6 +133,38 @@ class loginController extends Controller{
         $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
         $this->vars['pageTitle'] = "Changement de mot de passe";
         $this->vars['pageMessage'] = "";
+
+        /*
+         * This bit of code does so
+         * 1. it checks if the url contains sth , after changepassword/.   That is the secret key sent to the user (not hashed)
+         * 2. It asks the database for the user corresponding to the passwordRequest , whose id matches the sha1 of the secret key
+         * 4. It checks whether the key is outdated or not (15 min delay)
+         * 5. If this user exists, it's put in the session and the user is prompted to change password.
+         * 6. If not, the user is redirected to resetpassword and asked wether to redo the process, or to check his key again.
+         */
+
+        $requestUri = explode('/',$_SERVER['REQUEST_URI']);
+        if(isset($requestUri[4])){
+            try {
+
+                $_SESSION['user'] = user::getUserCorrespondingToSecretKey($requestUri[4]);
+
+
+            }catch(Exception $e){
+
+            }
+            if(  !($_SESSION['user']->getId() != 0)         ){
+
+                unset($_SESSION['user']);
+                $_SESSION['msg'] = '<span class="error">Key out of date,or invalid, please recover again.</span>';
+                $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
+                $this->redirect('../resetpassword');
+            }
+
+        }
+        /*
+         * If something is in the post, and the 2 passowrds aren't empty and match, the user logged password is updated in the database.
+         */
 
         if(!empty($_POST)){
 
@@ -107,7 +198,7 @@ class loginController extends Controller{
 
                 $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
 
-               $this->redirect( 'welcome');
+               $this->redirect('welcome');
             }
 
 
@@ -123,11 +214,13 @@ class loginController extends Controller{
     }
 
 
-
     /**
      * Method that controls the page 'newuser.php'
      */
     function newuser(){
+
+        $this->vars['pageTitle'] = "Créez votre compte";
+        $this->vars['pageMessage'] = "";
         //if a user is active he cannot re-register
         if($this->getActiveUser()){
             $this->redirect('login', 'welcome');
@@ -143,6 +236,8 @@ class loginController extends Controller{
      * Method called by the form of the page newuser.php
      */
     function register(){
+
+
         //Get data posted by the form
         $fname = $_POST['firstname'];
         $lname = $_POST['lastname'];
@@ -180,12 +275,15 @@ class loginController extends Controller{
             else{
                 $_SESSION['msg'] = '<span class="success">Registration successful!</span>';
                 unset($_SESSION['persistence']);
+                $this->sendMail($mail,"$lname $fname",'Bienvenue sur le site du CAS','Ceci est un mail automatique pour vous informer de votre inscription au site.');
+
             }
         }
 
+
+
         $this->redirect('login', 'newuser');
     }
-
 
     /**
      * Method that controls the page 'welcome.php'

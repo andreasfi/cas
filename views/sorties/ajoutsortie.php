@@ -186,7 +186,7 @@ include_once  'views/header.inc'; ?>
 			chartCanvas.innerHTML= "error " + status;
 			return;
 		}
-		
+
 		var chart = new google.visualization.LineChart(chartCanvas);
 		var data = new google.visualization.DataTable();
 		data.addColumn('string', 'Sample');
@@ -194,7 +194,7 @@ include_once  'views/header.inc'; ?>
 		for(var i = 0; i < elevations.length; i++){
 			data.addRow(['', elevations[i].elevation]);
 		}
-		
+
 		chart.draw(data, {
 			height: 150,
 			legend: 'none',

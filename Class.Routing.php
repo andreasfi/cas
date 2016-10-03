@@ -45,6 +45,7 @@ class Routing{
 		//Get the controller and the view or method
 		$controller = strtolower((@$parts[1]) ? $parts[1] : "home");
 		$method = strtolower((@$parts[2]) ? $parts[2] : "");
+        $GLOBALS['value'] = strtolower((@$parts[3]) ? $parts[3] : "");
 
         if (!method_exists("{$controller}Controller", "{$method}")) {
             $method = $controller;

@@ -165,7 +165,7 @@ class Event implements JsonSerializable
   EVENTS.maxParticipants,
   eventtypes.type,
   eventcategory.category,
-  difficulties.difficultyName,
+  difficulties.differenceName,
   users.firstname,
   users.lastname,
   users.mail,
@@ -217,5 +217,54 @@ WHERE
             'event_category' => $this->event_category,
             'difficulty' => $this->difficulty,
             'path' => $this->path);
+    }
+    function fetch_event_by_id($id){
+
+
+
+        $query = "SELECT
+         EVENTS.idEvent,
+  EVENTS.title,
+  EVENTS.description,
+  EVENTS.startDate,
+  EVENTS.endDate,
+  EVENTS.maxParticipants,
+  eventtypes.type,
+  eventcategory.category,
+  difficulties.differenceName,
+  users.firstname,
+  users.lastname,
+  users.mail,
+  users.tel,
+  paths.coordinatesJSON
+FROM
+  `events`,
+  `users`,
+  `eventcategory`,
+  `eventtypes`,
+  `paths`,
+  `difficulties`
+WHERE
+  `events`.`idEvent` = '$id'
+  AND `events`.`fk_idOwner` = `users`.`idUser`
+  AND `events`.`fk_idEventType` = `eventtypes`.`idEventType`
+  AND `events`.`fk_idEventCategory` = `eventcategory`.`idEventCategory`
+  AND `events`.`fk_idDifficulty` = `difficulties`.`id`
+  AND `events`.`fk_idPath` = `paths`.`idPath`";
+
+        $result = MySqlConn::getInstance()->selectDB($query);
+
+        $r = $result->fetch();
+
+        $owner = User::empty_construct();
+        $owner->setFirstname($r['firstname']);
+        $owner->setLastname($r['lastname']);
+        $owner->setMail($r['mail']);
+        $owner->setPhone($r['tel']);
+
+        $event = new Event($r['idEvent'], $r['description'], $r['startDate'], $r['endDate'], $r['maxParticipants'], $r['type'], $owner,$r['title'], $r['category'], $r['differenceName'], $r['coordinatesJSON']);
+
+
+        return $event;
     }
 }
