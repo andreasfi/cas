@@ -74,6 +74,7 @@
             item_calendar['textcolor'] = event_type_textcolor;
             item_calendar['allDay'] = true;
             item_calendar['description'] = "Very cool event";
+            item_calendar['difficulty'] = event['difficulty'];
 
             calendar_data.push(item_calendar);
             datatable_data.push(row_dataset);
@@ -95,6 +96,7 @@
 
         var today_string = today_y + '-' + today_m + '-' + today_d;
 
+
         $('#calendar').fullCalendar({
             locale: locale,
             contentHeight: 400,
@@ -103,23 +105,29 @@
                 center: 'title',
                 right: 'month,listYear'
             },
+            eventRender: function(event, element) {
+                $(element).tooltip({title: initTooltip(event.description, event.difficulty, "fr"), container: "body", html: true})
+            },
             defaultDate: today_string,
             navLinks: true, // can click day/week names to navigate views
             businessHours: true, // display business hours
             editable: true,
-            events: calendar_data,
-            eventRender: function (event, element) {
-
-                //TODO : The tooltip must be placed on top of the event, not at the bottom of the page.
-                element.qtip({
-                    content: {
-                        text: event.description
-                    }
-                });
-            }
-
+            events: calendar_data
         });
     }
+
+    /***
+     * Returns a <div> element to insert into the tooltip
+     */
+    function initTooltip(description, difficulty, lang)
+    {
+        switch(lang)
+        {
+            case "fr" : return description + "</br>" + "Niveau : " +difficulty;
+            case "en" : return description + "</br>" + "Level : "+difficulty;
+        }
+    }
+
 
     function initDataTable() {
 
