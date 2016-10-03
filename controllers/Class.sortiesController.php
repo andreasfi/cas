@@ -132,9 +132,39 @@ class sortiesController extends Controller{
     }
     function inscription(){
 
+        if(!isset($_Session['user'])){
+            $_SESSION['msg'] = '<span class="error">Vous devez vous connecter pour vous inscrire a une sortie</span>';
+            $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
+            $this->redirect('../../login');
+        }
+
     }
     function ajoutsortie()
     {
+
+        if(!isset($_SESSION['user']) ){
+            $_SESSION['msg'] = '<span class="error">Vous devez vous connecter pour créer un évenement</span>';
+            $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
+
+            $this->redirect('../login');
+        }
+        else if(($_SESSION['user']->getMemberType()) != 3){
+            $_SESSION['msg'] = '<span class="error">Vous ne possedez pas les droits pour creer un evenement</span>';
+            $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
+
+            $this->redirect('../login/welcome');
+
+        }
+    /*
+         else if($_SESSION['user']->getMemberType !=2){
+             var_dump("hello");
+            $_SESSION['msg'] = '<span class="error">Vous ne possédez pas les droits pour créer un évenement</span>';
+            $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
+            $this->redirect('/login/welcome');
+        }
+
+*/
+
 		$this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
         $this->vars['pageTitle'] = "Ajouter une course";
         $this->vars['pageMessage'] = "";

@@ -232,7 +232,7 @@ WHERE
             'difficulty' => $this->difficulty,
             'path' => $this->path);
     }
-    function fetch_event_by_id($id){
+   static function fetch_event_by_id($id){
 
 
 
