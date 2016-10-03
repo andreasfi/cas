@@ -23,6 +23,10 @@
         <link rel="stylesheet" href="css/slider.css">
         <link href="css/font-awesome.min.css" rel="stylesheet">
         <link href="css/style.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/contact.css">
+        <!-- FULLCALENDAR JQUERY PLUGIN -->
+        <link type="text/css" rel="stylesheet" href="css/fullcalendar.css">
+
 
         <link rel="shortcut icon" href="#">
 
@@ -49,15 +53,14 @@
 		<script src="js/html5shiv.js"></script>
 		<!-- Custom JS -->
 		<script src="js/custom.js"></script>
-        <!-- QTIP -->
-        <script type="text/javascript" src="js/jquery.qtip.js"></script>
-        <link type="text/css" href="css/jquery.qtip.css">
+        <!-- Contact -->
+        <script src="js/MediaStreamRecorder.js"></script>
 
-        <!-- FULLCALENDAR JQUERY PLUGIN -->
-        <link type="text/css" rel="stylesheet" href="css/fullcalendar.css">
+
 
         <!-- Don't change the order of the scripts -->
         <script type="text/javascript" src="js/fullcalendar/moment.min.js"></script>
+        <script type="text/javascript" src="js/fullcalendar/fullcalendar.js"></script>
         <script type="text/javascript" src="js/fullcalendar/fullcalendar.js"></script>
         <script type="text/javascript" src="js/fullcalendar/locale/fr.js"></script>
         <script type="text/javascript" src="js/fullcalendar/locale/de.js"></script>
@@ -68,6 +71,8 @@
         <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.12/css/jquery.dataTables.css">
         <script type="text/javascript" charset="utf8" src="http://cdn.datatables.net/1.10.12/js/jquery.dataTables.js"></script>
 
+        <!-- ANNYANG -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.5.0/annyang.min.js"></script>
 
     </head>
 	<body>
