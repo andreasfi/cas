@@ -255,9 +255,28 @@ class loginController extends Controller
             exit;
         }
 
+
+
+        if(!empty($_POST)){
+            $newFirstname = $_POST['firstname'];
+            $newLastname = $_POST['lastname'];
+            $newPhone = $_POST['phone'];
+            $tempId = $_SESSION['user']->getId();
+
+
+            $modifiedUser = User::empty_construct();
+            $modifiedUser->setId($tempId);
+            $modifiedUser->setFirstname($newFirstname);
+            $modifiedUser->setLastname($newLastname);
+            $modifiedUser->setPhone($newPhone);
+
+           $_SESSION['user']->update($modifiedUser);
+           $_SESSION['user'] = user::getUserFromId($tempId);
+            $_SESSION['msg'] = '<span class="success">Changes successful!</span>';
+
+        }
         //Get message from connection process
         $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
-
     }
 
 }
