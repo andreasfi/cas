@@ -1421,11 +1421,15 @@ font-size: 13px;
 }
 
 .features-two .f-block{
-	padding: 25px 20px 40px 20px;
+	padding: 25px 20px 10px 20px;
 	margin-bottom: 10px;
-	min-height: 180px;	
+	min-height: 70px;
 }
-
+.features-two .f-blockno{
+	padding: 25px 20px 40px 20px;
+	margin-bottom: 0px;
+	min-height: 230px;
+}
 .features-two a, .features-two a:hover{
 	color: #fff;
 	text-decoration: none;
@@ -1675,7 +1679,7 @@ border:1px solid #eee;
 
 .service-home .service-social{
 	padding: 15px;
-	margin: 10px 0px;
+	margin: 0px 0px;
 }
 
 .service-home .service-social .service-big{
@@ -1708,13 +1712,15 @@ border:1px solid #eee;
 	font-weight: bold;
 }
 
-.service-home .service-social .service-box a span{
+.service-home .service-social .service-box a span, .service-home .service-social .service-box span{
 	background: #333;
-	width: 60px;
+	width: auto;
+	padding: 0 5px;
 	text-align: center;
 	font-weight: bold;
 	font-size: 14px;
 }
+
 
 /* Features one */
 
@@ -2194,4 +2200,8 @@ footer .copy{
 	header .logo{
 		height: 90px;
 	}
+}
+.no-col-margin{
+	padding: 0px;
+	margin: 0px;
 }

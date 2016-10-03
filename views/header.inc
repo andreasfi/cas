@@ -13,7 +13,7 @@
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <base href="http://localhost/cas/">
-        <link rel="stylesheet" href="/<?php echo SITE_NAME; ?>/css/styles.css" type="text/css">
+        <link rel="stylesheet" href="/cas/css/styles.css" type="text/css">
 
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="css/settings.css" media="screen" />
@@ -56,7 +56,13 @@
         <!-- Contact -->
         <script src="js/MediaStreamRecorder.js"></script>
 
+		<!-- TIMEPICKER -->
+        <script type="text/javascript" src="js/jquery.timepicker.js"></script>
+        <link type="text/css" href="css/jquery.timepicker.css">
 
+
+        <!-- FULLCALENDAR JQUERY PLUGIN -->
+        <link type="text/css" rel="stylesheet" href="css/fullcalendar.css">
 
         <!-- Don't change the order of the scripts -->
         <script type="text/javascript" src="js/fullcalendar/moment.min.js"></script>
