@@ -57,6 +57,24 @@ class Controller {
     		return false;
     }
 
+    function checkUser($userLevel, $redirectPage){
+        // Verify the user level and redirects if not
+        $user = $this->getActiveUser();
+        if(($user && $user->getMemberType() >= $userLevel) || $userLevel == 0){
+
+        } else {
+            $this->redirect($redirectPage);
+            exit;
+        }
+    }
+
+    function checkParam($param, $redirectPage){
+        // Verify if params are valid and redirects if not
+        if(!isset($param) || $param == ""){
+            $this->redirect($redirectPage);
+            exit;
+        }
+    }
 
 
     function sendMail($destinationAddress, $destinationName, $subject, $message)
