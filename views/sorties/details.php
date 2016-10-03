@@ -38,7 +38,6 @@ $userLevel = $this->vars['userLevel'];
 include_once 'views/header.inc'; ?>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
     <style>
-
         .graphical {
             width: 100%;
             height: 292px;
