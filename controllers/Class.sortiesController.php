@@ -12,36 +12,124 @@ class sortiesController extends Controller{
 
     }
     function propositions(){
-        
+
         $this->vars['propositions'] = json_encode(Event::fetch_all_events());
 
     }
     function details(){
         // Get infos
-
-        $result = Event::fetch_all_events();
+        $result = Event::fetch_event_by_id($GLOBALS['value']);
         // Variables depuis BD
-        
+
         $description = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
 
-        $this->vars['title'] = $result[0]->getTitle();
-        $this->vars['startDate'] = $result[0]->getStartDate();
-        $this->vars['endDate'] = $result[0]->getEndDate();
-        $this->vars['maxParticipants'] = $result[0]->getMaxParticipants();
-        $this->vars['owner'] = $result[0]->getOwner();
-        $this->vars['eventCategory'] = $result[0]->getEventCategory();
-        $this->vars['difficulty'] = $result[0]->getDifficulty();
-        $this->vars['path'] = $result[0]->getPath();
-
-
-        $this->vars['description'] = $result[0]->getDescription();
-
+        $this->vars['eventId'] = $result->getId();
+        $this->vars['title'] = $result->getTitle();
+        $this->vars['startDate'] = $result->getStartDate();
+        $this->vars['endDate'] = $result->getEndDate();
+        $this->vars['maxParticipants'] = $result->getMaxParticipants();
+        $this->vars['owner'] = $result->getOwner();
+        $this->vars['eventCategory'] = $result->getEventCategory();
+        $this->vars['difficulty'] = $result->getDifficulty();
+        $this->vars['path'] = $result->getPath();
+        $this->vars['description'] = $result->getDescription();
         $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
         $this->vars['pageTitle'] = "Details";
         $this->vars['pageMessage'] = "Détails concernant la sortie";
-        // calculs
-    }
 
+
+        // Calcul de la distance
+        $path = $result->getPath();
+        // Faire un json valide
+        $json = preg_replace('/([{,])(\s*)([A-Za-z0-9_\-]+?)\s*:/','$1"$3":',$path);
+        $pathArrays = json_decode($json);
+        $pathDistance = 0;
+        // incrementer la distance entre tous les points
+        for($i = 0; $i < count($pathArrays)-1; $i++){
+            $pathDistance += $this->distance($pathArrays[$i]->lat, $pathArrays[$i]->lng, $pathArrays[$i+1]->lat, $pathArrays[$i+1]->lng);
+        }
+        $this->vars['distance'] = $pathDistance;
+
+        // Calcul du denivele
+
+
+
+        // api transport
+
+        $from = isset($_POST['from']) ? $_POST['from'] : false;
+        $response = isset($_POST['response']) ? $_POST['response'] : false;
+        $to = isset($_POST['to']) ? $_POST['to'] : false;
+        $via = isset($_POST['via']) ? $_POST['via'] : false;
+        $datetime = isset($_POST['datetime']) ? $_POST['datetime'] : '';
+        $page = isset($_POST['page']) ? ((int) $_POST['page']) - 1 : 0;
+        $c = isset($_POST['c']) ? (int) $_POST['c'] : false;
+        $stationsFrom = [];
+        $stationsTo = [];
+        $search = $from && $to;
+
+        if ($search) {
+            $query = [
+                'from'  => $from,
+                'to'    => $to,
+                'page'  => $page,
+                'limit' => 6,
+            ];
+            if ($datetime) {
+                $query['date'] = date('Y-m-d', strtotime($datetime));
+                $query['time'] = date('H:i', strtotime($datetime));
+            }
+            if ($via) {
+                $query['via'] = $via;
+            }
+            $url = 'http://transport.opendata.ch/v1/connections?'.http_build_query($query);
+            $url = filter_var($url, FILTER_VALIDATE_URL);
+            $response = json_decode(file_get_contents($url));
+            if ($response->from) {
+                $from = $response->from->name;
+            }
+            if ($response->to) {
+                $to = $response->to->name;
+            }
+            if (isset($response->stations->from[0])) {
+                if ($response->stations->from[0]->score < 101) {
+                    foreach (array_slice($response->stations->from, 1, 3) as $station) {
+                        if ($station->score > 97) {
+                            $stationsFrom[] = $station->name;
+                        }
+                    }
+                }
+            }
+            if (isset($response->stations->to[0])) {
+                if ($response->stations->to[0]->score < 101) {
+                    foreach (array_slice($response->stations->to, 1, 3) as $station) {
+                        if ($station->score > 97) {
+                            $stationsTo[] = $station->name;
+                        }
+                    }
+                }
+            }
+        }
+
+        if(isset($response)){$this->vars['response'] = $response;}else {$response = null;}
+        $this->vars['from'] = $from;
+        $this->vars['to'] = $to;
+        $this->vars['via'] = $via;
+        $this->vars['datetime'] = $datetime;
+        $this->vars['c'] = $c;
+        $this->vars['stationsFrom'] = $stationsFrom;
+        $this->vars['stationsTo'] = $stationsTo;
+        $this->vars['search'] = $search;
+    }
+    function distance($lat1, $lon1, $lat2, $lon2) {
+        // function de calcul de la distance entre deux points
+        $theta = $lon1 - $lon2;
+        $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
+        $dist = acos($dist);
+        $dist = rad2deg($dist);
+        $km = $dist * 60 * 1.1515;
+
+        return ($km * 1.609344);
+    }
     function inscription(){
 
     }
@@ -50,10 +138,10 @@ class sortiesController extends Controller{
 		$this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
         $this->vars['pageTitle'] = "Ajouter une course";
         $this->vars['pageMessage'] = "";
-			
-			
+
+
 		if(!empty($_POST)){
-			
+
 			$description = $_POST['description'];
 			$start_date = $_POST['startDate'].' '.$_POST['startTime'].':00';
 			$end_date = $_POST['endDate'].' '.$_POST['endTime'].':00';
@@ -64,7 +152,7 @@ class sortiesController extends Controller{
 			$event_cat = $_POST['category'];
 			$difficulty = $_POST['difficulty'];
 			$path = $_POST['JSON'];
-			
+
 			$event = new Event($id = null, $description, $start_date, $end_date, $max_participants, $event_type, $owner, $title, $event_cat, $difficulty, $path);
 			$event->save();
 		}
