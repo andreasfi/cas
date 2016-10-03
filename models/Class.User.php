@@ -148,12 +148,10 @@ class User implements JsonSerializable {
             $row['mail'], $row['tel'],$row['fk_idUserTypes'], $row['pwd']);
 
     }
-
     public function update($newData){
         $query = "UPDATE users set firstname='$newData->firstname', lastname='$newData->lastname', tel='$newData->phone' WHERE idUser ='$this->id'";
         return MySqlConn::getInstance()->executeQuery($query);
     }
-
 
 	public function save(){
 		$pwd = sha1($this->password);
