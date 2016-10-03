@@ -169,15 +169,14 @@ class sortiesController extends Controller{
         $this->vars['pageTitle'] = "Ajouter une course";
         $this->vars['pageMessage'] = "";
 
-
 		if(!empty($_POST)){
 
-			$description = $_POST['description'];
+			$description = str_replace('\'', '\\\'', $_POST['description']);
 			$start_date = $_POST['startDate'].' '.$_POST['startTime'].':00';
 			$end_date = $_POST['endDate'].' '.$_POST['endTime'].':00';
 			$max_participants = $_POST['maxParticipants'];
-			$event_type = 1;
-			$owner = 1;//$_SESSION['user']->getId();
+			$event_type = isset($_POST['multipleDays']) ? 2 : 1;
+			$owner = $_SESSION['user']->getId();
 			$title = $_POST['title'];
 			$event_cat = $_POST['category'];
 			$difficulty = $_POST['difficulty'];

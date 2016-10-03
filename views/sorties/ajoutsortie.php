@@ -73,12 +73,16 @@ include_once  'views/header.inc'; ?>
 				<div class="formgroup">
 					<p>Date/Heure de début</p>
 					<input id="startDate" name="startDate" type="date" required> 
-					<input id="startTime" name="startTime" type="time" autocomplete="off">
+					<input id="startTime" name="startTime" type="time" autocomplete="off" required onchange="">
 				</div>
 				<div class="formgroup">
-					<p>Date/Heure de fin</p>
-					<input id="endDate" name="endDate" type="date" required>
-					<input id="endTime" name="endTime" type="time" autocomplete="off">
+					<p>Heure de fin</p>
+					<input id="endDate" name="endDate" type="date" required style="display:none" required>
+					<input id="endTime" name="endTime" type="time" autocomplete="off" required>
+				</div>
+				<div class="formgroup">		
+					<p>Excursion sur plusieurs jours</p>
+					<input type="checkbox" name="multipleDays" id="multipleDays" onchange="toggleEndDate()">
 				</div>
 				<div class="formgroup">
 					<p>Description</p>
@@ -103,7 +107,7 @@ include_once  'views/header.inc'; ?>
 	<div class="row" style="margin-bottom:50px">
 		<div class="col-md-12 text-center">
 			<input id="form_json" name="JSON" type="hidden">
-			<button type="button" onclick="submit()">Ajouter</button>
+			<input type="submit">
 			</form>
 		</div>
 	</div>
@@ -258,11 +262,15 @@ include_once  'views/header.inc'; ?>
 		chart.clearChart();
 	}
 	
-	function updateSecondDate(){
-		console.log($('#startDate').val());
-		var date = new Date($('#startDate').val())
-		console.log(date);
-		$('#endDate').val(date);
+	function toggleEndDate(){
+		$("#endDate").val($("#startDate").val());
+		$("#endDate").attr("min", $("#startDate").val());
+		$("#endDate").toggle();
+	}
+	
+	function setStartTime(){
+		$("#endTime").val($("#startTime").val());
+		$("#endTime").attr("min", $("#startTime").val());
 	}
 	
 </script>
