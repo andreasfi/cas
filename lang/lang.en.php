@@ -59,3 +59,7 @@ $lang['WELCOME'] = "Welcome";
 $lang['CHANGE_DATA'] = "Change data";
 $lang['MY_PERSONNAL_DATA'] = "My personnal data";
 $lang['LOGOUT'] = "Logout";
+
+//ERROR MESSAGES
+
+//SUCCCESS MESSAGES
