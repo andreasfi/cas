@@ -1,10 +1,11 @@
 <!DOCTYPE html 
      PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-     
+
+<?php include_once("lang/common.php"); ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<title>CAS</title>
+		<title>cas</title>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
 
         <meta name="description" content=" ">
@@ -112,7 +113,7 @@
                                     echo '<br>';
                                     echo 'Déconnection';}
                                     else{echo 'Connection';};?>    </a></li>
-                                <li><a href="proximite" class="bblue"> <i class="fa fa-map-marker"></i>A proximité</a></li>
+                                <li><a href="proximite" class="bblue"> <i class="fa fa-map-marker"></i><?php echo $lang['PROXIMITY_MENU_BUTTON']; ?></a></li>
                                 <li><a href="sorties" class="bblue"> <i class="fa fa-calendar"></i> Sorties</a></li>
                                 <li><a href="contact" class="bblue"> <i class="fa fa-envelope-o"></i> Contact</a></li>
                                 <li><a  class="bblue"><img src ="./img/French_Flag_Small_Icon.jpg"><img src ="./img/English_Flag_Small_Icon.png"></a></li>
