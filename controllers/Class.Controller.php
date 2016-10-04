@@ -14,14 +14,40 @@ class Controller {
      * @param string $controller
      * @param string $method
      */
-    function __construct($controller, $method) {
-        $this->vars['pageTitle'] = "CAS";
-        $this->vars['pageMessage'] = "Club Alpin Suisse";
-        $this->controller = $controller;
-        $this->method = $method;
+        function __construct($controller, $method) {
+
+            $this->vars['pageTitle'] = "CAS";
+            $this->vars['pageMessage'] = "Club Alpin Suisse";
+            $this->controller = $controller;
+            $this->method = $method;
+
+            if(isSet($_GET['lang']))
+            {
+                $clang = $_GET['lang'];
+
+    // register the session and set the cookie
+                $_SESSION['lang'] = $clang;
+                setcookie('lang', $clang, time() + (3600 * 24 * 30));
+            }
+            else if(isSet($_SESSION['lang']))
+            {
+                $clang = $_SESSION['lang'];
+            }
+            else if(isSet($_COOKIE['lang']))
+            {
+                $clang = $_COOKIE['lang'];
+            }
+            else
+            {
+                $clang = 'en';
+            }
+            $lang = "";
+            include ("lang/lang.$clang.php");
+
+            $this->lang = $lang;
 
 
-    }
+        }
     
     /**
      * Display view associated to a controller method
