@@ -40,35 +40,35 @@
       <img class="img-responsive center-block" src="./img/img1.jpg" alt="Cabane">
       <div class="carousel-caption">
           <h2 class="mytitle"><?php echo $lang['WELCOME_MESSAGE']; ?></h2>
-          <p>Club Alpin Suisse, Crans-Montana</p>
+          <p><?php echo $lang['WEBSITE_NAME'] ,' , ', $lang['CAS_HOMETOWN']; ?></p>
       </div>
     </div>
     <div class="item">
       <img class="img-responsive center-block" src="./img/img2.jpg" alt="Alpinisme">
       <div class="carousel-caption">
           <h2 class="mytitle"><?php echo $lang['WELCOME_MESSAGE']; ?></h2>
-          <p>Club Alpin Suisse, Crans-Montana</p>
+          <p><?php echo $lang['WEBSITE_NAME'] ,' , ', $lang['CAS_HOMETOWN']; ?></p>
       </div>
     </div>
     <div class="item">
       <img class="img-responsive center-block" src="./img/img3.jpg" alt="Peau de Phoque">
       <div class="carousel-caption">
           <h2 class="mytitle"><?php echo $lang['WELCOME_MESSAGE']; ?></h2>
-          <p>Club Alpin Suisse, Crans-Montana</p>
+          <p><?php echo $lang['WEBSITE_NAME'] ,' , ', $lang['CAS_HOMETOWN']; ?></p>
       </div>
     </div>
 	  <div class="item">
       <img class="img-responsive center-block" src="./img/img4.jpg" alt="Peau de Phoque">
       <div class="carousel-caption">
           <h2 class="mytitle"><?php echo $lang['WELCOME_MESSAGE']; ?></h2>
-          <p>Club Alpin Suisse, Crans-Montana</p>
+          <p><?php echo $lang['WEBSITE_NAME'] ,' , ', $lang['CAS_HOMETOWN']; ?></p>
       </div>
     </div>
 	  <div class="item">
       <img class="img-responsive center-block" src="./img/img5.jpg" alt="Raquettes">
       <div class="carousel-caption">
           <h2 class="mytitle"><?php echo $lang['WELCOME_MESSAGE']; ?></h2>
-          <p>Club Alpin Suisse, Crans-Montana</p>
+          <p><?php echo $lang['WEBSITE_NAME'] ,' , ', $lang['CAS_HOMETOWN']; ?></p>
       </div>
     </div>
 	  

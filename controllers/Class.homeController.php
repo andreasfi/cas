@@ -7,7 +7,7 @@
  */
 class homeController extends Controller{
     function home(){
-
+        //TODO Put messages in the header with the variables
     }
 
 }

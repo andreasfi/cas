@@ -12,12 +12,13 @@
 $lang = array();
 
 //misc
-
 $lang['WEBSITE_NAME'] = "Club alpin Suisse";
+$lang['CAS_HOMETOWN'] = "Crans-Montana";
 
 //menu
 
 $lang['CONNECT_MENU_BUTTON'] = "Connection";
+$lang['DISCONNECT_MENU_BUTTON'] = "Déconnection";
 $lang['PROXIMITY_MENU_BUTTON'] = "A proximité";
 $lang['ACTIVITIES_MENU_BUTTON'] = "Excursions";
 $lang['CONTACT_MENU_BUTTON'] = "Contact";
@@ -25,3 +26,5 @@ $lang['CONTACT_MENU_BUTTON'] = "Contact";
 //Home
 
 $lang['WELCOME_MESSAGE'] = "Bienvenue les montagnards";
+
+//Login

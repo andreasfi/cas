@@ -111,11 +111,11 @@
                                     echo ' ';
                                     echo $_SESSION['user']->getLastname();
                                     echo '<br>';
-                                    echo 'Déconnection';}
-                                    else{echo 'Connection';};?>    </a></li>
+                                    echo $lang['DISCONNECT_MENU_BUTTON'];}
+                                    else{echo $lang['CONNECT_MENU_BUTTON'];};?>    </a></li>
                                 <li><a href="proximite" class="bblue"> <i class="fa fa-map-marker"></i><?php echo $lang['PROXIMITY_MENU_BUTTON']; ?></a></li>
-                                <li><a href="sorties" class="bblue"> <i class="fa fa-calendar"></i> Sorties</a></li>
-                                <li><a href="contact" class="bblue"> <i class="fa fa-envelope-o"></i> Contact</a></li>
+                                <li><a href="sorties" class="bblue"> <i class="fa fa-calendar"></i><?php echo $lang['ACTIVITIES_MENU_BUTTON']; ?></a></li>
+                                <li><a href="contact" class="bblue"> <i class="fa fa-envelope-o"></i><?php echo $lang['CONTACT_MENU_BUTTON']; ?></a></li>
                                 <li><a  class="bblue"><img src ="./img/French_Flag_Small_Icon.jpg"><img src ="./img/English_Flag_Small_Icon.png"></a></li>
                             </ul>
                         </div>

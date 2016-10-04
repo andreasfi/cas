@@ -47,7 +47,7 @@ class loginController extends Controller
         $this->sendSms('XXXXXX','Salut monsieur X, ici c est Club alpin suisse. ca va?');
 
         $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
-        $this->vars['pageTitle'] = "Connection";
+        $this->vars['pageTitle'] = "connection";
         $this->vars['pageMessage'] = "Connectez vous pour vous inscrire aux évenements.";
 
 

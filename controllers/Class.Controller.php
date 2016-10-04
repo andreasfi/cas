@@ -4,7 +4,7 @@
  * @author S. Martin
  * @link http://www.hevs.ch	
  */
-class Controller {	
+class Controller {
     protected $vars = array();
     protected $controller;
     protected $method;
