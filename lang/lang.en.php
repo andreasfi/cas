@@ -65,6 +65,10 @@ $lang['LOGIN_TO_ACCESS_EVENTS'] = "Login to access excurions.";
 $lang['MSG_TO_RECOVER_PASSWORD'] = "This message is here to help you recover your password : \nFollow this link : http://localhost/cas/login/changepassword/";
 $lang['CAS_PWD_RECOVERY'] = "CAS password recovery";
 
+//Welcome
+$lang['USER_EVENTS_NO_DATA'] = "No events to show.";
+$lang['WELCOME_H1_LISTEVENTS'] = "List of events you are subscribed to.";
+
 //ERROR MESSAGES
 $lang['E_REQUIRED_FIELD_EMPTY'] = "A reqired field is empty.";
 $lang['E_USERNAME_PASSWORD_INCORRECT'] = "Username or password incorrect.";
