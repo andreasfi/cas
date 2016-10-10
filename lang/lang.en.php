@@ -66,6 +66,25 @@ $lang['MSG_TO_RECOVER_PASSWORD'] = "This message is here to help you recover you
 $lang['CAS_PWD_RECOVERY'] = "CAS password recovery";
 $lang['CREATE_ACCOUNT'] ="Create your account";
 
+//SORTIE CONTROLLER
+// DETAILS
+$lang['BUTTON_PARTICIPATION_REQUEST'] = "I want to participate ";
+$lang['BUTTON_FIND_ROUTE'] = "Find a route ";
+$lang['FIELD_DISTANCE'] = "Distance ";
+$lang['FIELD_ALTITUDE'] = "Altitude ";
+$lang['FIELD_DIFFICULTY'] = "Difficulty ";
+$lang['FIELD_MAX_PARTICIPANT'] = "Max participants ";
+$lang['FIELD_CATEGORY'] = "Category ";
+
+$lang['FIELD_TRAIL_MASTER'] = "Trail master ";
+$lang['FIELD_NAME'] = "Name ";
+$lang['FIELD_EMAIL'] = "Email ";
+$lang['FIELD_TELEPHONE'] = "Tel. ";
+
+//Welcome
+$lang['USER_EVENTS_NO_DATA'] = "No events to show.";
+$lang['WELCOME_H1_LISTEVENTS'] = "List of events you are subscribed to.";
+
 //Welcome
 $lang['USER_EVENTS_NO_DATA'] = "No events to show.";
 $lang['WELCOME_H1_LISTEVENTS'] = "List of events you are subscribed to.";
@@ -86,3 +105,4 @@ $lang['S_CHANGES_SUCCESSFUL'] = "Changes successful";
 //Mail content
 $lang['REGISTRATION_MAIL_TITLE'] = "Welcome on the CAS website !";
 $lang['REGISTRATION_MAIL_BODY'] = "This is an automatic email to inform you of your registration on our website.";
+
