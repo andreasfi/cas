@@ -1,11 +1,12 @@
 -- phpMyAdmin SQL Dump
 -- version 4.5.2
 -- http://www.phpmyadmin.net
+-- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Oct 03, 2016 at 11:22 AM
--- Server version: 10.1.16-MariaDB
--- PHP Version: 5.6.24
+-- Host: 127.0.0.1
+-- Generation Time: Oct 10, 2016 at 09:33 AM
+-- Server version: 5.7.9
+-- PHP Version: 5.6.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -26,10 +27,12 @@ SET time_zone = "+00:00";
 -- Table structure for table `difficulties`
 --
 
-CREATE TABLE `difficulties` (
-  `id` int(11) NOT NULL,
-  `differenceName` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+DROP TABLE IF EXISTS `difficulties`;
+CREATE TABLE IF NOT EXISTS `difficulties` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `differenceName` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `difficulties`
@@ -48,10 +51,12 @@ INSERT INTO `difficulties` (`id`, `differenceName`) VALUES
 -- Table structure for table `eventcategory`
 --
 
-CREATE TABLE `eventcategory` (
-  `idEventCategory` int(11) NOT NULL,
-  `category` varchar(25) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+DROP TABLE IF EXISTS `eventcategory`;
+CREATE TABLE IF NOT EXISTS `eventcategory` (
+  `idEventCategory` int(11) NOT NULL AUTO_INCREMENT,
+  `category` varchar(25) NOT NULL,
+  PRIMARY KEY (`idEventCategory`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `eventcategory`
@@ -73,8 +78,9 @@ INSERT INTO `eventcategory` (`idEventCategory`, `category`) VALUES
 -- Table structure for table `events`
 --
 
-CREATE TABLE `events` (
-  `idEvent` int(11) NOT NULL,
+DROP TABLE IF EXISTS `events`;
+CREATE TABLE IF NOT EXISTS `events` (
+  `idEvent` int(11) NOT NULL AUTO_INCREMENT,
   `description` text NOT NULL,
   `startDate` datetime NOT NULL,
   `endDate` datetime NOT NULL,
@@ -84,8 +90,14 @@ CREATE TABLE `events` (
   `title` text NOT NULL,
   `fk_idEventCategory` int(11) NOT NULL,
   `fk_idDifficulty` int(11) NOT NULL,
-  `fk_idPath` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `fk_idPath` int(11) NOT NULL,
+  PRIMARY KEY (`idEvent`),
+  KEY `fk_idEventType` (`fk_idEventType`),
+  KEY `fk_idOwner` (`fk_idOwner`),
+  KEY `fk_idEventCategory` (`fk_idEventCategory`),
+  KEY `fk_idDifficulty` (`fk_idDifficulty`),
+  KEY `idPath` (`fk_idPath`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `events`
@@ -100,10 +112,12 @@ INSERT INTO `events` (`idEvent`, `description`, `startDate`, `endDate`, `maxPart
 -- Table structure for table `eventtypes`
 --
 
-CREATE TABLE `eventtypes` (
-  `idEventType` int(11) NOT NULL,
-  `type` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+DROP TABLE IF EXISTS `eventtypes`;
+CREATE TABLE IF NOT EXISTS `eventtypes` (
+  `idEventType` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(50) NOT NULL,
+  PRIMARY KEY (`idEventType`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `eventtypes`
@@ -119,9 +133,17 @@ INSERT INTO `eventtypes` (`idEventType`, `type`) VALUES
 -- Table structure for table `eventusers`
 --
 
-CREATE TABLE `eventusers` (
+DROP TABLE IF EXISTS `eventusers`;
+CREATE TABLE IF NOT EXISTS `eventusers` (
   `fk_idEvent` int(11) NOT NULL,
-  `fk_idUser` int(11) NOT NULL
+  `fk_idUser` int(11) NOT NULL,
+  `fk_idStatus` int(11) NOT NULL,
+  `submitDate` datetime NOT NULL,
+  `numberParticipants` int(1) NOT NULL,
+  PRIMARY KEY (`fk_idEvent`,`fk_idUser`),
+  KEY `fk_idEvent` (`fk_idEvent`),
+  KEY `fk_idUser` (`fk_idUser`),
+  KEY `fk_idStatus` (`fk_idStatus`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -130,10 +152,13 @@ CREATE TABLE `eventusers` (
 -- Table structure for table `password_change_requests`
 --
 
-CREATE TABLE `password_change_requests` (
+DROP TABLE IF EXISTS `password_change_requests`;
+CREATE TABLE IF NOT EXISTS `password_change_requests` (
   `idRequest` varchar(100) NOT NULL,
   `Time` datetime NOT NULL,
-  `fk_idUser` int(11) NOT NULL
+  `fk_idUser` int(11) NOT NULL,
+  PRIMARY KEY (`idRequest`),
+  KEY `fk_idUser` (`fk_idUser`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -150,10 +175,12 @@ INSERT INTO `password_change_requests` (`idRequest`, `Time`, `fk_idUser`) VALUES
 -- Table structure for table `paths`
 --
 
-CREATE TABLE `paths` (
-  `idPath` int(11) NOT NULL,
-  `coordinatesJSON` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+DROP TABLE IF EXISTS `paths`;
+CREATE TABLE IF NOT EXISTS `paths` (
+  `idPath` int(11) NOT NULL AUTO_INCREMENT,
+  `coordinatesJSON` text NOT NULL,
+  PRIMARY KEY (`idPath`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `paths`
@@ -166,18 +193,45 @@ INSERT INTO `paths` (`idPath`, `coordinatesJSON`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `status`
+--
+
+DROP TABLE IF EXISTS `status`;
+CREATE TABLE IF NOT EXISTS `status` (
+  `idStatus` int(11) NOT NULL AUTO_INCREMENT,
+  `statusname` varchar(30) NOT NULL,
+  PRIMARY KEY (`idStatus`),
+  KEY `idStatus` (`idStatus`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `status`
+--
+
+INSERT INTO `status` (`idStatus`, `statusname`) VALUES
+(1, 'Submited'),
+(2, 'Accepted'),
+(3, 'Refused');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
-  `idUser` int(11) NOT NULL,
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users` (
+  `idUser` int(11) NOT NULL AUTO_INCREMENT,
   `mail` varchar(100) NOT NULL,
   `firstname` varchar(100) NOT NULL,
   `lastname` varchar(100) NOT NULL,
   `tel` varchar(50) NOT NULL,
   `pwd` varchar(256) NOT NULL,
-  `fk_idUserTypes` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `fk_idUserTypes` int(11) NOT NULL,
+  PRIMARY KEY (`idUser`),
+  UNIQUE KEY `mail` (`mail`),
+  KEY `fk_idUserTypes` (`fk_idUserTypes`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
@@ -187,7 +241,8 @@ INSERT INTO `users` (`idUser`, `mail`, `firstname`, `lastname`, `tel`, `pwd`, `f
 (1, 'lothgar_pgm@hotmail.com', 'Pierre', 'Baran', '793943353', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 2),
 (2, 'a@a', 'a', 'a', '041241', '7c4a8d09ca3762af61e59520943dc26494f8941b', 2),
 (4, 'pierre.baran@students.hevs.ch', 'a', 'a', '423423', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 3),
-(9, 'calixtemayoraz@gmail.com', 'Calixte', 'Mayoraz', '0786298541', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 3);
+(9, 'calixtemayoraz@gmail.com', 'Calixte', 'Mayoraz', '0786298541', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 3),
+(12, 'tewt@google.cok', 'bob', 'bab', '23', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 1);
 
 -- --------------------------------------------------------
 
@@ -195,10 +250,12 @@ INSERT INTO `users` (`idUser`, `mail`, `firstname`, `lastname`, `tel`, `pwd`, `f
 -- Table structure for table `usertypes`
 --
 
-CREATE TABLE `usertypes` (
-  `idUserType` int(11) NOT NULL,
-  `role` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+DROP TABLE IF EXISTS `usertypes`;
+CREATE TABLE IF NOT EXISTS `usertypes` (
+  `idUserType` int(11) NOT NULL AUTO_INCREMENT,
+  `role` varchar(50) NOT NULL,
+  PRIMARY KEY (`idUserType`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `usertypes`
@@ -209,113 +266,6 @@ INSERT INTO `usertypes` (`idUserType`, `role`) VALUES
 (2, 'member'),
 (3, 'trailMaster');
 
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `difficulties`
---
-ALTER TABLE `difficulties`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `eventcategory`
---
-ALTER TABLE `eventcategory`
-  ADD PRIMARY KEY (`idEventCategory`);
-
---
--- Indexes for table `events`
---
-ALTER TABLE `events`
-  ADD PRIMARY KEY (`idEvent`),
-  ADD KEY `fk_idEventType` (`fk_idEventType`),
-  ADD KEY `fk_idOwner` (`fk_idOwner`),
-  ADD KEY `fk_idEventCategory` (`fk_idEventCategory`),
-  ADD KEY `fk_idDifficulty` (`fk_idDifficulty`),
-  ADD KEY `idPath` (`fk_idPath`);
-
---
--- Indexes for table `eventtypes`
---
-ALTER TABLE `eventtypes`
-  ADD PRIMARY KEY (`idEventType`);
-
---
--- Indexes for table `eventusers`
---
-ALTER TABLE `eventusers`
-  ADD PRIMARY KEY (`fk_idEvent`,`fk_idUser`),
-  ADD KEY `fk_idEvent` (`fk_idEvent`),
-  ADD KEY `fk_idUser` (`fk_idUser`);
-
---
--- Indexes for table `password_change_requests`
---
-ALTER TABLE `password_change_requests`
-  ADD PRIMARY KEY (`idRequest`),
-  ADD KEY `fk_idUser` (`fk_idUser`);
-
---
--- Indexes for table `paths`
---
-ALTER TABLE `paths`
-  ADD PRIMARY KEY (`idPath`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`idUser`),
-  ADD UNIQUE KEY `mail` (`mail`),
-  ADD KEY `fk_idUserTypes` (`fk_idUserTypes`);
-
---
--- Indexes for table `usertypes`
---
-ALTER TABLE `usertypes`
-  ADD PRIMARY KEY (`idUserType`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `difficulties`
---
-ALTER TABLE `difficulties`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
---
--- AUTO_INCREMENT for table `eventcategory`
---
-ALTER TABLE `eventcategory`
-  MODIFY `idEventCategory` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
---
--- AUTO_INCREMENT for table `events`
---
-ALTER TABLE `events`
-  MODIFY `idEvent` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT for table `eventtypes`
---
-ALTER TABLE `eventtypes`
-  MODIFY `idEventType` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT for table `paths`
---
-ALTER TABLE `paths`
-  MODIFY `idPath` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
---
--- AUTO_INCREMENT for table `usertypes`
---
-ALTER TABLE `usertypes`
-  MODIFY `idUserType` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- Constraints for dumped tables
 --
@@ -335,7 +285,8 @@ ALTER TABLE `events`
 --
 ALTER TABLE `eventusers`
   ADD CONSTRAINT `EventUsers_ibfk_1` FOREIGN KEY (`fk_idEvent`) REFERENCES `events` (`idEvent`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `EventUsers_ibfk_2` FOREIGN KEY (`fk_idUser`) REFERENCES `users` (`idUser`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `EventUsers_ibfk_2` FOREIGN KEY (`fk_idUser`) REFERENCES `users` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `EventUsers_ibfk_3` FOREIGN KEY (`fk_idStatus`) REFERENCES `status` (`idStatus`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `password_change_requests`
