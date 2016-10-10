@@ -78,10 +78,10 @@ class loginController extends Controller
             try{
                 $messageContent = $this->lang['MSG_TO_RECOVER_PASSWORD'] ."$secretKey";
                 $this->sendMail($_POST['recoveryMail'],$_POST['recoveryMail'],$this->lang['CAS_PWD_RECOVERY'],$messageContent,null);
-                $_SESSION['msg'] = '<span class="success">'. $this->lang['RECOVERY_MAIL_SENT'].'</span>';
+                $_SESSION['msg'] = '<span class="success">'. $this->lang['S_RECOVERY_MAIL_SENT'].'</span>';
                 $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
             }catch(Exception $e){
-                $_SESSION['msg'] = '<span class="error">Failed to deliver</span>';
+                $_SESSION['msg'] = '<span class="error">' . $this->lang['E_FAILED_TO_DELIVER_EMAIL'].'</span>';
                 $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
             }
 
@@ -119,7 +119,7 @@ class loginController extends Controller
             if(  !($_SESSION['user']->getId() != 0)         ){
 
                 unset($_SESSION['user']);
-                $_SESSION['msg'] = '<span class="error">Key out of date,or invalid, please recover again.</span>';
+                $_SESSION['msg'] = '<span class="error">'.$this->lang['E_KEY_REJECTED'].'</span>';
                 $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
                 $this->redirect('../resetpassword');
             }
@@ -137,13 +137,13 @@ class loginController extends Controller
             //check if fields are empty
             if(empty($newPassword) or empty($newPasswordConfirmation)) {
 
-                $_SESSION['msg'] = '<span class="error">Veuillez remplir les champs</span>';
+                $_SESSION['msg'] = '<span class="error">'.$this->lang['E_REQUIRED_FILED_EMPTY'].'</span>';
                 $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
                 return;
         }
             //check if passwords match
             if($newPassword != $newPasswordConfirmation){
-                $_SESSION['msg'] = '<span class="error">Passwords dont match</span>';
+                $_SESSION['msg'] = '<span class="error">'.$this->lang['E_PASSWORDS_DONT_MATCH'].'</span>';
                 $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
                 return;
             }
@@ -154,7 +154,7 @@ class loginController extends Controller
                     $_SESSION['msg'] = '<span class="error">'.$result.'</span>';
                 }
                 else{
-                    $_SESSION['msg'] = '<span class="success">Password change successful!</span>';
+                    $_SESSION['msg'] = '<span class="success">'.$this->lang['S_PASSWORD_CHANGE_SUCCESSFUL'].'</span>';
                     $this->getActiveUser()->setPassword(sha1($newPassword));
 
                 }
@@ -182,7 +182,7 @@ class loginController extends Controller
      */
     function newuser(){
 
-        $this->vars['pageTitle'] = "Créez votre compte";
+        $this->vars['pageTitle'] = $this->lang['CREATE_ACCOUNT'];
         $this->vars['pageMessage'] = "";
         //if a user is active he cannot re-register
         if($this->getActiveUser()){
@@ -224,7 +224,7 @@ class loginController extends Controller
 
         //Check if data valid
         if(empty($fname) or empty($lname) or empty($mail) or empty($pwd) or empty($phone)){
-            $_SESSION['msg'] = '<span class="error">A required field is empty!</span>';
+            $_SESSION['msg'] = '<span class="error">'.$this->lang['E_REQUIRED_FIELD_EMPTY'].'</span>';
             $_SESSION['persistence'] = array($fname, $lname, $mail, $phone, $finalMemberNumber, $pwd);
         }
         else{
@@ -236,9 +236,9 @@ class loginController extends Controller
                 $_SESSION['persistence'] = array($fname, $lname,$mail,$phone,$memberNumber, $pwd);
             }
             else{
-                $_SESSION['msg'] = '<span class="success">Registration successful!</span>';
+                $_SESSION['msg'] = '<span class="success">'.$this->lang['S_REGISTRATION_SUCCESSFUL'].'</span>';
                 unset($_SESSION['persistence']);
-                $this->sendMail($mail,"$lname $fname",'Bienvenue sur le site du CAS','Ceci est un mail automatique pour vous informer de votre inscription au site.',null);
+                $this->sendMail($mail,"$lname $fname",$this->lang['REGISTRATION_MAIL_TITLE'],$this->lang['REGISTRATION_MAIL_BODY'],null);
 
             }
         }
@@ -275,7 +275,7 @@ class loginController extends Controller
 
            $_SESSION['user']->update($modifiedUser);
            $_SESSION['user'] = user::getUserFromId($tempId);
-            $_SESSION['msg'] = '<span class="success">Changes successful!</span>';
+            $_SESSION['msg'] = '<span class="success">'.$this->lang['S_CHANGES_SUCCESSFUL'].'</span>';
 
         }
         //Get message from connection process
