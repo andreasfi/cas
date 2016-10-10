@@ -81,6 +81,14 @@ $lang['FIELD_NAME'] = "Name ";
 $lang['FIELD_EMAIL'] = "Email ";
 $lang['FIELD_TELEPHONE'] = "Tel. ";
 
+//Welcome
+$lang['USER_EVENTS_NO_DATA'] = "No events to show.";
+$lang['WELCOME_H1_LISTEVENTS'] = "List of events you are subscribed to.";
+
+//Welcome
+$lang['USER_EVENTS_NO_DATA'] = "No events to show.";
+$lang['WELCOME_H1_LISTEVENTS'] = "List of events you are subscribed to.";
+
 //ERROR MESSAGES
 $lang['E_REQUIRED_FIELD_EMPTY'] = "A reqired field is empty.";
 $lang['E_USERNAME_PASSWORD_INCORRECT'] = "Username or password incorrect.";
