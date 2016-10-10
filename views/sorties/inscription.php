@@ -78,6 +78,6 @@ include_once ROOT_DIR.'views/header.inc';
 
 
 <?php
-unset($_SESSION['msg']);
+
 include_once ROOT_DIR.'views/footer.inc';
 ?>
