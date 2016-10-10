@@ -28,3 +28,7 @@ $lang['CONTACT_MENU_BUTTON'] = "Contact";
 $lang['WELCOME_MESSAGE'] = "Bienvenue les montagnards";
 
 //Login
+
+//welcome page
+$lang['USER_EVENTS_NO_DATA'] = "Vous n'êtes inscrit à aucun événement.";
+$lang['WELCOME_H1_LISTEVENTS'] = "Liste des sorties auxquelles vous êtes inscrit.";

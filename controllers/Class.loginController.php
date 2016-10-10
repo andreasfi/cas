@@ -259,7 +259,6 @@ class loginController extends Controller
         }
 
 
-
         if(!empty($_POST)){
             $newFirstname = $_POST['firstname'];
             $newLastname = $_POST['lastname'];
@@ -280,6 +279,14 @@ class loginController extends Controller
         }
         //Get message from connection process
         $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
+
+        //Get the events for the specified user
+        $this->vars['user_events'] = Event::fetch_events_for_user($_SESSION['user']->getId());
+        if(sizeof($this->vars['user_events']) == 0){
+            $this->vars['user_events_msg'] = $this->lang['USER_EVENTS_NO_DATA'];
+        }
+
+
     }
 
 }

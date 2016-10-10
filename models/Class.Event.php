@@ -163,6 +163,7 @@ class Event implements JsonSerializable
      * Fetches all the events from the database
      * @return bool|User
      */
+
     static function fetch_all_events()
     {
         //0. Create a new list of events
@@ -232,6 +233,42 @@ WHERE
             'difficulty' => $this->difficulty,
             'path' => $this->path);
     }
+
+
+    /***
+     * @param $user_id
+     * @return array
+     * Returns an array of events.
+     */
+    static function fetch_events_for_user($user_id)
+    {
+        $events = array();
+
+        $query = "SELECT idEvent, startDate, endDate, title, description FROM `Events`, `eventusers` WHERE `eventusers`.`fk_idEvent` = idEvent AND `eventusers`.`fk_idUser` = $user_id;";
+
+        $result = MySQlConn::getInstance()->selectDB($query);
+        $rows = $result->fetchAll();
+
+        /*''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+         * Data needed for the event
+         * '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+         * 1. event_ID
+         * 2. start date of the event
+         * 3. end date of the event
+         * 4. event_status TODO : Add status
+         * 5. title
+         * 6. description
+         *'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''*/
+
+        foreach($rows as $r)
+        {
+            $e = new Event($r['idEvent'], $r['description'], $r['startDate'], $r['endDate'], null, null, null, $r['title'], null, null, null);
+            array_push($events, $e);
+        }
+        return $events;
+    }
+
+
    static function fetch_event_by_id($id){
 
 
