@@ -6,7 +6,6 @@
  * Time: 08:48
  */
 
-
 $msg = $this->vars['msg'];
 $pageTitle = $this->vars['pageTitle'];
 $pageMessage = $this->vars['pageMessage'];
@@ -20,7 +19,6 @@ $path = $this->vars['path'];
 $distance = $this->vars['distance'];
 $eventId = $this->vars['eventId'];
 
-
 $from =$this->vars['from'];
 $to = $this->vars['to'];
 $via = $this->vars['via'];
@@ -31,9 +29,6 @@ $stationsTo = $this->vars['stationsTo'];
 $search = $this->vars['search'];
 $response = $this->vars['response'];
 $userLevel = $this->vars['userLevel'];
-
-
-
 
 include_once 'views/header.inc'; ?>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
@@ -56,11 +51,11 @@ include_once 'views/header.inc'; ?>
                 </div>
                 <div class="col-lg-6">
                     <?php if(isset($userLevel) && $userLevel >= 2 ){ ?>
-                            <a href="sorties/inscription/<?php if (isset($eventId)) {echo $eventId;}; ?>" class="btn btn-danger btn-large pull-right">Je veux participer <i class="fa fa-angle-double-right"></i></a>
+                            <a href="sorties/inscription/<?php if (isset($eventId)) {echo $eventId;}; ?>" class="btn btn-danger btn-large pull-right"><?php echo $lang['BUTTON_PARTICIPATION_REQUEST'];?><i class="fa fa-angle-double-right"></i></a>
                     <?php } else { ?>
-                            <button data-toggle="tooltip" data-placement="top" title="Vous devez être membre pour vous inscrire" style="" class="btn btn-default btn-large pull-right">Je veux participer <i class="fa fa-angle-double-right"></i></button>
+                            <button data-toggle="tooltip" data-placement="top" title="Vous devez être membre pour vous inscrire" style="" class="btn btn-default btn-large pull-right"><?php echo $lang['BUTTON_PARTICIPATION_REQUEST'];?> <i class="fa fa-angle-double-right"></i></button>
                     <?php } ?>
-                    <a href="#" data-toggle="modal" data-target="#itineraire" class="btn btn-info btn-large pull-right">Trouver itinéraire <i class="fa fa-angle-double-right"></i></a>
+                    <a href="#" data-toggle="modal" data-target="#itineraire" class="btn btn-info btn-large pull-right"><?php echo $lang['BUTTON_FIND_ROUTE'];?> <i class="fa fa-angle-double-right"></i></a>
                 </div>
             </div>
             <div class="service-home">
@@ -72,25 +67,25 @@ include_once 'views/header.inc'; ?>
                         <div class="col-md-3 no-col-margin">
                             <div class="service-social bblack">
                                 <div class="service-box bviolet">
-                                    Distance <span class="pull-right">
+                                    <?php echo $lang['FIELD_DISTANCE'];?> <span class="pull-right">
                                     <?php if (isset($distance)) { echo round($distance,2);} else { echo "No Data";}; ?> km
                                 </span>
                                 </div>
                                 <div class="service-box bviolet">
-                                    Denivele <span id="elevation" class="pull-right">500m</span>
+                                    <?php echo $lang['FIELD_ALTITUDE'];?> <span id="elevation" class="pull-right">500m</span>
                                 </div>
                                 <div class="service-box bviolet">
-                                    Difficulté <span class="pull-right">
+                                    <?php echo $lang['FIELD_DIFFICULTY'];?> <span class="pull-right">
                                 <?php if (isset($difficulty)) { echo $difficulty;} else { echo "No Data";}; ?>
                             </span>
                                 </div>
                                 <div class="service-box bblue">
-                                    Max participants <span class="pull-right">
+                                    <?php echo $lang['FIELD_MAX_PARTICIPANT'];?> <span class="pull-right">
                                 <?php if (isset($maxParticipants)) { echo $maxParticipants;} else { echo "No Data";}; ?>
                             </span>
                                 </div>
                                 <div class="service-box bblue">
-                                    Categorie <span class="pull-right">
+                                    <?php echo $lang['FIELD_CATEGORY'];?> <span class="pull-right">
                                 <?php if (isset($eventCategory)) {echo $eventCategory;} else {echo "No Data";}; ?>
                             </span>
                                 </div>
@@ -117,23 +112,23 @@ include_once 'views/header.inc'; ?>
                                 </p>
                                 <div class="">
                                     <?php if(isset($userLevel) && $userLevel >= 2 ){ ?>
-                                        <a href="sorties/inscription/<?php if (isset($eventId)) {echo $eventId;}; ?>" class="btn btn-danger btn-large pull-right">Je veux participer <i class="fa fa-angle-double-right"></i></a>
+                                        <a href="sorties/inscription/<?php if (isset($eventId)) {echo $eventId;}; ?>" class="btn btn-danger btn-large pull-right"><?php echo $lang['BUTTON_PARTICIPATION_REQUEST'];?> <i class="fa fa-angle-double-right"></i></a>
                                     <?php } else { ?>
-                                        <button data-toggle="tooltip" data-placement="top" title="Vous devez être membre pour vous inscrire" style="" class="btn btn-default btn-large pull-right">Je veux participer <i class="fa fa-angle-double-right"></i></button>
+                                        <button data-toggle="tooltip" data-placement="top" title="Vous devez être membre pour vous inscrire" style="" class="btn btn-default btn-large pull-right"><?php echo $lang['BUTTON_PARTICIPATION_REQUEST'];?> <i class="fa fa-angle-double-right"></i></button>
                                     <?php } ?>
-                                    <a href="#" data-toggle="modal" data-target="#itineraire" class="btn btn-info btn-large pull-right">Trouver itinéraire <i class="fa fa-angle-double-right"></i></a>
+                                    <a href="#" data-toggle="modal" data-target="#itineraire" class="btn btn-info btn-large pull-right"><?php echo $lang['BUTTON_FIND_ROUTE'];?> <i class="fa fa-angle-double-right"></i></a>
                                 </div>
                             </div>
                             <div class="col-md-3 f-block no-col-margin borange">
                                 <a href="#"><i class="fa fa-envelope"></i></a>
-                                <a href="#"><h3>Responsable sortie</h3></a>
+                                <a href="#"><h3><?php echo $lang['FIELD_TRAIL_MASTER'];?></h3></a>
                                 <ul class="list-unstyled">
                                     <li>
-                                        Name: <?php if (isset($owner)) {echo $owner->getFirstname();} else {echo "No Data";}; ?>
+                                        <?php echo $lang['FIELD_NAME'];?>: <?php if (isset($owner)) {echo $owner->getFirstname();} else {echo "No Data";}; ?>
                                         <?php if (isset($owner)) {echo $owner->getLastname();} else {echo "No Data";}; ?>
                                     </li>
-                                    <li>Email: <a href="mailto:<?php if (isset($owner)) {echo $owner->getMail();} else {echo "No Data";}; ?>"><?php if (isset($owner)) {echo $owner->getMail();} else {echo "No Data";}; ?></a></li>
-                                    <li>Tél:<?php if (isset($owner)) {echo $owner->getPhone();} else {echo "No Data";}; ?></li>
+                                    <li><?php echo $lang['FIELD_EMAIL'];?>: <a href="mailto:<?php if (isset($owner)) {echo $owner->getMail();} else {echo "No Data";}; ?>"><?php if (isset($owner)) {echo $owner->getMail();} else {echo "No Data";}; ?></a></li>
+                                    <li><?php echo $lang['FIELD_TELEPHONE'];?>:<?php if (isset($owner)) {echo $owner->getPhone();} else {echo "No Data";}; ?></li>
                                 </ul>
                             </div>
                         </div>
@@ -405,15 +400,7 @@ if($response != false){
                             </tbody>
                         <?php endforeach; ?>
                     </table>
-
                     <?php $datetime = $datetime ?: date('Y-m-d H:i:s'); ?>
-
-                    <div class="col-xs-6">
-                        <a href="connections.php?<?php echo htmlentities(http_build_query(['from' => $from, 'to' => $to, 'datetime' => $datetime, 'page' => $page]), ENT_QUOTES, 'UTF-8'); ?>">Earlier connections</a>
-                    </div>
-                    <div class="col-xs-6 text-right">
-                        <a href="connections.php?<?php echo htmlentities(http_build_query(['from' => $from, 'to' => $to, 'datetime' => $datetime, 'page' => $page + 2]), ENT_QUOTES, 'UTF-8'); ?>">Later connections</a>
-                    </div>
                 </div>
                 <form class="pager">
                     <input type="hidden" name="from" value="<?php echo htmlentities($from, ENT_QUOTES, 'UTF-8'); ?>" />
