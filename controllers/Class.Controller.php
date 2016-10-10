@@ -104,13 +104,15 @@ class Controller {
     }
 
 
-    function sendMail($destinationAddress, $destinationName, $subject, $message)
+    function sendMail($destinationAddress, $destinationName, $subject, $message, $path_to_attachment_file)
     {
         require_once 'dependencies/mailer/class.phpmailer.php';
         require_once 'dependencies/mailer/class.smtp.php';
 
 
         $mail = new PHPMailer(true);
+
+        /* Check the attachment file */
 
         //Send mail using gmail
 
@@ -129,14 +131,23 @@ class Controller {
         $mail->Subject = $subject;
         $mail->Body = $message;
 
+        //Attachment
+        if(isset($path_to_attachment_file) && file_exists($path_to_attachment_file)){
+        $mail->addAttachment($path_to_attachment_file);
+        }
+
+        if(file_exists($path_to_attachment_file))
+        {
+            error_log("OK, file exists");
+        }else{
+            error_log("file doesn't exist");
+        }
+
         try {
             $mail->Send();
-
-
         } catch (Exception $e) {
+            error_log("An error occured at line 97. $e");
             //Something went bad
-
-
         }
     }
 

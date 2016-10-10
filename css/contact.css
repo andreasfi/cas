@@ -1,0 +1,45 @@
+#button_container
+{
+    text-align: center;
+}
+
+#video_container
+{
+    text-align: center;
+    height: 250px;
+}
+
+#webcam_video_container
+{
+    height: 250px;
+    width: auto;
+    background-color: #00A8FF;
+}
+
+#webcam_video_controls ul
+{
+    display: inline-block;
+}
+
+#webcam_video_controls li
+{
+    list-style: none;
+    display: inline-block;
+}
+
+#webcam_video
+{
+    height: 250px;
+    margin: 0 auto;
+}
+
+#webcam_after_stop ul
+{
+    display: inline-block;
+}
+
+#webcam_after_stop li
+{
+    display: inline-block;
+    list-style: none;
+}

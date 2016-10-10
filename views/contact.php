@@ -16,26 +16,34 @@ include_once ROOT_DIR.'views/header.inc';
             <h3 class="title">Formulaire de contact</h3>
 
             <div class="form">
-                <form class="form-horizontal">
+                <form class="form-horizontal" action="contact/sendEmail" method="post">
                     <!-- Name -->
                     <div class="form-group">
                         <label class="control-label col-md-3" for="name">Nom</label>
                         <div class="col-md-9">
-                            <input type="text" class="form-control" id="name" maxlength="40">
+                            <input type="text" class="form-control" name="name" id="name" maxlength="40">
                         </div>
                     </div>
                     <!-- Email -->
                     <div class="form-group">
                         <label class="control-label col-md-3" for="email">Adresse e-mail</label>
                         <div class="col-md-9">
-                            <input type="email" class="form-control" id="email">
+                            <input type="email" class="form-control" name="email" id="email">
                         </div>
                     </div>
+                    <!-- Subject -->
+                    <div class="form-group">
+                        <label class="control-label col-md-3" for="subject">Subject</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" name="subject" id="subject">
+                        </div>
+                    </div>
+
                     <!-- Message -->
                     <div class="form-group">
                         <label class="control-label col-md-3" for="message">Message</label>
                         <div class="col-md-9">
-                            <textarea class="form-control" id="message" rows="4"></textarea>
+                            <textarea class="form-control" name="message" id="message" rows="4"></textarea>
                         </div>
                     </div>
                     <!-- Buttons -->
@@ -91,7 +99,9 @@ include_once ROOT_DIR.'views/header.inc';
                         <div id="webcam_after_stop" style="display: none;">
                             <ul>
                                 <li>
-                                    <button id="button_video_preview" data-toggle="modal" data-target="#modal_video_preview" class="btn btn-info">Preview</button>
+                                    <button id="button_video_preview" data-toggle="modal"
+                                            data-target="#modal_video_preview" class="btn btn-info">Preview
+                                    </button>
                                 </li>
                                 <li>
                                     <button id="button_video_retry" class="btn btn-info">New video</button>
@@ -117,9 +127,13 @@ include_once ROOT_DIR.'views/header.inc';
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h4 class="modal-title">Video preview</h4>
                     </div>
-                    <div class="modal-body">
-                        <video autoplay id="video_preview" src="#" style="background-color: green;"></video>
-                        <p>That's your video guy !</p>
+                    <div class="form-group col-lg-offset-1 col-lg-10">
+                        <label for="input_email_modal">Votre adresse e-mail</label>
+                        <input type="email" required id="input_email_modal" class="form-control"/>
+                    </div>
+                    <div class="modal-body col-lg-offset-1 col-lg-10">
+                        <video autoplay id="video_preview" class="col-lg-12" src="#"
+                               style="background-color: green;"></video>
                     </div>
                     <div class="modal-footer">
                         <ul>
@@ -127,7 +141,7 @@ include_once ROOT_DIR.'views/header.inc';
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                             </li>
                             <li>
-                                <button type="button" class="btn btn-info">Preview</button>
+                                <button type="button" class="btn btn-info" onclick="postVideo()">Envoyer</button>
                             </li>
                             <li>
 
@@ -138,12 +152,6 @@ include_once ROOT_DIR.'views/header.inc';
 
             </div>
         </div>
-
-
-
-
-
-
         <script>
 
             var index = 0;
@@ -153,6 +161,7 @@ include_once ROOT_DIR.'views/header.inc';
                 audio: true,
                 video: true
             };
+            var blob_to_send = null;
 
             function hasGetUserMedia() {
                 return !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
@@ -205,7 +214,6 @@ include_once ROOT_DIR.'views/header.inc';
                 $('#pause_recording').prop('disabled', true);
                 $('#start_recording').prop('disabled', false);
                 $('#stop_recording').prop('disabled', false);
-
             }
 
             function stop_recording() {
@@ -224,6 +232,9 @@ include_once ROOT_DIR.'views/header.inc';
                 mediaRecorder = new MediaStreamRecorder(stream);
                 mediaRecorder.mimeType = 'video/webm';
                 mediaRecorder.ondataavailable = function (blob) {
+
+                    blob_to_send = blob;
+                    alert(blob_to_send);
                     // POST/PUT "Blob" using FormData/XHR2
                     var blobURL = URL.createObjectURL(blob);
                     appendLink('' + blobURL + '');
@@ -236,12 +247,13 @@ include_once ROOT_DIR.'views/header.inc';
             }
 
             function appendLink(blob) {
+                /*
                 var a = document.createElement('a');
                 a.target = '_blank';
                 a.innerHTML = 'Open Recorded ' + (blob.type == 'audio/ogg' ? 'Audio' : 'Video') + ' No. ' + (index++) + ' (Size: ' + bytesToSize(blob.size) + ')';
                 a.href = blob;
-
-                alert(blob.length);
+                 alert(blob.length);
+                */
 
                 $('#video_preview').attr("src", blob);
                 $('#video_preview').prop('controls', true);
@@ -250,12 +262,21 @@ include_once ROOT_DIR.'views/header.inc';
 
                 //Stop the video
                 stop_recording();
-
-                console.log($("#video_preview"));
-
-
             }
 
+            function postVideo() {
+                
+                var xhr = new XMLHttpRequest();
+
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState == XMLHttpRequest.DONE) {
+                        console.log(xhr.responseText);
+                    }
+                }
+                xhr.open('POST', 'contact/sendVideo', true);
+                xhr.send(blob_to_send);
+
+            }
 
         </script>
 
