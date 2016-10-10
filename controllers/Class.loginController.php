@@ -77,7 +77,7 @@ class loginController extends Controller
             $secretKey = user::getUserFromMail($_POST['recoveryMail'])->createPwdChangeRequest();
             try{
                 $messageContent = $this->lang['MSG_TO_RECOVER_PASSWORD'] ."$secretKey";
-                $this->sendMail($_POST['recoveryMail'],$_POST['recoveryMail'],$this->lang['CAS_PWD_RECOVERY'],$messageContent);
+                $this->sendMail($_POST['recoveryMail'],$_POST['recoveryMail'],$this->lang['CAS_PWD_RECOVERY'],$messageContent,null);
                 $_SESSION['msg'] = '<span class="success">'. $this->lang['RECOVERY_MAIL_SENT'].'</span>';
                 $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
             }catch(Exception $e){
@@ -238,7 +238,7 @@ class loginController extends Controller
             else{
                 $_SESSION['msg'] = '<span class="success">Registration successful!</span>';
                 unset($_SESSION['persistence']);
-                $this->sendMail($mail,"$lname $fname",'Bienvenue sur le site du CAS','Ceci est un mail automatique pour vous informer de votre inscription au site.');
+                $this->sendMail($mail,"$lname $fname",'Bienvenue sur le site du CAS','Ceci est un mail automatique pour vous informer de votre inscription au site.',null);
 
             }
         }
