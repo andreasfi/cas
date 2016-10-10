@@ -75,7 +75,7 @@ class loginController extends Controller
             $secretKey = user::getUserFromMail($_POST['recoveryMail'])->createPwdChangeRequest();
             try{
                 $messageContent = "Ce message est la pour recuperer votre mdp : \nSuivez ce lien :  http://localhost/cas/login/changepassword/$secretKey";
-                $this->sendMail($_POST['recoveryMail'],$_POST['recoveryMail'],'CAS password recovery',$messageContent);
+                $this->sendMail($_POST['recoveryMail'],$_POST['recoveryMail'],'CAS password recovery',$messageContent, null);
                 $_SESSION['msg'] = '<span class="success">A recuperation email was sent to your address</span>';
                 $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
             }catch(Exception $e){
@@ -236,7 +236,7 @@ class loginController extends Controller
             else{
                 $_SESSION['msg'] = '<span class="success">Registration successful!</span>';
                 unset($_SESSION['persistence']);
-                $this->sendMail($mail,"$lname $fname",'Bienvenue sur le site du CAS','Ceci est un mail automatique pour vous informer de votre inscription au site.');
+                $this->sendMail($mail,"$lname $fname",'Bienvenue sur le site du CAS','Ceci est un mail automatique pour vous informer de votre inscription au site.', null);
 
             }
         }
