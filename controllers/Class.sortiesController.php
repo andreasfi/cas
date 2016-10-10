@@ -138,13 +138,13 @@ class sortiesController extends Controller{
     }
     function inscription(){
 
-        if(!isset($_Session['user'])){
-            $_SESSION['msg'] = '<span class="error">Vous devez vous connecter pour vous inscrire a une sortie</span>';
-            $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
-            $this->redirect('../../login');
-        }
+        $this->checkUser(1, "/cas/error/http404");
 
-        $this->checkUser(2, "/cas/error/http404");
+        $this->vars['pageTitle'] = "Inscription";
+        $this->vars['pageMessage'] = "Inscrivez-vous pour participer à nos activités";
+
+        $_SESSION["idEvent"] = 1;
+
     }
     function ajoutsortie()
     {
