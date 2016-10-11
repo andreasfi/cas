@@ -75,7 +75,7 @@ class Event implements JsonSerializable
 
     public function setStartDate($start_date)
     {
-        $this->start_date = $start_date->format('Y-m-d H:i:s');
+        $this->start_date = $start_date;
     }
 
     public function getEndDate()
@@ -85,7 +85,7 @@ class Event implements JsonSerializable
 
     public function setEndDate($end_date)
     {
-        $this->end_date = $end_date->format('Y-m-d H:i:s');
+        $this->end_date = $end_date;
     }
 
     public function getMaxParticipants()
