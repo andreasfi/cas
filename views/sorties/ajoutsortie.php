@@ -1,4 +1,3 @@
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 <?php
 /**
@@ -10,7 +9,7 @@
 $msg = $this->vars['msg'];
 $pageTitle = $this->vars['pageTitle'];
 $pageMessage = $this->vars['pageMessage'];
-include_once  'views/header.inc'; ?>
+include_once ROOT_DIR.'views/header.inc'; ?>
 
 
 <style>
@@ -34,70 +33,63 @@ include_once  'views/header.inc'; ?>
 <div class="container">
 	<div class="row">
 		<div class="col-md-5 col-xs-1">
-			<form id="form" method="post" action="<?php echo URL_DIR.'sorties/ajoutsortie' ?>">
+			<form method="post" action="<?php echo URL_DIR.'sorties/ajoutsortie' ?>">
 				<div class="row">
 					<div class="col-md-6 formgroup">
-						<p>Titre</p>
+						<p><?php echo $lang['TRAIL_TITLE'] ?></p>
 						<input id="title" name="title" type="text" required style="width:100%">
 					</div>
 					<div class="col-md-6 formgroup">
-						<p>Personnes max</p>
+						<p><?php echo $lang['TRAIL_MAX_PEOPLE'] ?></p>
 						<input id="maxParticipants" name="maxParticipants" type="number" min="1" required style="width:50px">
 					</div>
 				</div>
 				<div class="row">
 					<div class="formgroup col-sm-6">
-						<p>Catégorie</p>
+						<p><?php echo $lang['TRAIL_CATEGORY'] ?></p>
 						<select id="category" name="category" required>
-							<option value="1">Marche</option>
-							<option value="2">Peau de Phoque</option>
-							<option value="3">Grimpe</option>
-							<option value="4">Raquettes</option>
-							<option value="5">Ski</option>
-							<option value="6">Snowboard</option>
-							<option value="7">Télémark</option>
-							<option value="7">Ski de fond</option>
+							<option value="1"><?php echo $lang['TRAIL_CAT_1'] ?></option>
+							<option value="2"><?php echo $lang['TRAIL_CAT_2'] ?></option>
+							<option value="3"><?php echo $lang['TRAIL_CAT_3'] ?></option>
+							<option value="4"><?php echo $lang['TRAIL_CAT_4'] ?></option>
+							<option value="5"><?php echo $lang['TRAIL_CAT_5'] ?></option>
+							<option value="6"><?php echo $lang['TRAIL_CAT_6'] ?></option>
+							<option value="7"><?php echo $lang['TRAIL_CAT_7'] ?></option>
+							<option value="8"><?php echo $lang['TRAIL_CAT_8'] ?></option>
 						</select>
 					</div>
 					<div class="formgroup col-sm-6">
-						<p>Difficulté</p>
+						<p><?php echo $lang['TRAIL_DIFFICULTY']?></p>
 						<select id="difficulty" name="difficulty" required>
-							<option value="1">Débutant</option>
-							<option value="2">Modéré</option>
-							<option value="3">Avancé</option>
-							<option value="4">Très Avancé</option>
-							<option value="5">Professionnel</option>
+							<option value="1"><?php echo $lang['TRAIL_DIFF_1'] ?></option>
+							<option value="2"><?php echo $lang['TRAIL_DIFF_2'] ?></option>
+							<option value="3"><?php echo $lang['TRAIL_DIFF_3'] ?></option>
+							<option value="4"><?php echo $lang['TRAIL_DIFF_4'] ?></option>
+							<option value="5"><?php echo $lang['TRAIL_DIFF_5'] ?></option>
 						</select>
 					</div>
 				</div>
 				<div class="formgroup">
-					<p>Date/Heure de début</p>
-					<input id="startDate" name="startDate" type="date" required> 
-					<input id="startTime" name="startTime" type="time" autocomplete="off" required onchange="">
+					<p><?php echo $lang['TRAIL_STARTDATE']?></p>
+					<input id="startDate" name="startDate" type="text" required>
 				</div>
 				<div class="formgroup">
-					<p>Heure de fin</p>
-					<input id="endDate" name="endDate" type="date" required style="display:none" required>
-					<input id="endTime" name="endTime" type="time" autocomplete="off" required>
+					<p><?php echo $lang['TRAIL_ENDDATE']?></p>
+					<input id="endDate" name="endDate" type="text" required required>
 				</div>
-				<div class="formgroup">		
-					<p>Excursion sur plusieurs jours</p>
-					<input type="checkbox" name="multipleDays" id="multipleDays" onchange="toggleEndDate()">
-				</div>
+					<input type="hidden" name="multipleDays" id="multipleDays" onchange="toggleEndDate()" >
 				<div class="formgroup">
-					<p>Description</p>
+					<p><?php echo $lang['TRAIL_DESCRIPTION']?></p>
 					<textarea id="description" rows="6" cols="50" name="description"></textarea>
 				</div>
 		</div>
 		<div class="col-md-7 col-xs-10 text-center">
 			<div class="formgroup">
-				<h2>Parcours</h2>
-				<input id="geocodeInput" type=text placeholder="Entrer un lieu"><button type="button" id="searchGeo" onclick="showAddress()">Go</button>
-
-				<div id="trailIndication" style=" opacity:0 !important">
-					<p style="font-size:12px !important;">cliquez sur la carte pour dessiner le parcours</p>
-					<button type="button" onclick="removeLastPoint()">Suppr dernier point</button>
-					<button type="button" onclick="removeAllPoints()">Suppr tous les points</button>
+				<h2><?php echo $lang['TRAIL_MAP']?></h2>
+				<div id="trailIndication">
+					<p style="font-size:12px !important;"><?php echo $lang['TRAIL_MAP_INSTRUCTIONS']?></p>
+					<button type="button" onclick="removeLastPoint()"><?php echo $lang['TRAIL_MAP_DELETELAST']?></button>
+					<button type="button" onclick="removeAllPoints()"><?php echo $lang['TRAIL_MAP_DELETEALL']?></button>
 				</div>
 				<div id="map" class="graphical"></div>
 				<div id="chart" class="graphical" style="height:150px;"></div>
@@ -115,8 +107,6 @@ include_once  'views/header.inc'; ?>
 
 <!-- Google Visualizations -->
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script src="https://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js"></script>
-<script src="https://cdn.jsdelivr.net/jquery.validation/1.15.0/additional-methods.min.js"></script>
 
 <script>
 	
@@ -127,10 +117,18 @@ include_once  'views/header.inc'; ?>
 	var trailShape = null;
 	var elevator = null;
 	var chart = null;
-	var form = $("#form");
-	form.validate();
 	
+	$(document).ready(function(){
+		jQuery('#startDate').datetimepicker({
+			minDate: '0'
+		});
+		
+		jQuery('#endDate').datetimepicker({
+			minDate: '0'
+		});
+	});
 	
+	//all things Google Maps:
 	function initMap() {
 		  
 		  var mapCanvas = document.getElementById('map');
@@ -190,11 +188,9 @@ include_once  'views/header.inc'; ?>
 		});
 		
 		document.getElementById('form_json').value = JSON.stringify(trailPoints);
-		console.log(JSON.stringify(trailPoints));
 	}
     
 	function clickMap(clickedPoint){
-		
 		trailPoints.push(clickedPoint);
 		drawCoordinates();
 		if (trailPoints.length >= 2)
@@ -261,17 +257,7 @@ include_once  'views/header.inc'; ?>
 		drawCoordinates();
 		chart.clearChart();
 	}
-	
-	function toggleEndDate(){
-		$("#endDate").val($("#startDate").val());
-		$("#endDate").attr("min", $("#startDate").val());
-		$("#endDate").toggle();
-	}
-	
-	function setStartTime(){
-		$("#endTime").val($("#startTime").val());
-		$("#endTime").attr("min", $("#startTime").val());
-	}
+
 	
 </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfHSiXZQseH8j-pPHb9PiWwvGvpOUSDGw&callback=initMap"

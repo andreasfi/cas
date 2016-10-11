@@ -106,3 +106,33 @@ $lang['S_CHANGES_SUCCESSFUL'] = "Changes successful";
 $lang['REGISTRATION_MAIL_TITLE'] = "Welcome on the CAS website !";
 $lang['REGISTRATION_MAIL_BODY'] = "This is an automatic email to inform you of your registration on our website.";
 
+//ajouter une course
+$lang['ADD_TRAIL'] = "Add a trail";
+$lang['TRAIL_TITLE'] = "Title";
+$lang['TRAIL_MAX_PEOPLE'] = "Max participants";
+$lang['TRAIL_CATEGORY'] = "Category";
+$lang['TRAIL_DIFFICULTY'] = "Difficulty";
+$lang['TRAIL_STARTDATE'] = "Start date/time";
+$lang['TRAIL_ENDDATE'] = "End date/time";
+$lang['TRAIL_DESCRIPTION'] = "Trail description";
+$lang['TRAIL_MAP'] = "Trail";
+$lang['TRAIL_MAP_INSTRUCTIONS'] = "Click on the map to draw the trail";
+$lang['TRAIL_MAP_DELETELAST'] = "Delete last point";
+$lang['TRAIL_MAP_DELETEALL'] = "Delete all points";
+
+//catégories de courses
+$lang['TRAIL_CAT_1'] = "Hiking";
+$lang['TRAIL_CAT_2'] = "Backcountry ski";
+$lang['TRAIL_CAT_3'] = "Climbing";
+$lang['TRAIL_CAT_4'] = "Snowshoeing";
+$lang['TRAIL_CAT_5'] = "Ski";
+$lang['TRAIL_CAT_6'] = "Snowboard";
+$lang['TRAIL_CAT_7'] = "Télémark";
+$lang['TRAIL_CAT_8'] = "Cross country ski";
+
+//difficultés des courses
+$lang['TRAIL_DIFF_1'] = 'Beginner';
+$lang['TRAIL_DIFF_2'] = 'Moderate';
+$lang['TRAIL_DIFF_3'] = 'Advanced';
+$lang['TRAIL_DIFF_4'] = 'Very Advanced';
+$lang['TRAIL_DIFF_5'] = 'Professionnal';

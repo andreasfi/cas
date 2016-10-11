@@ -8,18 +8,16 @@
 	}
     .carousel-inner h2, .carousel-inner P{
         background-color: rgba(247, 247, 247, 0.74902);
-
         color: BLACK;
     }
 
 	.carousel-inner h2{
         font-size:50px;
-
 	}
 	
 	.carousel-inner img{
 		min-width: 100%;
-		margin-top: -40%;
+		margin-top: -10%;
 	}
 	
 </style>

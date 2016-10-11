@@ -180,8 +180,8 @@ class sortiesController extends Controller{
 		if(!empty($_POST)){
 
 			$description = $_POST['description'];
-			$start_date = $_POST['startDate'].' '.$_POST['startTime'].':00';
-			$end_date = $_POST['endDate'].' '.$_POST['endTime'].':00';
+			$start_date = DateTime::createFromFormat('Y/m/d H:i:s', $_POST['startDate'].':00');
+			$end_date = DateTime::createFromFormat('Y/m/d H:i:s', $_POST['endDate'].':00');
 			$max_participants = $_POST['maxParticipants'];
 			$event_type = 1;
 			$owner = 1;//$_SESSION['user']->getId();
