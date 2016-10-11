@@ -62,8 +62,8 @@ $lang = $this->lang;
         <script src="js/MediaStreamRecorder.js"></script>
 
 		<!-- TIMEPICKER -->
-        <script type="text/javascript" src="js/jquery.timepicker.js"></script>
-        <link type="text/css" href="css/jquery.timepicker.css">
+        <link rel="stylesheet" type="text/css" href="css/jquery.datetimepicker.css">
+		<script src="js/jquery.datetimepicker.full.min.js"></script>
 
 
         <!-- FULLCALENDAR JQUERY PLUGIN -->
