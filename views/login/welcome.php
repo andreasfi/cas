@@ -28,15 +28,22 @@ $events_msg = $this->vars['user_events_msg'];
         $title = $e->getTitle();
         $description = $e->getDescription(); //For the tooltip
 
+        $startDate = $startDate->format('Y-m-d H:i:s');
+        $endDate = $endDate->format('Y-m-d H:i:s');
+
+
         echo "<tr><td>$startDate</td><td>$endDate</td><td>$status</td><td>$title</td></tr>";
     }
 
     ?>
 
 </table>
-    <div id="message" class="col-md-12">
-        <p><?php echo $events_msg ?></p>
-    </div>
+	
+    <?php if ($events_msg != 'rien'){
+    echo "<div id=\"message\" class=\"col-md-12\">
+        <p> $events_msg  </p>
+    </div>";
+    } ?>
 
 
 </section>
