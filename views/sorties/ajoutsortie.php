@@ -71,7 +71,7 @@ include_once ROOT_DIR.'views/header.inc'; ?>
 				</div>
 				<div class="formgroup">
 					<p><?php echo $lang['TRAIL_STARTDATE']?></p>
-					<input id="startDate" name="startDate" type="text" required>
+					<input id="startDate" name="startDate" type="text" required onchange="adjustEndTime()">
 				</div>
 				<div class="formgroup">
 					<p><?php echo $lang['TRAIL_ENDDATE']?></p>
@@ -258,6 +258,12 @@ include_once ROOT_DIR.'views/header.inc'; ?>
 		chart.clearChart();
 	}
 
+	//all things date time
+	function adjustEndTime(){
+		jQuery('#endDate').datetimepicker({
+			minDate: $('#startDate').val()
+		});
+	}
 	
 </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfHSiXZQseH8j-pPHb9PiWwvGvpOUSDGw&callback=initMap"
