@@ -245,7 +245,7 @@ class loginController extends Controller
 
 
 
-        $this->redirect('login', 'newuser');
+        $this->redirect('/login');
     }
 
     /**
