@@ -48,6 +48,7 @@ include_once ROOT_DIR.'views/header.inc';
 
     </div>
 
+<form action="<?php echo URL_DIR.'sorties/inscription';?>" method="post">
     <div class="content" style="display: none;" id="blockP1">
         <div class="container">
             <div class="row">
@@ -224,20 +225,23 @@ include_once ROOT_DIR.'views/header.inc';
         </div>
     </div>
 
-    <div class="content" id="inscriptionBlock" style="display: none;">
+    <div class="content" id="inscriptionBlock" style="display: none;" method="post">
         <div class="container">
             <h3>Prix CHF 120</h3>
             <!-- Buttons -->
             <div class="form-group">
                 <!-- Buttons -->
                 <div class="col-md-9 col-md-offset-3">
-                    <button type="submit" class="btn btn-success">Envoyer la demande de participation</button>
+                    <button type="submit" class="btn btn-success" name="send">Envoyer la demande de participation</button>
                 </div>
             </div>
         </div>
     </div>
 
     </div>
+</form>
+
+
 
 
 

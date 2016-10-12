@@ -143,7 +143,11 @@ class sortiesController extends Controller{
         $this->vars['pageTitle'] = "Inscription";
         $this->vars['pageMessage'] = "Inscrivez-vous pour participer à nos activités";
 
-        $_SESSION["idEvent"] = 1;
+        $_SESSION['idEvent'] = 2;
+        //$numberParticipants = $_POST['participantsNumber'];
+        $numberParticipants = 1;
+
+        $_SESSION['user']->addUserToEvent(2, $numberParticipants);
 
     }
     function ajoutsortie()
