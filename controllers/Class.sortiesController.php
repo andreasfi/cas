@@ -10,7 +10,12 @@
 class sortiesController extends Controller{
 
     function sorties(){
+
+    }
+    function propositions(){
+
         $this->vars['propositions'] = json_encode(Event::fetch_all_events());
+
     }
 
     function details(){
@@ -155,6 +160,10 @@ class sortiesController extends Controller{
         return ($km * 1.609344);
     }
     function inscription(){
+
+        $this->vars['pageTitle'] = "Inscription";
+        $this->vars['pageMessage'] = "";
+
         if(!isset($_Session['user'])){
             $_SESSION['msg'] = '<span class="error">Vous devez vous connecter pour vous inscrire a une sortie</span>';
             $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
@@ -174,6 +183,13 @@ class sortiesController extends Controller{
         $this->vars['difficulty'] = $result->getDifficulty();
         $this->vars['path'] = $result->getPath();
         $this->vars['description'] = $result->getDescription();
+
+		$_SESSION['difficulty'] = $result->getDifficulty();
+
+		if(isset($_POST['numPeople'])){
+			var_dump($_POST);
+		}
+
 
         $_SESSION['difficulty'] = $result->getDifficulty();
 
@@ -215,15 +231,18 @@ class sortiesController extends Controller{
 
         if(!empty($_POST)){
 
-            $description = $_POST['description'];
-            $start_date = DateTime::createFromFormat('Y/m/d H:i:s', $_POST['startDate'].':00');
-            $end_date = DateTime::createFromFormat('Y/m/d H:i:s', $_POST['endDate'].':00');
-            $max_participants = $_POST['maxParticipants'];
-            $owner = $_SESSION['user']->getId();
-            $title = $_POST['title'];
-            $event_cat = $_POST['category'];
-            $difficulty = $_POST['difficulty'];
-            $path = $_POST['JSON'];
+			$description = $_POST['description'];
+			$start_date = DateTime::createFromFormat('Y/m/d H:i:s', $_POST['startDate'].':00');
+			$start_date = $start_date->format('Y-m-d H:i:s');
+			$end_date = DateTime::createFromFormat('Y/m/d H:i:s', $_POST['endDate'].':00');
+			$end_date = $end_date->format('Y-m-d H:i:s');
+			$max_participants = $_POST['maxParticipants'];
+			$event_type = 1;
+			$owner = 1;//$_SESSION['user']->getId();
+			$title = $_POST['title'];
+			$event_cat = $_POST['category'];
+			$difficulty = $_POST['difficulty'];
+			$path = $_POST['JSON'];
 
 
 
