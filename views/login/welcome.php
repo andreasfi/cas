@@ -34,9 +34,12 @@ $events_msg = $this->vars['user_events_msg'];
     ?>
 
 </table>
-    <div id="message" class="col-md-12">
-        <p><?php echo $events_msg ?></p>
-    </div>
+	
+    <?php if ($events_msg != 'rien'){
+    echo "<div id=\"message\" class=\"col-md-12\">
+        <p> $events_msg  </p>
+    </div>";
+    } ?>
 
 
 </section>

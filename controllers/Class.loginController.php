@@ -284,6 +284,8 @@ class loginController extends Controller
         $this->vars['user_events'] = Event::fetch_events_for_user($_SESSION['user']->getId());
         if(sizeof($this->vars['user_events']) == 0){
             $this->vars['user_events_msg'] = $this->lang['USER_EVENTS_NO_DATA'];
+        }else{
+            $this->vars['user_events_msg'] ='rien';
         }
 
 
