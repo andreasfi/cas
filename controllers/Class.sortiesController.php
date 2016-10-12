@@ -17,6 +17,7 @@ class sortiesController extends Controller{
 
     }
     function details(){
+		var_dump($_POST);
         $this->checkUser(0, "/cas/error/http404");
         $this->checkParam($GLOBALS['value'], "/cas/home");
 
@@ -127,8 +128,10 @@ class sortiesController extends Controller{
         $this->vars['userLevel'] = $userLevel;
 		
 		//réception du POST depuis l'inscription
-		if(isset($_POST)){
-			var_dump($_POST);
+		if(isset($_POST) && isset($_POST['participantsNumber'])){
+
+			$_SESSION['user']->addUserToEvent($_POST['eventId'], $_POST['participantsNumber']);
+			
 		}
     }
     function distance($lat1, $lon1, $lat2, $lon2) {

@@ -35,19 +35,21 @@ include_once ROOT_DIR.'views/header.inc';
 
         }
 		
+		
 		function sendRequest(){
 			$.post($(location).attr('origin') + '/cas/sorties/details.php',{
 					participantsNumber : $('#participantsNumber').val(),
 					eventId : <?php echo $eventId;?>
 				}, 
-				function(){
-					//$(location).attr("href", '/cas/sorties/details/' + <?php echo $eventId; ?>);
+				function(data){
+					window.location.replace('/cas/sorties/details/' + <?php echo $eventId ?>)
 				});
 		}
 		
 
     </script>
 
+<form action="<?php echo URL_DIR.'sorties/details/';?>" method="post">
     <br><br>
     <div class="content">
         <div class="container">
@@ -55,12 +57,11 @@ include_once ROOT_DIR.'views/header.inc';
             <input type="number" id="participantsNumber" name="participantsNumber" min ="0" max="5">
             <br>
             <br>
-            <button type="submit" class="btn btn-info" onclick="addBox()">Valider</button>
+            <button type="button" class="btn btn-info" onclick="addBox()">Valider</button>
         </div>
 
     </div>
 
-<form action="<?php echo URL_DIR.'sorties/inscription';?>" method="post">
     <div class="content" style="display: none;" id="blockP1">
         <div class="container">
             <div class="row">
@@ -236,15 +237,15 @@ include_once ROOT_DIR.'views/header.inc';
             </div>
         </div>
     </div>
-
-    <div class="content" id="inscriptionBlock" style="display: none;" method="post">
+    <div class="content" id="inscriptionBlock" style="display: none;">
         <div class="container">
             <h3>Prix CHF 120</h3>
             <!-- Buttons -->
             <div class="form-group">
                 <!-- Buttons -->
                 <div class="col-md-9 col-md-offset-3">
-                    <button type="submit" class="btn btn-success" name="send" onclick="sendRequest()">Envoyer la demande de participation</button>
+					<button type="button" value="submit" class="btn btn-success" name="send" onclick="sendRequest()">Envoyer la demande</button>
+					
                 </div>
             </div>
         </div>
