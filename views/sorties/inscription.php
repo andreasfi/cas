@@ -1,6 +1,7 @@
 <?php
 $pageTitle = $this->vars['pageTitle'];
 $pageMessage = $this->vars['pageMessage'];
+$eventId = $this->vars['eventId'];
 include_once ROOT_DIR.'views/header.inc';
 
 ?>
@@ -32,7 +33,18 @@ include_once ROOT_DIR.'views/header.inc';
             }
 
 
-        };
+        }
+		
+		function sendRequest(){
+			$.post($(location).attr('origin') + '/cas/sorties/details.php',{
+					participantsNumber : $('#participantsNumber').val(),
+					eventId : <?php echo $eventId;?>
+				}, 
+				function(){
+					//$(location).attr("href", '/cas/sorties/details/' + <?php echo $eventId; ?>);
+				});
+		}
+		
 
     </script>
 
@@ -40,7 +52,7 @@ include_once ROOT_DIR.'views/header.inc';
     <div class="content">
         <div class="container">
             <h4>Nombre de participants (maximum 5)</h4>
-            <input type="number" id="participantsNumber" name="participantsNumber" min ="0" max="5" >
+            <input type="number" id="participantsNumber" name="participantsNumber" min ="0" max="5">
             <br>
             <br>
             <button type="submit" class="btn btn-info" onclick="addBox()">Valider</button>
@@ -232,7 +244,7 @@ include_once ROOT_DIR.'views/header.inc';
             <div class="form-group">
                 <!-- Buttons -->
                 <div class="col-md-9 col-md-offset-3">
-                    <button type="submit" class="btn btn-success" name="send">Envoyer la demande de participation</button>
+                    <button type="submit" class="btn btn-success" name="send" onclick="sendRequest()">Envoyer la demande de participation</button>
                 </div>
             </div>
         </div>

@@ -125,6 +125,11 @@ class sortiesController extends Controller{
         $this->vars['stationsTo'] = $stationsTo;
         $this->vars['search'] = $search;
         $this->vars['userLevel'] = $userLevel;
+		
+		//réception du POST depuis l'inscription
+		if(isset($_POST)){
+			var_dump($_POST);
+		}
     }
     function distance($lat1, $lon1, $lat2, $lon2) {
         // function de calcul de la distance entre deux points
@@ -138,17 +143,27 @@ class sortiesController extends Controller{
     }
     function inscription(){
 
-        $this->checkUser(1, "/cas/error/http404");
+        if(!isset($_Session['user'])){
+            $_SESSION['msg'] = '<span class="error">Vous devez vous connecter pour vous inscrire a une sortie</span>';
+            $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
+            //$this->redirect('../../login'); //too many redirects
+			
+        }
+		// Get infos
+        $result = Event::fetch_event_by_id($GLOBALS['value']);
 
-        $this->vars['pageTitle'] = "Inscription";
-        $this->vars['pageMessage'] = "Inscrivez-vous pour participer à nos activités";
+        $this->vars['eventId'] = $result->getId();
+        $this->vars['title'] = $result->getTitle();
+        $this->vars['startDate'] = $result->getStartDate();
+        $this->vars['endDate'] = $result->getEndDate();
+        $this->vars['maxParticipants'] = $result->getMaxParticipants();
+        $this->vars['owner'] = $result->getOwner();
+        $this->vars['eventCategory'] = $result->getEventCategory();
+        $this->vars['difficulty'] = $result->getDifficulty();
+        $this->vars['path'] = $result->getPath();
+        $this->vars['description'] = $result->getDescription();
 
-        $_SESSION['idEvent'] = 2;
-        //$numberParticipants = $_POST['participantsNumber'];
-        $numberParticipants = 1;
-
-        $_SESSION['user']->addUserToEvent(2, $numberParticipants);
-
+        $this->checkUser(2, "/cas/error/http404");
     }
     function ajoutsortie()
     {
@@ -184,8 +199,8 @@ class sortiesController extends Controller{
 		if(!empty($_POST)){
 
 			$description = $_POST['description'];
-			$start_date = $_POST['startDate'].' '.$_POST['startTime'].':00';
-			$end_date = $_POST['endDate'].' '.$_POST['endTime'].':00';
+			$start_date = DateTime::createFromFormat('Y/m/d H:i:s', $_POST['startDate'].':00');
+			$end_date = DateTime::createFromFormat('Y/m/d H:i:s', $_POST['endDate'].':00');
 			$max_participants = $_POST['maxParticipants'];
 			$event_type = 1;
 			$owner = 1;//$_SESSION['user']->getId();
