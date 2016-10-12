@@ -19,8 +19,8 @@ class Event implements JsonSerializable
     {
         $this->setId($id);
         $this->setDescription($description);
-        $this->setStartDate($start_date->format('Y-M-d H:i:s'));
-        $this->setEndDate($end_date->format('Y-M-d H:i:s'));
+        $this->setStartDate($start_date);
+        $this->setEndDate($end_date);
         $this->setMaxParticipants($max_participants);
         $this->setEventType($event_type);
         $this->setOwner($owner);

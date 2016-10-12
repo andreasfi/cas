@@ -17,7 +17,6 @@ class sortiesController extends Controller{
 
     }
     function details(){
-		var_dump($_POST);
         $this->checkUser(0, "/cas/error/http404");
         $this->checkParam($GLOBALS['value'], "/cas/home");
 
@@ -203,7 +202,9 @@ class sortiesController extends Controller{
 
 			$description = $_POST['description'];
 			$start_date = DateTime::createFromFormat('Y/m/d H:i:s', $_POST['startDate'].':00');
+			$start_date = $start_date->format('Y-m-d H:i:d');
 			$end_date = DateTime::createFromFormat('Y/m/d H:i:s', $_POST['endDate'].':00');
+			$end_date = $end_date->format('Y-m-d H:i:d');
 			$max_participants = $_POST['maxParticipants'];
 			$event_type = 1;
 			$owner = 1;//$_SESSION['user']->getId();
