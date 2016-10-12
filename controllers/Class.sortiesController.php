@@ -8,18 +8,23 @@
 
 
 class sortiesController extends Controller{
+
     function sorties(){
         $this->vars['propositions'] = json_encode(Event::fetch_all_events());
     }
 
     function details(){
-        $this->checkUser(0, URL_DIR."/error/http404");
-        $this->checkParam($GLOBALS['value'], "/home");
+
+        $this->checkUser(0, "/cas/error/http404");
+        $this->checkParam($GLOBALS['value'], "/cas/home");
 
         // Get infos
         $result = Event::fetch_event_by_id($GLOBALS['value']);
 
         // Variables depuis BD
+
+        $description = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
+
         $this->vars['eventId'] = $result->getId();
         $this->vars['title'] = $result->getTitle();
         $this->vars['startDate'] = $result->getStartDate();
@@ -52,6 +57,7 @@ class sortiesController extends Controller{
 
 
         // api transport
+
         $from = isset($_POST['from']) ? $_POST['from'] : false;
         $response = isset($_POST['response']) ? $_POST['response'] : false;
         $to = isset($_POST['to']) ? $_POST['to'] : false;
@@ -63,6 +69,7 @@ class sortiesController extends Controller{
         $stationsTo = [];
         $search = $from && $to;
         $userLevel = isset($_SESSION['user']) ? $_SESSION['user']->getMemberType() : false;
+
         if ($search) {
             $query = [
                 'from'  => $from,
@@ -116,21 +123,14 @@ class sortiesController extends Controller{
         $this->vars['stationsTo'] = $stationsTo;
         $this->vars['search'] = $search;
         $this->vars['userLevel'] = $userLevel;
-		
 
-		if(isset($_POST['numParticipants'])){
 
-			$_SESSION['user']->addUserToEvent($this->vars['eventId'], $_POST['numParticipants']);
+        if(isset($_POST['numParticipants'])){
 
-			echo("VOUS AVEZ ETE INSCRIT");
-		}
-        if($userLevel >= 0){
-            $userByEvent = User::getUserByEventId(2);
-            $this->vars['allParticipants'] = $userByEvent;
+            $_SESSION['user']->addUserToEvent($this->vars['eventId'], $_POST['numParticipants']);
 
+            echo("VOUS AVEZ ETE INSCRIT");
         }
-
-
     }
     function distance($lat1, $lon1, $lat2, $lon2) {
         // function de calcul de la distance entre deux points
@@ -149,7 +149,7 @@ class sortiesController extends Controller{
             //$this->redirect('../../login'); //too many redirects
 
         }
-		// Get infos
+        // Get infos
         $result = Event::fetch_event_by_id($GLOBALS['value']);
 
         $this->vars['eventId'] = $result->getId();
@@ -163,11 +163,11 @@ class sortiesController extends Controller{
         $this->vars['path'] = $result->getPath();
         $this->vars['description'] = $result->getDescription();
 
-		$_SESSION['difficulty'] = $result->getDifficulty();
+        $_SESSION['difficulty'] = $result->getDifficulty();
 
-		if(isset($_POST['numPeople'])){
-			var_dump($_POST);
-		}
+        if(isset($_POST['numPeople'])){
+            var_dump($_POST);
+        }
 
 
         $this->checkUser(2, "/cas/error/http404");
@@ -177,54 +177,54 @@ class sortiesController extends Controller{
             $_SESSION['msg'] = '<span class="error">Vous devez vous connecter pour créer un évenement</span>';
             $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
 
-            $this->redirect('/login');
+            $this->redirect('../login');
         }
         else if(($_SESSION['user']->getMemberType()) != 3){
             $_SESSION['msg'] = '<span class="error">Vous ne possedez pas les droits pour creer un evenement</span>';
             $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
 
-            $this->redirect('/login/welcome');
+            $this->redirect('../login/welcome');
 
         }
-    /*
-         else if($_SESSION['user']->getMemberType !=2){
-             var_dump("hello");
-            $_SESSION['msg'] = '<span class="error">Vous ne possédez pas les droits pour créer un évenement</span>';
-            $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
-            $this->redirect('/login/welcome');
-        }
+        /*
+             else if($_SESSION['user']->getMemberType !=2){
+                 var_dump("hello");
+                $_SESSION['msg'] = '<span class="error">Vous ne possédez pas les droits pour créer un évenement</span>';
+                $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
+                $this->redirect('/login/welcome');
+            }
 
-*/
+    */
 
-		$this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
+        $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
         $this->vars['pageTitle'] = "Ajouter une course";
         $this->vars['pageMessage'] = "";
 
 
-		if(!empty($_POST)){
+        if(!empty($_POST)){
 
-			$description = $_POST['description'];
-			$start_date = DateTime::createFromFormat('Y/m/d H:i:s', $_POST['startDate'].':00');
-			$end_date = DateTime::createFromFormat('Y/m/d H:i:s', $_POST['endDate'].':00');
-			$max_participants = $_POST['maxParticipants'];
-			$owner = $_SESSION['user']->getId();
-			$title = $_POST['title'];
-			$event_cat = $_POST['category'];
-			$difficulty = $_POST['difficulty'];
-			$path = $_POST['JSON'];
-
-
+            $description = $_POST['description'];
+            $start_date = DateTime::createFromFormat('Y/m/d H:i:s', $_POST['startDate'].':00');
+            $end_date = DateTime::createFromFormat('Y/m/d H:i:s', $_POST['endDate'].':00');
+            $max_participants = $_POST['maxParticipants'];
+            $owner = $_SESSION['user']->getId();
+            $title = $_POST['title'];
+            $event_cat = $_POST['category'];
+            $difficulty = $_POST['difficulty'];
+            $path = $_POST['JSON'];
 
 
-			if($start_date->format('i') != $end_date->format('i'))
-				$event_type = 1;
-			else
-				$event_type = 2;
 
-			$start_date = $start_date->format('Y-m-d H:i:s');
-			$end_date = $end_date->format('Y-m-d H:i:s');
-			$event = new Event($id = null, $description, $start_date, $end_date, $max_participants, $event_type, $owner, $title, $event_cat, $difficulty, $path);
-			$event->save();
-		}
-	}
+
+            if($start_date->format('i') != $end_date->format('i'))
+                $event_type = 1;
+            else
+                $event_type = 2;
+
+            $start_date = $start_date->format('Y-m-d H:i:s');
+            $end_date = $end_date->format('Y-m-d H:i:s');
+            $event = new Event($id = null, $description, $start_date, $end_date, $max_participants, $event_type, $owner, $title, $event_cat, $difficulty, $path);
+            $event->save();
+        }
+    }
 }
