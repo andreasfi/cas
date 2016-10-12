@@ -243,6 +243,21 @@ WHERE
         return $datetime->format('Y-m-d H:i:s');
     }
 
+    private function get_events($fk_idUser)
+    {
+        $events = array();
+
+        $query = "SELECT * FROM `eventusers` WHERE fk_idUser = $fk_idUser";
+
+        $result = MySqlConn::getInstance()->selectDB($query);
+        $rows = $result->fetchAll();
+
+        
+
+
+
+    }
+
 
     /***
      * @param $user_id
