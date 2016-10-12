@@ -136,6 +136,18 @@ class sortiesController extends Controller{
 
             echo("VOUS AVEZ ETE INSCRIT");
         }
+
+        if($userLevel >= 0){
+            $userByEvent = User::getUserByEventId($GLOBALS['value']);
+            $this->vars['allParticipants'] = $userByEvent;
+
+        }
+        //if($userLevel >= 0){ 
+            //$userByEvent = User::getUserByEventId(2); 
+            //$this->vars['allParticipants'] = $userByEvent;  
+        //}
+
+
     }
     function distance($lat1, $lon1, $lat2, $lon2) {
         // function de calcul de la distance entre deux points

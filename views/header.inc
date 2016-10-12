@@ -19,7 +19,6 @@ $lang = $this->lang;
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <base href="<?php echo URL_DIR;?>">
         <link rel="stylesheet" href="<?php echo URL_DIR;?>/css/styles.css" type="text/css">
-        <?php echo URL_DIR;?>
         <link href="<?php echo URL_DIR;?>/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="<?php echo URL_DIR;?>/css/settings.css" media="screen" />
         <link rel="stylesheet" href="<?php echo URL_DIR;?>/css/ddlevelsmenu-base.css">
