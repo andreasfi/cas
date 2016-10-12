@@ -30,7 +30,7 @@ class loginController extends Controller
 
                 $_SESSION['msg'] = '';
                 $_SESSION['user'] = $result;
-                $this->redirect('welcome');
+                $this->redirect('/login','welcome');
             }
         }
 
@@ -43,7 +43,7 @@ class loginController extends Controller
         $lang = $this->lang;
         //if a user is active he cannot re-login
         if($this->getActiveUser()){
-            $this->redirect('login', 'welcome');
+            $this->redirect('/login', 'welcome');
             exit;
         }
         $this->sendSms('XXXXXX','Salut monsieur X, ici c est Club alpin suisse. ca va?');
@@ -161,7 +161,7 @@ class loginController extends Controller
 
                 $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
 
-               $this->redirect('welcome');
+               $this->redirect('/login/welcome');
             }
 
 
@@ -173,7 +173,7 @@ class loginController extends Controller
      */
     function logout(){
         session_destroy();
-        $this->redirect('login');
+        $this->redirect('/login');
     }
 
 
@@ -254,7 +254,7 @@ class loginController extends Controller
     function welcome(){
         //The page cannot be displayed if no user connected
         if(!$this->getActiveUser()){
-            $this->redirect('login');
+            $this->redirect('/login');
             exit;
         }
 

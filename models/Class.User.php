@@ -195,7 +195,7 @@ class User implements JsonSerializable {
         return MySqlConn::getInstance()->executeQuery($query);
     }
 
-    public function getUserByEventId($idEvent){
+    public static function getUserByEventId($idEvent){
         $submitUsers = array();
         $acceptUsers = array();
         $refuseUsers = array();

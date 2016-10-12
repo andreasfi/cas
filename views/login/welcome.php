@@ -28,8 +28,9 @@ $events_msg = $this->vars['user_events_msg'];
         $title = $e->getTitle();
         $description = $e->getDescription(); //For the tooltip
 
-        $startDate = $startDate->format('Y-m-d H:i:s');
+        /*$startDate = $startDate->format('Y-m-d H:i:s');
         $endDate = $endDate->format('Y-m-d H:i:s');
+        */
 
 
         echo "<tr><td>$startDate</td><td>$endDate</td><td>$status</td><td>$title</td></tr>";
@@ -54,7 +55,7 @@ $events_msg = $this->vars['user_events_msg'];
             <?php echo $msg; ?>
             <h1><?php echo $lang['WELCOME'], ' ' . $user->getFirstname() . ' ' . $user->getLastname(); ?></h1>
             <h3><?php echo $lang['MY_PERSONNAL_DATA']; ?></h3>
-            <form action="<?php echo URL_DIR . 'login/welcome'; ?>" method="post">
+            <form action="<?php echo URL_DIR . '/login/welcome'; ?>" method="post">
                 <?php echo $lang['FIRSTNAME']; ?> :<br><input type="text" name="firstname" size="25"
                                                               value="<?php echo $user->getFirstname(); ?>"/><br>
                 <?php echo $lang['LASTNAME']; ?> :<br><input type="text" name="lastname" size="25"
@@ -64,8 +65,8 @@ $events_msg = $this->vars['user_events_msg'];
                 <input type="submit" name="action" value="<?php echo $lang['CHANGE_DATA']; ?>"><br><br>
             </form>
             <br>
-            <a href="<?php echo URL_DIR . 'login/logout'; ?>"><?php echo $lang['LOGOUT']; ?></a><br>
-            <a href="<?php echo URL_DIR . 'login/changepassword'; ?>"><?php echo $lang['PASSWORD_CHANGE']; ?></a>
+            <a href="<?php echo URL_DIR . '/login/logout'; ?>"><?php echo $lang['LOGOUT']; ?></a><br>
+            <a href="<?php echo URL_DIR . '/login/changepassword'; ?>"><?php echo $lang['PASSWORD_CHANGE']; ?></a>
         </td>
     </tr>
 </table>
