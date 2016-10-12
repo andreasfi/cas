@@ -17,6 +17,7 @@ class sortiesController extends Controller{
 
     }
     function details(){
+		echo $_POST['testName'];
         $this->checkUser(0, "/cas/error/http404");
         $this->checkParam($GLOBALS['value'], "/cas/home");
 
@@ -126,12 +127,6 @@ class sortiesController extends Controller{
         $this->vars['search'] = $search;
         $this->vars['userLevel'] = $userLevel;
 		
-		//réception du POST depuis l'inscription
-		if(isset($_POST) && isset($_POST['participantsNumber'])){
-
-			$_SESSION['user']->addUserToEvent($_POST['eventId'], $_POST['participantsNumber']);
-			
-		}
     }
     function distance($lat1, $lon1, $lat2, $lon2) {
         // function de calcul de la distance entre deux points
@@ -164,11 +159,15 @@ class sortiesController extends Controller{
         $this->vars['difficulty'] = $result->getDifficulty();
         $this->vars['path'] = $result->getPath();
         $this->vars['description'] = $result->getDescription();
+		
+		if(isset($_POST)){
+			$_SESSION['msg'] = 'pouet';
+		}
+		
 
         $this->checkUser(2, "/cas/error/http404");
     }
-    function ajoutsortie()
-    {
+    function ajoutsortie(){
 
         if(!isset($_SESSION['user']) ){
             $_SESSION['msg'] = '<span class="error">Vous devez vous connecter pour créer un évenement</span>';
