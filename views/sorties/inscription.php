@@ -48,8 +48,13 @@ include_once ROOT_DIR.'views/header.inc';
 		
 
     </script>
+<form action="<?php echo URL_DIR.'sorties/inscription/'.$eventId;?>" method="post">
+	<input type="number" name="numPeople" max="10">
+	<input type="submit">
+</form>
+<?php echo($_POST['numPeople']); ?>
 <form action="<?php echo URL_DIR.'sorties/details/'.$eventId;?>" method="post">
-	<input name='testName' type=text required placeholder="test">
+	
 	<input type=submit>
 </form>
 

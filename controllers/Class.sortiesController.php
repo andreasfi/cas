@@ -17,7 +17,7 @@ class sortiesController extends Controller{
 
     }
     function details(){
-		echo $_POST['testName'];
+		
         $this->checkUser(0, "/cas/error/http404");
         $this->checkParam($GLOBALS['value'], "/cas/home");
 
@@ -127,6 +127,10 @@ class sortiesController extends Controller{
         $this->vars['search'] = $search;
         $this->vars['userLevel'] = $userLevel;
 		
+		
+		if(isset($_POST['testName'])){
+			var_dump($_POST);
+		}
     }
     function distance($lat1, $lon1, $lat2, $lon2) {
         // function de calcul de la distance entre deux points
@@ -160,8 +164,8 @@ class sortiesController extends Controller{
         $this->vars['path'] = $result->getPath();
         $this->vars['description'] = $result->getDescription();
 		
-		if(isset($_POST)){
-			$_SESSION['msg'] = 'pouet';
+		if(isset($_POST['numPeople'])){
+			var_dump($_POST);
 		}
 		
 
@@ -201,9 +205,9 @@ class sortiesController extends Controller{
 
 			$description = $_POST['description'];
 			$start_date = DateTime::createFromFormat('Y/m/d H:i:s', $_POST['startDate'].':00');
-			$start_date = $start_date->format('Y-m-d H:i:d');
+			$start_date = $start_date->format('Y-m-d H:i:s');
 			$end_date = DateTime::createFromFormat('Y/m/d H:i:s', $_POST['endDate'].':00');
-			$end_date = $end_date->format('Y-m-d H:i:d');
+			$end_date = $end_date->format('Y-m-d H:i:s');
 			$max_participants = $_POST['maxParticipants'];
 			$event_type = 1;
 			$owner = 1;//$_SESSION['user']->getId();
