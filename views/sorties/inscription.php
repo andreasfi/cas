@@ -48,16 +48,32 @@ include_once ROOT_DIR.'views/header.inc';
 		
 
     </script>
-<form action="<?php echo URL_DIR.'sorties/inscription/'.$eventId;?>" method="post">
-	<input type="number" name="numPeople" max="10">
-	<input type="submit">
-</form>
-<?php echo($_POST['numPeople']); ?>
-<form action="<?php echo URL_DIR.'sorties/details/'.$eventId;?>" method="post">
-	
-	<input type=submit>
-</form>
-
+    <form action="<?php echo URL_DIR.'sorties/details/'.$eventId;?>" method="post">
+		<?php
+			if($_SESSION['difficulty'] == 'très avancé' || $_SESSION['difficulty'] == 'professionnel'){
+				echo('<div class="f-block bred">
+							C\'EST DUR!!!
+						</div>');
+			}
+		?>
+    	<div class="content" style="display:block">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-3 col-sm-3"></div>
+					<div class="col-md-6 col-sm-6">
+						<div class="cwell">
+							<!-- Inscription form -->
+							<h3 class="title" id="participant1">Entrez le nombre de participants</h3>
+							<input type="number" min="1" max="10" name="numParticipants" style="margin-right:20px">
+							<input type=submit class="btn btn-success">
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+    </form>
+    
 
 
 

@@ -189,8 +189,9 @@ class User implements JsonSerializable {
 	public function addUserToEvent($idEvent, $numberParticipants)
     {
         $query = "INSERT INTO eventusers(fk_idEvent, fk_idUser, fk_idStatus, submitDate, numberParticipants)
-                  VALUES ($idEvent, $this->id, 1, now(),$numberParticipants);";
+                  VALUES ('$idEvent', '$this->id', '1', now(),'$numberParticipants');";
 
+		var_dump($query);
         return MySqlConn::getInstance()->executeQuery($query);
     }
 

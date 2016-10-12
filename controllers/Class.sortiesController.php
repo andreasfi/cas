@@ -128,8 +128,11 @@ class sortiesController extends Controller{
         $this->vars['userLevel'] = $userLevel;
 		
 		
-		if(isset($_POST['testName'])){
-			var_dump($_POST);
+		if(isset($_POST['numParticipants'])){
+			
+			$_SESSION['user']->addUserToEvent($this->vars['eventId'], $_POST['numParticipants']);
+
+			echo("VOUS AVEZ ETE INSCRIT");
 		}
     }
     function distance($lat1, $lon1, $lat2, $lon2) {
@@ -143,7 +146,6 @@ class sortiesController extends Controller{
         return ($km * 1.609344);
     }
     function inscription(){
-
         if(!isset($_Session['user'])){
             $_SESSION['msg'] = '<span class="error">Vous devez vous connecter pour vous inscrire a une sortie</span>';
             $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
@@ -164,6 +166,8 @@ class sortiesController extends Controller{
         $this->vars['path'] = $result->getPath();
         $this->vars['description'] = $result->getDescription();
 		
+		$_SESSION['difficulty'] = $result->getDifficulty();
+		
 		if(isset($_POST['numPeople'])){
 			var_dump($_POST);
 		}
@@ -172,7 +176,6 @@ class sortiesController extends Controller{
         $this->checkUser(2, "/cas/error/http404");
     }
     function ajoutsortie(){
-
         if(!isset($_SESSION['user']) ){
             $_SESSION['msg'] = '<span class="error">Vous devez vous connecter pour créer un évenement</span>';
             $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
