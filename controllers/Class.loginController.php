@@ -16,7 +16,7 @@ class loginController extends Controller
         //Check if data valid
         if (empty($mail) or empty($pwd)) {
             $_SESSION['msg'] = '<span class="error">' . $lang['E_REQUIRED_FIELD_EMPTY'] . '</span>';
-            $this->redirect('login');
+            $this->redirect('/login');
         } else {
             //Load user from DB if exists
             $result = User::connect($mail, $pwd);
@@ -24,7 +24,7 @@ class loginController extends Controller
             //Put user in session if exists or return error msg
             if (!$result) {
                 $_SESSION['msg'] = '<span class="error">' . $lang['E_USERNAME_PASSWORD_INCORRECT'] . '</span>';
-                $this->redirect('login');
+                $this->redirect('/login');
 
             } else {
 
