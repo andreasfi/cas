@@ -206,8 +206,7 @@ WHERE
 
         $rows = $result->fetchAll();
 
-        foreach($rows as $r)
-        {
+        foreach ($rows as $r) {
             $owner = User::empty_construct();
             $owner->setFirstname($r['firstname']);
             $owner->setLastname($r['lastname']);
@@ -219,6 +218,7 @@ WHERE
             //Add the event to the array
             array_push($events, $event);
         }
+
         return $events;
     }
 
@@ -238,6 +238,7 @@ WHERE
             'path' => json_decode($this->path));
     }
 
+    //TODO : implement this method
     private function get_events($fk_idUser)
     {
         $events = array();
@@ -274,17 +275,16 @@ WHERE
          * 6. description
          *'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''*/
 
-        foreach($rows as $r)
-        {
-            $e = new Event($r['idEvent'], $r['description'], $r['startDate'], $r['endDate'], null, null, null, $r['title'], null, null, null);
+        foreach ($rows as $r) {
+            $e = new Event($r['idEvent'], $r['description'], DateTime::createFromFormat('Y-m-d H:i:s', $r['startDate']), DateTime::createFromFormat('Y-m-d H:i:s', $r['endDate']), null, null, null, $r['title'], null, null, null);
             array_push($events, $e);
         }
         return $events;
     }
 
 
-   static function fetch_event_by_id($id){
-
+    static function fetch_event_by_id($id)
+    {
 
 
         $query = "SELECT
