@@ -17,6 +17,7 @@ class sortiesController extends Controller{
 
     }
     function details(){
+		var_dump($_POST);
         $this->checkUser(0, "/cas/error/http404");
         $this->checkParam($GLOBALS['value'], "/cas/home");
 
@@ -125,6 +126,13 @@ class sortiesController extends Controller{
         $this->vars['stationsTo'] = $stationsTo;
         $this->vars['search'] = $search;
         $this->vars['userLevel'] = $userLevel;
+		
+		//réception du POST depuis l'inscription
+		if(isset($_POST) && isset($_POST['participantsNumber'])){
+
+			$_SESSION['user']->addUserToEvent($_POST['eventId'], $_POST['participantsNumber']);
+			
+		}
     }
     function distance($lat1, $lon1, $lat2, $lon2) {
         // function de calcul de la distance entre deux points
@@ -141,8 +149,22 @@ class sortiesController extends Controller{
         if(!isset($_Session['user'])){
             $_SESSION['msg'] = '<span class="error">Vous devez vous connecter pour vous inscrire a une sortie</span>';
             $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
-            $this->redirect('../../login');
+            //$this->redirect('../../login'); //too many redirects
+			
         }
+		// Get infos
+        $result = Event::fetch_event_by_id($GLOBALS['value']);
+
+        $this->vars['eventId'] = $result->getId();
+        $this->vars['title'] = $result->getTitle();
+        $this->vars['startDate'] = $result->getStartDate();
+        $this->vars['endDate'] = $result->getEndDate();
+        $this->vars['maxParticipants'] = $result->getMaxParticipants();
+        $this->vars['owner'] = $result->getOwner();
+        $this->vars['eventCategory'] = $result->getEventCategory();
+        $this->vars['difficulty'] = $result->getDifficulty();
+        $this->vars['path'] = $result->getPath();
+        $this->vars['description'] = $result->getDescription();
 
         $this->checkUser(2, "/cas/error/http404");
     }

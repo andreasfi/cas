@@ -186,6 +186,14 @@ class User implements JsonSerializable {
 			'member_type' => $this->memberType);
 	}
 
+	public function addUserToEvent($idEvent, $numberParticipants)
+    {
+        $query = "INSERT INTO eventusers(fk_idEvent, fk_idUser, fk_idStatus, submitDate, numberParticipants)
+                  VALUES ($idEvent, $this->id, 1, now(),$numberParticipants);";
+
+        return MySqlConn::getInstance()->executeQuery($query);
+    }
+
 
 	
 }

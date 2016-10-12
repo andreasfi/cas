@@ -90,7 +90,7 @@ class Controller {
         if(($user && $user->getMemberType() >= $userLevel) || $userLevel == 0){
 
         } else {
-            $this->redirect($redirectPage);
+            $this->redirect($redirectPage,"");
             exit;
         }
     }
