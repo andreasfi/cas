@@ -19,8 +19,8 @@ class Event implements JsonSerializable
     {
         $this->setId($id);
         $this->setDescription($description);
-        $this->setStartDate(DateTime::createFromFormat('Y-m-d H:i:s', $start_date));
-        $this->setEndDate(DateTime::createFromFormat('Y-m-d H:i:s', $end_date));
+        $this->setStartDate($start_date->format('Y-m-d H:i:s'));
+        $this->setEndDate($end_date->format('Y-m-d H:i:s'));
         $this->setMaxParticipants($max_participants);
         $this->setEventType($event_type);
         $this->setOwner($owner);
@@ -213,7 +213,7 @@ WHERE
             $owner->setMail($r['mail']);
             $owner->setPhone($r['tel']);
 
-            $event = new Event($r['idEvent'], $r['description'], $r['startDate'], $r['endDate'], $r['maxParticipants'], $r['type'], $owner, $r['title'], $r['category'], $r['differenceName'], $r['coordinatesJSON']);
+            $event = new Event($r['idEvent'], $r['description'],  DateTime::createFromFormat('Y-m-d H:i:s', $r['startDate']), DateTime::createFromFormat('Y-m-d H:i:s', $r['endDate']), $r['maxParticipants'], $r['type'], $owner, $r['title'], $r['category'], $r['differenceName'], $r['coordinatesJSON']);
 
             //Add the event to the array
             array_push($events, $event);
@@ -228,8 +228,8 @@ WHERE
         return array('id' => $this->id,
             'title' => $this->title,
             'description' => $this->description,
-            'start_date' => $this->date_to_string($this->start_date),
-            'end_date' => $this->date_to_string($this->end_date),
+            'start_date' => $this->start_date,
+            'end_date' => $this->end_date,
             'owner' => $this->owner,
             'max_participants' => $this->max_participants,
             'event_type' => $this->event_type,
@@ -251,11 +251,6 @@ WHERE
 
         $result = MySqlConn::getInstance()->selectDB($query);
         $rows = $result->fetchAll();
-
-        
-
-
-
     }
 
 
@@ -285,7 +280,7 @@ WHERE
          *'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''*/
 
         foreach ($rows as $r) {
-            $e = new Event($r['idEvent'], $r['description'], $r['startDate'], $r['endDate'], null, null, null, $r['title'], null, null, null);
+            $e = new Event($r['idEvent'], $r['description'], DateTime::createFromFormat('Y-m-d H:i:s', $r['startDate']), DateTime::createFromFormat('Y-m-d H:i:s', $r['endDate']), null, null, null, $r['title'], null, null, null);
             array_push($events, $e);
         }
         return $events;
@@ -336,7 +331,7 @@ WHERE
         $owner->setMail($r['mail']);
         $owner->setPhone($r['tel']);
 
-        $event = new Event($r['idEvent'], $r['description'], $r['startDate'], $r['endDate'], $r['maxParticipants'], $r['type'], $owner, $r['title'], $r['category'], $r['differenceName'], $r['coordinatesJSON']);
+        $event = new Event($r['idEvent'], $r['description'], DateTime::createFromFormat('Y-m-d H:i:s', $r['startDate']), DateTime::createFromFormat('Y-m-d H:i:s', $r['endDate']), $r['maxParticipants'], $r['type'], $owner, $r['title'], $r['category'], $r['differenceName'], $r['coordinatesJSON']);
 
 
         return $event;
