@@ -48,7 +48,7 @@ include_once ROOT_DIR.'views/header.inc';
 		
 
     </script>
-    <form action="<?php echo URL_DIR.'sorties/details/'.$eventId;?>" method="post">
+    <form action="<?php echo URL_DIR.'/sorties/details/'.$eventId;?>" method="post">
 		<?php
 			if($_SESSION['difficulty'] == 'très avancé' || $_SESSION['difficulty'] == 'professionnel'){
 				echo('<div class="f-block bred">

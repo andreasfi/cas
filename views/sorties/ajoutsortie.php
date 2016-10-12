@@ -33,7 +33,7 @@ include_once ROOT_DIR.'views/header.inc'; ?>
 <div class="container">
 	<div class="row">
 		<div class="col-md-5 col-xs-1">
-			<form method="post" action="<?php echo URL_DIR.'sorties/ajoutsortie' ?>">
+			<form method="post" action="<?php echo URL_DIR.'/sorties/ajoutsortie' ?>">
 				<div class="row">
 					<div class="col-md-6 formgroup">
 						<p><?php echo $lang['TRAIL_TITLE'] ?></p>
