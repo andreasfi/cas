@@ -132,7 +132,12 @@ class sortiesController extends Controller{
 			
 			$_SESSION['user']->addUserToEvent($this->vars['eventId'], $_POST['numParticipants']);
 
-			echo("VOUS AVEZ ETE INSCRIT");
+			//echo("VOUS AVEZ ETE INSCRIT");
+
+            echo('<div class="f-block bgreen">
+							VOUS AVEZ ETE INSCRIT
+						</div>');
+
 		}
     }
     function distance($lat1, $lon1, $lat2, $lon2) {
@@ -146,6 +151,10 @@ class sortiesController extends Controller{
         return ($km * 1.609344);
     }
     function inscription(){
+
+        $this->vars['pageTitle'] = "Inscription";
+        $this->vars['pageMessage'] = "";
+
         if(!isset($_Session['user'])){
             $_SESSION['msg'] = '<span class="error">Vous devez vous connecter pour vous inscrire a une sortie</span>';
             $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
