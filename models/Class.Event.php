@@ -174,12 +174,12 @@ class Event implements JsonSerializable
 
 
         $query = "SELECT
-         EVENTS.idEvent,
-  EVENTS.title,
-  EVENTS.description,
-  EVENTS.startDate,
-  EVENTS.endDate,
-  EVENTS.maxParticipants,
+         events.idEvent,
+  events.title,
+  events.description,
+  events.startDate,
+  events.endDate,
+  events.maxParticipants,
   eventtypes.type,
   eventcategory.category,
   difficulties.differenceName,
