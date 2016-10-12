@@ -17,17 +17,13 @@ class sortiesController extends Controller{
 
     }
     function details(){
-		var_dump($_POST);
-        $this->checkUser(0, "/cas/error/http404");
-        $this->checkParam($GLOBALS['value'], "/cas/home");
+        $this->checkUser(0, URL_DIR."/error/http404");
+        $this->checkParam($GLOBALS['value'], "/home");
 
         // Get infos
         $result = Event::fetch_event_by_id($GLOBALS['value']);
 
         // Variables depuis BD
-
-        $description = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
-
         $this->vars['eventId'] = $result->getId();
         $this->vars['title'] = $result->getTitle();
         $this->vars['startDate'] = $result->getStartDate();
@@ -60,7 +56,6 @@ class sortiesController extends Controller{
 
 
         // api transport
-
         $from = isset($_POST['from']) ? $_POST['from'] : false;
         $response = isset($_POST['response']) ? $_POST['response'] : false;
         $to = isset($_POST['to']) ? $_POST['to'] : false;
@@ -72,7 +67,6 @@ class sortiesController extends Controller{
         $stationsTo = [];
         $search = $from && $to;
         $userLevel = isset($_SESSION['user']) ? $_SESSION['user']->getMemberType() : false;
-
         if ($search) {
             $query = [
                 'from'  => $from,
@@ -126,13 +120,20 @@ class sortiesController extends Controller{
         $this->vars['stationsTo'] = $stationsTo;
         $this->vars['search'] = $search;
         $this->vars['userLevel'] = $userLevel;
-		
+
 		//réception du POST depuis l'inscription
 		if(isset($_POST) && isset($_POST['participantsNumber'])){
 
 			$_SESSION['user']->addUserToEvent($_POST['eventId'], $_POST['participantsNumber']);
-			
+
 		}
+        if($userLevel >= 0){
+            $userByEvent = User::getUserByEventId(2);
+            $this->vars['allParticipants'] = $userByEvent;
+
+        }
+
+
     }
     function distance($lat1, $lon1, $lat2, $lon2) {
         // function de calcul de la distance entre deux points
@@ -150,7 +151,7 @@ class sortiesController extends Controller{
             $_SESSION['msg'] = '<span class="error">Vous devez vous connecter pour vous inscrire a une sortie</span>';
             $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
             //$this->redirect('../../login'); //too many redirects
-			
+
         }
 		// Get infos
         $result = Event::fetch_event_by_id($GLOBALS['value']);
@@ -175,13 +176,13 @@ class sortiesController extends Controller{
             $_SESSION['msg'] = '<span class="error">Vous devez vous connecter pour créer un évenement</span>';
             $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
 
-            $this->redirect('../login');
+            $this->redirect('/login');
         }
         else if(($_SESSION['user']->getMemberType()) != 3){
             $_SESSION['msg'] = '<span class="error">Vous ne possedez pas les droits pour creer un evenement</span>';
             $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
 
-            $this->redirect('../login/welcome');
+            $this->redirect('/login/welcome');
 
         }
     /*

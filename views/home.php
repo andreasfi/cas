@@ -1,4 +1,4 @@
-<?php include_once ROOT_DIR.'views/header.inc'; 
+<?php include_once ROOT_DIR.'views/header.inc';
 ?>
 
 <style>
@@ -14,12 +14,12 @@
 	.carousel-inner h2{
         font-size:50px;
 	}
-	
+
 	.carousel-inner img{
 		min-width: 100%;
 		margin-top: -10%;
 	}
-	
+
 </style>
 
 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
@@ -35,41 +35,41 @@
   <!-- Wrapper for slides -->
   <div class="carousel-inner " role="listbox">
     <div class="item active">
-      <img class="img-responsive center-block" src="./img/img1.jpg" alt="Cabane">
+      <img class="img-responsive center-block" src="<?php echo URL_DIR;?>/img/img1.jpg" alt="Cabane">
       <div class="carousel-caption">
           <h2 class="mytitle"><?php echo $lang['WELCOME_MESSAGE']; ?></h2>
           <p><?php echo $lang['WEBSITE_NAME'] ,' , ', $lang['CAS_HOMETOWN']; ?></p>
       </div>
     </div>
     <div class="item">
-      <img class="img-responsive center-block" src="./img/img2.jpg" alt="Alpinisme">
+      <img class="img-responsive center-block" src="<?php echo URL_DIR;?>/img/img2.jpg" alt="Alpinisme">
       <div class="carousel-caption">
           <h2 class="mytitle"><?php echo $lang['WELCOME_MESSAGE']; ?></h2>
           <p><?php echo $lang['WEBSITE_NAME'] ,' , ', $lang['CAS_HOMETOWN']; ?></p>
       </div>
     </div>
     <div class="item">
-      <img class="img-responsive center-block" src="./img/img3.jpg" alt="Peau de Phoque">
+      <img class="img-responsive center-block" src="<?php echo URL_DIR;?>/img/img3.jpg" alt="Peau de Phoque">
       <div class="carousel-caption">
           <h2 class="mytitle"><?php echo $lang['WELCOME_MESSAGE']; ?></h2>
           <p><?php echo $lang['WEBSITE_NAME'] ,' , ', $lang['CAS_HOMETOWN']; ?></p>
       </div>
     </div>
 	  <div class="item">
-      <img class="img-responsive center-block" src="./img/img4.jpg" alt="Peau de Phoque">
+      <img class="img-responsive center-block" src="<?php echo URL_DIR;?>/img/img4.jpg" alt="Peau de Phoque">
       <div class="carousel-caption">
           <h2 class="mytitle"><?php echo $lang['WELCOME_MESSAGE']; ?></h2>
           <p><?php echo $lang['WEBSITE_NAME'] ,' , ', $lang['CAS_HOMETOWN']; ?></p>
       </div>
     </div>
 	  <div class="item">
-      <img class="img-responsive center-block" src="./img/img5.jpg" alt="Raquettes">
+      <img class="img-responsive center-block" src="<?php echo URL_DIR;?>/img/img5.jpg" alt="Raquettes">
       <div class="carousel-caption">
           <h2 class="mytitle"><?php echo $lang['WELCOME_MESSAGE']; ?></h2>
           <p><?php echo $lang['WEBSITE_NAME'] ,' , ', $lang['CAS_HOMETOWN']; ?></p>
       </div>
     </div>
-	  
+
   </div>
 
   <!-- Controls -->
@@ -85,5 +85,5 @@
 
 
 
-<?php include_once ROOT_DIR.'views/footer.inc'; 
+<?php include_once ROOT_DIR.'views/footer.inc';
 ?>

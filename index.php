@@ -1,11 +1,15 @@
 <?php
-//Global Constants
-define('SITE_NAME', 'cas');
+//Global Constants,
+
+define('SITE_NAME', '/cas'); // si en localhost ajouter: /cas   si sur grp4 ajouter: /grp4
+
 //define('ROOT_DIR', dirname(getcwd()) . '/' . SITE_NAME.'/');
 define('ROOT_DIR', "");
+
 //define('URL_DIR', $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT']
 //		. '/' . SITE_NAME.'/');
-define('URL_DIR', "");
+define('URL_DIR', $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT']
+		. SITE_NAME);
 
 //Load required classes automatically
 function __autoload($class)

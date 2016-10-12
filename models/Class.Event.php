@@ -218,6 +218,16 @@ WHERE
             array_push($events, $event);
         }
         return $events;
+        /* add to sortiesController details method
+        if($userLevel >= 0){
+            $userByEvent = User::getUserByEventId(2);
+            $this->vars['allParticipants'] = $userByEvent;
+            //var_dump($userByEvent);
+
+            foreach ($userByEvent as $temp){
+                echo $temp->getFirstname()."ad";
+            }
+        }*/
     }
 
     public function jsonSerialize() {
@@ -314,7 +324,6 @@ WHERE
         $owner->setPhone($r['tel']);
 
         $event = new Event($r['idEvent'], $r['description'], $r['startDate'], $r['endDate'], $r['maxParticipants'], $r['type'], $owner,$r['title'], $r['category'], $r['differenceName'], $r['coordinatesJSON']);
-
 
         return $event;
     }
