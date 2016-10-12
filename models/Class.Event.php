@@ -212,7 +212,7 @@ WHERE
             $owner->setMail($r['mail']);
             $owner->setPhone($r['tel']);
 
-            $event = new Event($r['idEvent'], $r['description'], $r['startDate'], $r['endDate'], $r['maxParticipants'], $r['type'], $owner,$r['title'], $r['category'], $r['difficultyName'], $r['coordinatesJSON']);
+            $event = new Event($r['idEvent'], $r['description'], $r['startDate'], $r['endDate'], $r['maxParticipants'], $r['type'], $owner,$r['title'], $r['category'], $r['differenceName'], $r['coordinatesJSON']);
 
             //Add the event to the array
             array_push($events, $event);
