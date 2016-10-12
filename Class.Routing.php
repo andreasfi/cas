@@ -42,11 +42,14 @@ class Routing{
 		);
 
 		$parts = explode("/", substr($path['path'], 1));
-
+        $paramstart = 0;
+        if(SITE_NAME!=""){
+            $paramstart=1;
+        }
 		//Get the controller and the view or method
-		$controller = strtolower((@$parts[1]) ? $parts[1] : "home");
-		$method = strtolower((@$parts[2]) ? $parts[2] : "");
-        $GLOBALS['value'] = strtolower((@$parts[3]) ? $parts[3] : "");
+		$controller = strtolower((@$parts[$paramstart]) ? $parts[$paramstart] : "home");
+		$method = strtolower((@$parts[$paramstart+1]) ? $parts[$paramstart+1] : "");
+        $GLOBALS['value'] = strtolower((@$parts[$paramstart+2]) ? $parts[$paramstart+2] : "");
 
         if (!method_exists("{$controller}Controller", "{$method}")) {
             $method = $controller;

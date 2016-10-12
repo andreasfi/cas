@@ -6,6 +6,7 @@
  * Time: 08:48
  */
 
+
 $msg = $this->vars['msg'];
 $pageTitle = $this->vars['pageTitle'];
 $pageMessage = $this->vars['pageMessage'];
@@ -19,6 +20,7 @@ $path = $this->vars['path'];
 $distance = $this->vars['distance'];
 $eventId = $this->vars['eventId'];
 
+
 $from =$this->vars['from'];
 $to = $this->vars['to'];
 $via = $this->vars['via'];
@@ -29,6 +31,9 @@ $stationsTo = $this->vars['stationsTo'];
 $search = $this->vars['search'];
 $response = $this->vars['response'];
 $userLevel = $this->vars['userLevel'];
+
+$allParticipants = $this->vars['allParticipants'];
+
 
 include_once 'views/header.inc'; ?>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
@@ -134,10 +139,45 @@ include_once 'views/header.inc'; ?>
                         </div>
                     </div>
                 </div>
+                <hr>
                 <div class="row">
-                    <div class="col-lg-6 no-col-margin">
+                    <div class="col-md-12 service-list col-no-margin">
+                        <form>
+                            <?php
+
+
+                            foreach ($allParticipants as $key=>$item){
+                                if(isset($item)){
+                                    foreach ($item as $keyuser=>$it){
+                                        ?>
+                                        <div class="service-icon">
+                                            <i class="fa fa-user bblue"></i>
+                                        </div>
+                                        <div class="service-content">
+                                            <div class="service-home-meta">Participant <?php echo $keyuser+1;?></div>
+                                            <h4><?php echo $it->getFirstname()." ".$it->getLastname();?></h4>
+                                            <p>
+                                                Tel.: <?php echo $it->getPhone();?>,
+                                                Email: <a href="mailto:<?php echo $it->getMail();?>"><?php echo $it->getMail();?></a>
+                                                <?php echo "Set".($key+1)?>
+                                                <select>
+                                                    <option value="1" <?php if($key==1){ echo "selected";}?>>Submitted</option>
+                                                    <option value="2" <?php if($key==2){ echo "selected";}?>>Accepted</option>
+                                                    <option value="3" <?php if($key==3){ echo "selected";}?>>Refused</option>
+                                                </select>
+                                            </p>
+                                        </div>
+                                        <hr />
+                                    <?php }
+                                }
+                                 } ?>
+                            <button>Edit</button>
+                        </form>
+
+                        <div class="clearfix"></div>
 
                     </div>
+
                 </div>
             </div>
         </div>
@@ -154,9 +194,8 @@ if($response != false){
             $('#itineraire').modal('show');
         });
     </script>
-    <?php
-}
-?>
+<?php } ?>
+
     <script>
         $(function () {
             if (navigator.geolocation) {
@@ -400,6 +439,7 @@ if($response != false){
                             </tbody>
                         <?php endforeach; ?>
                     </table>
+
                     <?php $datetime = $datetime ?: date('Y-m-d H:i:s'); ?>
                 </div>
                 <form class="pager">
@@ -432,7 +472,7 @@ if($response != false){
             PlanCoordinates = <?php echo $path; ?>;
 
             var mapOptions = {
-                center: PlanCoordinates[1],
+                center: PlanCoordinates[0],
                 zoom: 14,
                 mapTypeId: 'terrain'
             };
@@ -496,6 +536,4 @@ if($response != false){
 
 
 <?php
-
-
 include_once 'views/footer.inc';
