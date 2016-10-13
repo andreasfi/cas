@@ -269,9 +269,9 @@ WHERE
     {
         $events = array();
 
-        $query = "SELECT idEvent, startDate, endDate, title, description FROM `Events`, `eventusers` WHERE `eventusers`.`fk_idEvent` = idEvent AND `eventusers`.`fk_idUser` = $user_id;";
+        $query = "SELECT idEvent, startDate, endDate, title, description FROM `events`, `eventusers` WHERE `eventusers`.`fk_idEvent` = idEvent AND `eventusers`.`fk_idUser` = $user_id;";
 
-        $result = MySQlConn::getInstance()->selectDB($query);
+        $result = MySqlConn::getInstance()->selectDB($query);
         $rows = $result->fetchAll();
 
         /*''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
