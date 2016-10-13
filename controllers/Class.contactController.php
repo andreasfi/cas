@@ -11,18 +11,27 @@ class contactController extends Controller
     function contact()
     {
 
+            if(!empty($_POST)){
+
+                //0. Get the posted data from the form
+                if( isset($_POST['name']) && isset($_POST['emailFrom']) && isset($_POST['subject']) && isset($_POST['message']) ){
+                    $name = $_POST['name'];
+                    $emailFrom = $_POST['emailFrom'];
+                    $subject = $_POST['subject'];
+                    $message = $_POST['message'];
+                    $finalMessage = "From : $name\nEmail : $emailFrom\n\nMessage : $message";
+
+                    $this->sendMail("casphphes@gmail.com", "Contact message on cas website", $subject, $finalMessage, null);
+
+                }
+
+            }
+
+
+
     }
 
-    function sendEmail()
-    {
-        //0. Get the posted data from the form
-        $name = $_POST['name'];
-        $from = $_POST['from'];
-        $subject = $_POST['subject'];
-        $message = $_POST['message'];
 
-        $this->sendMail("casphphes@gmail.com", "CAS", $subject, $message, null);
-    }
 
     function sendVideo()
     {
