@@ -98,6 +98,7 @@ $lang['E_PASSWORDS_DONT_MATCH'] = "Passwords don't match";
 
 //SUCCCESS MESSAGES
 $lang['S_RECOVERY_MAIL_SENT'] = "A recovery email was sent to your address.";
+$lang['S_CONTACT_MAIL_SENT'] = "A contact mail has been sent, we'll get to you ASAP.";
 $lang['S_PASSWORD_CHANGE_SUCCESSFUL'] = "Password change successful.";
 $lang['S_REGISTRATION_SUCCESSFUL'] = "Registration successful";
 $lang['S_CHANGES_SUCCESSFUL'] = "Changes successful";
@@ -136,3 +137,7 @@ $lang['TRAIL_DIFF_2'] = 'Moderate';
 $lang['TRAIL_DIFF_3'] = 'Advanced';
 $lang['TRAIL_DIFF_4'] = 'Very Advanced';
 $lang['TRAIL_DIFF_5'] = 'Professionnal';
+
+//CONTACT CONTROLLER
+$lang['CONTACT_US'] = 'Contact us';
+$lang['LEAVE_VIDEO_MSG'] = "Leave video message";

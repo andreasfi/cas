@@ -5,7 +5,13 @@
  * Date: 27.09.16
  * Time: 15:18
  */
+
+$msg = $this->vars['msg'];
+$pageTitle = $this->vars['pageTitle'];
+$pageMessage = $this->vars['pageMessage'];
 include_once ROOT_DIR.'views/header.inc';
+
+echo $msg;
 ?>
 
     <section id="form_container" class="col-lg-12">
