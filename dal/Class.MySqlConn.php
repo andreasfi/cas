@@ -9,9 +9,9 @@ class MySqlConn
 {
     const HOST = "127.0.0.1";
     const PORT = "3306";
-    const DATABASE = "grp4";
-    const USER = "grp4";
-    const PWD = "Guadeloupe2015";
+    const DATABASE = "cas_php";
+    const USER = "root";
+    const PWD = "";
     const ENCODING = "utf8";
 
     private static $instance;

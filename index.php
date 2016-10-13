@@ -1,7 +1,7 @@
 <?php
 //Global Constants,
 
-define('SITE_NAME', '/grp4'); // si en localhost ajouter: /cas   si sur grp4 ajouter: /grp4
+define('SITE_NAME', '/cas'); // si en localhost ajouter: /cas   si sur grp4 ajouter: /grp4
 
 //define('ROOT_DIR', dirname(getcwd()) . '/' . SITE_NAME.'/');
 define('ROOT_DIR', "");
