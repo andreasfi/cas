@@ -8,6 +8,9 @@
 class proximiteController extends Controller{
     function proximite(){
 
+        var_dump(htmlentities("<<>'?sa?>"));
+
+
     }
 
 }
