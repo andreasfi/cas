@@ -16,7 +16,7 @@ include_once ROOT_DIR.'views/header.inc';
             <h3 class="title">Formulaire de contact</h3>
 
             <div class="form">
-                <form class="form-horizontal" action="contact/sendEmail" method="post">
+                <form class="form-horizontal" action="<?php echo URL_DIR.'/contact';?>" method="post">
                     <!-- Name -->
                     <div class="form-group">
                         <label class="control-label col-md-3" for="name">Nom</label>
@@ -26,9 +26,9 @@ include_once ROOT_DIR.'views/header.inc';
                     </div>
                     <!-- Email -->
                     <div class="form-group">
-                        <label class="control-label col-md-3" for="email">Adresse e-mail</label>
+                        <label class="control-label col-md-3" for="emailFrom">Adresse e-mail</label>
                         <div class="col-md-9">
-                            <input type="email" class="form-control" name="email" id="email">
+                            <input type="email" class="form-control" name="emailFrom" id="email">
                         </div>
                     </div>
                     <!-- Subject -->
