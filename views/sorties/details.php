@@ -33,6 +33,7 @@ $response = $this->vars['response'];
 $userLevel = $this->vars['userLevel'];
 
 $allParticipants = $this->vars['allParticipants'];
+$participating = $this->vars['participating'];
 
 
 include_once 'views/header.inc'; ?>
@@ -55,8 +56,10 @@ include_once 'views/header.inc'; ?>
 
                 </div>
                 <div class="col-lg-6">
-                    <?php if(isset($userLevel) && $userLevel >= 2 ){ ?>
-                            <a href=<?php echo URL_DIR ?>/sorties/inscription/<?php if (isset($eventId)) {echo $eventId;}; ?> class="btn btn-danger btn-large pull-right"><?php echo $lang['BUTTON_PARTICIPATION_REQUEST'];?><i class="fa fa-angle-double-right"></i></a>
+                    <?php if($participating){ ?>
+                        <button data-toggle="tooltip" data-placement="top" title="You are already attending this event" style="" class="btn btn-default btn-large pull-right"><?php echo 'Already participating';?> <i class="fa fa-angle-double-right"></i></button>
+                    <?php } else if(isset($userLevel) && $userLevel >= 2 ) { ?>
+                        <a href="<?php echo URL_DIR ?>/sorties/inscription/<?php if (isset($eventId)) {echo $eventId;}; ?>" class="btn btn-danger btn-large pull-right"><?php echo $lang['BUTTON_PARTICIPATION_REQUEST'];?><i class="fa fa-angle-double-right"></i></a>
                     <?php } else { ?>
                             <button data-toggle="tooltip" data-placement="top" title="Vous devez être membre pour vous inscrire" style="" class="btn btn-default btn-large pull-right"><?php echo $lang['BUTTON_PARTICIPATION_REQUEST'];?> <i class="fa fa-angle-double-right"></i></button>
                     <?php } ?>

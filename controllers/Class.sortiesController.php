@@ -134,12 +134,24 @@ class sortiesController extends Controller{
 
             $this->vars['msg'] = "VOUS AVEZ ETE INSCRIT";
         }
-
+        $userId = $_SESSION['user']->getId();
+        $participating = false;
         if($userLevel >= 0){
             $userByEvent = User::getUserByEventId($GLOBALS['value']);
             $this->vars['allParticipants'] = $userByEvent;
 
+            foreach ($userByEvent as $item){
+                foreach ($item as $it) {
+                    if($it->getId() == $userId){
+                        $participating = true;
+                        break 2;
+                    }
+                }
+            }
         }
+        $this->vars['participating'] = $participating;
+
+
         //if($userLevel >= 0){ 
             //$userByEvent = User::getUserByEventId(2); 
             //$this->vars['allParticipants'] = $userByEvent;  
@@ -265,6 +277,11 @@ class sortiesController extends Controller{
             $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
 
             $this->redirect('/login/welcome');
+
+        }
+        function alreadyParticipating(){
+            $userId = $_SESSION['user']->getId();
+
 
         }
     }

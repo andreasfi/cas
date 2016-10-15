@@ -298,35 +298,35 @@ WHERE
 
 
         $query = "SELECT
-         events.idEvent,
-  events.title,
-  events.description,
-  events.startDate,
-  events.endDate,
-  events.maxParticipants,
-  eventtypes.type,
-  eventcategory.category,
-  difficulties.differenceName,
-  users.idUser,
-  users.firstname,
-  users.lastname,
-  users.mail,
-  users.tel,
-  paths.coordinatesJSON
-FROM
-  `events`,
-  `users`,
-  `eventcategory`,
-  `eventtypes`,
-  `paths`,
-  `difficulties`
-WHERE
-  `events`.`idEvent` = '$id'
-  AND `events`.`fk_idOwner` = `users`.`idUser`
-  AND `events`.`fk_idEventType` = `eventtypes`.`idEventType`
-  AND `events`.`fk_idEventCategory` = `eventcategory`.`idEventCategory`
-  AND `events`.`fk_idDifficulty` = `difficulties`.`id`
-  AND `events`.`fk_idPath` = `paths`.`idPath`";
+          events.idEvent,
+          events.title,
+          events.description,
+          events.startDate,
+          events.endDate,
+          events.maxParticipants,
+          eventtypes.type,
+          eventcategory.category,
+          difficulties.differenceName,
+          users.idUser,
+          users.firstname,
+          users.lastname,
+          users.mail,
+          users.tel,
+          paths.coordinatesJSON
+        FROM
+          `events`,
+          `users`,
+          `eventcategory`,
+          `eventtypes`,
+          `paths`,
+          `difficulties`
+        WHERE
+          `events`.`idEvent` = '$id'
+          AND `events`.`fk_idOwner` = `users`.`idUser`
+          AND `events`.`fk_idEventType` = `eventtypes`.`idEventType`
+          AND `events`.`fk_idEventCategory` = `eventcategory`.`idEventCategory`
+          AND `events`.`fk_idDifficulty` = `difficulties`.`id`
+          AND `events`.`fk_idPath` = `paths`.`idPath`";
 
         $result = MySqlConn::getInstance()->selectDB($query);
 
