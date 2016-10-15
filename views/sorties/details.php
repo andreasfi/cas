@@ -140,45 +140,71 @@ include_once 'views/header.inc'; ?>
                     </div>
                 </div>
                 <hr>
-                <div class="row">
-                    <div class="col-md-12 service-list col-no-margin">
-                        <form>
-                            <?php
-
-
-                            foreach ($allParticipants as $key=>$item){
-                                if(isset($item)){
-                                    foreach ($item as $keyuser=>$it){
-                                        ?>
-                                        <div class="service-icon">
-                                            <i class="fa fa-user bblue"></i>
-                                        </div>
-                                        <div class="service-content">
-                                            <div class="service-home-meta">Participant <?php echo $keyuser+1;?></div>
-                                            <h4><?php echo $it->getFirstname()." ".$it->getLastname();?></h4>
-                                            <p>
-                                                Tel.: <?php echo $it->getPhone();?>,
-                                                Email: <a href="mailto:<?php echo $it->getMail();?>"><?php echo $it->getMail();?></a>
-                                                <?php echo "Set".($key+1)?>
-                                                <select>
-                                                    <option value="1" <?php if($key==1){ echo "selected";}?>>Submitted</option>
-                                                    <option value="2" <?php if($key==2){ echo "selected";}?>>Accepted</option>
-                                                    <option value="3" <?php if($key==3){ echo "selected";}?>>Refused</option>
-                                                </select>
-                                            </p>
-                                        </div>
-                                        <hr />
-                                    <?php }
-                                }
-                                 } ?>
-                            <button>Edit</button>
-                        </form>
-
-                        <div class="clearfix"></div>
-
+                <?php
+                if($this->checkUser(2,"")){
+                    if($this->checkEventOwner($owner->getId(),"")){ ?>
+                    <div class="row">
+                        <div class="col-md-12 service-list col-no-margin">
+                            <form>
+                                <?php
+                                foreach ($allParticipants as $key=>$item){
+                                    if(isset($item)){
+                                        foreach ($item as $keyuser=>$it){
+                                            ?>
+                                            <div class="service-icon">
+                                                <i class="fa fa-user bblue"></i>
+                                            </div>
+                                            <div class="service-content">
+                                                <div class="service-home-meta">Participant <?php echo $keyuser+1;?></div>
+                                                <h4><?php echo $it->getFirstname()." ".$it->getLastname();?></h4>
+                                                <p>
+                                                    Tel.: <?php echo $it->getPhone();?>,
+                                                    Email: <a href="mailto:<?php echo $it->getMail();?>"><?php echo $it->getMail();?></a>
+                                                    <select>
+                                                        <option value="1" <?php if($key==1){ echo "selected";}?>>Submitted</option>
+                                                        <option value="2" <?php if($key==2){ echo "selected";}?>>Accepted</option>
+                                                        <option value="3" <?php if($key==3){ echo "selected";}?>>Refused</option>
+                                                    </select>
+                                                </p>
+                                            </div>
+                                            <hr />
+                                        <?php }
+                                    }
+                                } ?>
+                                <button>Edit</button>
+                            </form>
+                            <div class="clearfix"></div>
+                        </div>
                     </div>
+<?php
+                    } else {
+                        ?>
+                        <div class="row">
+                            <div class="col-md-12 service-list col-no-margin">
+                                    <?php
+                                    foreach ($allParticipants as $key=>$item){
+                                        if(isset($item)){
+                                            foreach ($item as $keyuser=>$it){
+                                                ?>
+                                                <div class="service-icon">
+                                                    <i class="fa fa-user bblue"></i>
+                                                </div>
+                                                <div class="service-content">
+                                                    <div class="service-home-meta">Participant <?php echo $keyuser+1;?></div>
+                                                    <h4><?php echo $it->getFirstname()." ".$it->getLastname();?></h4>
+                                                    <p></p>
+                                                </div>
+                                                <hr />
+                                            <?php }
+                                        }
+                                    } ?>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                <?php
+                    }
 
-                </div>
+                }  ?>
             </div>
         </div>
     </div>

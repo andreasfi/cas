@@ -88,11 +88,30 @@ class Controller {
         // Verify the user level and redirects if not
         $user = $this->getActiveUser();
         if(($user && $user->getMemberType() >= $userLevel) || $userLevel == 0){
-
+            // Ajoute pour pouvoir vérifier si l'utilisateur a le LEVEL pour voir une partie d'une page
+            return true;
         } else {
+            // If empty d'ont redirect
+            if($redirectPage!=""){
+                $this->redirect($redirectPage,"");
+                exit;
+            }
+        }
+    }
+
+    function checkEventOwner($eventIdOwner, $redirectPage){
+        // Verifie si l'utilisateur actuel est le trail master du l'event
+        $user = $this->getActiveUser();
+
+        if($user && $user->getId() == $eventIdOwner){
+            return true;
+        }
+        if($redirectPage!=""){
             $this->redirect($redirectPage,"");
             exit;
         }
+        return false;
+
     }
 
     function checkParam($param, $redirectPage){

@@ -7,8 +7,8 @@
  */
 class proximiteController extends Controller{
     function proximite(){
-
-        var_dump(htmlentities("<<>'?sa?>"));
+        $this->vars['pageTitle'] = "Proximite";
+        $this->vars['pageMessage'] = "";
 
 
     }

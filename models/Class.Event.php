@@ -307,6 +307,7 @@ WHERE
   eventtypes.type,
   eventcategory.category,
   difficulties.differenceName,
+  users.idUser,
   users.firstname,
   users.lastname,
   users.mail,
@@ -332,6 +333,7 @@ WHERE
         $r = $result->fetch();
 
         $owner = User::empty_construct();
+        $owner->setId($r['idUser']);
         $owner->setFirstname($r['firstname']);
         $owner->setLastname($r['lastname']);
         $owner->setMail($r['mail']);
