@@ -28,8 +28,7 @@ class MySqlConn
                 ';dbname=' . self::DATABASE .
                 ';charset='.self::ENCODING,
                 self::USER, self::PWD
-                , array(
-                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+            );
         } catch (PDOException $e) {
             die ('Connection failed: ' . $e->getMessage());
         }

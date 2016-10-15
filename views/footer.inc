@@ -99,4 +99,4 @@
 </html>
 <?php
 
-unset($_SESSION['msg']);
+$_SESSION['msg']="";

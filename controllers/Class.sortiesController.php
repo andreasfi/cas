@@ -18,8 +18,8 @@ class sortiesController extends Controller{
 
     function details(){
 
-        $this->checkUser(0, "/cas/error/http404");
-        $this->checkParam($GLOBALS['value'], "/cas/home");
+        $this->checkUser(0, "/error/http404");
+        $this->checkParam($GLOBALS['value'], "/home");
 
         // Get infos
         $result = Event::fetch_event_by_id($GLOBALS['value']);
@@ -134,7 +134,11 @@ class sortiesController extends Controller{
 
             $this->vars['msg'] = "VOUS AVEZ ETE INSCRIT";
         }
-        $userId = $_SESSION['user']->getId();
+        $userId = null;
+        if(isset($_SESSION['user'])){
+            $userId = $_SESSION['user']->getId();
+        }
+
         $participating = false;
         if($userLevel >= 0){
             $userByEvent = User::getUserByEventId($GLOBALS['value']);
@@ -208,9 +212,12 @@ class sortiesController extends Controller{
         }
 
 
-        $this->checkUser(2, "/cas/error/http404");
+
+        $this->checkUser(2, "/error/http404");
     }
     function ajoutsortie(){
+
+        $this->checkUser(3, "/error/http404");
         if(!isset($_SESSION['user']) ){
             $_SESSION['msg'] = '<span class="error">Vous devez vous connecter pour créer un évenement</span>';
             $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';

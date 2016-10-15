@@ -16,7 +16,6 @@ include_once ROOT_DIR.'views/header.inc';
 	<table align="center">		
 		<tr>
 			<td>
-				<?php echo $msg;?>
 				<h1><?php echo $lang['CONNECT_MENU_BUTTON']; ?></h1>
 				<?php echo $lang['EMAIL']; ?> :<br><input type="text" name="mail" size="25"/><br>
 				<?php echo $lang['PASSWORD']; ?> :<br><input type="password" name="password" size="25"/><br><br>

@@ -118,14 +118,6 @@ include_once 'views/header.inc'; ?>
                                     <?php if (isset($description)) {echo $description;} else {echo "No Data";}; ?>
 
                                 </p>
-                                <div class="">
-                                    <?php if(isset($userLevel) && $userLevel >= 2 ){ ?>
-                                        <a href=<?php echo URL_DIR ?>/sorties/inscription/<?php if (isset($eventId)) {echo $eventId;}; ?> class="btn btn-danger btn-large pull-right"><?php echo $lang['BUTTON_PARTICIPATION_REQUEST'];?> <i class="fa fa-angle-double-right"></i></a>
-                                    <?php } else { ?>
-                                        <button data-toggle="tooltip" data-placement="top" title="Vous devez être membre pour vous inscrire" style="" class="btn btn-default btn-large pull-right"><?php echo $lang['BUTTON_PARTICIPATION_REQUEST'];?> <i class="fa fa-angle-double-right"></i></button>
-                                    <?php } ?>
-                                    <a href="#" data-toggle="modal" data-target="#itineraire" class="btn btn-info btn-large pull-right"><?php echo $lang['BUTTON_FIND_ROUTE'];?> <i class="fa fa-angle-double-right"></i></a>
-                                </div>
                             </div>
                             <div class="col-md-3 f-block no-col-margin borange">
                                 <a href="#"><i class="fa fa-envelope"></i></a>
@@ -342,7 +334,7 @@ if($response != false){
                             <div class="col-xs-6">
                                 <div class="form-group">
                                     <input type="submit" class="btn btn-primary" value="Search" />
-                                    <a class="btn btn-link" href="sorties/details/<?php if (isset($eventId)) {echo $eventId;} else {echo "";}; ?>">Clear</a>
+                                    <!--<a class="btn btn-link" href="sorties/details/<?php if (isset($eventId)) {echo $eventId;} else {echo "";}; ?>">Clear</a>-->
                                 </div>
                             </div>
                         </div>
