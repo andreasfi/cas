@@ -10,6 +10,8 @@
 class sortiesController extends Controller{
 
     function sorties(){
+        $this->vars['pageTitle'] = "Planning";
+        $this->vars['pageMessage'] = "";
         $this->vars['propositions'] = json_encode(Event::fetch_all_events());
     }
 

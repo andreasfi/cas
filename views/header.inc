@@ -2,11 +2,6 @@
 
 $lang = $this->lang;
 ?>
-
-<!DOCTYPE html
-     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<title>cas</title>
@@ -17,7 +12,7 @@ $lang = $this->lang;
         <meta name="author" content="605">
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <base href="<?php echo URL_DIR;?>">
+
         <link rel="stylesheet" href="<?php echo URL_DIR;?>/css/styles.css" type="text/css">
         <link href="<?php echo URL_DIR;?>/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="<?php echo URL_DIR;?>/css/settings.css" media="screen" />
@@ -27,7 +22,7 @@ $lang = $this->lang;
         <link rel="stylesheet" href="<?php echo URL_DIR;?>/css/slider.css">
         <link href="<?php echo URL_DIR;?>/css/font-awesome.min.css" rel="stylesheet">
         <link href="<?php echo URL_DIR;?>/css/style.css" rel="stylesheet">
-        <link rel="stylesheet" href="css/contact.css">
+        <link rel="stylesheet" href="<?php echo URL_DIR;?>/css/contact.css">
         <!-- FULLCALENDAR JQUERY PLUGIN -->
         <link type="text/css" rel="stylesheet" href="<?php echo URL_DIR;?>/css/fullcalendar.css">
 
@@ -56,7 +51,7 @@ $lang = $this->lang;
 		<!-- HTML5 Support for IE -->
 		<script src="<?php echo URL_DIR;?>/js/html5shiv.js"></script>
 		<!-- Custom JS -->
-		<script src="<?php echo URL_DIR;?>/js/custom.js"></script>
+
         <!-- Contact -->
         <script src="<?php echo URL_DIR;?>/js/MediaStreamRecorder.js"></script>
 
@@ -139,7 +134,7 @@ $lang = $this->lang;
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h2 class="pull-left"></i id ="pageTitle"> <?php  if(isset($pageTitle)){ echo $pageTitle;}; ?></h2>
+                    <h2 class="pull-left"> <?php  if(isset($pageTitle)){ echo $pageTitle;}; ?></h2>
                     <div class="pull-right heading-meta"><?php  if(isset($pageMessage)){ echo $pageMessage; }; ?></div>
                 </div>
             </div>

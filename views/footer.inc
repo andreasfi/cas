@@ -90,6 +90,7 @@
 		$('[data-toggle="tooltip"]').tooltip();
 	});
 </script>
+<script src="<?php echo URL_DIR;?>/js/custom.js"></script>
 
 <!-- This page JS -->
 
