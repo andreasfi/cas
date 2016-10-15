@@ -132,7 +132,7 @@ class sortiesController extends Controller{
 
             $_SESSION['user']->addUserToEvent($this->vars['eventId'], $_POST['numParticipants']);
 
-            echo("VOUS AVEZ ETE INSCRIT");
+            $this->vars['msg'] = "VOUS AVEZ ETE INSCRIT";
         }
 
         if($userLevel >= 0){

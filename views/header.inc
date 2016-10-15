@@ -147,6 +147,21 @@ $lang = $this->lang;
         </div>
     </div>
 
+    <?php
+
+// Si on met un $msg il s'affiche ici
+if(isset($msg) && $msg!=""){
+    ?>
+    <div class="content">
+        <div class="container">
+            <div class="alert alert-info">
+                <strong>Info!</strong> <?php echo $msg;?>
+            </div>
+        </div>
+    </div>
+
+<?php }
+
 
 
 
