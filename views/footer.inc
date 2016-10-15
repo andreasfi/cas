@@ -48,8 +48,8 @@
 					<div class="fwidget">
 
 						<h4>Newsletter</h4>
-						<p>Duis leo risus, condimentum ut posuere ac, vehicula luctus nunc.  Quisque rhoncus, a sodales enim arcu quis turpis.</p>
-						<p>Enter you email to Subscribe</p>
+						<p>Inscrivez vous à notre newsletter.</p>
+						<p></p>
 
 						<form class="form-inline" role="form">
 							<div class="input-group">
@@ -68,6 +68,7 @@
 						<h4>Devenez membre</h4>
 						<p>
 							Pour adhérer à notre section, veuillez remplir le formulaire d'adhésion en suivant le lien suivant:
+							<a href="<?php echo URL_DIR;?>/login">Cliquez ici</a>
 						</p>
 					</div>
 				</div>
