@@ -74,7 +74,7 @@ class loginController extends Controller
          */
 
         if(!empty($_POST)){
-            $secretKey = user::getUserFromMail($_POST['recoveryMail'])->createPwdChangeRequest();
+            $secretKey = User::getUserFromMail($_POST['recoveryMail'])->createPwdChangeRequest();
             try{
                 $messageContent = $this->lang['MSG_TO_RECOVER_PASSWORD'] ."$secretKey";
                 $this->sendMail($_POST['recoveryMail'],$_POST['recoveryMail'],$this->lang['CAS_PWD_RECOVERY'],$messageContent,null);
@@ -110,7 +110,7 @@ class loginController extends Controller
         if(isset($requestUri[4])){
             try {
 
-                $_SESSION['user'] = user::getUserCorrespondingToSecretKey($requestUri[4]);
+                $_SESSION['user'] = User::getUserCorrespondingToSecretKey($requestUri[4]);
 
 
             }catch(Exception $e){
@@ -273,7 +273,7 @@ class loginController extends Controller
             $modifiedUser->setPhone($newPhone);
 
            $_SESSION['user']->update($modifiedUser);
-           $_SESSION['user'] = user::getUserFromId($tempId);
+           $_SESSION['user'] = User::getUserFromId($tempId);
             $_SESSION['msg'] = '<span class="success">'.$this->lang['S_CHANGES_SUCCESSFUL'].'</span>';
 
         }
