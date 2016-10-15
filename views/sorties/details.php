@@ -239,7 +239,7 @@ if($response != false){
                                 navigator.geolocation.clearWatch(watch);
                                 var lat = position.coords.latitude;
                                 var lng = position.coords.longitude;
-                                $.get('../v1/locations', {x: lat, y: lng}, function(data) {
+                                $.get('http://transport.opendata.ch/v1/locations', {x: lat, y: lng}, function(data) {
                                     clearInterval(interval);
                                     $('input[name=from]').attr('placeholder', 'From');
                                     $(data.stations).each(function (i, station) {
@@ -251,7 +251,7 @@ if($response != false){
                                 });
                             }
                         }, function(error) {
-                            // ignore
+
                         }, {
                             enableHighAccuracy:true,
                             maximumAge: 10000,
