@@ -198,45 +198,7 @@ if($response != false){
 
     <script>
         $(function () {
-            if (navigator.geolocation) {
-                if (!$('input[name=from]').val()) {
-                    $('input[name=from]').attr('placeholder', 'Locating...');
-                    var i = 0;
-                    var interval = setInterval(function () {
-                        i = (i + 1) % 4;
-                        var message = 'Locating';
-                        for (var j = 0; j < i; j++) {
-                            message += '.';
-                        }
-                        $('input[name=from]').attr('placeholder', message);
-                    }, 400);
-                    // get location for from
-                    var watch = navigator.geolocation.watchPosition(function (position) {
-                        if (position.coords.accuracy < 100) {
-                            // stop locating
-                            navigator.geolocation.clearWatch(watch);
-                            var lat = position.coords.latitude;
-                            var lng = position.coords.longitude;
-                            $.get('../v1/locations', {x: lat, y: lng}, function(data) {
-                                clearInterval(interval);
-                                $('input[name=from]').attr('placeholder', 'From');
-                                $(data.stations).each(function (i, station) {
-                                    if (!$('input[name=from]').val()) {
-                                        $('input[name=from]').val(station.name);
-                                    }
-                                    return false;
-                                });
-                            });
-                        }
-                    }, function(error) {
-                        // ignore
-                    }, {
-                        enableHighAccuracy:true,
-                        maximumAge: 10000,
-                        timeout: 30000
-                    });
-                }
-            }
+
             function reset() {
                 $('table.connections tr.connection').show();
                 $('table.connections tr.section').hide();
@@ -256,7 +218,51 @@ if($response != false){
                     that.setSelectionRange(0, 9999);
                 }, 10);
             });
+            $('#itineraire').on('shown.bs.modal', function () {
+                if (navigator.geolocation) {
+                    if (!$('input[name=from]').val()) {
+                        $('input[name=from]').attr('placeholder', 'Locating...');
+                        var i = 0;
+                        var interval = setInterval(function () {
+                            i = (i + 1) % 4;
+                            var message = 'Locating';
+                            for (var j = 0; j < i; j++) {
+                                message += '.';
+                            }
+                            $('input[name=from]').attr('placeholder', message);
+                        }, 400);
+                        // get location for from
+
+                        var watch = navigator.geolocation.watchPosition(function (position) {
+                            if (position.coords.accuracy < 100) {
+                                // stop locating
+                                navigator.geolocation.clearWatch(watch);
+                                var lat = position.coords.latitude;
+                                var lng = position.coords.longitude;
+                                $.get('../v1/locations', {x: lat, y: lng}, function(data) {
+                                    clearInterval(interval);
+                                    $('input[name=from]').attr('placeholder', 'From');
+                                    $(data.stations).each(function (i, station) {
+                                        if (!$('input[name=from]').val()) {
+                                            $('input[name=from]').val(station.name);
+                                        }
+                                        return false;
+                                    });
+                                });
+                            }
+                        }, function(error) {
+                            // ignore
+                        }, {
+                            enableHighAccuracy:true,
+                            maximumAge: 10000,
+                            timeout: 30000
+                        });
+                    }
+                }
+
+            })
         });
+
     </script>
 
     <div id="itineraire" class="modal fade" role="dialog">
