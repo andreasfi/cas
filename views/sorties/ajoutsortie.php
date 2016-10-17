@@ -9,7 +9,14 @@
 $msg = $this->vars['msg'];
 $pageTitle = $this->vars['pageTitle'];
 $pageMessage = $this->vars['pageMessage'];
-include_once ROOT_DIR.'views/header.inc'; ?>
+include_once ROOT_DIR.'views/header.inc'; 
+$event = null;
+if(isset($_SESSION['event'])){
+	$event = $_SESSION['event'];
+	var_dump($event);
+	unset($_SESSION['event']);
+}
+?>
 
 
 <style>
@@ -37,11 +44,11 @@ include_once ROOT_DIR.'views/header.inc'; ?>
 				<div class="row">
 					<div class="col-md-6 formgroup">
 						<p><?php echo $lang['TRAIL_TITLE'] ?></p>
-						<input id="title" name="title" type="text" required style="width:100%">
+						<input id="title" name="title" type="text" required style="width:100%" value="<?php echo ($event==null ? "" : $event->getTitle()); ?>">
 					</div>
 					<div class="col-md-6 formgroup">
 						<p><?php echo $lang['TRAIL_MAX_PEOPLE'] ?></p>
-						<input id="maxParticipants" name="maxParticipants" type="number" min="1" required style="width:50px">
+						<input id="maxParticipants" name="maxParticipants" type="number" min="1" required style="width:50px" value="<?php echo($event==null?"":$event->getMaxParticipants()); ?>">
 					</div>
 				</div>
 				<div class="row">
@@ -71,16 +78,17 @@ include_once ROOT_DIR.'views/header.inc'; ?>
 				</div>
 				<div class="formgroup">
 					<p><?php echo $lang['TRAIL_STARTDATE']?></p>
-					<input id="startDate" name="startDate" type="text" required onchange="adjustEndTime()">
+					<input id="startDate" name="startDate" type="text" required onchange="adjustEndTime()" value="<?php echo($event==null?"":$event->getStartDateFormattedJS()); ?>">
 				</div>
 				<div class="formgroup">
 					<p><?php echo $lang['TRAIL_ENDDATE']?></p>
-					<input id="endDate" name="endDate" type="text" required required>
+					<input id="endDate" name="endDate" type="text" required required value="<?php 
+	echo($event==null?"":$event->getEndDateFormattedJS()); ?>">
 				</div>
-					<input type="hidden" name="multipleDays" id="multipleDays" onchange="toggleEndDate()" >
 				<div class="formgroup">
 					<p><?php echo $lang['TRAIL_DESCRIPTION']?></p>
-					<textarea id="description" rows="6" cols="50" name="description"></textarea>
+					<textarea id="description" rows="6" cols="50" name="description"><?php 
+	echo($event==null?"":$event->getDescription()); ?></textarea>
 				</div>
 		</div>
 		<div class="col-md-7 col-xs-10 text-center">
@@ -98,7 +106,10 @@ include_once ROOT_DIR.'views/header.inc'; ?>
 	</div>
 	<div class="row" style="margin-bottom:50px">
 		<div class="col-md-12 text-center">
-			<input id="form_json" name="JSON" type="hidden">
+			<input id="form_json" name="JSON" type="hidden" value='<?php echo($event==null?"":$event->getPath()); ?>'>
+			<?php if ($event!= null){ ?>
+			<input id="edit_event" type=hidden value="yes">
+			<?php } ?>
 			<input type="submit">
 			</form>
 		</div>
@@ -126,6 +137,10 @@ include_once ROOT_DIR.'views/header.inc'; ?>
 		jQuery('#endDate').datetimepicker({
 			minDate: '0'
 		});
+		if($('#form_json').val() != null){
+			trailPoints = loadJSON($('#form_json').val());
+			drawCoordinates();
+		}
 	});
 	
 	//all things Google Maps:
@@ -145,31 +160,8 @@ include_once ROOT_DIR.'views/header.inc'; ?>
 		});
 		      google.charts.load('current', {'packages':['corechart']});
 
+		
       }
-	
-	function showAddress(){
-		var address = $("#geocodeInput").val();
-		if(geocoder){
-			geocoder.geocode({address: address}, 
-				function(response, status){
-					if(!response || status != google.maps.GeocoderStatus.OK){
-						alert(address + " introuvable");
-					}else{
-						var point = response[0].geometry.location;
-						addressMarker = new google.maps.Marker({
-							position: point,
-							map: map,
-							title: "Point recherché"
-						});
-						
-						map.setCenter(point)
-						map.setZoom(12);
-						
-						$('#trailIndication').css("opacity", "1");
-					}
-				});
-		}
-	}
 	
 	function drawCoordinates(){
 		if(trailShape)
@@ -188,15 +180,15 @@ include_once ROOT_DIR.'views/header.inc'; ?>
 		});
 		
 		document.getElementById('form_json').value = JSON.stringify(trailPoints);
+		
+		
+		if (trailPoints.length >= 2)
+			calculateElevation(getJSON(trailPoints));
 	}
     
 	function clickMap(clickedPoint){
 		trailPoints.push(clickedPoint);
 		drawCoordinates();
-		if (trailPoints.length >= 2)
-			calculateElevation(getJSON(trailPoints));
-		
-		$('#trailIndication').css("opacity", "1");
 	}
 	
 	function getJSON(points){
@@ -208,6 +200,16 @@ include_once ROOT_DIR.'views/header.inc'; ?>
 				lng: points[i].lng()
 			};
 			output.push(line);
+		}
+		return output;
+	}
+	
+	function loadJSON(points){
+		var output = [];
+		var pointsJSON = JSON.parse(points);
+		for(var i = 0; i < pointsJSON.length; i++){
+			var pt = new google.maps.LatLng(pointsJSON[i].lat, pointsJSON[i].lng)
+			output.push(pt);
 		}
 		return output;
 	}

@@ -74,6 +74,17 @@ class Event implements JsonSerializable
     {
         return $this->start_date;
     }
+	
+	public function getStartDateFormattedJS()
+    {
+        $output = DateTime::createFromFormat('Y-m-d H:i:s', $this->start_date);
+		return $output->format('Y/m/d H:i');
+    }
+	public function getEndDateFormattedJS()
+    {
+        $output = DateTime::createFromFormat('Y-m-d H:i:s', $this->end_date);
+		return $output->format('Y/m/d H:i');
+    }
 
     public function setStartDate($start_date)
     {

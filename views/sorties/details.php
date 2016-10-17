@@ -19,6 +19,8 @@ $eventCategory = $this->vars['eventCategory'];
 $path = $this->vars['path'];
 $distance = $this->vars['distance'];
 $eventId = $this->vars['eventId'];
+$startDate = $this->vars['startDate'];
+$endDate = $this->vars['endDate'];
 
 
 $from =$this->vars['from'];
@@ -62,7 +64,15 @@ include_once 'views/header.inc'; ?>
                         <a href="<?php echo URL_DIR ?>/sorties/inscription/<?php if (isset($eventId)) {echo $eventId;}; ?>" class="btn btn-danger btn-large pull-right"><?php echo $lang['BUTTON_PARTICIPATION_REQUEST'];?><i class="fa fa-angle-double-right"></i></a>
                     <?php } else { ?>
                             <button data-toggle="tooltip" data-placement="top" title="Vous devez être membre pour vous inscrire" style="" class="btn btn-default btn-large pull-right"><?php echo $lang['BUTTON_PARTICIPATION_REQUEST'];?> <i class="fa fa-angle-double-right"></i></button>
-                    <?php } ?>
+                    <?php } 
+					if($_SESSION['user']->getId() == $owner->getId()){ ?>
+						<form action="<?php echo URL_DIR.'/sorties/ajoutsortie' ?>" method="post">
+							<input type=hidden name="id" value="<?php echo $eventId;?>">
+							<button type="submit" class="btn btn-large bgreen ">Modifier la course <i class="fa fa-angle-double-right"></i></button>
+						</form>
+						
+					<?php } ?>
+					
                     <a href="#" data-toggle="modal" data-target="#itineraire" class="btn btn-info btn-large pull-right"><?php echo $lang['BUTTON_FIND_ROUTE'];?> <i class="fa fa-angle-double-right"></i></a>
                 </div>
             </div>

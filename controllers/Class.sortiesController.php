@@ -247,43 +247,52 @@ class sortiesController extends Controller{
 
 
         if(!empty($_POST)){
-
-			$description = $_POST['description'];
-			$start_date = DateTime::createFromFormat('Y/m/d H:i:s', $_POST['startDate'].':00');
-            // j'ai supprime cette ligne pour que $start_date soit un DATETIME
-			//$start_date = $start_date->format('Y-m-d H:i:s');
-			$end_date = DateTime::createFromFormat('Y/m/d H:i:s', $_POST['endDate'].':00');
-            // j'ai supprime cette ligne pour que $start_date soit un DATETIME
-			//$end_date = $end_date->format('Y-m-d H:i:s');
-			$max_participants = $_POST['maxParticipants'];
-			$event_type = 1;
-			$owner = 1;//$_SESSION['user']->getId();
-			$title = $_POST['title'];
-			$event_cat = $_POST['category'];
-			$difficulty = $_POST['difficulty'];
-			$path = $_POST['JSON'];
-
-
-            //TODO check ajoutsortie quel event type c'est
-
-            if($start_date->format('i') != $end_date->format('i'))
-                $event_type = 1;
-            else
-                $event_type = 2;
+			if(isset($_POST['id'])){
+				$result = Event::fetch_event_by_id($_POST['id']);
+				$_SESSION['event'] = $result;
+				
+			}else{
+				$description = $_POST['description'];
+				$start_date = DateTime::createFromFormat('Y/m/d H:i:s', $_POST['startDate'].':00');
+				// j'ai supprime cette ligne pour que $start_date soit un DATETIME
+				//$start_date = $start_date->format('Y-m-d H:i:s');
+				$end_date = DateTime::createFromFormat('Y/m/d H:i:s', $_POST['endDate'].':00');
+				// j'ai supprime cette ligne pour que $start_date soit un DATETIME
+				//$end_date = $end_date->format('Y-m-d H:i:s');
+				$max_participants = $_POST['maxParticipants'];
+				$event_type = 1;
+				$owner = $_SESSION['user']->getId();
+				$title = $_POST['title'];
+				$event_cat = $_POST['category'];
+				$difficulty = $_POST['difficulty'];
+				$path = $_POST['JSON'];
 
 
+				//TODO check ajoutsortie quel event type c'est
 
-            // LE CASTING FORMAT SE FAIT DEJA DANS LE CONSTRUCTEUR
-         /*   $start_date = $start_date->format('Y-m-d H:i:s');
-            $end_date = $end_date->format('Y-m-d H:i:s');
-         */
-            $event = new Event($id = null, $description, $start_date, $end_date, $max_participants, $event_type, $owner, $title, $event_cat, $difficulty, $path);
-            $event->save();
+				if($start_date->format('i') != $end_date->format('i'))
+					$event_type = 1;
+				else
+					$event_type = 2;
+				
 
-            $_SESSION['msg'] = '<span class="success">Evenement cree</span>';
-            $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
 
-            $this->redirect('/login/welcome');
+				// LE CASTING FORMAT SE FAIT DEJA DANS LE CONSTRUCTEUR
+			 /*   $start_date = $start_date->format('Y-m-d H:i:s');
+				$end_date = $end_date->format('Y-m-d H:i:s');
+			 */
+				if(isset($_POST['edit_event'])){
+					
+				}else{
+					$event = new Event($id = null, $description, $start_date, $end_date, $max_participants, $event_type, $owner, $title, $event_cat, $difficulty, $path);
+					$event->save();
+
+					$_SESSION['msg'] = '<span class="success">Evenement cree</span>';
+					$this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
+
+					$this->redirect('/login/welcome');
+				}
+			}
 
         }
         function alreadyParticipating(){
