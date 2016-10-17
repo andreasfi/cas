@@ -38,16 +38,11 @@ $lang = $this->lang;
 					<div class="fwidget">
 						<h4><?php echo $lang['PAGES']; ?></h4>
 						<ul>
-							<li><a href="home"><?php echo $lang['HOME']; ?></a></li>
-							<li><a href="login"><?php echo $lang['LOGIN']; ?></a></li>
-							<li><a href="proximite"><?php echo $lang['PROXIMITY_MENU_BUTTON']; ?></a></li>
-							<li><a href="sorties"><?php echo $lang['EXCURSIONS_CALENDAR']; ?></a></li>
-							<li><a href="contact"><?php echo $lang['CONTACT_US']; ?></a></li>
-							<li><a href="<?php echo URL_DIR;?>/home">Home</a></li>
-							<li><a href="<?php echo URL_DIR;?>/login">Login</a></li>
-							<li><a href="<?php echo URL_DIR;?>/proximite">A proximité</a></li>
-							<li><a href="<?php echo URL_DIR;?>/sorties">Sorties - Calendrier</a></li>
-							<li><a href="<?php echo URL_DIR;?>/contact">Contact</a></li>
+							<li><a href="<?php echo URL_DIR;?>/home"><?php echo $lang['HOME']; ?></a></li>
+							<li><a href="<?php echo URL_DIR;?>/login"><?php echo $lang['LOGIN']; ?></a></li>
+							<li><a href="<?php echo URL_DIR;?>/proximite"><?php echo $lang['PROXIMITY_MENU_BUTTON']; ?></a></li>
+							<li><a href="<?php echo URL_DIR;?>/sortie"><?php echo $lang['EXCURSIONS_CALENDAR']; ?></a></li>
+							<li><a href="<?php echo URL_DIR;?>/contact"><?php echo $lang['CONTACT_US']; ?></a></li>
 						</ul>
 					</div>
 				</div>
