@@ -35,11 +35,11 @@
 					<div class="fwidget">
 						<h4>Pages</h4>
 						<ul>
-							<li><a href="home">Home</a></li>
-							<li><a href="login">Login</a></li>
-							<li><a href="proximite">A proximité</a></li>
-							<li><a href="sorties">Sorties - Calendrier</a></li>
-							<li><a href="contact">Contact</a></li>
+							<li><a href="<?php echo URL_DIR;?>/home">Home</a></li>
+							<li><a href="<?php echo URL_DIR;?>/login">Login</a></li>
+							<li><a href="<?php echo URL_DIR;?>/proximite">A proximité</a></li>
+							<li><a href="<?php echo URL_DIR;?>/sorties">Sorties - Calendrier</a></li>
+							<li><a href="<?php echo URL_DIR;?>/contact">Contact</a></li>
 						</ul>
 					</div>
 				</div>
