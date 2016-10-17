@@ -42,7 +42,7 @@ $lang['TRAIL_CATEGORY'] = "Catégorie";
 $lang['TRAIL_DIFFICULTY'] = "Difficulté";
 $lang['TRAIL_STARTDATE'] = "Date/Heure de début";
 $lang['TRAIL_ENDDATE'] = "Date/Heure de fin";
-$lang['TRAIL_DESCRIPTION'] = "Déscription de la course";
+$lang['TRAIL_DESCRIPTION'] = "Description de la course";
 $lang['TRAIL_MAP'] = "Parcours";
 $lang['TRAIL_MAP_INSTRUCTIONS'] = "Cliquez sur la carte pour dessiner le parcours";
 $lang['TRAIL_MAP_DELETELAST'] = "Suppr. dernier point";
@@ -64,3 +64,7 @@ $lang['TRAIL_DIFF_2'] = 'Modéré';
 $lang['TRAIL_DIFF_3'] = 'Avancé';
 $lang['TRAIL_DIFF_4'] = 'Très Avancé';
 $lang['TRAIL_DIFF_5'] = 'Professionnel';
+
+//INSCRIPTION TO EVENT
+$lang['INSCRIPTION_NUMBER_PARTICIPANTS'] = "Entrez le nombre de participants";
+$lang['SEND'] = "Envoyer";
