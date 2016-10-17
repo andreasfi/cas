@@ -43,6 +43,11 @@ $lang = $this->lang;
 							<li><a href="proximite"><?php echo $lang['PROXIMITY_MENU_BUTTON']; ?></a></li>
 							<li><a href="sorties"><?php echo $lang['EXCURSIONS_CALENDAR']; ?></a></li>
 							<li><a href="contact"><?php echo $lang['CONTACT_US']; ?></a></li>
+							<li><a href="<?php echo URL_DIR;?>/home">Home</a></li>
+							<li><a href="<?php echo URL_DIR;?>/login">Login</a></li>
+							<li><a href="<?php echo URL_DIR;?>/proximite">A proximité</a></li>
+							<li><a href="<?php echo URL_DIR;?>/sorties">Sorties - Calendrier</a></li>
+							<li><a href="<?php echo URL_DIR;?>/contact">Contact</a></li>
 						</ul>
 					</div>
 				</div>
@@ -101,5 +106,6 @@ $lang = $this->lang;
 </body>
 </html>
 <?php
+
 $_SESSION['msg']="";
 ?>
