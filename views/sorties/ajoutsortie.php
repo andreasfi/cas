@@ -9,7 +9,13 @@
 $msg = $this->vars['msg'];
 $pageTitle = $this->vars['pageTitle'];
 $pageMessage = $this->vars['pageMessage'];
-include_once ROOT_DIR.'views/header.inc'; ?>
+include_once ROOT_DIR.'views/header.inc'; 
+$event = null;
+if(isset($_SESSION['event'])){
+	$event = $_SESSION['event'];
+	unset($_SESSION['event']);
+}
+?>
 
 
 <style>
@@ -31,56 +37,59 @@ include_once ROOT_DIR.'views/header.inc'; ?>
 </style>
 
 <div class="container">
+	
+	<form method="post" action="<?php echo URL_DIR.'/sorties/ajoutsortie' ?>">
 	<div class="row">
 		<div class="col-md-5 col-xs-1">
-			<form method="post" action="<?php echo URL_DIR.'sorties/ajoutsortie' ?>">
 				<div class="row">
 					<div class="col-md-6 formgroup">
 						<p><?php echo $lang['TRAIL_TITLE'] ?></p>
-						<input id="title" name="title" type="text" required style="width:100%">
+						<input id="title" name="title" type="text" required style="width:100%" value="<?php echo ($event==null ? "" : $event->getTitle()); ?>">
 					</div>
 					<div class="col-md-6 formgroup">
 						<p><?php echo $lang['TRAIL_MAX_PEOPLE'] ?></p>
-						<input id="maxParticipants" name="maxParticipants" type="number" min="1" required style="width:50px">
+						<input id="maxParticipants" name="maxParticipants" type="number" min="1" required style="width:50px" value="<?php echo($event==null?"":$event->getMaxParticipants()); ?>">
 					</div>
 				</div>
 				<div class="row">
 					<div class="formgroup col-sm-6">
 						<p><?php echo $lang['TRAIL_CATEGORY'] ?></p>
+						
 						<select id="category" name="category" required>
-							<option value="1"><?php echo $lang['TRAIL_CAT_1'] ?></option>
-							<option value="2"><?php echo $lang['TRAIL_CAT_2'] ?></option>
-							<option value="3"><?php echo $lang['TRAIL_CAT_3'] ?></option>
-							<option value="4"><?php echo $lang['TRAIL_CAT_4'] ?></option>
-							<option value="5"><?php echo $lang['TRAIL_CAT_5'] ?></option>
-							<option value="6"><?php echo $lang['TRAIL_CAT_6'] ?></option>
-							<option value="7"><?php echo $lang['TRAIL_CAT_7'] ?></option>
-							<option value="8"><?php echo $lang['TRAIL_CAT_8'] ?></option>
+							<option value="1" <?php echo($event!=null && $event->getEventCategory() == 'Marche' ? "selected='selected'": ""); ?>><?php echo $lang['TRAIL_CAT_1'] ?></option>
+							<option value="2" <?php echo($event!=null && $event->getEventCategory() == 'Peau de Phoque' ? "selected='selected'": ""); ?>><?php echo $lang['TRAIL_CAT_2'] ?></option>
+							<option value="3" <?php echo($event!=null && $event->getEventCategory() == 'Grimpe' ? "selected='selected'": ""); ?>><?php echo $lang['TRAIL_CAT_3'] ?></option>
+							<option value="4" <?php echo($event!=null && $event->getEventCategory() == 'Raquettes' ? "selected='selected'": ""); ?>><?php echo $lang['TRAIL_CAT_4'] ?></option>
+							<option value="5" <?php echo($event!=null && $event->getEventCategory() == 'Ski' ? "selected='selected'": ""); ?>><?php echo $lang['TRAIL_CAT_5'] ?></option>
+							<option value="6" <?php echo($event!=null && $event->getEventCategory() == 'Snowboard' ? "selected='selected'": ""); ?>><?php echo $lang['TRAIL_CAT_6'] ?></option>
+							<option value="7" <?php echo($event!=null && $event->getEventCategory() == 'Télémark' ? "selected='selected'": ""); ?>><?php echo $lang['TRAIL_CAT_7'] ?></option>
+							<option value="8" <?php echo($event!=null && $event->getEventCategory() == 'Ski de fond' ? "selected='selected'": ""); ?>><?php echo $lang['TRAIL_CAT_8'] ?></option>
 						</select>
 					</div>
 					<div class="formgroup col-sm-6">
 						<p><?php echo $lang['TRAIL_DIFFICULTY']?></p>
 						<select id="difficulty" name="difficulty" required>
-							<option value="1"><?php echo $lang['TRAIL_DIFF_1'] ?></option>
-							<option value="2"><?php echo $lang['TRAIL_DIFF_2'] ?></option>
-							<option value="3"><?php echo $lang['TRAIL_DIFF_3'] ?></option>
-							<option value="4"><?php echo $lang['TRAIL_DIFF_4'] ?></option>
-							<option value="5"><?php echo $lang['TRAIL_DIFF_5'] ?></option>
+							<option value="1" <?php echo($event!=null && $event->getDifficulty() == 'débutant' ? "selected='selected'": ""); ?>><?php echo $lang['TRAIL_DIFF_1'] ?></option>
+							<option value="2" <?php echo($event!=null && $event->getDifficulty() == 'modéré' ? "selected='selected'": ""); ?>><?php echo $lang['TRAIL_DIFF_2'] ?></option>
+							<option value="3" <?php echo($event!=null && $event->getDifficulty() == 'avancé' ? "selected='selected'": ""); ?>><?php echo $lang['TRAIL_DIFF_3'] ?></option>
+							<option value="4" <?php echo($event!=null && $event->getDifficulty() == 'très avancé' ? "selected='selected'": ""); ?>><?php echo $lang['TRAIL_DIFF_4'] ?></option>
+							<option value="5" <?php echo($event!=null && $event->getDifficulty() == 'professionnel' ? "selected='selected'": ""); ?>><?php echo $lang['TRAIL_DIFF_5'] ?></option>
 						</select>
 					</div>
 				</div>
 				<div class="formgroup">
 					<p><?php echo $lang['TRAIL_STARTDATE']?></p>
-					<input id="startDate" name="startDate" type="text" required onchange="adjustEndTime()">
+					<input id="startDate" name="startDate" type="text" required onchange="adjustEndTime()" value="<?php echo($event==null?"":$event->getStartDateFormattedJS()); ?>">
 				</div>
 				<div class="formgroup">
 					<p><?php echo $lang['TRAIL_ENDDATE']?></p>
-					<input id="endDate" name="endDate" type="text" required required>
+					<input id="endDate" name="endDate" type="text" required required value="<?php 
+	echo($event==null?"":$event->getEndDateFormattedJS()); ?>">
 				</div>
-					<input type="hidden" name="multipleDays" id="multipleDays" onchange="toggleEndDate()" >
 				<div class="formgroup">
 					<p><?php echo $lang['TRAIL_DESCRIPTION']?></p>
-					<textarea id="description" rows="6" cols="50" name="description"></textarea>
+					<textarea id="description" rows="6" cols="50" name="description"><?php 
+	echo($event==null?"":$event->getDescription()); ?></textarea>
 				</div>
 		</div>
 		<div class="col-md-7 col-xs-10 text-center">
@@ -97,11 +106,23 @@ include_once ROOT_DIR.'views/header.inc'; ?>
 		</div>
 	</div>
 	<div class="row" style="margin-bottom:50px">
-		<div class="col-md-12 text-center">
-			<input id="form_json" name="JSON" type="hidden">
-			<input type="submit">
+		<div class="col-md-4"></div>
+		<div class="col-md-<?php echo(isset($event) ? 2 : 4) ?> text-center">
+			<input id="form_json" name="JSON" type="hidden" value='<?php echo($event==null?"":$event->getPath()); ?>'>
+			<?php if ($event!= null){ ?>
+			<input name="edit_event" type=hidden value="<?php echo $event->getId(); ?>">
+			<?php } ?>
+			<input type="submit" <?php echo(isset($event) ? "value='UPDATE'" : ""); ?>>
 			</form>
 		</div>
+		<?php if(isset($event)){ ?>
+			<div class="col-md-2 text-center">
+				<form method="post" action="<?php echo URL_DIR.'/sorties/ajoutsortie'?>">
+					<input type=hidden name="delete_event" value="<?php echo $event->getId(); ?>">
+					<input type="submit" value="DELETE">
+				</form>
+			</div>
+		<?php } ?>
 	</div>
 </div>
 
@@ -126,6 +147,10 @@ include_once ROOT_DIR.'views/header.inc'; ?>
 		jQuery('#endDate').datetimepicker({
 			minDate: '0'
 		});
+		if($('#form_json').val() != null){
+			trailPoints = loadJSON($('#form_json').val());
+			drawCoordinates();
+		}
 	});
 	
 	//all things Google Maps:
@@ -145,31 +170,8 @@ include_once ROOT_DIR.'views/header.inc'; ?>
 		});
 		      google.charts.load('current', {'packages':['corechart']});
 
+		
       }
-	
-	function showAddress(){
-		var address = $("#geocodeInput").val();
-		if(geocoder){
-			geocoder.geocode({address: address}, 
-				function(response, status){
-					if(!response || status != google.maps.GeocoderStatus.OK){
-						alert(address + " introuvable");
-					}else{
-						var point = response[0].geometry.location;
-						addressMarker = new google.maps.Marker({
-							position: point,
-							map: map,
-							title: "Point recherché"
-						});
-						
-						map.setCenter(point)
-						map.setZoom(12);
-						
-						$('#trailIndication').css("opacity", "1");
-					}
-				});
-		}
-	}
 	
 	function drawCoordinates(){
 		if(trailShape)
@@ -188,15 +190,15 @@ include_once ROOT_DIR.'views/header.inc'; ?>
 		});
 		
 		document.getElementById('form_json').value = JSON.stringify(trailPoints);
+		
+		
+		if (trailPoints.length >= 2)
+			calculateElevation(getJSON(trailPoints));
 	}
     
 	function clickMap(clickedPoint){
 		trailPoints.push(clickedPoint);
 		drawCoordinates();
-		if (trailPoints.length >= 2)
-			calculateElevation(getJSON(trailPoints));
-		
-		$('#trailIndication').css("opacity", "1");
 	}
 	
 	function getJSON(points){
@@ -208,6 +210,16 @@ include_once ROOT_DIR.'views/header.inc'; ?>
 				lng: points[i].lng()
 			};
 			output.push(line);
+		}
+		return output;
+	}
+	
+	function loadJSON(points){
+		var output = [];
+		var pointsJSON = JSON.parse(points);
+		for(var i = 0; i < pointsJSON.length; i++){
+			var pt = new google.maps.LatLng(pointsJSON[i].lat, pointsJSON[i].lng)
+			output.push(pt);
 		}
 		return output;
 	}

@@ -11,18 +11,41 @@ class contactController extends Controller
     function contact()
     {
 
+        $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
+
+        $this->vars['pageTitle'] = $this->lang['CONTACT_US'];
+        $this->vars['pageMessage'] = $this->lang['LEAVE_VIDEO_MSG'];;
+
+            if(!empty($_POST)){
+
+                //0. Get the posted data from the form
+                if( isset($_POST['name']) && isset($_POST['emailFrom']) && isset($_POST['subject']) && isset($_POST['message']) ){
+                    $name = $_POST['name'];
+                    $emailFrom = $_POST['emailFrom'];
+                    $subject = $_POST['subject'];
+                    $message = $_POST['message'];
+                    $finalMessage = "From : $name\nEmail : $emailFrom\n\nMessage : $message";
+
+                    try {
+                        $this->sendMail("casphphes@gmail.com", "Contact message on cas website", $subject, $finalMessage, null);
+
+                        $_SESSION['msg'] = '<span class="success">'. $this->lang['S_CONTACT_MAIL_SENT'].'</span>';
+                        $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
+                    }catch(Exception $e){
+
+                        $_SESSION['msg'] = '<span class="error">' . $this->lang['E_FAILED_TO_DELIVER_EMAIL'].'</span>';
+                        $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
+                    }
+
+                }
+
+            }
+
+
+
     }
 
-    function sendEmail()
-    {
-        //0. Get the posted data from the form
-        $name = $_POST['name'];
-        $from = $_POST['from'];
-        $subject = $_POST['subject'];
-        $message = $_POST['message'];
 
-        $this->sendMail("casphphes@gmail.com", "CAS", $subject, $message, null);
-    }
 
     function sendVideo()
     {

@@ -10,13 +10,16 @@
 class sortiesController extends Controller{
 
     function sorties(){
+        $this->vars['pageTitle'] = "Planning";
+        $this->vars['pageMessage'] = "";
         $this->vars['propositions'] = json_encode(Event::fetch_all_events());
     }
 
+
     function details(){
 
-        $this->checkUser(0, "/cas/error/http404");
-        $this->checkParam($GLOBALS['value'], "/cas/home");
+        $this->checkUser(0, "/error/http404");
+        $this->checkParam($GLOBALS['value'], "/home");
 
         // Get infos
         $result = Event::fetch_event_by_id($GLOBALS['value']);
@@ -129,8 +132,36 @@ class sortiesController extends Controller{
 
             $_SESSION['user']->addUserToEvent($this->vars['eventId'], $_POST['numParticipants']);
 
-            echo("VOUS AVEZ ETE INSCRIT");
+            $this->vars['msg'] = "VOUS AVEZ ETE INSCRIT";
         }
+        $userId = null;
+        if(isset($_SESSION['user'])){
+            $userId = $_SESSION['user']->getId();
+        }
+
+        $participating = false;
+        if($userLevel >= 0){
+            $userByEvent = User::getUserByEventId($GLOBALS['value']);
+            $this->vars['allParticipants'] = $userByEvent;
+
+            foreach ($userByEvent as $item){
+                foreach ($item as $it) {
+                    if($it->getId() == $userId){
+                        $participating = true;
+                        break 2;
+                    }
+                }
+            }
+        }
+        $this->vars['participating'] = $participating;
+
+
+        //if($userLevel >= 0){
+            //$userByEvent = User::getUserByEventId(2);
+            //$this->vars['allParticipants'] = $userByEvent;
+        //}
+
+
     }
     function distance($lat1, $lon1, $lat2, $lon2) {
         // function de calcul de la distance entre deux points
@@ -143,6 +174,10 @@ class sortiesController extends Controller{
         return ($km * 1.609344);
     }
     function inscription(){
+
+        $this->vars['pageTitle'] = "Inscription";
+        $this->vars['pageMessage'] = "";
+
         if(!isset($_Session['user'])){
             $_SESSION['msg'] = '<span class="error">Vous devez vous connecter pour vous inscrire a une sortie</span>';
             $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
@@ -163,6 +198,15 @@ class sortiesController extends Controller{
         $this->vars['path'] = $result->getPath();
         $this->vars['description'] = $result->getDescription();
 
+<<<<<<< HEAD
+=======
+		$_SESSION['difficulty'] = $result->getDifficulty();
+
+		if(isset($_POST['numPeople'])){
+			var_dump($_POST);
+		}
+
+>>>>>>> origin/master
 
         $_SESSION['difficulty'] = $result->getDifficulty();
 
@@ -170,9 +214,17 @@ class sortiesController extends Controller{
             var_dump($_POST);
         }
 
+<<<<<<< HEAD
         $this->checkUser(2, "/cas/error/http404");
+=======
+
+
+        $this->checkUser(2, "/error/http404");
+>>>>>>> origin/master
     }
     function ajoutsortie(){
+
+        $this->checkUser(3, "/error/http404");
         if(!isset($_SESSION['user']) ){
             $_SESSION['msg'] = '<span class="error">Vous devez vous connecter pour créer un évenement</span>';
             $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
@@ -193,8 +245,7 @@ class sortiesController extends Controller{
                 $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
                 $this->redirect('/login/welcome');
             }
-
-    */
+		*/
 
         $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
         $this->vars['pageTitle'] = "Ajouter une course";
@@ -202,29 +253,71 @@ class sortiesController extends Controller{
 
 
         if(!empty($_POST)){
+			if(isset($_POST['id'])){
+				//pour charger l'event dans le mode édition. on charge un objet event dans la session.
+				$result = Event::fetch_event_by_id($_POST['id']);
+				$_SESSION['event'] = $result;
+				
+			}else if(isset($_POST['delete_event'])){
+					$event = Event::fetch_event_by_id($_POST['delete_event']);
+					$event->delete();
+					
+					$_SESSION['msg'] = '<span class="success">Evenement suprimmé</span>';
+					$this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
+					
+					$this->redirect('/home'.$_POST['edit_event']);
+			}else{
+				
+				echo('create mode');
+				//sinon on est en mode submit. décoder l'info.
+				$description = $_POST['description'];
+				$start_date = DateTime::createFromFormat('Y/m/d H:i:s', $_POST['startDate'].':00');
+				// j'ai supprime cette ligne pour que $start_date soit un DATETIME
+				//$start_date = $start_date->format('Y-m-d H:i:s');
+				$end_date = DateTime::createFromFormat('Y/m/d H:i:s', $_POST['endDate'].':00');
+				// j'ai supprime cette ligne pour que $start_date soit un DATETIME
+				//$end_date = $end_date->format('Y-m-d H:i:s');
+				$max_participants = $_POST['maxParticipants'];
+				$event_type = 1;
+				$owner = $_SESSION['user']->getId();
+				$title = $_POST['title'];
+				$event_cat = $_POST['category'];
+				$difficulty = $_POST['difficulty'];
+				$path = $_POST['JSON'];
 
-            $description = $_POST['description'];
-            $start_date = DateTime::createFromFormat('Y/m/d H:i:s', $_POST['startDate'].':00');
-            $end_date = DateTime::createFromFormat('Y/m/d H:i:s', $_POST['endDate'].':00');
-            $max_participants = $_POST['maxParticipants'];
-            $owner = $_SESSION['user']->getId();
-            $title = $_POST['title'];
-            $event_cat = $_POST['category'];
-            $difficulty = $_POST['difficulty'];
-            $path = $_POST['JSON'];
+
+				//TODO check ajoutsortie quel event type c'est
+				if($start_date->format('i') != $end_date->format('i'))
+					$event_type = 1;
+				else
+					$event_type = 2;
+				
+				if(isset($_POST['edit_event'])){
+					$event = Event::fetch_event_by_id($_POST['edit_event']);
+					//si on était en mode édition, on fait un update, et non pas un insert
+					$event->update($description, $start_date, $end_date, $max_participants, $title, $event_cat, $difficulty, $path);
+					
+					$_SESSION['msg'] = '<span class="success">Evenement modifié</span>';
+					$this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
+					
+					$this->redirect('/sorties/details/'.$_POST['edit_event']);
+				}else{
+					//si on était en mode création, on insert l'event.
+					$event = new Event($id = null, $description, $start_date, $end_date, $max_participants, $event_type, $owner, $title, $event_cat, $difficulty, $path, null);
+					$event->save();
+
+					$_SESSION['msg'] = '<span class="success">Evenement cree</span>';
+					$this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
+
+					$this->redirect('/login/welcome');
+				}
+			}
+
+        }
+        function alreadyParticipating(){
+            $userId = $_SESSION['user']->getId();
 
 
-
-
-            if($start_date->format('i') != $end_date->format('i'))
-                $event_type = 1;
-            else
-                $event_type = 2;
-
-            $start_date = $start_date->format('Y-m-d H:i:s');
-            $end_date = $end_date->format('Y-m-d H:i:s');
-            $event = new Event($id = null, $description, $start_date, $end_date, $max_participants, $event_type, $owner, $title, $event_cat, $difficulty, $path);
-            $event->save();
         }
     }
 }

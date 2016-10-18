@@ -15,6 +15,8 @@ $lang = array();
 
 $lang['WEBSITE_NAME'] = "Alpine club Switzerland";
 $lang['CAS_HOMETOWN'] = "Crans-Montana";
+$lang['CAS_MAIL'] = "casphphes@gmail.com";
+$lang['CAS_PHONE'] = "+41 27 000 00 00";
 
 //menu
 
@@ -62,7 +64,7 @@ $lang['LOGOUT'] = "Logout";
 
 //LOGIN CONTROLLER
 $lang['LOGIN_TO_ACCESS_EVENTS'] = "Login to access excurions.";
-$lang['MSG_TO_RECOVER_PASSWORD'] = "This message is here to help you recover your password : \nFollow this link : http://localhost/cas/login/changepassword/";
+$lang['MSG_TO_RECOVER_PASSWORD'] = "This message is here to help you recover your password : \nFollow this link : ".URL_DIR."/login/changepassword/";
 $lang['CAS_PWD_RECOVERY'] = "CAS password recovery";
 $lang['CREATE_ACCOUNT'] ="Create your account";
 
@@ -98,6 +100,7 @@ $lang['E_PASSWORDS_DONT_MATCH'] = "Passwords don't match";
 
 //SUCCCESS MESSAGES
 $lang['S_RECOVERY_MAIL_SENT'] = "A recovery email was sent to your address.";
+$lang['S_CONTACT_MAIL_SENT'] = "A contact mail has been sent, we'll get to you ASAP.";
 $lang['S_PASSWORD_CHANGE_SUCCESSFUL'] = "Password change successful.";
 $lang['S_REGISTRATION_SUCCESSFUL'] = "Registration successful";
 $lang['S_CHANGES_SUCCESSFUL'] = "Changes successful";
@@ -136,3 +139,18 @@ $lang['TRAIL_DIFF_2'] = 'Moderate';
 $lang['TRAIL_DIFF_3'] = 'Advanced';
 $lang['TRAIL_DIFF_4'] = 'Very Advanced';
 $lang['TRAIL_DIFF_5'] = 'Professionnal';
+
+//CONTACT CONTROLLER
+$lang['CONTACT_US'] = 'Contact us';
+$lang['LEAVE_VIDEO_MSG'] = "Leave video message";
+
+//FOOTER
+$lang['PAGES'] = "Pages";
+$lang['HOME'] = "Home";
+$lang['EXCURSIONS_CALENDAR'] = "Excursions - Calendar";
+$lang['NEWSLETTER'] = "Newsletter";
+$lang['SUBSCRIBE_NEWSLETTER'] ="Subscribe to our newsletter.";
+$lang['SUBSCRIBE_BUTTON'] = "Subscribe";
+$lang['BECOME_MEMBER'] = "Become member";
+$lang['FOR_MEMBERSHIP_CLICK_LINK'] = "To become a member of our section, please fill in the form on the following link : ";
+$lang['CLICK_HERE'] = "Click here";

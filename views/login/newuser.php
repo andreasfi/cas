@@ -10,7 +10,7 @@ include_once ROOT_DIR.'views/header.inc';
 ?>
 <?php echo $msg;?>
 <br><br>
-<form method="post" action="<?php echo URL_DIR.'login/register';?>">
+<form method="post" action="<?php echo URL_DIR.'/login/register';?>">
 	<table align="center">		
 		<tr>
 			<td>

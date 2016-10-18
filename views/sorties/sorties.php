@@ -1,15 +1,19 @@
-<?php include_once ROOT_DIR . 'views/header.inc'; ?>
 
-<h1>Planning</h1>
+
+
+<?php
+
+$pageTitle = $this->vars['pageTitle'];
+$pageMessage = $this->vars['pageMessage'];
+include_once ROOT_DIR . 'views/header.inc'; ?>
+
+
 
 <div class="content">
     <div class="container">
-        <div id="calendar" class="fc fc-unthemed fc-ltr col-md-offset-1 col-md-10"></div>
-    </div>
-</div>
-
-<div class="content col-lg-12">
-    <div class="container">
+        <div class="row">
+            <div id="calendar" class="fc fc-unthemed fc-ltr col-md-offset-1 col-md-10"></div>
+        </div>
         <table id="datatable">
             <thead>
             <tr>
@@ -21,7 +25,6 @@
                 <th>Category</th>
             </tr>
             </thead>
-        </table>
         </table>
     </div>
 </div>
@@ -65,6 +68,7 @@
 
             //init calendar
             item_calendar = {};
+            item_calendar['idEvent'] = event['id'];
             item_calendar['title'] = event['title'];
             item_calendar['start'] = event['start_date'];
             item_calendar['constraint'] = 'businessHours';
@@ -110,7 +114,10 @@
             navLinks: true, // can click day/week names to navigate views
             businessHours: true, // display business hours
             editable: true,
-            events: calendar_data
+            events: calendar_data,
+            eventClick: function(calEvent, jsEvent, view) {
+                window.location.replace("<?php echo URL_DIR; ?>/sorties/details/"+calEvent.idEvent);
+            }
         });
     }
 
@@ -135,4 +142,8 @@
             data: datatable_data
         });
     }
+
 </script>
+<?php
+
+include_once ROOT_DIR.'views/footer.inc';

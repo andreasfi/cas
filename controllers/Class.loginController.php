@@ -16,7 +16,7 @@ class loginController extends Controller
         //Check if data valid
         if (empty($mail) or empty($pwd)) {
             $_SESSION['msg'] = '<span class="error">' . $lang['E_REQUIRED_FIELD_EMPTY'] . '</span>';
-            $this->redirect('login');
+            $this->redirect('/login');
         } else {
             //Load user from DB if exists
             $result = User::connect($mail, $pwd);
@@ -24,13 +24,13 @@ class loginController extends Controller
             //Put user in session if exists or return error msg
             if (!$result) {
                 $_SESSION['msg'] = '<span class="error">' . $lang['E_USERNAME_PASSWORD_INCORRECT'] . '</span>';
-                $this->redirect('login');
+                $this->redirect('/login');
 
             } else {
 
                 $_SESSION['msg'] = '';
                 $_SESSION['user'] = $result;
-                $this->redirect('welcome');
+                $this->redirect('/login','welcome');
             }
         }
 
@@ -43,7 +43,7 @@ class loginController extends Controller
         $lang = $this->lang;
         //if a user is active he cannot re-login
         if($this->getActiveUser()){
-            $this->redirect('login', 'welcome');
+            $this->redirect('/login', 'welcome');
             exit;
         }
         $this->sendSms('XXXXXX','Salut monsieur X, ici c est Club alpin suisse. ca va?');
@@ -74,7 +74,7 @@ class loginController extends Controller
          */
 
         if(!empty($_POST)){
-            $secretKey = user::getUserFromMail($_POST['recoveryMail'])->createPwdChangeRequest();
+            $secretKey = User::getUserFromMail($_POST['recoveryMail'])->createPwdChangeRequest();
             try{
                 $messageContent = $this->lang['MSG_TO_RECOVER_PASSWORD'] ."$secretKey";
                 $this->sendMail($_POST['recoveryMail'],$_POST['recoveryMail'],$this->lang['CAS_PWD_RECOVERY'],$messageContent,null);
@@ -110,7 +110,7 @@ class loginController extends Controller
         if(isset($requestUri[4])){
             try {
 
-                $_SESSION['user'] = user::getUserCorrespondingToSecretKey($requestUri[4]);
+                $_SESSION['user'] = User::getUserCorrespondingToSecretKey($requestUri[4]);
 
 
             }catch(Exception $e){
@@ -161,7 +161,7 @@ class loginController extends Controller
 
                 $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
 
-               $this->redirect('welcome');
+               $this->redirect('/login/welcome');
             }
 
 
@@ -173,7 +173,7 @@ class loginController extends Controller
      */
     function logout(){
         session_destroy();
-        $this->redirect('login');
+        $this->redirect('/login');
     }
 
 
@@ -245,7 +245,7 @@ class loginController extends Controller
 
 
 
-        $this->redirect('login', 'newuser');
+        $this->redirect('/login');
     }
 
     /**
@@ -254,7 +254,7 @@ class loginController extends Controller
     function welcome(){
         //The page cannot be displayed if no user connected
         if(!$this->getActiveUser()){
-            $this->redirect('login');
+            $this->redirect('/login');
             exit;
         }
 
@@ -273,7 +273,7 @@ class loginController extends Controller
             $modifiedUser->setPhone($newPhone);
 
            $_SESSION['user']->update($modifiedUser);
-           $_SESSION['user'] = user::getUserFromId($tempId);
+           $_SESSION['user'] = User::getUserFromId($tempId);
             $_SESSION['msg'] = '<span class="success">'.$this->lang['S_CHANGES_SUCCESSFUL'].'</span>';
 
         }

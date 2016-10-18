@@ -7,6 +7,9 @@
  */
 class proximiteController extends Controller{
     function proximite(){
+        $this->vars['pageTitle'] = "Proximite";
+        $this->vars['pageMessage'] = "";
+
 
     }
 

@@ -13,7 +13,7 @@ enableshim: true, //enable IFRAME shim to prevent drop down menus from being hid
 arrowpointers:{
 	downarrow: ["img/arrow-down.png", 11,7], //[path_to_down_arrow, arrowwidth, arrowheight]
 	rightarrow: ["img/arrow-right.png", 12,12], //[path_to_right_arrow, arrowwidth, arrowheight]
-	showarrow: {toplevel: true, sublevel: true} //Show arrow images on top level items and sub level items, respectively?
+	showarrow: {toplevel: false, sublevel: false} //Show arrow images on top level items and sub level items, respectively?
 },
 hideinterval: 200, //delay in milliseconds before entire menu disappears onmouseout.
 effects: {enableswipe: true, enableslide: true, enablefade: true, duration: 200},
