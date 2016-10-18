@@ -238,8 +238,7 @@ class sortiesController extends Controller{
                 $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
                 $this->redirect('/login/welcome');
             }
-
-    */
+		*/
 
         $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
         $this->vars['pageTitle'] = "Ajouter une course";

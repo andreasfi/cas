@@ -20,7 +20,6 @@ class Event implements JsonSerializable
     {
         $this->setId($id);
         $this->setDescription($description);
-		var_dump($this);
         $this->setStartDate($start_date->format('Y-m-d H:i:s'));
         $this->setEndDate($end_date->format('Y-m-d H:i:s'));
         $this->setMaxParticipants($max_participants);
@@ -30,6 +29,7 @@ class Event implements JsonSerializable
         $this->setEventCategory($event_cat);
         $this->setDifficulty($difficulty);
         $this->setPath($path);
+		$this->setPathId($pathId);
     }
 
 
