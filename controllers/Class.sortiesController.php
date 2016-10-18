@@ -198,29 +198,13 @@ class sortiesController extends Controller{
         $this->vars['path'] = $result->getPath();
         $this->vars['description'] = $result->getDescription();
 
-<<<<<<< HEAD
-=======
-		$_SESSION['difficulty'] = $result->getDifficulty();
-
-		if(isset($_POST['numPeople'])){
-			var_dump($_POST);
-		}
-
->>>>>>> origin/master
-
         $_SESSION['difficulty'] = $result->getDifficulty();
 
         if(isset($_POST['numPeople'])){
             var_dump($_POST);
         }
 
-<<<<<<< HEAD
-        $this->checkUser(2, "/cas/error/http404");
-=======
-
-
         $this->checkUser(2, "/error/http404");
->>>>>>> origin/master
     }
     function ajoutsortie(){
 

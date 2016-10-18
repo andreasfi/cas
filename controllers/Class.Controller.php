@@ -5,28 +5,26 @@
  * @author S. Martin
  * @link http://www.hevs.ch	
  */
-class Controller
-{
-
+class Controller {
     protected $vars = array();
     protected $controller;
     protected $method;
-
+   
     /**
      * Constructor
      * @param string $controller
      * @param string $method
      */
-    function __construct($controller, $method)
-    {
+        function __construct($controller, $method) {
 
-        $this->vars['pageTitle'] = "CAS";
-        $this->vars['pageMessage'] = "Club Alpin Suisse";
-        $this->controller = $controller;
-        $this->method = $method;
+            $this->vars['pageTitle'] = "CAS";
+            $this->vars['pageMessage'] = "Club Alpin Suisse";
+            $this->controller = $controller;
+            $this->method = $method;
 
-        if (isSet($_GET['lang'])) {
-            $clang = $_GET['lang'];
+            if(isSet($_GET['lang']))
+            {
+                $clang = $_GET['lang'];
 
             // register the session and set the cookie
             $_SESSION['lang'] = $clang;
@@ -84,12 +82,7 @@ class Controller
     {
         // Verify the user level and redirects if not
         $user = $this->getActiveUser();
-<<<<<<< HEAD
-        if (($user && $user->getMemberType() >= $userLevel) || $userLevel == 0) {
 
-        } else {
-            $this->redirect($redirectPage, "");
-=======
         if(($user && $user->getMemberType() >= $userLevel) || $userLevel == 0){
             // Ajoute pour pouvoir vérifier si l'utilisateur a le LEVEL pour voir une partie d'une page
             return true;
@@ -111,7 +104,6 @@ class Controller
         }
         if($redirectPage!=""){
             $this->redirect($redirectPage,"");
->>>>>>> origin/master
             exit;
         }
         return false;
