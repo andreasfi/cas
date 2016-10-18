@@ -248,10 +248,15 @@ class sortiesController extends Controller{
 
         if(!empty($_POST)){
 			if(isset($_POST['id'])){
+				//pour charger l'event dans le mode édition. on charge un objet event dans la session.
+				echo('edit mode');
 				$result = Event::fetch_event_by_id($_POST['id']);
 				$_SESSION['event'] = $result;
 				
 			}else{
+				
+				echo('create mode');
+				//sinon on est en mode submit. décoder l'info.
 				$description = $_POST['description'];
 				$start_date = DateTime::createFromFormat('Y/m/d H:i:s', $_POST['startDate'].':00');
 				// j'ai supprime cette ligne pour que $start_date soit un DATETIME
@@ -269,7 +274,6 @@ class sortiesController extends Controller{
 
 
 				//TODO check ajoutsortie quel event type c'est
-
 				if($start_date->format('i') != $end_date->format('i'))
 					$event_type = 1;
 				else
@@ -282,9 +286,16 @@ class sortiesController extends Controller{
 				$end_date = $end_date->format('Y-m-d H:i:s');
 			 */
 				if(isset($_POST['edit_event'])){
+					$event = Event::fetch_event_by_id($_POST['edit_event']);
+					//si on était en mode édition, on fait un update, et non pas un insert
+					$event->update($description, $start_date, $end_date, $max_participants, $title, $event_cat, $difficulty, $path);
 					
+					$_SESSION['msg'] = '<span class="success">Evenement modifié</span>';
+					$this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
+					
+					$this->redirect('/sorties/details/'.$_POST['edit_event']);
 				}else{
-					$event = new Event($id = null, $description, $start_date, $end_date, $max_participants, $event_type, $owner, $title, $event_cat, $difficulty, $path);
+					$event = new Event($id = null, $description, $start_date, $end_date, $max_participants, $event_type, $owner, $title, $event_cat, $difficulty, $path, null);
 					$event->save();
 
 					$_SESSION['msg'] = '<span class="success">Evenement cree</span>';

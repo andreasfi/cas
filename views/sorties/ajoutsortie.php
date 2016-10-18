@@ -13,7 +13,6 @@ include_once ROOT_DIR.'views/header.inc';
 $event = null;
 if(isset($_SESSION['event'])){
 	$event = $_SESSION['event'];
-	var_dump($event);
 	unset($_SESSION['event']);
 }
 ?>
@@ -54,25 +53,26 @@ if(isset($_SESSION['event'])){
 				<div class="row">
 					<div class="formgroup col-sm-6">
 						<p><?php echo $lang['TRAIL_CATEGORY'] ?></p>
+						
 						<select id="category" name="category" required>
-							<option value="1"><?php echo $lang['TRAIL_CAT_1'] ?></option>
-							<option value="2"><?php echo $lang['TRAIL_CAT_2'] ?></option>
-							<option value="3"><?php echo $lang['TRAIL_CAT_3'] ?></option>
-							<option value="4"><?php echo $lang['TRAIL_CAT_4'] ?></option>
-							<option value="5"><?php echo $lang['TRAIL_CAT_5'] ?></option>
-							<option value="6"><?php echo $lang['TRAIL_CAT_6'] ?></option>
-							<option value="7"><?php echo $lang['TRAIL_CAT_7'] ?></option>
-							<option value="8"><?php echo $lang['TRAIL_CAT_8'] ?></option>
+							<option value="1" <?php echo($event!=null && $event->getEventCategory() == 'Marche' ? "selected='selected'": ""); ?>><?php echo $lang['TRAIL_CAT_1'] ?></option>
+							<option value="2" <?php echo($event!=null && $event->getEventCategory() == 'Peau de Phoque' ? "selected='selected'": ""); ?>><?php echo $lang['TRAIL_CAT_2'] ?></option>
+							<option value="3" <?php echo($event!=null && $event->getEventCategory() == 'Grimpe' ? "selected='selected'": ""); ?>><?php echo $lang['TRAIL_CAT_3'] ?></option>
+							<option value="4" <?php echo($event!=null && $event->getEventCategory() == 'Raquettes' ? "selected='selected'": ""); ?>><?php echo $lang['TRAIL_CAT_4'] ?></option>
+							<option value="5" <?php echo($event!=null && $event->getEventCategory() == 'Ski' ? "selected='selected'": ""); ?>><?php echo $lang['TRAIL_CAT_5'] ?></option>
+							<option value="6" <?php echo($event!=null && $event->getEventCategory() == 'Snowboard' ? "selected='selected'": ""); ?>><?php echo $lang['TRAIL_CAT_6'] ?></option>
+							<option value="7" <?php echo($event!=null && $event->getEventCategory() == 'Télémark' ? "selected='selected'": ""); ?>><?php echo $lang['TRAIL_CAT_7'] ?></option>
+							<option value="8" <?php echo($event!=null && $event->getEventCategory() == 'Ski de fond' ? "selected='selected'": ""); ?>><?php echo $lang['TRAIL_CAT_8'] ?></option>
 						</select>
 					</div>
 					<div class="formgroup col-sm-6">
 						<p><?php echo $lang['TRAIL_DIFFICULTY']?></p>
 						<select id="difficulty" name="difficulty" required>
-							<option value="1"><?php echo $lang['TRAIL_DIFF_1'] ?></option>
-							<option value="2"><?php echo $lang['TRAIL_DIFF_2'] ?></option>
-							<option value="3"><?php echo $lang['TRAIL_DIFF_3'] ?></option>
-							<option value="4"><?php echo $lang['TRAIL_DIFF_4'] ?></option>
-							<option value="5"><?php echo $lang['TRAIL_DIFF_5'] ?></option>
+							<option value="1" <?php echo($event!=null && $event->getDifficulty() == 'débutant' ? "selected='selected'": ""); ?>><?php echo $lang['TRAIL_DIFF_1'] ?></option>
+							<option value="2" <?php echo($event!=null && $event->getDifficulty() == 'modéré' ? "selected='selected'": ""); ?>><?php echo $lang['TRAIL_DIFF_2'] ?></option>
+							<option value="3" <?php echo($event!=null && $event->getDifficulty() == 'avancé' ? "selected='selected'": ""); ?>><?php echo $lang['TRAIL_DIFF_3'] ?></option>
+							<option value="4" <?php echo($event!=null && $event->getDifficulty() == 'très avancé' ? "selected='selected'": ""); ?>><?php echo $lang['TRAIL_DIFF_4'] ?></option>
+							<option value="5" <?php echo($event!=null && $event->getDifficulty() == 'professionnel' ? "selected='selected'": ""); ?>><?php echo $lang['TRAIL_DIFF_5'] ?></option>
 						</select>
 					</div>
 				</div>
@@ -108,7 +108,7 @@ if(isset($_SESSION['event'])){
 		<div class="col-md-12 text-center">
 			<input id="form_json" name="JSON" type="hidden" value='<?php echo($event==null?"":$event->getPath()); ?>'>
 			<?php if ($event!= null){ ?>
-			<input id="edit_event" type=hidden value="yes">
+			<input name="edit_event" type=hidden value="<?php echo $event->getId(); ?>">
 			<?php } ?>
 			<input type="submit">
 			</form>
