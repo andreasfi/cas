@@ -1,8 +1,8 @@
 <?php
 //Global Constants
 define('SITE_NAME', 'cas');
-//define('ROOT_DIR', dirname(getcwd()) . '/' . SITE_NAME.'/');
-define('ROOT_DIR', "");
+define('ROOT_DIR', dirname(getcwd()) . '/' . SITE_NAME.'/');
+//define('ROOT_DIR', "");
 //define('URL_DIR', $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT']
 //		. '/' . SITE_NAME.'/');
 define('URL_DIR', "");

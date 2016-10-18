@@ -27,8 +27,8 @@ class sortiesController extends Controller{
 
         $this->vars['eventId'] = $result->getId();
         $this->vars['title'] = $result->getTitle();
-        $this->vars['startDate'] = $result->getStartDate();
-        $this->vars['endDate'] = $result->getEndDate();
+        $this->vars['startDate'] = DateTime::createFromFormat('Y-m-d H:i:s', $result->getStartDate());
+        $this->vars['endDate'] = DateTime::createFromFormat('Y-m-d H:i:s', $result->getEndDate());
         $this->vars['maxParticipants'] = $result->getMaxParticipants();
         $this->vars['owner'] = $result->getOwner();
         $this->vars['eventCategory'] = $result->getEventCategory();
@@ -162,6 +162,8 @@ class sortiesController extends Controller{
         $this->vars['difficulty'] = $result->getDifficulty();
         $this->vars['path'] = $result->getPath();
         $this->vars['description'] = $result->getDescription();
+
+        var_dump($this->vars);
 		
 		$_SESSION['difficulty'] = $result->getDifficulty();
 		
@@ -221,8 +223,9 @@ class sortiesController extends Controller{
 			else
 				$event_type = 2;
 
-			$start_date = $start_date->format('Y-m-d H:i:s');
-			$end_date = $end_date->format('Y-m-d H:i:s');
+			//$start_date = $start_date->format('Y-m-d H:i:s');
+			//$end_date = $end_date->format('Y-m-d H:i:s');
+
 			$event = new Event($id = null, $description, $start_date, $end_date, $max_participants, $event_type, $owner, $title, $event_cat, $difficulty, $path);
 			$event->save();
 		}

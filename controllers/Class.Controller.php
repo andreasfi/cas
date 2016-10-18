@@ -5,6 +5,7 @@
  * @link http://www.hevs.ch	
  */
 class Controller {
+
     protected $vars = array();
     protected $controller;
     protected $method;
@@ -45,8 +46,6 @@ class Controller {
             include ("lang/lang.$clang.php");
 
             $this->lang = $lang;
-
-
         }
     
     /**
