@@ -194,6 +194,42 @@ class User implements JsonSerializable {
         return MySqlConn::getInstance()->executeQuery($query);
     }
 
+    public function getUserByEventId($idEvent){
+        $submitUsers = array();
+        $acceptUsers = array();
+        $refuseUsers = array();
+        $allUsers[0] = null;
+        $allUsers[1] = null;
+        $allUsers[2] = null;
+        $query = "Select * from eventusers as eu, users as u where fk_idEvent = '$idEvent' AND eu.fk_idUser = u.idUser";
+        $result = MySqlConn::getInstance()->selectDB($query);
+        $row = $result->fetchAll();
+
+        foreach ($row as $item) {
+            $user = User::empty_construct();
+            $user->setId($item['idUser']);
+            $user->setFirstname($item['firstname']);
+            $user->setLastname($item['lastname']);
+            $user->setPhone($item['tel']);
+            $user->setMail($item['mail']);
+
+            if($item['fk_idStatus'] == 1){
+                array_push($submitUsers, $user);
+            } elseif ($item['fk_idStatus'] == 2){
+                array_push($acceptUsers, $user);
+            } elseif($item['fk_idStatus'] == 3){
+                array_push($refuseUsers, $user);
+            }
+        }
+
+        $allUsers[0] = $submitUsers;
+        $allUsers[1] = $acceptUsers;
+        $allUsers[2] = $refuseUsers;
+
+        return $allUsers;
+
+    }
+
 
 	
 }
