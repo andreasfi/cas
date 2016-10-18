@@ -3,9 +3,11 @@
 define('SITE_NAME', 'cas');
 define('ROOT_DIR', dirname(getcwd()) . '/' . SITE_NAME.'/');
 //define('ROOT_DIR', "");
-//define('URL_DIR', $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT']
+//define('URL_DIR', $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT']);
 //		. '/' . SITE_NAME.'/');
 define('URL_DIR', "");
+
+define('SALT_NEWSLETTER', "fuckingunsubscriber");
 
 //Load required classes automatically
 function __autoload($class)
