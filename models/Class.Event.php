@@ -80,8 +80,21 @@ class Event implements JsonSerializable
     {
         $mysqlConnection = MySqlConn::getInstance();
         $query = "UPDATE paths SET coordinatesJSON = '$newPath' WHERE idPath = '$this->pathId';";
-        return $mysqlConnection->insertAndGetID($query);
+        $mysqlConnection->executeQuery($query);
     }
+	
+	public function delete(){
+		$mysqlConnection = MySqlConn::getInstance();
+        $query = "DELETE from events WHERE idEvent = '$this->id'";
+        $mysqlConnection->executeQuery($query);
+		$this->deletePath();
+	}
+	
+	private function deletePath(){
+		$mysqlConnection = MySqlConn::getInstance();
+        $query = "DELETE from paths WHERE idPath = '$this->pathId'";
+        $mysqlConnection->executeQuery($query);
+	}
 
     public function setId($id)
     {

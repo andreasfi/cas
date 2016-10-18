@@ -156,9 +156,9 @@ class sortiesController extends Controller{
         $this->vars['participating'] = $participating;
 
 
-        //if($userLevel >= 0){ 
-            //$userByEvent = User::getUserByEventId(2); 
-            //$this->vars['allParticipants'] = $userByEvent;  
+        //if($userLevel >= 0){
+            //$userByEvent = User::getUserByEventId(2);
+            //$this->vars['allParticipants'] = $userByEvent;
         //}
 
 
@@ -248,10 +248,17 @@ class sortiesController extends Controller{
         if(!empty($_POST)){
 			if(isset($_POST['id'])){
 				//pour charger l'event dans le mode édition. on charge un objet event dans la session.
-				echo('edit mode');
 				$result = Event::fetch_event_by_id($_POST['id']);
 				$_SESSION['event'] = $result;
 				
+			}else if(isset($_POST['delete_event'])){
+					$event = Event::fetch_event_by_id($_POST['delete_event']);
+					$event->delete();
+					
+					$_SESSION['msg'] = '<span class="success">Evenement suprimmé</span>';
+					$this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
+					
+					$this->redirect('/home'.$_POST['edit_event']);
 			}else{
 				
 				echo('create mode');
@@ -278,12 +285,6 @@ class sortiesController extends Controller{
 				else
 					$event_type = 2;
 				
-
-
-				// LE CASTING FORMAT SE FAIT DEJA DANS LE CONSTRUCTEUR
-			 /*   $start_date = $start_date->format('Y-m-d H:i:s');
-				$end_date = $end_date->format('Y-m-d H:i:s');
-			 */
 				if(isset($_POST['edit_event'])){
 					$event = Event::fetch_event_by_id($_POST['edit_event']);
 					//si on était en mode édition, on fait un update, et non pas un insert
@@ -294,6 +295,7 @@ class sortiesController extends Controller{
 					
 					$this->redirect('/sorties/details/'.$_POST['edit_event']);
 				}else{
+					//si on était en mode création, on insert l'event.
 					$event = new Event($id = null, $description, $start_date, $end_date, $max_participants, $event_type, $owner, $title, $event_cat, $difficulty, $path, null);
 					$event->save();
 

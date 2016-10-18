@@ -37,9 +37,10 @@ if(isset($_SESSION['event'])){
 </style>
 
 <div class="container">
+	
+	<form method="post" action="<?php echo URL_DIR.'/sorties/ajoutsortie' ?>">
 	<div class="row">
 		<div class="col-md-5 col-xs-1">
-			<form method="post" action="<?php echo URL_DIR.'/sorties/ajoutsortie' ?>">
 				<div class="row">
 					<div class="col-md-6 formgroup">
 						<p><?php echo $lang['TRAIL_TITLE'] ?></p>
@@ -105,14 +106,23 @@ if(isset($_SESSION['event'])){
 		</div>
 	</div>
 	<div class="row" style="margin-bottom:50px">
-		<div class="col-md-12 text-center">
+		<div class="col-md-4"></div>
+		<div class="col-md-<?php echo(isset($event) ? 2 : 4) ?> text-center">
 			<input id="form_json" name="JSON" type="hidden" value='<?php echo($event==null?"":$event->getPath()); ?>'>
 			<?php if ($event!= null){ ?>
 			<input name="edit_event" type=hidden value="<?php echo $event->getId(); ?>">
 			<?php } ?>
-			<input type="submit">
+			<input type="submit" <?php echo(isset($event) ? "value='UPDATE'" : ""); ?>>
 			</form>
 		</div>
+		<?php if(isset($event)){ ?>
+			<div class="col-md-2 text-center">
+				<form method="post" action="<?php echo URL_DIR.'/sorties/ajoutsortie'?>">
+					<input type=hidden name="delete_event" value="<?php echo $event->getId(); ?>">
+					<input type="submit" value="DELETE">
+				</form>
+			</div>
+		<?php } ?>
 	</div>
 </div>
 
