@@ -63,11 +63,8 @@ $lang = $this->lang;
 							<div class="input-group">
 								<input type="text" class="form-control" id="subscribe" placeholder="Subscribe...">
 								<span class="input-group-btn">
-<<<<<<< HEAD
-					<button type="button" id="button_form" class="btn btn-danger">Subscribe</button>
-=======
-					<button type="submit" class="btn btn-danger"><?php echo $lang['SUBSCRIBE_BUTTON']; ?></button>
->>>>>>> origin/master
+
+					<button type="button" id="button_form" class="btn btn-danger"><?php echo $lang['SUBSCRIBE_BUTTON']; ?></button>
 				</span>
 							</div>
 						</form>
