@@ -83,9 +83,7 @@ $lang['FIELD_NAME'] = "Name ";
 $lang['FIELD_EMAIL'] = "Email ";
 $lang['FIELD_TELEPHONE'] = "Tel. ";
 
-//Welcome
-$lang['USER_EVENTS_NO_DATA'] = "No events to show.";
-$lang['WELCOME_H1_LISTEVENTS'] = "List of events you are subscribed to.";
+
 
 //Welcome
 $lang['USER_EVENTS_NO_DATA'] = "No events to show.";
