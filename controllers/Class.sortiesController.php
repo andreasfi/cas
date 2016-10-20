@@ -254,7 +254,8 @@ class sortiesController extends Controller{
 				
 				echo('create mode');
 				//sinon on est en mode submit. décoder l'info.
-				$description = $_POST['description'];
+				$description = htmlentities(str_replace("\n", " ", $_POST['description']), ENT_QUOTES);
+				var_dump($description);
 				$start_date = DateTime::createFromFormat('Y/m/d H:i:s', $_POST['startDate'].':00');
 				// j'ai supprime cette ligne pour que $start_date soit un DATETIME
 				//$start_date = $start_date->format('Y-m-d H:i:s');
@@ -264,13 +265,13 @@ class sortiesController extends Controller{
 				$max_participants = $_POST['maxParticipants'];
 				$event_type = 1;
 				$owner = $_SESSION['user']->getId();
-				$title = $_POST['title'];
+				$title = htmlentities(str_replace("\n", " ", $_POST['title']), ENT_QUOTES);
 				$event_cat = $_POST['category'];
 				$difficulty = $_POST['difficulty'];
 				$path = $_POST['JSON'];
 
 
-				//TODO check ajoutsortie quel event type c'est
+				//regarde les dates pour déterminer si c'est une rando ou une sortie
 				if($start_date->format('i') != $end_date->format('i'))
 					$event_type = 1;
 				else

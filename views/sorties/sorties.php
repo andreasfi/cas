@@ -43,7 +43,9 @@ include_once ROOT_DIR . 'views/header.inc'; ?>
     function loadEvents() {
         //Get JSON data in string format.
         var json_events = '<?php echo $this->vars['propositions']; ?>';
-
+		//convert newline elements to <br/>
+		json_events = json_events.replace(/(?:\r\n|\r|\n)/g, '&nbsp');
+		console.log(json_events);
         //Parse the string to JSON.
         json_events = JSON.parse(json_events);
 
@@ -51,6 +53,7 @@ include_once ROOT_DIR . 'views/header.inc'; ?>
             //0. Fetch the first event
             var event = json_events[i];
             var row_dataset = [];
+		
 
             //init rows for the datatable
             row_dataset[0] = event['title'];
@@ -69,7 +72,7 @@ include_once ROOT_DIR . 'views/header.inc'; ?>
             //init calendar
             item_calendar = {};
             item_calendar['idEvent'] = event['id'];
-            item_calendar['title'] = event['title'];
+            item_calendar['title'] = event['title'].replace(/&quot;/g, '\"').replace(/&apos;/g, '\'');//replace html entity
             item_calendar['start'] = event['start_date'];
             item_calendar['constraint'] = 'businessHours';
             item_calendar['color'] = color;
@@ -82,6 +85,8 @@ include_once ROOT_DIR . 'views/header.inc'; ?>
             datatable_data.push(row_dataset);
         }
     }
+	
+	
 
 
     $(document).ready(function () {
