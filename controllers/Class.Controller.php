@@ -16,7 +16,7 @@ class Controller {
      * @param string $method
      */
         function __construct($controller, $method) {
-
+            $_SESSION['lang'] = "fr";
             $this->vars['pageTitle'] = "CAS";
             $this->vars['pageMessage'] = "Club Alpin Suisse";
             $this->controller = $controller;
@@ -41,6 +41,17 @@ class Controller {
 
         $this->lang = $lang;
     }
+
+
+    function setLangFR(){
+        $_SESSION['lang'] = "fr";
+
+    }
+    function setLangEn(){
+        $_SESSION['lang'] = "en";
+
+    }
+
 
     /**
      * Display view associated to a controller method

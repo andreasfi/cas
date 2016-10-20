@@ -13,15 +13,15 @@ $lang = array();
 
 //misc
 
-$lang['WEBSITE_NAME'] = "Club alpin suisse";
+$lang['WEBSITE_NAME'] = "Club Alpin Suisse";
 $lang['CAS_HOMETOWN'] = "Crans-Montana";
 $lang['CAS_MAIL'] = "casphphes@gmail.com";
 $lang['CAS_PHONE'] = "+41 27 000 00 00";
 
 //menu
 
-$lang['CONNECT_MENU_BUTTON'] = "Se connecter";
-$lang['DISCONNECT_MENU_BUTTON'] = "Se déconnecter";
+$lang['CONNECT_MENU_BUTTON'] = "Connection";
+$lang['DISCONNECT_MENU_BUTTON'] = "Déconnection";
 $lang['PROXIMITY_MENU_BUTTON'] = "A proximité";
 $lang['ACTIVITIES_MENU_BUTTON'] = "Excursions";
 $lang['CONTACT_MENU_BUTTON'] = "Contact";
