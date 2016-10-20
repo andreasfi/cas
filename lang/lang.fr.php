@@ -12,47 +12,118 @@
 $lang = array();
 
 //misc
-$lang['WEBSITE_NAME'] = "Club alpin Suisse";
+
+$lang['WEBSITE_NAME'] = "Club alpin suisse";
 $lang['CAS_HOMETOWN'] = "Crans-Montana";
+$lang['CAS_MAIL'] = "casphphes@gmail.com";
+$lang['CAS_PHONE'] = "+41 27 000 00 00";
 
 //menu
 
-$lang['CONNECT_MENU_BUTTON'] = "Connection";
-$lang['DISCONNECT_MENU_BUTTON'] = "Déconnection";
+$lang['CONNECT_MENU_BUTTON'] = "Se connecter";
+$lang['DISCONNECT_MENU_BUTTON'] = "Se déconnecter";
 $lang['PROXIMITY_MENU_BUTTON'] = "A proximité";
 $lang['ACTIVITIES_MENU_BUTTON'] = "Excursions";
 $lang['CONTACT_MENU_BUTTON'] = "Contact";
 
 //Home
 
-$lang['WELCOME_MESSAGE'] = "Bienvenue les montagnards";
+$lang['WELCOME_MESSAGE'] = "Bienvenue les montagnards!";
 
 //Login
 
-//welcome page
-$lang['USER_EVENTS_NO_DATA'] = "Vous n'êtes inscrit à aucun événement.";
-$lang['WELCOME_H1_LISTEVENTS'] = "Liste des sorties auxquelles vous êtes inscrit.";
+$lang['EMAIL'] = "E-mail";
+$lang['PASSWORD'] = "Mot de passe";
+$lang['OK_BUTTON'] = "OK";
+$lang['FORGOT_PASSWORD'] = "Mot de passe oublié?";
+$lang['RESET_PASSWORD'] = "Réinitialiser le mot de passe";
+$lang['NO_ACCOUNT'] = "Pas de compte?";
+$lang['REGISTER'] = "S'enregistrer";
 
+//RESETPASSWORD
+
+$lang['PASSWORD_RECOVERY'] = "Récupération de mot de passe";
+
+//NEWUSER
+$lang['FIRSTNAME'] = "Prénom";
+$lang['LASTNAME'] = "Nom";
+$lang['PHONE'] = "N°Tel";
+$lang['MEMBER_NUMBER_IF_EXISTS'] ="Numéro de membre (si existant)";
+$lang['LOGIN'] = "Se connecter";
+
+//CHANGEPASSWORD
+$lang['PASSWORD_CHANGE'] = "Changer le mot de passe";
+$lang['NEW_PASSWORD'] = "Nouveau mot de passe";
+$lang['CHANGE'] = "Changer";
+
+//WELCOME
+$lang['WELCOME'] = "Bienvenue";
+$lang['CHANGE_DATA'] = "Changer les données";
+$lang['MY_PERSONNAL_DATA'] = "Mes données personnelles";
+$lang['LOGOUT'] = "Se déconnecter";
+
+//LOGIN CONTROLLER
+$lang['LOGIN_TO_ACCESS_EVENTS'] = "Connectez vous pour accéder aux excursions.";
+$lang['MSG_TO_RECOVER_PASSWORD'] = "Ce message est la pour vous aider a récupérer votre mot de passe : \nSuivez ce lien : ".URL_DIR."/login/changepassword/";
+$lang['CAS_PWD_RECOVERY'] = "CAS Récupération de mot de passe";
+$lang['CREATE_ACCOUNT'] ="Créez votre compte";
+
+//SORTIE CONTROLLER
+// DETAILS
+$lang['BUTTON_PARTICIPATION_REQUEST'] = "Je veux participer !";
+$lang['BUTTON_FIND_ROUTE'] = "Trouver les transports ";
+$lang['FIELD_DISTANCE'] = "Distance ";
+$lang['FIELD_ALTITUDE'] = "Altitude ";
+$lang['FIELD_DIFFICULTY'] = "Difficulté ";
+$lang['FIELD_MAX_PARTICIPANT'] = "Participants max. ";
+$lang['FIELD_CATEGORY'] = "Catégorie ";
+
+$lang['FIELD_TRAIL_MASTER'] = "Chef de course ";
+$lang['FIELD_NAME'] = "Nom ";
+$lang['FIELD_EMAIL'] = "E-mail ";
+$lang['FIELD_TELEPHONE'] = "N°tel. ";
+
+//Welcome
+$lang['USER_EVENTS_NO_DATA'] = "Aucune excursion à afficher.";
+$lang['WELCOME_H1_LISTEVENTS'] = "Liste des excursions auxquelles vous êtes inscrit.";
+
+//ERROR MESSAGES
+$lang['E_REQUIRED_FIELD_EMPTY'] = "Un des champs reqis est vide.";
+$lang['E_USERNAME_PASSWORD_INCORRECT'] = "Nom d'utilisateur ou mot de passe incorrect.";
+$lang['E_FAILED_TO_DELIVER_EMAIL'] = "Echec de l'envoi d'un mail de récupération.";
+$lang['E_KEY_REJECTED'] = "Votre clé de récupération est invalide ou périméée, veuillez récupérer à nouveau le mot de passe.";
+$lang['E_PASSWORDS_DONT_MATCH'] = "Les mots de passe ne correspondent pas";
+
+//SUCCCESS MESSAGES
+$lang['S_RECOVERY_MAIL_SENT'] = "Un e-mail de récupération à été envoyé à votre adresse..";
+$lang['S_CONTACT_MAIL_SENT'] = "Un e-mail de contact a été envoyé, nous y réponderons aussi vite que possible.";
+$lang['S_PASSWORD_CHANGE_SUCCESSFUL'] = "Mot de passe changé.";
+$lang['S_REGISTRATION_SUCCESSFUL'] = "Enregistrement terminé";
+$lang['S_CHANGES_SUCCESSFUL'] = "Changements effectués";
+
+//Mail content
+$lang['REGISTRATION_MAIL_TITLE'] = "Bienvenue sur le site du CAS !";
+$lang['REGISTRATION_MAIL_BODY'] = "Ceci est un message automatique pour vous informer de votre inscription à notre site.";
 
 //ajouter une course
 $lang['ADD_TRAIL'] = "Ajouter une course";
 $lang['TRAIL_TITLE'] = "Titre";
-$lang['TRAIL_MAX_PEOPLE'] = "Personnes max";
+$lang['TRAIL_MAX_PEOPLE'] = "Paricipants max.";
 $lang['TRAIL_CATEGORY'] = "Catégorie";
 $lang['TRAIL_DIFFICULTY'] = "Difficulté";
-$lang['TRAIL_STARTDATE'] = "Date/Heure de début";
-$lang['TRAIL_ENDDATE'] = "Date/Heure de fin";
-$lang['TRAIL_DESCRIPTION'] = "Déscription de la course";
-$lang['TRAIL_MAP'] = "Parcours";
-$lang['TRAIL_MAP_INSTRUCTIONS'] = "Cliquez sur la carte pour dessiner le parcours";
-$lang['TRAIL_MAP_DELETELAST'] = "Suppr. dernier point";
-$lang['TRAIL_MAP_DELETEALL'] = "Suppr. tous les points";
+$lang['TRAIL_STARTDATE'] = "Temps de départ";
+$lang['TRAIL_ENDDATE'] = "Temps de fin";
+$lang['TRAIL_DESCRIPTION'] = "Description de la course";
+$lang['TRAIL_MAP'] = "Course";
+$lang['TRAIL_MAP_INSTRUCTIONS'] = "Cliquez sur la carte pour dessinner la course";
+$lang['TRAIL_MAP_DELETELAST'] = "Supprimer le dernier point";
+$lang['TRAIL_MAP_DELETEALL'] = "Supprimer tous les points";
 
 //catégories de courses
 $lang['TRAIL_CAT_1'] = "Marche";
-$lang['TRAIL_CAT_2'] = "Peau de phoque";
+$lang['TRAIL_CAT_2'] = "Ski hors piste";
 $lang['TRAIL_CAT_3'] = "Grimpe";
-$lang['TRAIL_CAT_4'] = "Raquettes";
+$lang['TRAIL_CAT_4'] = "Raquette";
 $lang['TRAIL_CAT_5'] = "Ski";
 $lang['TRAIL_CAT_6'] = "Snowboard";
 $lang['TRAIL_CAT_7'] = "Télémark";
@@ -60,7 +131,22 @@ $lang['TRAIL_CAT_8'] = "Ski de fond";
 
 //difficultés des courses
 $lang['TRAIL_DIFF_1'] = 'Débutant';
-$lang['TRAIL_DIFF_2'] = 'Modéré';
+$lang['TRAIL_DIFF_2'] = 'Intermédiaire';
 $lang['TRAIL_DIFF_3'] = 'Avancé';
-$lang['TRAIL_DIFF_4'] = 'Très Avancé';
+$lang['TRAIL_DIFF_4'] = 'Tres Avancé';
 $lang['TRAIL_DIFF_5'] = 'Professionnel';
+
+//CONTACT CONTROLLER
+$lang['CONTACT_US'] = 'Contactez nous';
+$lang['LEAVE_VIDEO_MSG'] = "Laissez un message video";
+
+//FOOTER
+$lang['PAGES'] = "Pages";
+$lang['HOME'] = "Home";
+$lang['EXCURSIONS_CALENDAR'] = "Excursions - Calendrier";
+$lang['NEWSLETTER'] = "Newsletter";
+$lang['SUBSCRIBE_NEWSLETTER'] ="Inscrivez vous à notre newsletter.";
+$lang['SUBSCRIBE_BUTTON'] = "S'inscrire";
+$lang['BECOME_MEMBER'] = "Devenir membre";
+$lang['FOR_MEMBERSHIP_CLICK_LINK'] = "Pour devenir un membre de notre section, veuillez remplir le formulaire sur ce lien : ";
+$lang['CLICK_HERE'] = "Cliquez ici";
