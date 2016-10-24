@@ -251,15 +251,14 @@ class sortiesController extends Controller{
 					
 					$this->redirect('/home'.$_POST['edit_event']);
 			}else{
-				
-				echo('create mode');
+				 
 				//sinon on est en mode submit. décoder l'info.
 				$description = htmlentities(str_replace("\n", " ", $_POST['description']), ENT_QUOTES);
 				var_dump($description);
-				$start_date = DateTime::createFromFormat('Y/m/d H:i:s', $_POST['startDate'].':00');
+				$start_date = DateTime::createFromFormat('Y/m/d H:i', $_POST['startDate']);
 				// j'ai supprime cette ligne pour que $start_date soit un DATETIME
 				//$start_date = $start_date->format('Y-m-d H:i:s');
-				$end_date = DateTime::createFromFormat('Y/m/d H:i:s', $_POST['endDate'].':00');
+				$end_date = DateTime::createFromFormat('Y/m/d H:i', $_POST['endDate']);
 				// j'ai supprime cette ligne pour que $start_date soit un DATETIME
 				//$end_date = $end_date->format('Y-m-d H:i:s');
 				$max_participants = $_POST['maxParticipants'];
@@ -270,12 +269,11 @@ class sortiesController extends Controller{
 				$difficulty = $_POST['difficulty'];
 				$path = $_POST['JSON'];
 
-
 				//regarde les dates pour déterminer si c'est une rando ou une sortie
-				if($start_date->format('i') != $end_date->format('i'))
-					$event_type = 1;
-				else
+				if($start_date->format('d') != $end_date->format('d'))
 					$event_type = 2;
+				else
+					$event_type = 1;
 				
 				if(isset($_POST['edit_event'])){
 					$event = Event::fetch_event_by_id($_POST['edit_event']);
