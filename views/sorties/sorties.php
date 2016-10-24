@@ -37,12 +37,12 @@ include_once ROOT_DIR . 'views/header.inc'; ?>
         </table>
     </div>
 </div>
-
+<?php var_dump($_SESSION); ?>
 
 <script>
 
-    //0 : sortie
-    //1 : event
+    //1 : rando (1 day)
+    //2 : sortie (2+ days)
     var event_type_color = ["#fa3031", "#52b9e9"];
     var event_type_textcolor = 'white';
 
@@ -57,12 +57,12 @@ include_once ROOT_DIR . 'views/header.inc'; ?>
 		console.log(json_events);
         //Parse the string to JSON.
         json_events = JSON.parse(json_events);
-
+		console.log(json_events);
         for (var i = 0; i < json_events.length; i++) {
             //0. Fetch the first event
             var event = json_events[i];
             var row_dataset = [];
-		
+			
 
             //init rows for the datatable
             row_dataset[0] = event['title'];
@@ -81,7 +81,7 @@ include_once ROOT_DIR . 'views/header.inc'; ?>
             //init calendar
             item_calendar = {};
             item_calendar['idEvent'] = event['id'];
-            item_calendar['title'] = event['title'].replace(/&quot;/g, '\"').replace(/&apos;/g, '\'');//replace html entity
+            item_calendar['title'] = decodeHTML(event['title']);
             item_calendar['start'] = event['start_date'];
             item_calendar['constraint'] = 'businessHours';
             item_calendar['color'] = color;
@@ -103,6 +103,12 @@ include_once ROOT_DIR . 'views/header.inc'; ?>
         initCalendar('fr')
         initDataTable();
     });
+	
+	function decodeHTML(html){
+		var txt = document.createElement("textarea");
+    	txt.innerHTML = html;
+    	return txt.value;
+	}
 
     function initCalendar(locale) {
         var today = new Date();
