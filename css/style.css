@@ -2205,37 +2205,3 @@ footer .copy{
 	padding: 0px;
 	margin: 0px;
 }
-
-#button_container
-{
-	margin-top: 10%;
-}
-
-#button_container > i
-{
-	background: rgba(210, 210, 210, 0.5);
-	color: rgba(120, 120, 120, 0.5) !important;
-	height: 100px;
-	display: block;
-	width: 100px;
-	margin: 0 auto;
-	padding-top: 9%;
-	margin-bottom: 6%;
-}
-
-.circle_image
-{
-	border-radius: 50% !important;
-}
-
-.blue-button
-{
-	background: rgb(0, 102, 139);
-	color: white;
-}
-
-.blue-button:hover
-{
-	background-color: rgba(0, 102, 139, 0.8);
-	color: white;
-}

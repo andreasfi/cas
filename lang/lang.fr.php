@@ -140,6 +140,19 @@ $lang['TRAIL_DIFF_5'] = 'Professionnel';
 $lang['CONTACT_US'] = 'Contactez nous';
 $lang['LEAVE_VIDEO_MSG'] = "Laissez un message video";
 
+//-- Modal
+$lang['CONTACT_SEND_BUTTON'] = "Envoyer";
+$lang['CONTACT_CLOSE_BUTTON'] = "Fermer";
+$lang['CONTACT_YOUR_EMAIL'] = "Votre adresse e-mail";
+
+$lang['CONTACT_FORM'] = "Formulaire de contact";
+$lang['CONTACT_NAME'] = "Nom";
+$lang['CONTACT_SUBJECT'] = "Sujet";
+$lang['CONTACT_MESSAGE'] = "Message";
+$lang['CONTACT_LEAVE_VIDEO_MESSAGE'] = "Laisser un message audio-visuel";
+$lang['CONTACT_VIDEO_PREVIEW'] = "Prévisualisation de votre vidéo";
+
+
 //FOOTER
 $lang['PAGES'] = "Pages";
 $lang['HOME'] = "Home";

@@ -11,9 +11,8 @@
 
 #webcam_video_container
 {
-    height: 250px;
-    width: auto;
-    background-color: #00A8FF;
+    width: inherit;
+    height: auto;
 }
 
 #webcam_video_error
@@ -33,6 +32,8 @@
 #webcam_video_controls ul
 {
     display: inline-block;
+    padding: 0;
+    margin-top: 10px;
 }
 
 #webcam_video_controls li
@@ -41,10 +42,22 @@
     display: inline-block;
 }
 
+#webcam_video_controls button
+{
+    padding: 10px;
+    border-radius: 50% !important;
+}
+
+#webcam_video_controls button:disabled
+{
+    background-color: darkgray;
+}
+
 #webcam_video
 {
     height: 250px;
     margin: 0 auto;
+    border: 3px solid gray;
 }
 
 #webcam_after_stop ul
@@ -56,4 +69,56 @@
 {
     display: inline-block;
     list-style: none;
+}
+
+#button_container
+{
+    margin-top: 10%;
+}
+
+#button_container > i
+{
+    background: rgba(210, 210, 210, 0.5);
+    color: rgba(120, 120, 120, 0.5) !important;
+    height: 100px;
+    display: block;
+    width: 100px;
+    margin: 0 auto;
+    padding-top: 9%;
+    margin-bottom: 6%;
+}
+
+.circle_image
+{
+    border-radius: 50% !important;
+}
+
+.blue-button
+{
+    background: rgb(0, 102, 139);
+    color: white;
+}
+
+.blue-button:hover
+{
+    background-color: rgba(0, 102, 139, 0.8);
+    color: white;
+}
+
+.video_modal_footer ul
+{
+    padding: 0;
+    list-style: none;
+}
+
+.video_modal_footer li
+{
+    display: inline-block;
+}
+
+#video_preview
+{
+    background-color: whitesmoke;
+    border: 1px solid gray;
+    padding-top: 15px;
 }
