@@ -14,6 +14,15 @@ include_once ROOT_DIR . 'views/header.inc'; ?>
         <div class="row">
             <div id="calendar" class="fc fc-unthemed fc-ltr col-md-offset-1 col-md-10"></div>
         </div>
+		<div class="row" style="margin:1em 1em;">
+			<div class="col-md-5"></div>
+			<div class="col-md-2 text-center">
+				<?php if($_SESSION['user']->getMemberType() == 3){?>
+				<a class="btn btn-primary" href="sorties/ajoutsortie">Ajouter une sortie</a>
+				<?php }?>
+			</div>
+			<div class="col-md-5"></div>
+		</div>
         <table id="datatable">
             <thead>
             <tr>
