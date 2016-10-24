@@ -83,10 +83,10 @@ include_once ROOT_DIR . 'views/header.inc'; ?>
             item_calendar['idEvent'] = event['id'];
             item_calendar['title'] = decodeHTML(event['title']);
             item_calendar['start'] = event['start_date'];
+			item_calendar['end'] = event['end_date'];
             item_calendar['constraint'] = 'businessHours';
             item_calendar['color'] = color;
             item_calendar['textcolor'] = event_type_textcolor;
-            item_calendar['allDay'] = true;
             item_calendar['description'] = "Very cool event";
             item_calendar['difficulty'] = event['difficulty'];
 
