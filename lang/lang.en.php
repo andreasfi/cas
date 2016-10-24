@@ -142,6 +142,24 @@ $lang['TRAIL_DIFF_5'] = 'Professionnal';
 $lang['CONTACT_US'] = 'Contact us';
 $lang['LEAVE_VIDEO_MSG'] = "Leave video message";
 
+//-- Modal
+$lang['CONTACT_SEND_BUTTON'] = "Send";
+$lang['CONTACT_CLOSE_BUTTON'] = "Close";
+$lang['CONTACT_YOUR_EMAIL'] = "Your e-mail address";
+
+//-- Contact form
+$lang['CONTACT_FORM'] = "Contact form";
+$lang['CONTACT_NAME'] = "Name";
+$lang['CONTACT_SUBJECT'] = "Subject";
+$lang['CONTACT_MESSAGE'] = "Message";
+$lang['CONTACT_LEAVE_VIDEO_MESSAGE'] = "Leave a video message";
+$lang['CONTACT_VIDEO_PREVIEW'] = "Video preview";
+$lang['CONTACT_INVALID_EMIAL'] = "Invalid e-mail address";
+
+$lang['DOWNLOAD_CHROME'] = "Download Google Chrome";
+$lang['DOWNLOAD_FIREFOX'] = "Download Firefox";
+$lang['UNSUPPORTED_API'] = "Your browser does not support the webcam API.";
+
 //FOOTER
 $lang['PAGES'] = "Pages";
 $lang['HOME'] = "Home";

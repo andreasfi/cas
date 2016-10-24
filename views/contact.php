@@ -21,28 +21,28 @@ include_once ROOT_DIR.'views/header.inc';
 
                     <!-- Formulaire de contact -->
 
-                    <div class="cwell col-md-5">
-                        <h3 class="title">Formulaire de contact</h3>
+                    <div class="cwell col-md-6">
+                        <h3 class="title"><?php echo $lang['CONTACT_FORM'] ?></h3>
 
                         <div class="form">
                             <form class="form-horizontal" action="<?php echo URL_DIR.'/contact';?>" method="post">
                                 <!-- Name -->
                                 <div class="form-group">
-                                    <label class="control-label col-md-3" for="name">Nom</label>
+                                    <label class="control-label col-md-3" for="name"><?php echo $lang['CONTACT_NAME'] ?></label>
                                     <div class="col-md-9">
                                         <input type="text" class="form-control" name="name" id="name" maxlength="40">
                                     </div>
                                 </div>
                                 <!-- Email -->
                                 <div class="form-group">
-                                    <label class="control-label col-md-3" for="emailFrom">Adresse e-mail</label>
+                                    <label class="control-label col-md-3" for="emailFrom"><?php echo $lang['CONTACT_YOUR_EMAIL'] ?></label>
                                     <div class="col-md-9">
                                         <input type="email" class="form-control" name="emailFrom" id="email">
                                     </div>
                                 </div>
                                 <!-- Subject -->
                                 <div class="form-group">
-                                    <label class="control-label col-md-3" for="subject">Subject</label>
+                                    <label class="control-label col-md-3" for="subject"><?php echo $lang['CONTACT_SUBJECT'] ?></label>
                                     <div class="col-md-9">
                                         <input type="text" class="form-control" name="subject" id="subject">
                                     </div>
@@ -50,7 +50,7 @@ include_once ROOT_DIR.'views/header.inc';
 
                                 <!-- Message -->
                                 <div class="form-group">
-                                    <label class="control-label col-md-3" for="message">Message</label>
+                                    <label class="control-label col-md-3" for="message"><?php echo $lang['CONTACT_MESSAGE'] ?></label>
                                     <div class="col-md-9">
                                         <textarea class="form-control" name="message" id="message" rows="4"></textarea>
                                     </div>
@@ -59,14 +59,14 @@ include_once ROOT_DIR.'views/header.inc';
                                 <div class="form-group">
                                     <!-- Buttons -->
                                     <div class="col-md-9 col-md-offset-3">
-                                        <button type="submit" class="btn btn-info">Submit</button>
+                                        <button type="submit" class="btn btn-info"><?php echo $lang['CONTACT_SEND_BUTTON'] ?></button>
                                     </div>
                                 </div>
                             </form>
                         </div>
                     </div>
 
-                    <div class="col-lg-2">
+                    <div class="col-lg-1">
 
                     </div>
 
@@ -77,19 +77,16 @@ include_once ROOT_DIR.'views/header.inc';
                         <div id="message_audio_visuel" class="col-lg-12">
                             <div id="video_container">
                                 <div id="button_container" class="col-lg-offset-1 col-lg-10">
-                                    <i class="fa fa-video-camera" aria-hidden="true"
-                                       style="font-size: 40px; color: dodgerblue; display: block;"></i>
-                                    <button id="button_message_visuel" type="button" class="btn btn-info" onclick="display_video()">
-                                        Laisser un message audio-visuel
+                                    <i class="fa fa-video-camera circle_image" aria-hidden="true"
+                                       style="font-size: 40px;"></i>
+                                    <button id="button_message_visuel" type="button" class="btn blue-button" onclick="display_video()">
+                                        <?php echo $lang['CONTACT_LEAVE_VIDEO_MESSAGE'] ?>
                                     </button>
                                 </div>
                                 <div id="webcam_video_error" style="display: none;">
                                     <div class="container col-md-12">
                                         <p><span id="ban_logo" style="font-size: 50px" class="fa fa-wrench"></span></p>
-                                        <p>Oouups.. ! Seems like you have a shitty browser.</p>
-                                        <p><a href="https://www.google.com/chrome/browser/desktop/" target="_blank">Download Google Chrome</a></p>
-                                        <p><a href="https://www.mozilla.org/en-US/firefox/new/" target="_blank">Download Firefox</a></p>
-
+                                        <div id="webcam_error_message"></div>
                                     </div>
                                 </div>
 
@@ -98,35 +95,24 @@ include_once ROOT_DIR.'views/header.inc';
                                     <div id="webcam_video_controls">
                                         <ul>
                                             <li>
-                                                <button id="start_recording" onclick="start_recording()"><i class="fa fa-circle"
+                                                <button id="start_recording" class="blue-button" onclick="start_recording()"><i class="fa fa-circle"
                                                                                                             style="color: red"> </i>
                                                 </button>
                                             </li>
                                             <li>
-                                                <button id="pause_recording" onclick="pause_recording"><i class="fa fa-pause"
+                                                <button id="pause_recording" class="blue-button" onclick="pause_recording()"><i class="fa fa-pause"
                                                                                                           aria-hidden="true"></i>
                                                 </button>
                                             </li>
                                             <li>
-                                                <button id="stop_recording" onclick="stop_recording()"><i class="fa fa-stop"
+                                                <button id="stop_recording" class="blue-button" onclick="stop_recording()"><i class="fa fa-stop"
                                                                                                           aria-hidden="true"></i>
                                                 </button>
                                             </li>
-                                        </ul>
-                                    </div>
-
-                                    <div id="webcam_after_stop" style="display: none;">
-                                        <ul>
                                             <li>
-                                                <button id="button_video_preview" data-toggle="modal"
-                                                        data-target="#modal_video_preview" class="btn btn-info">Preview
+                                                <button id="stop_recording" class="blue-button" onclick="new_video()"><i class="fa fa-refresh"
+                                                                                                                              aria-hidden="true"></i>
                                                 </button>
-                                            </li>
-                                            <li>
-                                                <button id="button_video_retry" class="btn btn-info">New video</button>
-                                            </li>
-                                            <li>
-                                                <button id="button_video_send" class="btn btn-info">Send</button>
                                             </li>
                                         </ul>
                                     </div>
@@ -144,23 +130,23 @@ include_once ROOT_DIR.'views/header.inc';
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title">Video preview</h4>
+                                    <h4 class="modal-title"><?php echo $lang['CONTACT_VIDEO_PREVIEW']  ?></h4>
                                 </div>
                                 <div class="form-group col-lg-offset-1 col-lg-10">
-                                    <label for="input_email_modal">Votre adresse e-mail</label>
+                                    <label for="input_email_modal"><?php echo $lang['CONTACT_YOUR_EMAIL'] ?></label>
                                     <input type="email" required id="input_email_modal" class="form-control"/>
+                                    <small id="error_email_modal" style="color: red; display: none;"><?php echo $lang['CONTACT_INVALID_EMIAL']?></small>
                                 </div>
                                 <div class="modal-body col-lg-offset-1 col-lg-10">
-                                    <video autoplay id="video_preview" class="col-lg-12" src="#"
-                                           style="background-color: green;"></video>
+                                    <video autoplay id="video_preview" class="col-lg-12" src="#"></video>
                                 </div>
-                                <div class="modal-footer">
+                                <div class="modal-footer video_modal_footer">
                                     <ul>
                                         <li>
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn blue-button" data-dismiss="modal"><?php echo $lang['CONTACT_CLOSE_BUTTON'] ?></button>
                                         </li>
                                         <li>
-                                            <button type="button" class="btn btn-info" onclick="postVideo()">Envoyer</button>
+                                            <button type="button" class="btn blue-button" onclick="postVideo()"><?php echo $lang['CONTACT_SEND_BUTTON'] ?></button>
                                         </li>
                                         <li>
 
@@ -185,6 +171,7 @@ include_once ROOT_DIR.'views/header.inc';
                 video: true
             };
             var blob_to_send = null;
+            var paused = false;
 
             function hasGetUserMedia() {
                 return !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
@@ -193,16 +180,39 @@ include_once ROOT_DIR.'views/header.inc';
 
             if (hasGetUserMedia()) {
                 console.log("Success : Webcam/micro are supported.");
+                //Disable pause and stop buttons
+                $('#pause_recording').prop("disabled", true);
+                $('#stop_recording').prop("disabled", true);
+
             } else {
                 //Inform the user that the browser is not supported.
 
                 console.log("error : Webcam/micro not supported.");
-                display_error();
+
+                var p0 = $('<p></p>').text("<?php echo $lang['UNSUPPORTED_API'] ?>");
+                
+                var a_chrome = $("<a></a>").text("<?php echo $lang['DOWNLOAD_CHROME'] ?>");
+                a_chrome.attr("href", "https://www.google.com/chrome/browser/desktop/");
+                a_chrome.attr("target", "_blank");
+
+                var p1 = $("<p></p>").append(a_chrome);
+
+                var a_moz = $("<a></a>").text("<?php echo $lang['DOWNLOAD_FIREFOX'] ?>");
+                a_moz.attr("href", "https://www.mozilla.org/en-US/firefox/new/");
+                a_moz.attr("target", "_blank");
+
+                var p2 = $("<p></p>").append(a_moz);
+
+                var msg = $('<div></div>').append(p0).append(p1).append(p2);
+
+                display_error(msg);
                 console.log("Error : Webcam/micro are not supported.");
             }
 
             var errorCallback = function (e) {
-                alert('Rejected', e);
+                //Display the error page
+                var msg = "<p>An error occured</p><p>"+e.name+"</p><p>"+e.message+"</p>";
+                display_error(msg);
             };
 
 
@@ -228,17 +238,26 @@ include_once ROOT_DIR.'views/header.inc';
                 camera_on();
             }
 
-            function display_error() {
+            function display_error(error_message) {
                 //0. Remove the current content
                 $('#button_container').hide();
+                $('#webcam_video_error').append(error_message);
                 $('#webcam_video_error').show();
             }
 
             function start_recording() {
-                navigator.getUserMedia(mediaConstraints, onMediaSuccess, onMediaError);
+
                 $('#start_recording').prop("disabled", true);
                 $('#pause_recording').prop("disabled", false);
                 $('#stop_recording').prop("disabled", false);
+
+                if(paused){
+                    mediaRecorder.resume();
+                    paused = false;
+                    return;
+                }
+
+                navigator.getUserMedia(mediaConstraints, onMediaSuccess, onMediaError);
 
             }
 
@@ -247,9 +266,15 @@ include_once ROOT_DIR.'views/header.inc';
                 $('#pause_recording').prop('disabled', true);
                 $('#start_recording').prop('disabled', false);
                 $('#stop_recording').prop('disabled', false);
+                paused = true;
             }
 
             function stop_recording() {
+
+                if(paused){
+                    paused = false;;
+                }
+
                 mediaRecorder.stop()
                 //mediaRecorder.stream.stop();
 
@@ -257,7 +282,8 @@ include_once ROOT_DIR.'views/header.inc';
                 $('#pause_recording').prop("disabled", true);
                 $('#stop_recording').prop("disabled", true);
 
-                $('#webcam_after_stop').css('display', 'block');
+                $('#modal_video_preview').modal('show');
+
             }
 
 
@@ -279,13 +305,6 @@ include_once ROOT_DIR.'views/header.inc';
             }
 
             function appendLink(blob) {
-                /*
-                var a = document.createElement('a');
-                a.target = '_blank';
-                a.innerHTML = 'Open Recorded ' + (blob.type == 'audio/ogg' ? 'Audio' : 'Video') + ' No. ' + (index++) + ' (Size: ' + bytesToSize(blob.size) + ')';
-                a.href = blob;
-                 alert(blob.length);
-                */
 
                 $('#video_preview').attr("src", blob);
                 $('#video_preview').prop('controls', true);
@@ -297,7 +316,20 @@ include_once ROOT_DIR.'views/header.inc';
             }
 
             function postVideo() {
-                
+
+                //Only if the e-mail address is valid
+
+                var email = $('#input_email_modal').val();
+
+                var testEmail = /^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i;
+                if(!testEmail.test(email))
+                {
+                    $('#error_email_modal').show();
+                    return;
+                }
+
+                $('#error_email_modal').hide();
+
                 var xhr = new XMLHttpRequest();
 
                 xhr.onreadystatechange = function() {
@@ -311,10 +343,10 @@ include_once ROOT_DIR.'views/header.inc';
             }
 
         </script>
-
-
     </section>
+<section id="map">
+
+</section>
 
 
-<?php include_once ROOT_DIR . 'views/footer.inc';
-?>
+<?php include_once ROOT_DIR . 'views/footer.inc';  ?>
