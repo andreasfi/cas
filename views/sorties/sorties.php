@@ -37,7 +37,6 @@ include_once ROOT_DIR . 'views/header.inc'; ?>
         </table>
     </div>
 </div>
-<?php var_dump($_SESSION); ?>
 
 <script>
 
