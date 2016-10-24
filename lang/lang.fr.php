@@ -152,6 +152,10 @@ $lang['CONTACT_MESSAGE'] = "Message";
 $lang['CONTACT_LEAVE_VIDEO_MESSAGE'] = "Laisser un message audio-visuel";
 $lang['CONTACT_VIDEO_PREVIEW'] = "Prévisualisation de votre vidéo";
 
+$lang['DOWNLOAD_CHROME'] = "Télécharger Google Chrome";
+$lang['DOWNLOAD_FIREFOX'] = "Télécharger Firefox";
+$lang['UNSUPPORTED_API'] = "Votre navigateur ne supporte pas l'API webcam";
+
 
 //FOOTER
 $lang['PAGES'] = "Pages";

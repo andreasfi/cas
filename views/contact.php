@@ -21,7 +21,7 @@ include_once ROOT_DIR.'views/header.inc';
 
                     <!-- Formulaire de contact -->
 
-                    <div class="cwell col-md-5">
+                    <div class="cwell col-md-6">
                         <h3 class="title"><?php echo $lang['CONTACT_FORM'] ?></h3>
 
                         <div class="form">
@@ -66,7 +66,7 @@ include_once ROOT_DIR.'views/header.inc';
                         </div>
                     </div>
 
-                    <div class="col-lg-2">
+                    <div class="col-lg-1">
 
                     </div>
 
@@ -86,10 +86,7 @@ include_once ROOT_DIR.'views/header.inc';
                                 <div id="webcam_video_error" style="display: none;">
                                     <div class="container col-md-12">
                                         <p><span id="ban_logo" style="font-size: 50px" class="fa fa-wrench"></span></p>
-                                        <p>Oouups.. ! Seems like you have a shitty browser.</p>
-                                        <p><a href="https://www.google.com/chrome/browser/desktop/" target="_blank">Download Google Chrome</a></p>
-                                        <p><a href="https://www.mozilla.org/en-US/firefox/new/" target="_blank">Download Firefox</a></p>
-
+                                        <div id="webcam_error_message"></div>
                                     </div>
                                 </div>
 
@@ -190,12 +187,31 @@ include_once ROOT_DIR.'views/header.inc';
                 //Inform the user that the browser is not supported.
 
                 console.log("error : Webcam/micro not supported.");
-                display_error();
+
+                var p0 = $('<p></p>').text("<?php echo $lang['UNSUPPORTED_API'] ?>");
+                
+                var a_chrome = $("<a></a>").text("<?php echo $lang['DOWNLOAD_CHROME'] ?>");
+                a_chrome.attr("href", "https://www.google.com/chrome/browser/desktop/");
+                a_chrome.attr("target", "_blank");
+
+                var p1 = $("<p></p>").append(a_chrome);
+
+                var a_moz = $("<a></a>").text("<?php echo $lang['DOWNLOAD_FIREFOX'] ?>");
+                a_moz.attr("href", "https://www.mozilla.org/en-US/firefox/new/");
+                a_moz.attr("target", "_blank");
+
+                var p2 = $("<p></p>").append(a_moz);
+
+                var msg = $('<div></div>').append(p0).append(p1).append(p2);
+
+                display_error(msg);
                 console.log("Error : Webcam/micro are not supported.");
             }
 
             var errorCallback = function (e) {
-                alert('Rejected', e);
+                //Display the error page
+                var msg = "<p>An error occured</p><p>"+e.name+"</p><p>"+e.message+"</p>";
+                display_error(msg);
             };
 
 
@@ -221,9 +237,10 @@ include_once ROOT_DIR.'views/header.inc';
                 camera_on();
             }
 
-            function display_error() {
+            function display_error(error_message) {
                 //0. Remove the current content
                 $('#button_container').hide();
+                $('#webcam_video_error').append(error_message);
                 $('#webcam_video_error').show();
             }
 
@@ -312,9 +329,10 @@ include_once ROOT_DIR.'views/header.inc';
             }
 
         </script>
-
-
     </section>
+<section id="map">
+
+</section>
 
 
 <?php include_once ROOT_DIR . 'views/footer.inc';  ?>
