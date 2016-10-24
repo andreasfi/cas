@@ -77,9 +77,9 @@ include_once ROOT_DIR.'views/header.inc';
                         <div id="message_audio_visuel" class="col-lg-12">
                             <div id="video_container">
                                 <div id="button_container" class="col-lg-offset-1 col-lg-10">
-                                    <i class="fa fa-video-camera" aria-hidden="true"
-                                       style="font-size: 40px; color: dodgerblue; display: block;"></i>
-                                    <button id="button_message_visuel" type="button" class="btn btn-info" onclick="display_video()">
+                                    <i class="fa fa-video-camera circle_image" aria-hidden="true"
+                                       style="font-size: 40px;"></i>
+                                    <button id="button_message_visuel" type="button" class="btn blue-button" onclick="display_video()">
                                         Laisser un message audio-visuel
                                     </button>
                                 </div>
