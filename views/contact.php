@@ -135,6 +135,7 @@ include_once ROOT_DIR.'views/header.inc';
                                 <div class="form-group col-lg-offset-1 col-lg-10">
                                     <label for="input_email_modal"><?php echo $lang['CONTACT_YOUR_EMAIL'] ?></label>
                                     <input type="email" required id="input_email_modal" class="form-control"/>
+                                    <small id="error_email_modal" style="color: red; display: none;"><?php echo $lang['CONTACT_INVALID_EMIAL']?></small>
                                 </div>
                                 <div class="modal-body col-lg-offset-1 col-lg-10">
                                     <video autoplay id="video_preview" class="col-lg-12" src="#"></video>
@@ -315,7 +316,20 @@ include_once ROOT_DIR.'views/header.inc';
             }
 
             function postVideo() {
-                
+
+                //Only if the e-mail address is valid
+
+                var email = $('#input_email_modal').val();
+
+                var testEmail = /^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i;
+                if(!testEmail.test(email))
+                {
+                    $('#error_email_modal').show();
+                    return;
+                }
+
+                $('#error_email_modal').hide();
+
                 var xhr = new XMLHttpRequest();
 
                 xhr.onreadystatechange = function() {

@@ -151,6 +151,7 @@ $lang['CONTACT_SUBJECT'] = "Sujet";
 $lang['CONTACT_MESSAGE'] = "Message";
 $lang['CONTACT_LEAVE_VIDEO_MESSAGE'] = "Laisser un message audio-visuel";
 $lang['CONTACT_VIDEO_PREVIEW'] = "Prévisualisation de votre vidéo";
+$lang['CONTACT_INVALID_EMIAL'] = "Adresse e-mail invalide";
 
 $lang['DOWNLOAD_CHROME'] = "Télécharger Google Chrome";
 $lang['DOWNLOAD_FIREFOX'] = "Télécharger Firefox";
