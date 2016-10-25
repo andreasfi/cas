@@ -496,36 +496,43 @@ if($response != false){
     <script>
 
         var map = null;
-        var geocoder = null;
         var trailShape = null;
         var elevator = null;
         var PlanCoordinates = null;
 
         function initMap() {
             var mapCanvas = document.getElementById('map');
-            geocoder = new google.maps.Geocoder();
             elevator = new google.maps.ElevationService();
             google.charts.load('current', {'packages': ['corechart'], 'callback': drawCharts});
-            PlanCoordinates = <?php echo $path; ?>;
+            PlanCoordinates = <?php echo(strlen($path) > 0 ? $path : '[]'); ?>;
 
             var mapOptions = {
-                center: PlanCoordinates[0],
-                zoom: 14,
+                center: (PlanCoordinates.length > 0 ? PlanCoordinates[0] : {lat: 46.307174, lng: 7.473367}),
                 mapTypeId: 'terrain'
+				
             };
 
             map = new google.maps.Map(mapCanvas, mapOptions);
-
-
-
-
         }
+		
         function drawCharts(){
             trailShape = new google.maps.Polyline({
                 path: PlanCoordinates,
                 strokeColor: '#FF0000',
                 map: map
             });
+			
+			//center map and zoom to fit path
+			var bounds = new google.maps.LatLngBounds();
+			for(var i = 0; i < PlanCoordinates.length; i++){
+				bounds.extend(PlanCoordinates[i]);
+			}
+			if(bounds.length > 0){
+				
+			}
+			map.setCenter(bounds.getCenter());
+			map.fitBounds(bounds);
+			map.setZoom(map.getZoom() + 1);
 
             elevator.getElevationAlongPath({
                 'path': PlanCoordinates,
