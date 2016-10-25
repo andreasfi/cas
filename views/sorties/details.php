@@ -501,13 +501,14 @@ if($response != false){
         function initMap() {
             var mapCanvas = document.getElementById('map');
             elevator = new google.maps.ElevationService();
-            google.charts.load('current', {'packages': ['corechart'], 'callback': drawCharts});
             PlanCoordinates = <?php echo(strlen($path) > 0 ? $path : '[]'); ?>;
+            if(PlanCoordinates.length > 0)
+				google.charts.load('current', {'packages': ['corechart'], 'callback': drawCharts});
 
             var mapOptions = {
-                center: (PlanCoordinates.length > 0 ? PlanCoordinates[0] : {lat: 46.307174, lng: 7.473367}),
-                mapTypeId: 'terrain'
-				
+                center: /*(PlanCoordinates.length > 0 ? PlanCoordinates[0] : */{lat: 46.307174, lng: 7.473367},//),
+                mapTypeId: 'terrain',
+				zoom:9
             };
 
             map = new google.maps.Map(mapCanvas, mapOptions);
@@ -525,17 +526,14 @@ if($response != false){
 			for(var i = 0; i < PlanCoordinates.length; i++){
 				bounds.extend(PlanCoordinates[i]);
 			}
-			if(bounds.length > 0){
-				
-			}
-			map.setCenter(bounds.getCenter());
-			map.fitBounds(bounds);
+				map.setCenter(bounds.getCenter());
+				map.fitBounds(bounds);
 
-            elevator.getElevationAlongPath({
-                'path': PlanCoordinates,
-                'samples': 256
-            }, plotElevation);
-
+				elevator.getElevationAlongPath({
+					'path': PlanCoordinates,
+					'samples': 256
+				}, plotElevation);
+			
         }
 
 
