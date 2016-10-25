@@ -549,23 +549,34 @@ if($response != false){
                 return;
             }
 
-
-            var chart = new google.visualization.LineChart(chartCanvas);
+            var chart = new google.visualization.ComboChart(chartCanvas);
             var data = new google.visualization.DataTable();
             data.addColumn('string', 'Sample');
             data.addColumn('number', 'Altitude');
-
+            data.addColumn('number', 'Sommet');
+			
+			//get highest point
+			var max = 0;
+			for (var i = 0; i < elevations.length; i++)
+				if(elevations[i].elevation > elevations[max].elevation)
+					max = i;
+			
+			//draw chart
             for (var i = 0; i < elevations.length; i++) {
-                data.addRow(['', elevations[i].elevation]);
+                data.addRow([(i == max ? 'Altitude' : ''), elevations[i].elevation, (i == max ? elevations[max].elevation : null)]);
             }
 
             chart.draw(data, {
                 height: 150,
                 legend: 'none',
                 titleY: 'Altitude (m)',
+				seriesType: 'line',
                 series: {
                     0: {color: '#1171A3'},
-                },
+					1: {type: 'scatter',
+						pointShape: 'star',
+						pointSize: 15,}
+						},
                 backgroundColor: '#E4E4E4'
             });
 
