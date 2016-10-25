@@ -506,7 +506,7 @@ if($response != false){
 				google.charts.load('current', {'packages': ['corechart'], 'callback': drawCharts});
 
             var mapOptions = {
-                center: /*(PlanCoordinates.length > 0 ? PlanCoordinates[0] : */{lat: 46.307174, lng: 7.473367},//),
+                center: (PlanCoordinates.length > 0 ? PlanCoordinates[0] : {lat: 46.307174, lng: 7.473367}),
                 mapTypeId: 'terrain',
 				zoom:9
             };
