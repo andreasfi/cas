@@ -82,7 +82,7 @@ include_once 'views/header.inc'; ?>
                                 </span>
                                 </div>
                                 <div class="service-box bviolet">
-                                    <?php echo $lang['FIELD_ALTITUDE'];?> <span id="elevation" class="pull-right">500m</span>
+                                    <?php echo $lang['FIELD_ALTITUDE'];?> <span id="elevation" class="pull-right"></span>
                                 </div>
                                 <div class="service-box bviolet">
                                     <?php echo $lang['FIELD_DIFFICULTY'];?> <span class="pull-right">
@@ -491,8 +491,6 @@ if($response != false){
 
     </div>
     </div>
-
-
     <script>
 
         var map = null;
@@ -532,7 +530,6 @@ if($response != false){
 			}
 			map.setCenter(bounds.getCenter());
 			map.fitBounds(bounds);
-			map.setZoom(map.getZoom() + 1);
 
             elevator.getElevationAlongPath({
                 'path': PlanCoordinates,
@@ -551,9 +548,10 @@ if($response != false){
 
             var chart = new google.visualization.ComboChart(chartCanvas);
             var data = new google.visualization.DataTable();
-            data.addColumn('string', 'Sample');
+            data.addColumn('string', 'title');
             data.addColumn('number', 'Altitude');
             data.addColumn('number', 'Sommet');
+            data.addColumn('number', 'Départ');
 			
 			//get highest point
 			var max = 0;
@@ -563,24 +561,55 @@ if($response != false){
 			
 			//draw chart
             for (var i = 0; i < elevations.length; i++) {
-                data.addRow([(i == max ? 'Altitude' : ''), elevations[i].elevation, (i == max ? elevations[max].elevation : null)]);
-            }
+                data.addRow([(i == max || i == 0 ? 'Altitude' : ''), 
+							 Math.round(elevations[i].elevation), 
+							 (i == max ? Math.round(elevations[max].elevation) : null), 
+							 (i == 0 ? Math.round(elevations[0].elevation) : null)]);	
+			}
+			
 
             chart.draw(data, {
                 height: 150,
                 legend: 'none',
                 titleY: 'Altitude (m)',
+				hAxis: {title: ''},
 				seriesType: 'line',
                 series: {
                     0: {color: '#1171A3'},
-					1: {type: 'scatter',
+					
+					1: {
+						type: 'scatter',
 						pointShape: 'star',
-						pointSize: 15,}
+						pointSize: 15
+						},
+					2: {
+						type: 'scatter',
+						color: 'green',
+						pointShape: 'circle',
+						pointSize: 10}
 						},
                 backgroundColor: '#E4E4E4'
             });
+			
+			this.calculateDenivele(elevations);
 
         }
+		
+		function calculateDenivele(elevations){
+			if(elevations.length > 0){
+				var lowest = elevations[0].elevation;
+				var highest = lowest;
+
+				for(var i = 0; i < elevations.length ; i++){
+					if(elevations[i].elevation > highest)
+						highest = elevations[i].elevation;
+					else if(elevations[i].elevation < lowest){
+						lowest = elevations[i].elevation;
+					}
+				}
+				document.getElementById('elevation').innerHTML = Math.round(highest-lowest) + "m";
+			}
+		}
 
     </script>
 
@@ -588,7 +617,6 @@ if($response != false){
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfHSiXZQseH8j-pPHb9PiWwvGvpOUSDGw&callback=initMap"
             async defer></script>
-
 
 <?php
 include_once 'views/footer.inc';
