@@ -422,7 +422,7 @@ header .logo-meta{
 	padding: 5px !important;
 	border-right:0px !important;
 	margin: 0px 2px;
-	font-size: 14px;
+	font-size: 13px;
 }
 
 .mattblackmenu li a > i{
@@ -435,6 +435,7 @@ header .logo-meta{
 }
 
 .mattblackmenu li a > img{
+	cursor: pointer;
 	align-self: center;
 	margin-left : 19px;
 	margin-top : 8px;
