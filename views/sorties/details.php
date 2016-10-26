@@ -529,6 +529,7 @@ if($response != false){
 				}
 					map.setCenter(bounds.getCenter());
 					map.fitBounds(bounds);
+					map.setZoom(map.getZoom() + 1);
 			
 				elevator.getElevationAlongPath({
 					'path': PlanCoordinates,
