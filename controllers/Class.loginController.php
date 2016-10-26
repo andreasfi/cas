@@ -252,6 +252,8 @@ class loginController extends Controller
      * Method that controls the page 'welcome.php'
      */
     function welcome(){
+        $this->vars['pageTitle'] = "Welcome";
+        $this->vars['pageMessage'] = "";
         //The page cannot be displayed if no user connected
         if(!$this->getActiveUser()){
             $this->redirect('/login');

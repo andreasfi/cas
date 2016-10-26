@@ -6,6 +6,8 @@ $msg = $this->vars['msg'];
 $user = $_SESSION['user'];
 $events = $this->vars['user_events']; //Declared in the controller
 $events_msg = $this->vars['user_events_msg'];
+$pageTitle = $this->vars['pageTitle'];
+$pageMessage = $this->vars['pageMessage'];
 include_once ROOT_DIR . 'views/header.inc';
 ?>
 <div class="content">

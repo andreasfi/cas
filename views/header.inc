@@ -126,8 +126,10 @@ $lang = $this->lang;
                                 <li><a href="<?php echo URL_DIR;?>/sorties" class="bblue"> <i class="fa fa-calendar"></i><?php echo $lang['ACTIVITIES_MENU_BUTTON']; ?></a></li>
                                 <li><a href="<?php echo URL_DIR;?>/contact" class="bblue"> <i class="fa fa-envelope-o"></i><?php echo $lang['CONTACT_MENU_BUTTON']; ?></a></li>
 
-                                        <li><a  id="frButton" class="bblue"><img src ="<?php echo URL_DIR;?>/img/French_Flag_Small_Icon.jpg"></a>
-                                        <a id="enButton"   class ="bblue"> <img src ="<?php echo URL_DIR;?>/img/English_Flag_Small_Icon.png"></a></li>
+                                        <div class="menu-lang bblue">
+                                            <a  id="frButton" class="bblue"><img src ="<?php echo URL_DIR;?>/img/French_Flag_Small_Icon.jpg"></a>
+                                            <a id="enButton"  class ="bblue"> <img src ="<?php echo URL_DIR;?>/img/English_Flag_Small_Icon.png"></a>
+                                        </div>
 
 
                             </ul>
