@@ -12,10 +12,13 @@
 }
 
 html {
+
+	cursor:url('../img/iceaxe.png'), auto !important;
 	-webkit-font-smoothing: antialiased;
 }
 
 body{
+
 	font-size: 14px;
 	line-height: 24px;
 	color: #666;
@@ -33,6 +36,7 @@ h1,h2,h3,h4,h5,h6{
 a{
 	color: #333;
 	text-decoration: none !important;
+	cursor:url('../img/iceaxe_active.png'), auto !important;
 }
 
 a:hover{
@@ -137,6 +141,7 @@ ul{
 
 .btn{
 	border: 0px !important;
+	cursor:url('../img/iceaxe_active.png'), auto !important;
 }
 
 
@@ -435,7 +440,7 @@ header .logo-meta{
 }
 
 .mattblackmenu li a > img{
-	cursor: pointer;
+	cursor:url('../img/iceaxe_active.png'), auto !important;
 	align-self: center;
 	margin-left : 19px;
 	margin-top : 8px;

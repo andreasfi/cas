@@ -79,10 +79,10 @@ $lang = $this->lang;
         <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.5.0/annyang.min.js"></script>
 
         <!-- NEWSLETTER -->
-        <script type="text/javascript" src="js/newsletter.js"></script>
+        <script type="text/javascript" src="<?php echo URL_DIR;?>/js/newsletter.js">"></script>
 
         <!-- LANGUAGE -->
-        <script type="text/javascript" src="js/language.js"></script>
+        <script type="text/javascript" src="<?php echo URL_DIR;?>/js/language.js">">></script>
 
     </head>
 	<body>
@@ -122,7 +122,7 @@ $lang = $this->lang;
                                 <?php } else { ?>
                                     <li><a href="<?php echo URL_DIR;?>/login" class="bblue"><i class="fa fa-lock"></i><?php echo $lang['CONNECT_MENU_BUTTON'];?></a></li>
                                 <?php } ?>
-                                <li><a href="<?php echo URL_DIR;?>/proximite" class="bblue"> <i class="fa fa-map-marker"></i><?php echo $lang['PROXIMITY_MENU_BUTTON']; ?></a></li>
+                                <li><a href="<?php echo URL_DIR;?>/sorties/proximite" class="bblue"> <i class="fa fa-map-marker"></i><?php echo $lang['PROXIMITY_MENU_BUTTON']; ?></a></li>
                                 <li><a href="<?php echo URL_DIR;?>/sorties" class="bblue"> <i class="fa fa-calendar"></i><?php echo $lang['ACTIVITIES_MENU_BUTTON']; ?></a></li>
                                 <li><a href="<?php echo URL_DIR;?>/contact" class="bblue"> <i class="fa fa-envelope-o"></i><?php echo $lang['CONTACT_MENU_BUTTON']; ?></a></li>
 
