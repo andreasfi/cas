@@ -109,11 +109,6 @@ include_once ROOT_DIR.'views/header.inc';
                                                                                                           aria-hidden="true"></i>
                                                 </button>
                                             </li>
-                                            <li>
-                                                <button id="stop_recording" class="blue-button" onclick="new_video()"><i class="fa fa-refresh"
-                                                                                                                              aria-hidden="true"></i>
-                                                </button>
-                                            </li>
                                         </ul>
                                     </div>
                                 </div>

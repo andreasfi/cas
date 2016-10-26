@@ -83,7 +83,8 @@ $lang['FIELD_NAME'] = "Name ";
 $lang['FIELD_EMAIL'] = "Email ";
 $lang['FIELD_TELEPHONE'] = "Tel. ";
 
-
+$lang['SAVE_BUTTON'] = "Save";
+$lang['MODIFY_BUTTON'] = "Modify the trail";
 
 //Welcome
 $lang['USER_EVENTS_NO_DATA'] = "No events to show.";

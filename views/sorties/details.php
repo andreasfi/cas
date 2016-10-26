@@ -142,7 +142,7 @@ include_once 'views/header.inc'; ?>
                     if($this->checkEventOwner($owner->getId(),"")){ ?>
                     <div class="row">
                         <div class="col-md-12 service-list col-no-margin">
-                            <form>
+                            <form method="post" action="<?php echo URL_DIR.'/sorties/saveNewStatuses' ?>">
                                 <?php
                                 foreach ($allParticipants as $key=>$item){
                                     if(isset($item)){
@@ -157,7 +157,7 @@ include_once 'views/header.inc'; ?>
                                                 <p>
                                                     Tel.: <?php echo $it->getPhone();?>,
                                                     Email: <a href="mailto:<?php echo $it->getMail();?>"><?php echo $it->getMail();?></a>
-                                                    <select>
+                                                    <select class="select_status">
                                                         <option value="1" <?php if($key==1){ echo "selected";}?>>Submitted</option>
                                                         <option value="2" <?php if($key==2){ echo "selected";}?>>Accepted</option>
                                                         <option value="3" <?php if($key==3){ echo "selected";}?>>Refused</option>
@@ -168,16 +168,17 @@ include_once 'views/header.inc'; ?>
                                         <?php }
                                     }
                                 } ?>
-			
+                                <button id="details_save_button" type="submit" class="btn btn-large bblack" style="display: none;"><?php echo $lang['SAVE_BUTTON'] ?> <i class="fa fa-save"></i></button>
+
                             </form>
 	<!-- EDIT EVENT -->							
 							<?php
 						if($_SESSION['user']->getId() == $owner->getId()){ ?>
 							<form action="<?php echo URL_DIR.'/sorties/ajoutsortie' ?>" method="post">
 								<input type=hidden name="id" value="<?php echo $eventId;?>">
-								<button type="submit" class="btn btn-large bgreen ">Modifier la course <i class="fa fa-angle-double-right"></i></button>
+								<button type="submit" class="btn btn-large bgreen"><?php echo $lang['MODIFY_BUTTON'] ?> <i class="fa fa-angle-double-right"></i></button>
 							</form>
-						<?php } ?>
+                        <?php } ?>
                             <div class="clearfix"></div>
                         </div>
                     </div>
@@ -491,6 +492,7 @@ if($response != false){
 
     </div>
     </div>
+
     <script>
 
         var map = null;
@@ -535,7 +537,6 @@ if($response != false){
 				}, plotElevation);
 			
         }
-
 
         function plotElevation(elevations, status) {
             var chartCanvas = document.getElementById("chart");
@@ -608,6 +609,12 @@ if($response != false){
 				document.getElementById('elevation').innerHTML = Math.round(highest-lowest) + "m";
 			}
 		}
+
+        $('.select_status').change(function(){
+           //Display the save button
+            $('#details_save_button').css('display', 'inline-block');
+
+        });
 
     </script>
 

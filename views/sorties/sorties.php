@@ -24,9 +24,13 @@ include_once ROOT_DIR . 'views/header.inc'; ?>
 				<b style="color:#fa3031;">sorties</b>
 			</div>
 			<div class="col-md-2 text-center">
-				<?php if($_SESSION['user']->getMemberType() == 3){?>
+				<?php
+
+                if(isset($_SESSION['user'])){
+                if($_SESSION['user']->getMemberType() == 3){?>
 				<a class="btn btn-primary" href="sorties/ajoutsortie">Ajouter une sortie</a>
-				<?php }?>
+				<?php }
+                }?>
 			</div>
 			<div class="col-md-5"></div>
 		</div>
