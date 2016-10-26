@@ -149,27 +149,32 @@ if(isset($_SESSION['event'])){
 		});
 		if($('#form_json').val() != null){
 			trailPoints = loadJSON($('#form_json').val());
-			drawCoordinates();
+			
+			google.charts.load('current', {'packages':['corechart'], 'callback': drawCoordinates});//drawCoordinates();
+			
+			fitMapToBounds();
 		}
+		
 	});
 	
 	//all things Google Maps:
 	function initMap() {
 		  
-		  var mapCanvas = document.getElementById('map');
-		  geocoder = new google.maps.Geocoder();
-		  elevator = new google.maps.ElevationService();
-		  var mapOptions = {
-				center: {lat: 46.307174, lng: 7.473367},
-				zoom: 9,
-				mapTypeId: 'terrain'
-		  };
-		  map = new google.maps.Map(mapCanvas, mapOptions);
+		var mapCanvas = document.getElementById('map');
+		geocoder = new google.maps.Geocoder();
+		elevator = new google.maps.ElevationService();
+		var mapOptions = {
+			center: {lat: 46.307174, lng: 7.473367},
+			zoom: 9,
+			mapTypeId: 'terrain'
+		};
+		map = new google.maps.Map(mapCanvas, mapOptions);
 		google.maps.event.addListener(map, 'click', function(event){
 			clickMap(event.latLng);
 		});
-		      google.charts.load('current', {'packages':['corechart']});
-
+		      
+		google.charts.load('current', {'packages':['corechart']});
+		
 		
       }
 	
@@ -293,6 +298,20 @@ if(isset($_SESSION['event'])){
 		jQuery('#endDate').datetimepicker({
 			minDate: $('#startDate').val()
 		});
+	}
+	
+	function fitMapToBounds(){
+		var bounds = new google.maps.LatLngBounds();
+			if(trailPoints.length > 1){
+				for(var i = 0; i < trailPoints.length; i++){
+					bounds.extend(trailPoints[i]);
+				}
+				map.fitBounds(bounds);
+			}else if(trailPoints.length == 1){
+				map.setCenter({lat:trailPoints[0].lat(), lng: trailPoints[0].lng()});
+				map.setZoom(12);
+			}
+		
 	}
 	
 </script>
