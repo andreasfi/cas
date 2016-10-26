@@ -162,7 +162,7 @@ include_once ROOT_DIR.'views/header.inc';
             var mediaRecorder = null;
             var video = document.querySelector('video');
             var mediaConstraints = {
-                audio: true,
+                audio: true,z
                 video: true
             };
             var blob_to_send = null;

@@ -311,17 +311,6 @@ WHERE
             'path' => json_decode($this->path));
     }
 
-    //TODO : implement this method
-    private function get_events($fk_idUser)
-    {
-        $events = array();
-
-        $query = "SELECT * FROM `eventusers` WHERE fk_idUser = $fk_idUser";
-
-        $result = MySqlConn::getInstance()->selectDB($query);
-        $rows = $result->fetchAll();
-    }
-
 
     /***
      * @param $user_id

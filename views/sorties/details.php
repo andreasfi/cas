@@ -143,10 +143,12 @@ include_once 'views/header.inc'; ?>
                     <div class="row">
                         <div class="col-md-12 service-list col-no-margin">
                             <form method="post" action="<?php echo URL_DIR.'/sorties/saveNewStatuses' ?>">
+                                <input type="hidden" name="event_id" value="<?php echo $eventId ?>">
                                 <?php
                                 foreach ($allParticipants as $key=>$item){
                                     if(isset($item)){
-                                        foreach ($item as $keyuser=>$it){
+                                        foreach ($item as $keyuser=>$it){;
+
                                             ?>
                                             <div class="service-icon">
                                                 <i class="fa fa-user bblue"></i>
@@ -157,7 +159,7 @@ include_once 'views/header.inc'; ?>
                                                 <p>
                                                     Tel.: <?php echo $it->getPhone();?>,
                                                     Email: <a href="mailto:<?php echo $it->getMail();?>"><?php echo $it->getMail();?></a>
-                                                    <select class="select_status">
+                                                    <select name="<?php echo $it->getId() ?>" class="select_status">
                                                         <option value="1" <?php if($key==1){ echo "selected";}?>>Submitted</option>
                                                         <option value="2" <?php if($key==2){ echo "selected";}?>>Accepted</option>
                                                         <option value="3" <?php if($key==3){ echo "selected";}?>>Refused</option>
