@@ -303,4 +303,8 @@ class sortiesController extends Controller{
 
         }
     }
+	function proximite(){
+		$paths = Event::fetch_all_paths_starts();
+		$this->vars['paths'] = $paths;
+	}
 }

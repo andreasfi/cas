@@ -119,7 +119,7 @@ $lang = $this->lang;
                                 <?php } else { ?>
                                     <li><a href="<?php echo URL_DIR;?>/login" class="bblue"><i class="fa fa-lock"></i><?php echo $lang['CONNECT_MENU_BUTTON'];?></a></li>
                                 <?php } ?>
-                                <li><a href="<?php echo URL_DIR;?>/proximite" class="bblue"> <i class="fa fa-map-marker"></i><?php echo $lang['PROXIMITY_MENU_BUTTON']; ?></a></li>
+                                <li><a href="<?php echo URL_DIR;?>/sorties/proximite" class="bblue"> <i class="fa fa-map-marker"></i><?php echo $lang['PROXIMITY_MENU_BUTTON']; ?></a></li>
                                 <li><a href="<?php echo URL_DIR;?>/sorties" class="bblue"> <i class="fa fa-calendar"></i><?php echo $lang['ACTIVITIES_MENU_BUTTON']; ?></a></li>
                                 <li><a href="<?php echo URL_DIR;?>/contact" class="bblue"> <i class="fa fa-envelope-o"></i><?php echo $lang['CONTACT_MENU_BUTTON']; ?></a></li>
                                 <li><a  class="bblue"><img src ="<?php echo URL_DIR;?>/img/French_Flag_Small_Icon.jpg"><img src ="<?php echo URL_DIR;?>/img/English_Flag_Small_Icon.png"></a></li>

@@ -407,4 +407,17 @@ WHERE
 
         return $event;
     }
+
+	static function fetch_all_paths_starts(){
+		$query =  "SELECT coordinatesJSON FROM paths WHERE coordinatesJSON != ''";
+		
+		$result = MySqlConn::getInstance()->selectDB($query);
+		$r = $result->fetch();
+		$output = array();
+		foreach($r as $line){
+			$json = json_decode($line);
+			array_push($output, $json[0]);
+		}
+		return $output;
+	}
 }
