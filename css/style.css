@@ -50,7 +50,7 @@ a:hover,a:focus,a:active{
 
 form *{
 	font-family: "Open Sans", sans-serif;
-	font-size: 13px !important;
+	/*font-size: 13px !important;*/
 }
 
 .btn{
