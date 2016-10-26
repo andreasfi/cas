@@ -287,8 +287,10 @@ class sortiesController extends Controller{
 				}else{
 					//si on était en mode création, on insert l'event.
 					$event = new Event($id = null, $description, $start_date, $end_date, $max_participants, $event_type, $owner, $title, $event_cat, $difficulty, $path, null);
-					$event->save();
-
+					$event->save($_SESSION['user']);
+					
+					
+					
 					$_SESSION['msg'] = '<span class="success">Evenement cree</span>';
 					$this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
 
@@ -297,11 +299,11 @@ class sortiesController extends Controller{
 			}
 
         }
-        function alreadyParticipating(){
-            $userId = $_SESSION['user']->getId();
+		function alreadyParticipating(){
+			$userId = $_SESSION['user']->getId();
 
 
-        }
+		}
     }
 	function proximite(){
 		$events = Event::fetch_all_events();

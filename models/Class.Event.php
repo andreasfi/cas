@@ -41,13 +41,15 @@ class Event implements JsonSerializable
         return $this->id;
     }
 
-    public function save()
+    public function save($owner)
     {
         $pathID = $this->savePath($this->path);
 		$this->setPathId($pathID);
 		
         $query = "INSERT INTO events(description, startDate, endDate, maxParticipants, fk_idEventType, fk_idOwner, title, fk_idEventCategory, fk_idDifficulty, fk_idPath) VALUES('$this->description', '$this->start_date','$this->end_date','$this->max_participants','$this->event_type', '$this->owner','$this->title','$this->event_category', '$this->difficulty','$pathID')";
-        MySqlConn::getInstance()->executeQuery($query);
+        $event_id = MySqlConn::getInstance()->insertAndGetId($query);
+		
+		$owner->addUserToEvent($event_id, 0);
     }
 	
 	public function update($description, $startDate, $endDate, $maxParticipants, $title, $eventCategory, $difficulty, $path){
