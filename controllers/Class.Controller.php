@@ -16,7 +16,15 @@ class Controller {
      * @param string $method
      */
         function __construct($controller, $method) {
-            $_SESSION['lang'] = "fr";
+
+
+            if(isset($_POST['lang'])) {
+
+                $_SESSION['lang'] = $_POST['lang'];
+            }
+
+
+
             $this->vars['pageTitle'] = "CAS";
             $this->vars['pageMessage'] = "Club Alpin Suisse";
             $this->controller = $controller;
@@ -28,12 +36,13 @@ class Controller {
 
             // register the session and set the cookie
             $_SESSION['lang'] = $clang;
-            setcookie('lang', $clang, time() + (3600 * 24 * 30));
+           // setcookie('lang', $clang, time() + (3600 * 24 * 30));
         } else if (isSet($_SESSION['lang'])) {
             $clang = $_SESSION['lang'];
-        } else if (isSet($_COOKIE['lang'])) {
-            $clang = $_COOKIE['lang'];
-        } else {
+        } //else if (isSet($_COOKIE['lang'])) {
+          //  $clang = $_COOKIE['lang'];
+       // }
+        else {
             $clang = 'en';
         }
         $lang = "";
@@ -43,14 +52,8 @@ class Controller {
     }
 
 
-    function setLangFR(){
-        $_SESSION['lang'] = "fr";
 
-    }
-    function setLangEn(){
-        $_SESSION['lang'] = "en";
 
-    }
 
 
     /**

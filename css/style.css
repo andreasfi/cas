@@ -435,6 +435,7 @@ header .logo-meta{
 }
 
 .mattblackmenu li a > img{
+	cursor: pointer;
 	align-self: center;
 	margin-left : 19px;
 	margin-top : 8px;

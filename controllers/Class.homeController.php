@@ -7,7 +7,7 @@
  */
 class homeController extends Controller{
     function home(){
-        var_dump($_SESSION['lang']);
+
         //TODO Put messages in the header with the variables
 
         $lang = $this->lang;
