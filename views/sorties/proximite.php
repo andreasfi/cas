@@ -40,7 +40,7 @@ include_once ROOT_DIR.'views/header.inc';
 		  }
 		  map = new google.maps.Map(mapCanvas, mapOptions);
 
-		infowindow = new google.maps.InfoWindow();
+		infowindow = new google.maps.InfoWindow({maxWidth: 300});
 		
 		for (var point in startPoints){
 			if(startPoints[point].path != null){
@@ -58,13 +58,16 @@ include_once ROOT_DIR.'views/header.inc';
 				
 				google.maps.event.addListener(pin, 'click', function(){
 					infowindow.close();
-					infowindow.setContent(event.title);
+					infowindow.setContent(getPrettyInfo(event));
 					infowindow.open(map, pin);
 				});
 	}
 	
-	function showEventDetails(event, map, marker){
-		
+	function getPrettyInfo(event){
+		var output = '<h3>' + decodeHTML(event.title) + '</h3>';
+		output += '<p>' + event.description + '</p>';
+		output += '<a href="details/' + event.id +'"> Plus d\'informations</a>'; 
+		return output;
 	}
 	
 	function decodeHTML(html){
