@@ -27,9 +27,9 @@ include_once ROOT_DIR.'views/header.inc';
     </div>
 <script>
 	function initMap(){
-		var startPoints = null;
-		startPoints = (<?php echo(json_encode($this->vars['paths'])); ?>);
-		
+		var startPoints = '<?php echo ($this->vars['events']);?>';
+		startPoints = startPoints.replace(/(?:\r\n|\r|\n)/g, '&nbsp');
+		startPoints = JSON.parse(startPoints);
 		var mapCanvas = document.getElementById('map');
 		var mapOptions = {
 				center: {lat: 46.307174, lng: 7.473367},
@@ -37,12 +37,16 @@ include_once ROOT_DIR.'views/header.inc';
 				mapTypeId: 'terrain'
 		  }
 		  map = new google.maps.Map(mapCanvas, mapOptions);
-		
+
 		for (var point in startPoints){
-			var pin = new google.maps.Marker({
-				position: startPoints[point],
-				map: map
-			});
+			if(startPoints[point].path != null){
+				
+				var pin = new google.maps.Marker({
+					position: startPoints[point].path[0],
+					map: map,
+					
+				});
+			}
 		}
 	}
 </script>
