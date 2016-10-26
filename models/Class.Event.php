@@ -409,4 +409,9 @@ WHERE
 
         return $event;
     }
+    static function updateUserEvent($eventId, $status, $iduser){
+        $status += 1;
+        $query = "UPDATE eventusers SET fk_idStatus = '$status' WHERE fk_idEvent = '$eventId' AND fk_idUser = '$iduser';";
+        MySqlConn::getInstance()->executeQuery($query);
+    }
 }

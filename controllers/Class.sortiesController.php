@@ -206,6 +206,41 @@ class sortiesController extends Controller{
 
         $this->checkUser(2, "/error/http404");
     }
+    function updateParticipant(){
+        // Check if its the owner
+        $owner = $_POST['owner'];
+        // The event id
+        $this->checkParam($GLOBALS['value'], "/home");
+        $idevent = $GLOBALS['value'];
+        // get the total of userevent to update
+        $countparticipant = $_POST['countparticipant'];
+        // status, iduser
+
+
+
+        $participants = Array();
+        $eventusers = Array();
+
+        if($this->checkEventOwner($owner,"/sorties/details/".$idevent)){
+            // Since each userevent comes in as a post (1,2,3...), we need to iterate all of them
+            echo $countparticipant."<br>";
+            for($i = 0; $i <= $countparticipant+1; $i++){
+                if(isset($_POST['participant'.$i])){
+                    $participants[$i] = $_POST['participant'.$i];
+                    $eventusers[$i] = $_POST['status'.$i];
+                    //echo "nb ".$i." for ".$participants[$i]." and ".$eventusers[$i].". <br>";
+
+                    Event::updateUserEvent($idevent, $eventusers[$i], $participants[$i]);
+                }
+
+            }
+            // update userevent where idevent and user
+        }
+
+        $_SESSION['msg'] = '<span class="error">Les participants ont été mise à jour</span>';
+        $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
+        $this->redirect('/sorties/details/'.$idevent);
+    }
     function ajoutsortie(){
 
         $this->checkUser(3, "/error/http404");

@@ -57,6 +57,8 @@ include_once 'views/header.inc'; ?>
 
                 </div>
                 <div class="col-lg-6">
+
+
                     <?php if($participating){ ?>
                         <button data-toggle="tooltip" data-placement="top" title="You are already attending this event" style="" class="btn btn-default btn-large pull-right"><?php echo 'Already participating';?> <i class="fa fa-angle-double-right"></i></button>
                     <?php } else if(isset($userLevel) && $userLevel >= 2 ) { ?>
@@ -66,6 +68,13 @@ include_once 'views/header.inc'; ?>
                     <?php } ?>
 					
                     <a href="#" data-toggle="modal" data-target="#itineraire" class="btn btn-info btn-large pull-right"><?php echo $lang['BUTTON_FIND_ROUTE'];?> <i class="fa fa-angle-double-right"></i></a>
+                    <?php
+                    if(isset($_SESSION['user']) && $_SESSION['user']->getId() == $owner->getId()){ ?>
+                        <form style="margin:0;" action="<?php echo URL_DIR.'/sorties/ajoutsortie' ?>" method="post">
+                            <input type=hidden name="id" value="<?php echo $eventId;?>">
+                            <button type="submit" class="btn btn-default btn-large bgreen pull-right">Modifier la course <i class="fa fa-angle-double-right"></i></button>
+                        </form>
+                    <?php } ?>
                 </div>
             </div>
             <div class="service-home">
@@ -107,7 +116,7 @@ include_once 'views/header.inc'; ?>
                 </div>
                 <div class="row">
                     <div class="col-lg-12 no-col-margin">
-                        <div id="chart" class="graphicalalt"></div>
+                        <div id="chart" class="graphicalalt col-lg-12 no-col-margin" ></div>
                     </div>
                 </div>
                 <div class="row">
@@ -137,47 +146,61 @@ include_once 'views/header.inc'; ?>
                     </div>
                 </div>
                 <hr>
+
                 <?php
                 if($this->checkUser(2,"")){
                     if($this->checkEventOwner($owner->getId(),"")){ ?>
                     <div class="row">
                         <div class="col-md-12 service-list col-no-margin">
-                            <form>
+                            <form method="post" action="<?php echo URL_DIR.'/sorties/updateParticipant/'.$eventId?>">
+                                <input type=hidden name="id" value="<?php echo $eventId;?>">
+                                <input type=hidden name="owner" value="<?php echo $owner->getId();?>">
                                 <?php
+                                $counter = 0;
                                 foreach ($allParticipants as $key=>$item){
                                     if(isset($item)){
                                         foreach ($item as $keyuser=>$it){
+
                                             ?>
-                                            <div class="service-icon">
-                                                <i class="fa fa-user bblue"></i>
+                                            <div class="col-lg-6">
+                                                <div class="service-icon">
+                                                    <i class="fa fa-area-chart bblue"></i>
+                                                </div>
+                                                <div class="service-content">
+                                                    <div class="service-home-meta">Participant <?php echo $counter+1;?></div>
+                                                    <h4><?php echo $it->getFirstname()." ".$it->getLastname();?></h4>
+                                                    <p>
+                                                        Tel.: <?php echo $it->getPhone();?>,
+                                                        Email: <a href="mailto:<?php echo $it->getMail();?>"><?php echo $it->getMail();?></a>
+                                                        <input type=hidden name="<?php echo 'participant'.$counter;?>" value="<?php echo $it->getId();?>">
+
+                                                        <select name="<?php echo 'status'.$counter;?>">
+                                                            <option value="0" <?php if($key==0){ echo "selected";}?>>Submitted</option>
+                                                            <option value="1" <?php if($key==1){ echo "selected";}?>>Accepted</option>
+                                                            <option value="2" <?php if($key==2){ echo "selected";}?>>Refused</option>
+                                                        </select>
+                                                    </p>
+                                                </div>
+                                                <hr>
                                             </div>
-                                            <div class="service-content">
-                                                <div class="service-home-meta">Participant <?php echo $keyuser+1;?></div>
-                                                <h4><?php echo $it->getFirstname()." ".$it->getLastname();?></h4>
-                                                <p>
-                                                    Tel.: <?php echo $it->getPhone();?>,
-                                                    Email: <a href="mailto:<?php echo $it->getMail();?>"><?php echo $it->getMail();?></a>
-                                                    <select>
-                                                        <option value="1" <?php if($key==1){ echo "selected";}?>>Submitted</option>
-                                                        <option value="2" <?php if($key==2){ echo "selected";}?>>Accepted</option>
-                                                        <option value="3" <?php if($key==3){ echo "selected";}?>>Refused</option>
-                                                    </select>
-                                                </p>
-                                            </div>
-                                            <hr />
-                                        <?php }
+
+
+                                        <?php $counter++; }
+
+                                        ?><input type="hidden" name="countparticipant" value="<?php echo $key;?>"/><?php
                                     }
-                                } ?>
-			
+
+                                }
+                                        if($_SESSION['user']->getId() == $owner->getId()){ ?>
+                                                <div class="col-lg-12">
+                                                    <button  type="submit" class="btn btn-large bgreen ">Modifier les statuts <i class="fa fa-angle-double-right"></i></button>
+                                                </div>
+                                        <?php }
+                                        ?>
+
                             </form>
-	<!-- EDIT EVENT -->							
-							<?php
-						if($_SESSION['user']->getId() == $owner->getId()){ ?>
-							<form action="<?php echo URL_DIR.'/sorties/ajoutsortie' ?>" method="post">
-								<input type=hidden name="id" value="<?php echo $eventId;?>">
-								<button type="submit" class="btn btn-large bgreen ">Modifier la course <i class="fa fa-angle-double-right"></i></button>
-							</form>
-						<?php } ?>
+	<!-- EDIT EVENT -->						<br><br>
+
                             <div class="clearfix"></div>
                         </div>
                     </div>
@@ -187,20 +210,24 @@ include_once 'views/header.inc'; ?>
                         <div class="row">
                             <div class="col-md-12 service-list col-no-margin">
                                     <?php
+                                    $counter = 0;
                                     foreach ($allParticipants as $key=>$item){
                                         if(isset($item)){
                                             foreach ($item as $keyuser=>$it){
                                                 ?>
-                                                <div class="service-icon">
-                                                    <i class="fa fa-user bblue"></i>
-                                                </div>
-                                                <div class="service-content">
-                                                    <div class="service-home-meta">Participant <?php echo $keyuser+1;?></div>
-                                                    <h4><?php echo $it->getFirstname()." ".$it->getLastname();?></h4>
-                                                    <p></p>
-                                                </div>
-                                                <hr />
-                                            <?php }
+                                <div class="col-lg-6">
+                                    <div class="service-icon">
+                                        <i class="fa fa-area-chart bblue"></i>
+                                    </div>
+                                    <div class="service-content">
+                                        <div class="service-home-meta">Participant <?php echo $counter+1;?></div>
+                                        <h4><?php echo $it->getFirstname()." ".$it->getLastname();?></h4>
+                                        <p></p>
+                                    </div>
+                                    <hr />
+                                </div>
+
+                                            <?php $counter++; }
                                         }
                                     } ?>
                                 <div class="clearfix"></div>
