@@ -307,7 +307,11 @@ if(isset($_SESSION['event'])){
 					bounds.extend(trailPoints[i]);
 				}
 				map.fitBounds(bounds);
+			}else if(trailPoints.length == 1){
+				map.setCenter({lat:trailPoints[0].lat(), lng: trailPoints[0].lng()});
+				map.setZoom(12);
 			}
+		
 	}
 	
 </script>
