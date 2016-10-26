@@ -14,6 +14,22 @@ include_once ROOT_DIR . 'views/header.inc'; ?>
         <div class="row">
             <div id="calendar" class="fc fc-unthemed fc-ltr col-md-offset-1 col-md-10"></div>
         </div>
+		<div class="row" style="margin:1em 1em;">
+			<div class="col-md-1"></div>
+			<div class="col-md-1">
+				<b style="color:#52b9e9;">randonnées</b>
+			</div>
+			<div class="col-md-1"></div>
+			<div class="col-md-2">
+				<b style="color:#fa3031;">sorties</b>
+			</div>
+			<div class="col-md-2 text-center">
+				<?php if($_SESSION['user']->getMemberType() == 3){?>
+				<a class="btn btn-primary" href="sorties/ajoutsortie">Ajouter une sortie</a>
+				<?php }?>
+			</div>
+			<div class="col-md-5"></div>
+		</div>
         <table id="datatable">
             <thead>
             <tr>
@@ -29,11 +45,10 @@ include_once ROOT_DIR . 'views/header.inc'; ?>
     </div>
 </div>
 
-
 <script>
 
-    //0 : sortie
-    //1 : event
+    //1 : rando (1 day)
+    //2 : sortie (2+ days)
     var event_type_color = ["#fa3031", "#52b9e9"];
     var event_type_textcolor = 'white';
 
@@ -43,14 +58,17 @@ include_once ROOT_DIR . 'views/header.inc'; ?>
     function loadEvents() {
         //Get JSON data in string format.
         var json_events = '<?php echo $this->vars['propositions']; ?>';
-
+		//convert newline elements to <br/>
+		json_events = json_events.replace(/(?:\r\n|\r|\n)/g, '&nbsp');
+		console.log(json_events);
         //Parse the string to JSON.
         json_events = JSON.parse(json_events);
-
+		console.log(json_events);
         for (var i = 0; i < json_events.length; i++) {
             //0. Fetch the first event
             var event = json_events[i];
             var row_dataset = [];
+			
 
             //init rows for the datatable
             row_dataset[0] = event['title'];
@@ -69,12 +87,12 @@ include_once ROOT_DIR . 'views/header.inc'; ?>
             //init calendar
             item_calendar = {};
             item_calendar['idEvent'] = event['id'];
-            item_calendar['title'] = event['title'];
+            item_calendar['title'] = decodeHTML(event['title']);
             item_calendar['start'] = event['start_date'];
+			item_calendar['end'] = event['end_date'];
             item_calendar['constraint'] = 'businessHours';
             item_calendar['color'] = color;
             item_calendar['textcolor'] = event_type_textcolor;
-            item_calendar['allDay'] = true;
             item_calendar['description'] = "Very cool event";
             item_calendar['difficulty'] = event['difficulty'];
 
@@ -82,6 +100,8 @@ include_once ROOT_DIR . 'views/header.inc'; ?>
             datatable_data.push(row_dataset);
         }
     }
+	
+	
 
 
     $(document).ready(function () {
@@ -89,6 +109,12 @@ include_once ROOT_DIR . 'views/header.inc'; ?>
         initCalendar('fr')
         initDataTable();
     });
+	
+	function decodeHTML(html){
+		var txt = document.createElement("textarea");
+    	txt.innerHTML = html;
+    	return txt.value;
+	}
 
     function initCalendar(locale) {
         var today = new Date();

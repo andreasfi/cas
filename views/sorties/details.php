@@ -19,6 +19,8 @@ $eventCategory = $this->vars['eventCategory'];
 $path = $this->vars['path'];
 $distance = $this->vars['distance'];
 $eventId = $this->vars['eventId'];
+$startDate = $this->vars['startDate'];
+$endDate = $this->vars['endDate'];
 
 
 $from =$this->vars['from'];
@@ -34,7 +36,6 @@ $userLevel = $this->vars['userLevel'];
 
 $allParticipants = $this->vars['allParticipants'];
 $participating = $this->vars['participating'];
-
 
 include_once 'views/header.inc'; ?>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
@@ -63,6 +64,7 @@ include_once 'views/header.inc'; ?>
                     <?php } else { ?>
                             <button data-toggle="tooltip" data-placement="top" title="Vous devez être membre pour vous inscrire" style="" class="btn btn-default btn-large pull-right"><?php echo $lang['BUTTON_PARTICIPATION_REQUEST'];?> <i class="fa fa-angle-double-right"></i></button>
                     <?php } ?>
+					
                     <a href="#" data-toggle="modal" data-target="#itineraire" class="btn btn-info btn-large pull-right"><?php echo $lang['BUTTON_FIND_ROUTE'];?> <i class="fa fa-angle-double-right"></i></a>
                 </div>
             </div>
@@ -80,7 +82,7 @@ include_once 'views/header.inc'; ?>
                                 </span>
                                 </div>
                                 <div class="service-box bviolet">
-                                    <?php echo $lang['FIELD_ALTITUDE'];?> <span id="elevation" class="pull-right">500m</span>
+                                    <?php echo $lang['FIELD_ALTITUDE'];?> <span id="elevation" class="pull-right"></span>
                                 </div>
                                 <div class="service-box bviolet">
                                     <?php echo $lang['FIELD_DIFFICULTY'];?> <span class="pull-right">
@@ -166,12 +168,20 @@ include_once 'views/header.inc'; ?>
                                         <?php }
                                     }
                                 } ?>
-                                <button>Edit</button>
+			
                             </form>
+	<!-- EDIT EVENT -->							
+							<?php
+						if($_SESSION['user']->getId() == $owner->getId()){ ?>
+							<form action="<?php echo URL_DIR.'/sorties/ajoutsortie' ?>" method="post">
+								<input type=hidden name="id" value="<?php echo $eventId;?>">
+								<button type="submit" class="btn btn-large bgreen ">Modifier la course <i class="fa fa-angle-double-right"></i></button>
+							</form>
+						<?php } ?>
                             <div class="clearfix"></div>
                         </div>
                     </div>
-<?php
+				<?php
                     } else {
                         ?>
                         <div class="row">
@@ -481,47 +491,49 @@ if($response != false){
 
     </div>
     </div>
-
-
     <script>
 
         var map = null;
-        var geocoder = null;
         var trailShape = null;
         var elevator = null;
         var PlanCoordinates = null;
 
         function initMap() {
             var mapCanvas = document.getElementById('map');
-            geocoder = new google.maps.Geocoder();
             elevator = new google.maps.ElevationService();
-            google.charts.load('current', {'packages': ['corechart'], 'callback': drawCharts});
-            PlanCoordinates = <?php echo $path; ?>;
+            PlanCoordinates = <?php echo(strlen($path) > 0 ? $path : '[]'); ?>;
+            if(PlanCoordinates.length > 0)
+				google.charts.load('current', {'packages': ['corechart'], 'callback': drawCharts});
 
             var mapOptions = {
-                center: PlanCoordinates[0],
-                zoom: 14,
-                mapTypeId: 'terrain'
+                center: (PlanCoordinates.length > 0 ? PlanCoordinates[0] : {lat: 46.307174, lng: 7.473367}),
+                mapTypeId: 'terrain',
+				zoom:9
             };
 
             map = new google.maps.Map(mapCanvas, mapOptions);
-
-
-
-
         }
+		
         function drawCharts(){
             trailShape = new google.maps.Polyline({
                 path: PlanCoordinates,
                 strokeColor: '#FF0000',
                 map: map
             });
+			
+			//center map and zoom to fit path
+			var bounds = new google.maps.LatLngBounds();
+			for(var i = 0; i < PlanCoordinates.length; i++){
+				bounds.extend(PlanCoordinates[i]);
+			}
+				map.setCenter(bounds.getCenter());
+				map.fitBounds(bounds);
 
-            elevator.getElevationAlongPath({
-                'path': PlanCoordinates,
-                'samples': 256
-            }, plotElevation);
-
+				elevator.getElevationAlongPath({
+					'path': PlanCoordinates,
+					'samples': 256
+				}, plotElevation);
+			
         }
 
 
@@ -532,27 +544,70 @@ if($response != false){
                 return;
             }
 
-
-            var chart = new google.visualization.LineChart(chartCanvas);
+            var chart = new google.visualization.ComboChart(chartCanvas);
             var data = new google.visualization.DataTable();
-            data.addColumn('string', 'Sample');
+            data.addColumn('string', 'title');
             data.addColumn('number', 'Altitude');
-
+            data.addColumn('number', 'Sommet');
+            data.addColumn('number', 'Départ');
+			
+			//get highest point
+			var max = 0;
+			for (var i = 0; i < elevations.length; i++)
+				if(elevations[i].elevation > elevations[max].elevation)
+					max = i;
+			
+			//draw chart
             for (var i = 0; i < elevations.length; i++) {
-                data.addRow(['', elevations[i].elevation]);
-            }
+                data.addRow([(i == max || i == 0 ? 'Altitude' : ''), 
+							 Math.round(elevations[i].elevation), 
+							 (i == max ? Math.round(elevations[max].elevation) : null), 
+							 (i == 0 ? Math.round(elevations[0].elevation) : null)]);	
+			}
+			
 
             chart.draw(data, {
                 height: 150,
                 legend: 'none',
                 titleY: 'Altitude (m)',
+				hAxis: {title: ''},
+				seriesType: 'line',
                 series: {
                     0: {color: '#1171A3'},
-                },
+					
+					1: {
+						type: 'scatter',
+						pointShape: 'star',
+						pointSize: 15
+						},
+					2: {
+						type: 'scatter',
+						color: 'green',
+						pointShape: 'circle',
+						pointSize: 10}
+						},
                 backgroundColor: '#E4E4E4'
             });
+			
+			this.calculateDenivele(elevations);
 
         }
+		
+		function calculateDenivele(elevations){
+			if(elevations.length > 0){
+				var lowest = elevations[0].elevation;
+				var highest = lowest;
+
+				for(var i = 0; i < elevations.length ; i++){
+					if(elevations[i].elevation > highest)
+						highest = elevations[i].elevation;
+					else if(elevations[i].elevation < lowest){
+						lowest = elevations[i].elevation;
+					}
+				}
+				document.getElementById('elevation').innerHTML = Math.round(highest-lowest) + "m";
+			}
+		}
 
     </script>
 
@@ -560,7 +615,6 @@ if($response != false){
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfHSiXZQseH8j-pPHb9PiWwvGvpOUSDGw&callback=initMap"
             async defer></script>
-
 
 <?php
 include_once 'views/footer.inc';

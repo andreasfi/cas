@@ -156,9 +156,9 @@ class sortiesController extends Controller{
         $this->vars['participating'] = $participating;
 
 
-        //if($userLevel >= 0){ 
-            //$userByEvent = User::getUserByEventId(2); 
-            //$this->vars['allParticipants'] = $userByEvent;  
+        //if($userLevel >= 0){
+            //$userByEvent = User::getUserByEventId(2);
+            //$this->vars['allParticipants'] = $userByEvent;
         //}
 
 
@@ -198,20 +198,11 @@ class sortiesController extends Controller{
         $this->vars['path'] = $result->getPath();
         $this->vars['description'] = $result->getDescription();
 
-		$_SESSION['difficulty'] = $result->getDifficulty();
-
-		if(isset($_POST['numPeople'])){
-			var_dump($_POST);
-		}
-
-
         $_SESSION['difficulty'] = $result->getDifficulty();
 
         if(isset($_POST['numPeople'])){
             var_dump($_POST);
         }
-
-
 
         $this->checkUser(2, "/error/http404");
     }
@@ -238,8 +229,7 @@ class sortiesController extends Controller{
                 $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
                 $this->redirect('/login/welcome');
             }
-
-    */
+		*/
 
         $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
         $this->vars['pageTitle'] = "Ajouter une course";
@@ -247,43 +237,64 @@ class sortiesController extends Controller{
 
 
         if(!empty($_POST)){
+			if(isset($_POST['id'])){
+				//pour charger l'event dans le mode édition. on charge un objet event dans la session.
+				$result = Event::fetch_event_by_id($_POST['id']);
+				$_SESSION['event'] = $result;
+				
+			}else if(isset($_POST['delete_event'])){
+					$event = Event::fetch_event_by_id($_POST['delete_event']);
+					$event->delete();
+					
+					$_SESSION['msg'] = '<span class="success">Evenement suprimmé</span>';
+					$this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
+					
+					$this->redirect('/home'.$_POST['edit_event']);
+			}else{
+				 
+				//sinon on est en mode submit. décoder l'info.
+				$description = htmlentities(str_replace("\n", " ", $_POST['description']), ENT_QUOTES);
+				var_dump($description);
+				$start_date = DateTime::createFromFormat('Y/m/d H:i', $_POST['startDate']);
+				// j'ai supprime cette ligne pour que $start_date soit un DATETIME
+				//$start_date = $start_date->format('Y-m-d H:i:s');
+				$end_date = DateTime::createFromFormat('Y/m/d H:i', $_POST['endDate']);
+				// j'ai supprime cette ligne pour que $start_date soit un DATETIME
+				//$end_date = $end_date->format('Y-m-d H:i:s');
+				$max_participants = $_POST['maxParticipants'];
+				$event_type = 1;
+				$owner = $_SESSION['user']->getId();
+				$title = htmlentities(str_replace("\n", " ", $_POST['title']), ENT_QUOTES);
+				$event_cat = $_POST['category'];
+				$difficulty = $_POST['difficulty'];
+				$path = $_POST['JSON'];
 
-			$description = $_POST['description'];
-			$start_date = DateTime::createFromFormat('Y/m/d H:i:s', $_POST['startDate'].':00');
-            // j'ai supprime cette ligne pour que $start_date soit un DATETIME
-			//$start_date = $start_date->format('Y-m-d H:i:s');
-			$end_date = DateTime::createFromFormat('Y/m/d H:i:s', $_POST['endDate'].':00');
-            // j'ai supprime cette ligne pour que $start_date soit un DATETIME
-			//$end_date = $end_date->format('Y-m-d H:i:s');
-			$max_participants = $_POST['maxParticipants'];
-			$event_type = 1;
-			$owner = 1;//$_SESSION['user']->getId();
-			$title = $_POST['title'];
-			$event_cat = $_POST['category'];
-			$difficulty = $_POST['difficulty'];
-			$path = $_POST['JSON'];
+				//regarde les dates pour déterminer si c'est une rando ou une sortie
+				if($start_date->format('d') != $end_date->format('d'))
+					$event_type = 2;
+				else
+					$event_type = 1;
+				
+				if(isset($_POST['edit_event'])){
+					$event = Event::fetch_event_by_id($_POST['edit_event']);
+					//si on était en mode édition, on fait un update, et non pas un insert
+					$event->update($description, $start_date, $end_date, $max_participants, $title, $event_cat, $difficulty, $path);
+					
+					$_SESSION['msg'] = '<span class="success">Evenement modifié</span>';
+					$this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
+					
+					$this->redirect('/sorties/details/'.$_POST['edit_event']);
+				}else{
+					//si on était en mode création, on insert l'event.
+					$event = new Event($id = null, $description, $start_date, $end_date, $max_participants, $event_type, $owner, $title, $event_cat, $difficulty, $path, null);
+					$event->save();
 
+					$_SESSION['msg'] = '<span class="success">Evenement cree</span>';
+					$this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
 
-            //TODO check ajoutsortie quel event type c'est
-
-            if($start_date->format('i') != $end_date->format('i'))
-                $event_type = 1;
-            else
-                $event_type = 2;
-
-
-
-            // LE CASTING FORMAT SE FAIT DEJA DANS LE CONSTRUCTEUR
-         /*   $start_date = $start_date->format('Y-m-d H:i:s');
-            $end_date = $end_date->format('Y-m-d H:i:s');
-         */
-            $event = new Event($id = null, $description, $start_date, $end_date, $max_participants, $event_type, $owner, $title, $event_cat, $difficulty, $path);
-            $event->save();
-
-            $_SESSION['msg'] = '<span class="success">Evenement cree</span>';
-            $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
-
-            $this->redirect('/login/welcome');
+					$this->redirect('/login/welcome');
+				}
+			}
 
         }
         function alreadyParticipating(){

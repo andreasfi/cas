@@ -59,7 +59,6 @@ $lang = $this->lang;
         <link rel="stylesheet" type="text/css" href="<?php echo URL_DIR;?>/css/jquery.datetimepicker.css">
 		<script src="<?php echo URL_DIR;?>/js/jquery.datetimepicker.full.min.js"></script>
 
-
         <!-- FULLCALENDAR JQUERY PLUGIN -->
         <link type="text/css" rel="stylesheet" href="<?php echo URL_DIR;?>/css/fullcalendar.css">
 
@@ -79,6 +78,12 @@ $lang = $this->lang;
         <!-- ANNYANG -->
         <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.5.0/annyang.min.js"></script>
 
+        <!-- NEWSLETTER -->
+        <script type="text/javascript" src="js/newsletter.js"></script>
+
+        <!-- LANGUAGE -->
+        <script type="text/javascript" src="js/language.js"></script>
+
     </head>
 	<body>
 
@@ -92,7 +97,7 @@ $lang = $this->lang;
                         </div>
                         <div class="logo-text">
                             <h1><a href="<?php echo URL_DIR;?>/home">CA<span class="lightblue">S</span></a></h1>
-                            <div class="logo-meta">SWISS ALPINE CLUB</div>
+                            <div class="logo-meta"><?php echo $lang['WEBSITE_NAME'];?></div>
                         </div>
                         <div class="clearfix"></div>
                     </div>
@@ -120,7 +125,11 @@ $lang = $this->lang;
                                 <li><a href="<?php echo URL_DIR;?>/proximite" class="bblue"> <i class="fa fa-map-marker"></i><?php echo $lang['PROXIMITY_MENU_BUTTON']; ?></a></li>
                                 <li><a href="<?php echo URL_DIR;?>/sorties" class="bblue"> <i class="fa fa-calendar"></i><?php echo $lang['ACTIVITIES_MENU_BUTTON']; ?></a></li>
                                 <li><a href="<?php echo URL_DIR;?>/contact" class="bblue"> <i class="fa fa-envelope-o"></i><?php echo $lang['CONTACT_MENU_BUTTON']; ?></a></li>
-                                <li><a  class="bblue"><img src ="<?php echo URL_DIR;?>/img/French_Flag_Small_Icon.jpg"><img src ="<?php echo URL_DIR;?>/img/English_Flag_Small_Icon.png"></a></li>
+
+                                        <li><a  id="frButton" class="bblue"><img src ="<?php echo URL_DIR;?>/img/French_Flag_Small_Icon.jpg"></a>
+                                        <a id="enButton"   class ="bblue"> <img src ="<?php echo URL_DIR;?>/img/English_Flag_Small_Icon.png"></a></li>
+
+
                             </ul>
                         </div>
                     </div>

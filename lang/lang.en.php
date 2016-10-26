@@ -73,7 +73,7 @@ $lang['CREATE_ACCOUNT'] = "Create your account";
 $lang['BUTTON_PARTICIPATION_REQUEST'] = "I want to participate ";
 $lang['BUTTON_FIND_ROUTE'] = "Find a route ";
 $lang['FIELD_DISTANCE'] = "Distance ";
-$lang['FIELD_ALTITUDE'] = "Altitude ";
+$lang['FIELD_ALTITUDE'] = "Altitude difference ";
 $lang['FIELD_DIFFICULTY'] = "Difficulty ";
 $lang['FIELD_MAX_PARTICIPANT'] = "Max participants ";
 $lang['FIELD_CATEGORY'] = "Category ";
@@ -83,9 +83,7 @@ $lang['FIELD_NAME'] = "Name ";
 $lang['FIELD_EMAIL'] = "Email ";
 $lang['FIELD_TELEPHONE'] = "Tel. ";
 
-//Welcome
-$lang['USER_EVENTS_NO_DATA'] = "No events to show.";
-$lang['WELCOME_H1_LISTEVENTS'] = "List of events you are subscribed to.";
+
 
 //Welcome
 $lang['USER_EVENTS_NO_DATA'] = "No events to show.";
@@ -147,6 +145,24 @@ $lang['LEAVE_VIDEO_MSG'] = "Leave video message";
 //INSCRIPTION TO EVENT
 $lang['INSCRIPTION_NUMBER_PARTICIPANTS'] = "Please enter the number of participants";
 $lang['SEND'] = "Send";
+
+//-- Modal
+$lang['CONTACT_SEND_BUTTON'] = "Send";
+$lang['CONTACT_CLOSE_BUTTON'] = "Close";
+$lang['CONTACT_YOUR_EMAIL'] = "Your e-mail address";
+
+//-- Contact form
+$lang['CONTACT_FORM'] = "Contact form";
+$lang['CONTACT_NAME'] = "Name";
+$lang['CONTACT_SUBJECT'] = "Subject";
+$lang['CONTACT_MESSAGE'] = "Message";
+$lang['CONTACT_LEAVE_VIDEO_MESSAGE'] = "Leave a video message";
+$lang['CONTACT_VIDEO_PREVIEW'] = "Video preview";
+$lang['CONTACT_INVALID_EMIAL'] = "Invalid e-mail address";
+
+$lang['DOWNLOAD_CHROME'] = "Download Google Chrome";
+$lang['DOWNLOAD_FIREFOX'] = "Download Firefox";
+$lang['UNSUPPORTED_API'] = "Your browser does not support the webcam API.";
 
 //FOOTER
 $lang['PAGES'] = "Pages";
