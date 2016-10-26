@@ -26,6 +26,8 @@ include_once ROOT_DIR.'views/header.inc';
         </div>
     </div>
 <script>
+	var infowindow;
+	var map;
 	function initMap(){
 		var startPoints = '<?php echo ($this->vars['events']);?>';
 		startPoints = startPoints.replace(/(?:\r\n|\r|\n)/g, '&nbsp');
@@ -38,16 +40,37 @@ include_once ROOT_DIR.'views/header.inc';
 		  }
 		  map = new google.maps.Map(mapCanvas, mapOptions);
 
+		infowindow = new google.maps.InfoWindow();
+		
 		for (var point in startPoints){
 			if(startPoints[point].path != null){
-				
-				var pin = new google.maps.Marker({
-					position: startPoints[point].path[0],
-					map: map,
-					
-				});
+				addPoint(startPoints[point]);	
 			}
 		}
+	}
+	
+	function addPoint(event){
+		var pin = new google.maps.Marker({
+					position: event.path[0],
+					map: map,
+					title: decodeHTML(event.title)
+				});
+				
+				google.maps.event.addListener(pin, 'click', function(){
+					infowindow.close();
+					infowindow.setContent(event.title);
+					infowindow.open(map, pin);
+				});
+	}
+	
+	function showEventDetails(event, map, marker){
+		
+	}
+	
+	function decodeHTML(html){
+		var txt = document.createElement("textarea");
+    	txt.innerHTML = html;
+    	return txt.value;
 	}
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfHSiXZQseH8j-pPHb9PiWwvGvpOUSDGw&callback=initMap"
