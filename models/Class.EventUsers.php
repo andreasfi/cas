@@ -115,4 +115,10 @@ class EventUsers
         }
         return $eventUsers;
     }
+
+    public function updateStatus()
+    {
+        $query = "UPDATE `eventusers` SET `fk_idStatus`= $this->status WHERE `fk_idUser`= $this->user ORDER BY fk_idUser ASC ";
+        MySqlConn::getInstance()->executeQuery($query);
+    }
 }
