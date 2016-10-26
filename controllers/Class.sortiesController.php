@@ -303,4 +303,8 @@ class sortiesController extends Controller{
 
         }
     }
+	function proximite(){
+		$events = Event::fetch_all_events();
+		$this->vars['events'] = json_encode($events);
+	}
 }
