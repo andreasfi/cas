@@ -79,10 +79,10 @@ $lang = $this->lang;
         <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.5.0/annyang.min.js"></script>
 
         <!-- NEWSLETTER -->
-        <script type="text/javascript" src="js/newsletter.js"></script>
+        <script type="text/javascript" src="<?php echo URL_DIR;?>/js/newsletter.js">"></script>
 
         <!-- LANGUAGE -->
-        <script type="text/javascript" src="js/language.js"></script>
+        <script type="text/javascript" src="<?php echo URL_DIR;?>/js/language.js">">></script>
 
     </head>
 	<body>
