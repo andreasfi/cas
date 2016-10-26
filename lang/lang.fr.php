@@ -22,7 +22,7 @@ $lang['CAS_PHONE'] = "+41 27 000 00 00";
 
 $lang['CONNECT_MENU_BUTTON'] = "Connection";
 $lang['DISCONNECT_MENU_BUTTON'] = "Déconnection";
-$lang['PROXIMITY_MENU_BUTTON'] = "A proximité";
+$lang['PROXIMITY_MENU_BUTTON'] = "Carte";
 $lang['ACTIVITIES_MENU_BUTTON'] = "Excursions";
 $lang['CONTACT_MENU_BUTTON'] = "Contact";
 
