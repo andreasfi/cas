@@ -67,7 +67,8 @@ include_once ROOT_DIR.'views/header.inc';
 	function getPrettyInfo(event){
 		var output = '<h3>' + decodeHTML(event.title) + '</h3>';
 		output += '<p>' + event.description + '</p>';
-		output += '<a href="details/' + event.id +'"> Plus d\'informations</a>'; 
+		output += '<a href="details/' + event.id +'"> Plus d\'informations</a><br>'; 
+		//add image to infowindow
 		calculateElevation(event.path)
 		return output;
 	}
@@ -79,6 +80,7 @@ include_once ROOT_DIR.'views/header.inc';
 	}
 	
 	function calculateElevation(points){
+		//first, find highest point along route
 		var max = {lat: 0, lng:0};
 		var elevator = new google.maps.ElevationService();
 		if(points.length > 2){
@@ -87,6 +89,7 @@ include_once ROOT_DIR.'views/header.inc';
 				'samples': 256
 			}, calculateSummit);
 		}else{
+			//if we just have one point, calculate point elevation
 			elevator.getElevationForLocations({
 				'locations': [points[0]]
 			}, calculateSummit);
@@ -117,11 +120,12 @@ include_once ROOT_DIR.'views/header.inc';
 	
 	function findAndDisplayImage(results, status){
 		var regex = new RegExp('" "', 'g');
-		var searchTerm = (results[0].name).replace(regex, '+');
-		$.get('https://www.googleapis.com/customsearch/v1?q='+ searchTerm +'&cx=006299086801710193067%3A5_sbtpwr7km&searchType=image&key=AIzaSyCfHSiXZQseH8j-pPHb9PiWwvGvpOUSDGw', function(data, status){
+		var searchTerm = (results[0].name + '+' +results[0].vicinity).replace(regex, '+');
+		$.get('https://www.googleapis.com/customsearch/v1?q='+ searchTerm +'&cx=006299086801710193067%3A5_sbtpwr7km&searchType=image&key=AIzaSyAu8ca8nVd7JUvLV4RuGQJZC12tQCBVJgE', function(data, status){
+			
 			var image = '<a href="'+ data.items[0].link+'"><img style="textalign:center" src="'+ data.items[0].link +'" width="200"></a>';
 			infowindow.setContent(infowindow.getContent() + image);
-			infowindow.setContent(infowindow.getContent() + '<p>' +results[0].name + '</p>');
+			infowindow.setContent(infowindow.getContent() + '<p>' +results[0].name + (results[0].vicinity != undefined ? ", " + results[0].vicinity : "") + '</p>');
 			
 		});
 
