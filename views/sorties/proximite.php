@@ -43,7 +43,8 @@ include_once ROOT_DIR.'views/header.inc';
 		infowindow = new google.maps.InfoWindow({maxWidth: 300});
 		
 		for (var point in startPoints){
-			if(startPoints[point].path != null){
+			//check if event has a trail mapped, and if it is in the future
+			if(startPoints[point].path != null && Date.parse(startPoints[point].start_date) > Date.parse(new Date)){
 				addPoint(startPoints[point]);	
 			}
 		}
