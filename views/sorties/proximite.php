@@ -123,7 +123,7 @@ include_once ROOT_DIR.'views/header.inc';
 		var searchTerm = (results[0].name + '+' +results[0].vicinity).replace(regex, '+');
 		$.get('https://www.googleapis.com/customsearch/v1?q='+ searchTerm +'&cx=006299086801710193067%3A5_sbtpwr7km&searchType=image&key=AIzaSyAu8ca8nVd7JUvLV4RuGQJZC12tQCBVJgE', function(data, status){
 			
-			var image = '<a href="'+ data.items[0].link+'"><img style="textalign:center" src="'+ data.items[0].link +'" width="200"></a>';
+			var image = '<a href="'+ data.items[0].link+'" target="_blank"><img style="textalign:center" src="'+ data.items[0].link +'" width="200"></a>';
 			infowindow.setContent(infowindow.getContent() + image);
 			infowindow.setContent(infowindow.getContent() + '<p>' +results[0].name + (results[0].vicinity != undefined ? ", " + results[0].vicinity : "") + '</p>');
 			
