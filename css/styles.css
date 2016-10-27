@@ -7,22 +7,3 @@
 .success {
 	color: green;
 }
-.menu-lang {
-    width: 98px;
-    height: 98px;
-    text-align: center;
-    padding: 5px !important;
-    border-right: 0px !important;
-    margin: 0px 2px;
-    font-size: 13px;
-    float: left;
-    display: block;
-}
-.menu-lang a {
-    display: block;
-    font-size: 30px;
-    width: 45px;
-    margin: 0 auto;
-    margin-bottom: 10px;
-    margin-top: 10px;
-}
