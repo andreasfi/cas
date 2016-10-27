@@ -121,7 +121,7 @@ include_once ROOT_DIR.'views/header.inc';
 		$.get('https://www.googleapis.com/customsearch/v1?q='+ searchTerm +'&cx=006299086801710193067%3A5_sbtpwr7km&searchType=image&key=AIzaSyCfHSiXZQseH8j-pPHb9PiWwvGvpOUSDGw', function(data, status){
 			var image = '<a href="'+ data.items[0].link+'"><img style="textalign:center" src="'+ data.items[0].link +'" width="200"></a>';
 			infowindow.setContent(infowindow.getContent() + image);
-			infowindow.setContent(infowindow.getContent() + results[0].name);
+			infowindow.setContent(infowindow.getContent() + '<p>' +results[0].name + '</p>');
 			
 		});
 
