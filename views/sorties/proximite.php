@@ -68,6 +68,7 @@ include_once ROOT_DIR.'views/header.inc';
 		var output = '<h3>' + decodeHTML(event.title) + '</h3>';
 		output += '<p>' + event.description + '</p>';
 		output += '<a href="details/' + event.id +'"> Plus d\'informations</a>'; 
+		output += '<img src="https://maps.googleapis.com/maps/api/streetview?size=400x400&location='+event.path[0].lat+','+event.path[0].lng + '&fov=90&heading=235&pitch=10&key=AIzaSyAu8ca8nVd7JUvLV4RuGQJZC12tQCBVJgE">'
 		return output;
 	}
 	
@@ -76,8 +77,14 @@ include_once ROOT_DIR.'views/header.inc';
     	txt.innerHTML = html;
     	return txt.value;
 	}
+	
+	
+	
+	//street view API Key AIzaSyAu8ca8nVd7JUvLV4RuGQJZC12tQCBVJgE
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfHSiXZQseH8j-pPHb9PiWwvGvpOUSDGw&callback=initMap"
     async defer></script>
 <?php include_once ROOT_DIR.'views/footer.inc';
 ?>
+
+
