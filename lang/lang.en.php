@@ -22,7 +22,7 @@ $lang['CAS_PHONE'] = "+41 27 000 00 00";
 
 $lang['CONNECT_MENU_BUTTON'] = "Connect";
 $lang['DISCONNECT_MENU_BUTTON'] = "Disconnect";
-$lang['PROXIMITY_MENU_BUTTON'] = "Near me";
+$lang['PROXIMITY_MENU_BUTTON'] = "Map";
 $lang['ACTIVITIES_MENU_BUTTON'] = "Excursions";
 $lang['CONTACT_MENU_BUTTON'] = "Contact";
 
@@ -66,7 +66,7 @@ $lang['LOGOUT'] = "Logout";
 $lang['LOGIN_TO_ACCESS_EVENTS'] = "Login to access excurions.";
 $lang['MSG_TO_RECOVER_PASSWORD'] = "This message is here to help you recover your password : \nFollow this link : ".URL_DIR."/login/changepassword/";
 $lang['CAS_PWD_RECOVERY'] = "CAS password recovery";
-$lang['CREATE_ACCOUNT'] ="Create your account";
+$lang['CREATE_ACCOUNT'] = "Create your account";
 
 //SORTIE CONTROLLER
 // DETAILS
@@ -142,6 +142,10 @@ $lang['TRAIL_DIFF_5'] = 'Professionnal';
 //CONTACT CONTROLLER
 $lang['CONTACT_US'] = 'Contact us';
 $lang['LEAVE_VIDEO_MSG'] = "Leave video message";
+
+//INSCRIPTION TO EVENT
+$lang['INSCRIPTION_NUMBER_PARTICIPANTS'] = "Please enter the number of participants";
+$lang['SEND'] = "Send";
 
 //-- Modal
 $lang['CONTACT_SEND_BUTTON'] = "Send";

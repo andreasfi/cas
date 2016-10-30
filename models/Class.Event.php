@@ -41,13 +41,15 @@ class Event implements JsonSerializable
         return $this->id;
     }
 
-    public function save()
+    public function save($owner)
     {
         $pathID = $this->savePath($this->path);
 		$this->setPathId($pathID);
 		
         $query = "INSERT INTO events(description, startDate, endDate, maxParticipants, fk_idEventType, fk_idOwner, title, fk_idEventCategory, fk_idDifficulty, fk_idPath) VALUES('$this->description', '$this->start_date','$this->end_date','$this->max_participants','$this->event_type', '$this->owner','$this->title','$this->event_category', '$this->difficulty','$pathID')";
-        MySqlConn::getInstance()->executeQuery($query);
+        $event_id = MySqlConn::getInstance()->insertAndGetId($query);
+		
+		$owner->addUserToEvent($event_id, 0);
     }
 	
 	public function update($description, $startDate, $endDate, $maxParticipants, $title, $eventCategory, $difficulty, $path){
@@ -395,5 +397,10 @@ WHERE
         $event = new Event($r['idEvent'], $r['description'], DateTime::createFromFormat('Y-m-d H:i:s', $r['startDate']), DateTime::createFromFormat('Y-m-d H:i:s', $r['endDate']), $r['maxParticipants'], $r['type'], $owner, $r['title'], $r['category'], $r['differenceName'], $r['coordinatesJSON'], $r['fk_idPath']);
 
         return $event;
+    }
+    static function updateUserEvent($eventId, $status, $iduser){
+        $status += 1;
+        $query = "UPDATE eventusers SET fk_idStatus = '$status' WHERE fk_idEvent = '$eventId' AND fk_idUser = '$iduser';";
+        MySqlConn::getInstance()->executeQuery($query);
     }
 }

@@ -6,6 +6,8 @@ $msg = $this->vars['msg'];
 $user = $_SESSION['user'];
 $events = $this->vars['user_events']; //Declared in the controller
 $events_msg = $this->vars['user_events_msg'];
+$pageTitle = $this->vars['pageTitle'];
+$pageMessage = $this->vars['pageMessage'];
 include_once ROOT_DIR . 'views/header.inc';
 ?>
 <div class="content">
@@ -63,7 +65,7 @@ include_once ROOT_DIR . 'views/header.inc';
                                                                          value="<?php echo $user->getLastname(); ?>"/><br>
                             <?php echo $lang['PHONE']; ?> :<br><input type="text" name="phone" size="25"
                                                                       value="<?php echo $user->getPhone(); ?>"/><br><br>
-                            <input type="submit" name="action" value="<?php echo $lang['CHANGE_DATA']; ?>"><br><br>
+                            <input class="btn btn-primary" type="submit" name="action" value="<?php echo $lang['CHANGE_DATA']; ?>"><br><br>
                         </form>
                         <br>
                         <a href="<?php echo URL_DIR . '/login/logout'; ?>"><?php echo $lang['LOGOUT']; ?></a><br>

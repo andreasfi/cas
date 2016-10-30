@@ -13,16 +13,16 @@ $lang = array();
 
 //misc
 
-$lang['WEBSITE_NAME'] = "Club alpin suisse";
+$lang['WEBSITE_NAME'] = "Club Alpin Suisse";
 $lang['CAS_HOMETOWN'] = "Crans-Montana";
 $lang['CAS_MAIL'] = "casphphes@gmail.com";
 $lang['CAS_PHONE'] = "+41 27 000 00 00";
 
 //menu
 
-$lang['CONNECT_MENU_BUTTON'] = "Se connecter";
-$lang['DISCONNECT_MENU_BUTTON'] = "Se déconnecter";
-$lang['PROXIMITY_MENU_BUTTON'] = "A proximité";
+$lang['CONNECT_MENU_BUTTON'] = "Connection";
+$lang['DISCONNECT_MENU_BUTTON'] = "Déconnection";
+$lang['PROXIMITY_MENU_BUTTON'] = "Carte";
 $lang['ACTIVITIES_MENU_BUTTON'] = "Excursions";
 $lang['CONTACT_MENU_BUTTON'] = "Contact";
 
@@ -139,6 +139,10 @@ $lang['TRAIL_DIFF_2'] = 'Intermédiaire';
 $lang['TRAIL_DIFF_3'] = 'Avancé';
 $lang['TRAIL_DIFF_4'] = 'Tres Avancé';
 $lang['TRAIL_DIFF_5'] = 'Professionnel';
+
+//INSCRIPTION TO EVENT
+$lang['INSCRIPTION_NUMBER_PARTICIPANTS'] = "Entrez le nombre de participants";
+$lang['SEND'] = "Envoyer";
 
 //CONTACT CONTROLLER
 $lang['CONTACT_US'] = 'Contactez nous';
