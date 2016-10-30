@@ -173,8 +173,8 @@ include_once 'views/header.inc'; ?>
                                 <button id="details_save_button" type="submit" class="btn btn-large bblack" style="display: none;"><?php echo $lang['SAVE_BUTTON'] ?> <i class="fa fa-save"></i></button>
 
                             </form>
-	<!-- EDIT EVENT -->							
 							<?php
+                            <!-- EDIT EVENT -->							
 						if($_SESSION['user']->getId() == $owner->getId()){ ?>
 							<form action="<?php echo URL_DIR.'/sorties/ajoutsortie' ?>" method="post">
 								<input type=hidden name="id" value="<?php echo $eventId;?>">

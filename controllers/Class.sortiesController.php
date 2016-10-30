@@ -15,6 +15,72 @@ class sortiesController extends Controller{
         $this->vars['propositions'] = json_encode(Event::fetch_all_events());
     }
 
+    function saveNewStatuses(){
+
+        //Only the trailmaster can access to this function
+        $this->checkUser(3, "/error/http404");
+        //TODO : Check the previous page.
+
+        if (!strpos($_SERVER['HTTP_REFERER'], SITE_NAME)) {
+            header('Location: ' . ROOT_DIR);
+            exit();
+        }
+
+        $event_id = $_POST['event_id'];
+        ksort($_POST);
+        //Send e-mails to those people whose reservation was approved/rejected.
+
+        $participating_users = EventUsers::getEventUsersByEventID($event_id);
+        $modified_statuses = array(); //Contains the EventUsers where the statuses were modified.
+
+        //TODO : Delete this. Only for debugging purpose.
+
+        $array_keys = array_keys($_POST);
+
+        for($i=0; $i<sizeof($array_keys); $i++)
+        {
+            for($j=0; $j<sizeof($participating_users); $j++)
+            {
+                if($array_keys[$i] == $participating_users[$j]->getUser())
+                {
+                    //Check if the status was modified
+                    if($participating_users[$j]->getStatus() != $_POST[$array_keys[$i]])
+                    {
+                        $participating_users[$j]->setStatus($_POST[$array_keys[$i]]);
+                        array_push($modified_statuses, $participating_users[$j]);
+                    }
+                }
+            }
+        }
+
+        //Update values in the table and send e-mails
+        foreach($modified_statuses as $m)
+        {
+            //Update
+            $m->updateStatus();
+
+            $USER = User::getUserFromId($m->getUser());
+            $email_address = $USER->getMail();
+
+            $subject = "Confirmation for your trail.";
+
+            //TODO : Create messages
+            $accepted_message = "Temporary message to inform you that your trail is confirmed by the trailmaster";
+            $refused_message =  "Temporary message to inform you that your trail is refused by the trailmaster";
+
+            switch ($m->getStatus())
+            {
+                case 1 : "Do nothing .. ";
+                    break;
+                case 2 : $this->sendMail($USER->getMail(), $USER->getFirstname() + " " + $USER->getLastname(), $subject, $accepted_message, null);
+                    break;
+                case 3 : $this->sendMail($USER->getMail(), $USER->getFirstname() + " " + $USER->getLastname(), $subject, $refused_message, null);
+                    break;
+            }
+        }
+        //Post the number of modified statuses to the previous page.
+        header('Location: '.$_SERVER['HTTP_REFERER']);
+    }
 
     function details(){
 
