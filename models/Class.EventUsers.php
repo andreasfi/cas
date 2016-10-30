@@ -98,7 +98,7 @@ class EventUsers
     {
         $eventUsers = array();
 
-        $query = "SELECT * FROM `eventusers` WHERE fk_idEvent = $eventID ORDER BY fk_idUser ASC ";
+        $query = "SELECT * FROM `eventusers` WHERE fk_idEvent = $eventID ORDER BY fk_idUser ASC";
 
         $result = MySqlConn::getInstance()->selectDB($query);
         $rows = $result->fetchAll();

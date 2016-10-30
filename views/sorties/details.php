@@ -22,7 +22,6 @@ $eventId = $this->vars['eventId'];
 $startDate = $this->vars['startDate'];
 $endDate = $this->vars['endDate'];
 
-
 $from =$this->vars['from'];
 $to = $this->vars['to'];
 $via = $this->vars['via'];
@@ -35,6 +34,7 @@ $response = $this->vars['response'];
 $userLevel = $this->vars['userLevel'];
 
 $allParticipants = $this->vars['allParticipants'];
+
 $participating = $this->vars['participating'];
 
 include_once 'views/header.inc'; ?>
@@ -57,24 +57,15 @@ include_once 'views/header.inc'; ?>
 
                 </div>
                 <div class="col-lg-6">
-
-
                     <?php if($participating){ ?>
                         <button data-toggle="tooltip" data-placement="top" title="You are already attending this event" style="" class="btn btn-default btn-large pull-right"><?php echo 'Already participating';?> <i class="fa fa-angle-double-right"></i></button>
                     <?php } else if(isset($userLevel) && $userLevel >= 2 ) { ?>
                         <a href="<?php echo URL_DIR ?>/sorties/inscription/<?php if (isset($eventId)) {echo $eventId;}; ?>" class="btn btn-danger btn-large pull-right"><?php echo $lang['BUTTON_PARTICIPATION_REQUEST'];?><i class="fa fa-angle-double-right"></i></a>
                     <?php } else { ?>
-                            <button data-toggle="tooltip" data-placement="top" title="Vous devez être membre pour vous inscrire" style="" class="btn btn-default btn-large pull-right"><?php echo $lang['BUTTON_PARTICIPATION_REQUEST'];?> <i class="fa fa-angle-double-right"></i></button>
+                        <button data-toggle="tooltip" data-placement="top" title="Vous devez être membre pour vous inscrire" style="" class="btn btn-default btn-large pull-right"><?php echo $lang['BUTTON_PARTICIPATION_REQUEST'];?> <i class="fa fa-angle-double-right"></i></button>
                     <?php } ?>
-					
+
                     <a href="#" data-toggle="modal" data-target="#itineraire" class="btn btn-info btn-large pull-right"><?php echo $lang['BUTTON_FIND_ROUTE'];?> <i class="fa fa-angle-double-right"></i></a>
-                    <?php
-                    if(isset($_SESSION['user']) && $_SESSION['user']->getId() == $owner->getId()){ ?>
-                        <form style="margin:0;" action="<?php echo URL_DIR.'/sorties/ajoutsortie' ?>" method="post">
-                            <input type=hidden name="id" value="<?php echo $eventId;?>">
-                            <button type="submit" class="btn btn-default btn-large bgreen pull-right">Modifier la course <i class="fa fa-angle-double-right"></i></button>
-                        </form>
-                    <?php } ?>
                 </div>
             </div>
             <div class="service-home">
@@ -116,7 +107,7 @@ include_once 'views/header.inc'; ?>
                 </div>
                 <div class="row">
                     <div class="col-lg-12 no-col-margin">
-                        <div id="chart" class="graphicalalt col-lg-12 no-col-margin" ></div>
+                        <div id="chart" class="graphicalalt"></div>
                     </div>
                 </div>
                 <div class="row">
@@ -146,27 +137,85 @@ include_once 'views/header.inc'; ?>
                     </div>
                 </div>
                 <hr>
-
                 <?php
                 if($this->checkUser(2,"")){
                     if($this->checkEventOwner($owner->getId(),"")){ ?>
-                    <div class="row">
-                        <div class="col-md-12 service-list col-no-margin">
-<<<<<<< HEAD
-                            <form method="post" action="<?php echo URL_DIR.'/sorties/saveNewStatuses' ?>">
-                                <input type="hidden" name="event_id" value="<?php echo $eventId ?>">
-=======
-                            <form method="post" action="<?php echo URL_DIR.'/sorties/updateParticipant/'.$eventId?>">
-                                <input type=hidden name="id" value="<?php echo $eventId;?>">
-                                <input type=hidden name="owner" value="<?php echo $owner->getId();?>">
->>>>>>> ec583966a4ba3aea3e03642069e08eaf7a70c0c1
+                        <div class="row">
+                            <div class="col-md-12 service-list col-no-margin">
+                                <form method="post" action="<?php echo URL_DIR.'/sorties/saveNewStatuses' ?>">
+                                    <input type="hidden" name="event_id" value="<?php echo $eventId ?>">
+                                    <table class="table table-responsive">
+                                        <thead>
+                                        <tr>
+                                            <th>Icon</th>
+                                            <th>Nom</th>
+                                            <th>Téléphone</th>
+                                            <th>E-mail</th>
+                                            <th>Status</th>
+                                            <th>Modifier</th>
+                                        </tr>
+                                        </thead>
+                                    <?php
+                                    foreach ($allParticipants as $key=>$item){
+                                        if(isset($item)){
+                                            foreach ($item as $keyuser=>$it){
+
+                                                $class = 'active';
+
+                                                if($key == 1){
+                                                    $class = 'success';
+                                                }elseif($key == 2)
+                                                {
+                                                    $class = 'danger';
+                                                }
+
+                                                ?>
+                                                <tr <?php echo "class='$class'"; ?>>
+                                                    <td class="service-icon">
+                                                    <i class="fa fa-user bblue"></i>
+                                                    </td>
+                                                    <td><?php echo $it->getFirstname()." ".$it->getLastname();?></td>
+                                                    <td><?php echo $it->getPhone();?></td>
+                                                    <td><a href="mailto:<?php echo $it->getMail();?>"><?php echo $it->getMail();?></a></td>
+                                                    <td>
+                                                        <select name="<?php echo $it->getId() ?>" class="select_status" <?php if($key==1 || $key==2){ echo "disabled style='background-color: lightgray;'";} ?>>
+                                                            <option value="1" <?php if($key==0){ echo "selected";}?>>Submitted</option>
+                                                            <option value="2" <?php if($key==1){ echo "selected";}?>>Accepted</option>
+                                                            <option value="3" <?php if($key==2){ echo "selected";}?>>Refused</option>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <button type="button" onclick="" class="btn btn-primary">Modifier</button>
+                                                    </td>
+                                                    </tr>
+                                            <?php }
+                                        }
+                                    } ?>
+
+                                    </table>
+                                    <button id="details_save_button" type="submit" class="btn btn-large bblack" style="display: none;"><?php echo $lang['SAVE_BUTTON'] ?> <i class="fa fa-save"></i></button>
+
+                                </form>
+                                <!-- EDIT EVENT -->
                                 <?php
-                                $counter = 0;
+                                if($_SESSION['user']->getId() == $owner->getId()){ ?>
+                                    <form action="<?php echo URL_DIR.'/sorties/ajoutsortie' ?>" method="post">
+                                        <input type=hidden name="id" value="<?php echo $eventId;?>">
+                                        <button type="submit" class="btn btn-large bgreen"><?php echo $lang['MODIFY_BUTTON'] ?> <i class="fa fa-angle-double-right"></i></button>
+                                    </form>
+                                <?php } ?>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                        <?php
+                    } else {
+                        ?>
+                        <div class="row">
+                            <div class="col-md-12 service-list col-no-margin">
+                                <?php
                                 foreach ($allParticipants as $key=>$item){
                                     if(isset($item)){
-<<<<<<< HEAD
-                                        foreach ($item as $keyuser=>$it){;
-
+                                        foreach ($item as $keyuser=>$it){
                                             ?>
                                             <div class="service-icon">
                                                 <i class="fa fa-user bblue"></i>
@@ -174,107 +223,16 @@ include_once 'views/header.inc'; ?>
                                             <div class="service-content">
                                                 <div class="service-home-meta">Participant <?php echo $keyuser+1;?></div>
                                                 <h4><?php echo $it->getFirstname()." ".$it->getLastname();?></h4>
-                                                <p>
-                                                    Tel.: <?php echo $it->getPhone();?>,
-                                                    Email: <a href="mailto:<?php echo $it->getMail();?>"><?php echo $it->getMail();?></a>
-                                                    <select name="<?php echo $it->getId() ?>" class="select_status">
-                                                        <option value="1" <?php if($key==1){ echo "selected";}?>>Submitted</option>
-                                                        <option value="2" <?php if($key==2){ echo "selected";}?>>Accepted</option>
-                                                        <option value="3" <?php if($key==3){ echo "selected";}?>>Refused</option>
-                                                    </select>
-                                                </p>
-=======
-                                        foreach ($item as $keyuser=>$it){
-
-                                            ?>
-                                            <div class="col-lg-6">
-                                                <div class="service-icon">
-                                                    <i class="fa fa-area-chart bblue"></i>
-                                                </div>
-                                                <div class="service-content">
-                                                    <div class="service-home-meta">Participant <?php echo $counter+1;?></div>
-                                                    <h4><?php echo $it->getFirstname()." ".$it->getLastname();?></h4>
-                                                    <p>
-                                                        Tel.: <?php echo $it->getPhone();?>,
-                                                        Email: <a href="mailto:<?php echo $it->getMail();?>"><?php echo $it->getMail();?></a>
-                                                        <input type=hidden name="<?php echo 'participant'.$counter;?>" value="<?php echo $it->getId();?>">
-
-                                                        <select name="<?php echo 'status'.$counter;?>">
-                                                            <option value="0" <?php if($key==0){ echo "selected";}?>>Submitted</option>
-                                                            <option value="1" <?php if($key==1){ echo "selected";}?>>Accepted</option>
-                                                            <option value="2" <?php if($key==2){ echo "selected";}?>>Refused</option>
-                                                        </select>
-                                                    </p>
-                                                </div>
-                                                <hr>
->>>>>>> ec583966a4ba3aea3e03642069e08eaf7a70c0c1
+                                                <p></p>
                                             </div>
-
-
-                                        <?php $counter++; }
-
-                                        ?><input type="hidden" name="countparticipant" value="<?php echo $key;?>"/><?php
-                                    }
-<<<<<<< HEAD
-                                } ?>
-                                <button id="details_save_button" type="submit" class="btn btn-large bblack" style="display: none;"><?php echo $lang['SAVE_BUTTON'] ?> <i class="fa fa-save"></i></button>
-
-                            </form>
-							<?php
-                            <!-- EDIT EVENT -->							
-						if($_SESSION['user']->getId() == $owner->getId()){ ?>
-							<form action="<?php echo URL_DIR.'/sorties/ajoutsortie' ?>" method="post">
-								<input type=hidden name="id" value="<?php echo $eventId;?>">
-								<button type="submit" class="btn btn-large bgreen"><?php echo $lang['MODIFY_BUTTON'] ?> <i class="fa fa-angle-double-right"></i></button>
-							</form>
-                        <?php } ?>
-=======
-
-                                }
-                                        if($_SESSION['user']->getId() == $owner->getId()){ ?>
-                                                <div class="col-lg-12">
-                                                    <button  type="submit" class="btn btn-large bgreen ">Modifier les statuts <i class="fa fa-angle-double-right"></i></button>
-                                                </div>
+                                            <hr />
                                         <?php }
-                                        ?>
-
-                            </form>
-	<!-- EDIT EVENT -->						<br><br>
-
->>>>>>> ec583966a4ba3aea3e03642069e08eaf7a70c0c1
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-				<?php
-                    } else {
-                        ?>
-                        <div class="row">
-                            <div class="col-md-12 service-list col-no-margin">
-                                    <?php
-                                    $counter = 0;
-                                    foreach ($allParticipants as $key=>$item){
-                                        if(isset($item)){
-                                            foreach ($item as $keyuser=>$it){
-                                                ?>
-                                <div class="col-lg-6">
-                                    <div class="service-icon">
-                                        <i class="fa fa-area-chart bblue"></i>
-                                    </div>
-                                    <div class="service-content">
-                                        <div class="service-home-meta">Participant <?php echo $counter+1;?></div>
-                                        <h4><?php echo $it->getFirstname()." ".$it->getLastname();?></h4>
-                                        <p></p>
-                                    </div>
-                                    <hr />
-                                </div>
-
-                                            <?php $counter++; }
-                                        }
-                                    } ?>
+                                    }
+                                } ?>
                                 <div class="clearfix"></div>
                             </div>
                         </div>
-                <?php
+                        <?php
                     }
 
                 }  ?>
@@ -560,6 +518,29 @@ if($response != false){
     </div>
     </div>
 
+<!-- Modal message -->
+
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Petit feedback ... </h4>
+                </div>
+                <div class="modal-body">
+                    <p><?php echo $msg ?></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
     <script>
 
         var map = null;
@@ -571,47 +552,38 @@ if($response != false){
             var mapCanvas = document.getElementById('map');
             elevator = new google.maps.ElevationService();
             PlanCoordinates = <?php echo(strlen($path) > 0 ? $path : '[]'); ?>;
-            if(PlanCoordinates.length > 0){
-				google.charts.load('current', {'packages': ['corechart'], 'callback': drawCharts});	
-			}
+            if(PlanCoordinates.length > 0)
+                google.charts.load('current', {'packages': ['corechart'], 'callback': drawCharts});
+
             var mapOptions = {
                 center: (PlanCoordinates.length > 0 ? PlanCoordinates[0] : {lat: 46.307174, lng: 7.473367}),
                 mapTypeId: 'terrain',
-				zoom:9
+                zoom:9
             };
 
             map = new google.maps.Map(mapCanvas, mapOptions);
         }
-		
+
         function drawCharts(){
             trailShape = new google.maps.Polyline({
                 path: PlanCoordinates,
                 strokeColor: '#FF0000',
                 map: map
             });
-			
-			//center map and zoom to fit path
-			var bounds = new google.maps.LatLngBounds();
-			if(PlanCoordinates.length > 1){
-				for(var i = 0; i < PlanCoordinates.length; i++){
-					bounds.extend(PlanCoordinates[i]);
-				}
-					map.setCenter(bounds.getCenter());
-					map.fitBounds(bounds);
-					map.setZoom(map.getZoom() + 1);
-			
-				elevator.getElevationAlongPath({
-					'path': PlanCoordinates,
-					'samples': 256
-				}, plotElevation);
-			}else{
-				var marker = new google.maps.Marker({
-					position: PlanCoordinates[0],
-					map: map
-				});
-				map.setCenter(PlanCoordinates[0]);
-				map.setZoom(12);
-			}
+
+            //center map and zoom to fit path
+            var bounds = new google.maps.LatLngBounds();
+            for(var i = 0; i < PlanCoordinates.length; i++){
+                bounds.extend(PlanCoordinates[i]);
+            }
+            map.setCenter(bounds.getCenter());
+            map.fitBounds(bounds);
+
+            elevator.getElevationAlongPath({
+                'path': PlanCoordinates,
+                'samples': 256
+            }, plotElevation);
+
         }
 
         function plotElevation(elevations, status) {
@@ -627,70 +599,81 @@ if($response != false){
             data.addColumn('number', 'Altitude');
             data.addColumn('number', 'Sommet');
             data.addColumn('number', 'Départ');
-			
-			//get highest point
-			var max = 0;
-			for (var i = 0; i < elevations.length; i++)
-				if(elevations[i].elevation > elevations[max].elevation)
-					max = i;
-			
-			//draw chart
+
+            //get highest point
+            var max = 0;
+            for (var i = 0; i < elevations.length; i++)
+                if(elevations[i].elevation > elevations[max].elevation)
+                    max = i;
+
+            //draw chart
             for (var i = 0; i < elevations.length; i++) {
-                data.addRow([(i == max || i == 0 ? 'Altitude' : ''), 
-							 Math.round(elevations[i].elevation), 
-							 (i == max ? Math.round(elevations[max].elevation) : null), 
-							 (i == 0 ? Math.round(elevations[0].elevation) : null)]);	
-			}
-			
+                data.addRow([(i == max || i == 0 ? 'Altitude' : ''),
+                    Math.round(elevations[i].elevation),
+                    (i == max ? Math.round(elevations[max].elevation) : null),
+                    (i == 0 ? Math.round(elevations[0].elevation) : null)]);
+            }
+
 
             chart.draw(data, {
                 height: 150,
                 legend: 'none',
                 titleY: 'Altitude (m)',
-				hAxis: {title: ''},
-				seriesType: 'line',
+                hAxis: {title: ''},
+                seriesType: 'line',
                 series: {
                     0: {color: '#1171A3'},
-					
-					1: {
-						type: 'scatter',
-						pointShape: 'star',
-						pointSize: 15
-						},
-					2: {
-						type: 'scatter',
-						color: 'green',
-						pointShape: 'circle',
-						pointSize: 10}
-						},
+
+                    1: {
+                        type: 'scatter',
+                        pointShape: 'star',
+                        pointSize: 15
+                    },
+                    2: {
+                        type: 'scatter',
+                        color: 'green',
+                        pointShape: 'circle',
+                        pointSize: 10}
+                },
                 backgroundColor: '#E4E4E4'
             });
-			
-			this.calculateDenivele(elevations);
+
+            this.calculateDenivele(elevations);
 
         }
-		
-		function calculateDenivele(elevations){
-			if(elevations.length > 0){
-				var lowest = elevations[0].elevation;
-				var highest = lowest;
 
-				for(var i = 0; i < elevations.length ; i++){
-					if(elevations[i].elevation > highest)
-						highest = elevations[i].elevation;
-					else if(elevations[i].elevation < lowest){
-						lowest = elevations[i].elevation;
-					}
-				}
-				document.getElementById('elevation').innerHTML = Math.round(highest-lowest) + "m";
-			}
-		}
+        function calculateDenivele(elevations){
+            if(elevations.length > 0){
+                var lowest = elevations[0].elevation;
+                var highest = lowest;
+
+                for(var i = 0; i < elevations.length ; i++){
+                    if(elevations[i].elevation > highest)
+                        highest = elevations[i].elevation;
+                    else if(elevations[i].elevation < lowest){
+                        lowest = elevations[i].elevation;
+                    }
+                }
+                document.getElementById('elevation').innerHTML = Math.round(highest-lowest) + "m";
+            }
+        }
 
         $('.select_status').change(function(){
-           //Display the save button
+            //Display the save button
             $('#details_save_button').css('display', 'inline-block');
 
         });
+
+        $(function()
+        {
+            var msg = "<?php echo $msg ?>";
+            if(msg.length > 0){
+                alert(msg);
+                $('#myModal').modal({ show: 'true' });
+            }
+
+        })
+
 
     </script>
 

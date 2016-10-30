@@ -83,9 +83,12 @@ $lang['FIELD_NAME'] = "Nom ";
 $lang['FIELD_EMAIL'] = "E-mail ";
 $lang['FIELD_TELEPHONE'] = "N°tel. ";
 
-$lang['SAVE_BUTTON'] = "Sauvegarder";
+$lang['SAVE_BUTTON'] = "Sauvegarder les changements";
 $lang['MODIFY_BUTTON'] = "Modifier la course";
 
+$lang['SELECT_SUBMITTED'] = "Submitted";
+$lang['SELECT_ACCEPTED'] = "Accepted";
+$lang['SELECT_REFUSED'] = "Refused";
 
 //Welcome
 $lang['USER_EVENTS_NO_DATA'] = "Aucune excursion à afficher.";
