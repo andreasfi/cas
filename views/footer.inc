@@ -123,6 +123,5 @@ $lang = $this->lang;
 <?php
 
 $_SESSION['msg']="";
-$_SESSION['msg_err'] = "";
 
 ?>

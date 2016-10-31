@@ -24,7 +24,6 @@ class Controller {
             }
 
 
-
             $this->vars['pageTitle'] = "CAS";
             $this->vars['pageMessage'] = "Club Alpin Suisse";
             $this->controller = $controller;
@@ -50,10 +49,6 @@ class Controller {
 
         $this->lang = $lang;
     }
-
-
-
-
 
 
     /**
