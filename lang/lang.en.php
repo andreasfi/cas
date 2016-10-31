@@ -86,9 +86,21 @@ $lang['FIELD_TELEPHONE'] = "Tel. ";
 $lang['SAVE_BUTTON'] = "Save changes";
 $lang['MODIFY_BUTTON'] = "Modify the trail";
 
-$lang['SELECT_ACCEPTED'] = "Accepté";
-$lang['SELECT_REFUSED'] = "Refusée";
-$lang['SELECT_SUBMITTED'] = "Soumise";
+$lang['SELECT_ACCEPTED'] = "Accepted";
+$lang['SELECT_REFUSED'] = "Refused";
+$lang['SELECT_SUBMITTED'] = "Submitted";
+
+$lang['PARTICIPANTS_NAME'] = "Name";
+$lang['PARTICIPANTS_PHONE'] = "Phone";
+$lang['PARTICIPANTS_EMAIL'] = "E-mail";
+$lang['PARTICIPANTS_STATUS'] = "Status";
+$lang['PARTICIPANTS_MODIFY'] = "Modify";
+
+//Save new user
+
+$lang['SUBJECT_APPLIANCE'] = "Your participation request.";
+$lang['SUBJECT_MODIFICATION'] = "Modification of your participation.";
+
 
 //Welcome
 $lang['USER_EVENTS_NO_DATA'] = "No events to show.";

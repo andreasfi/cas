@@ -86,9 +86,21 @@ $lang['FIELD_TELEPHONE'] = "N°tel. ";
 $lang['SAVE_BUTTON'] = "Sauvegarder les changements";
 $lang['MODIFY_BUTTON'] = "Modifier la course";
 
-$lang['SELECT_SUBMITTED'] = "Submitted";
-$lang['SELECT_ACCEPTED'] = "Accepted";
-$lang['SELECT_REFUSED'] = "Refused";
+$lang['SELECT_SUBMITTED'] = "En attente";
+$lang['SELECT_ACCEPTED'] = "Accepté";
+$lang['SELECT_REFUSED'] = "Refusé";
+
+$lang['PARTICIPANTS_NAME'] = "Nom";
+$lang['PARTICIPANTS_PHONE'] = "Téléphone";
+$lang['PARTICIPANTS_EMAIL'] = "E-mail";
+$lang['PARTICIPANTS_STATUS'] = "Statut";
+$lang['PARTICIPANTS_MODIFY'] = "Modifier";
+
+//Save new user
+
+$lang['SUBJECT_APPLIANCE'] = "Votre demande de participation";
+$lang['SUBJECT_MODIFICATION'] = "Modification de votre participation";
+
 
 //Welcome
 $lang['USER_EVENTS_NO_DATA'] = "Aucune excursion à afficher.";

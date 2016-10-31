@@ -256,7 +256,7 @@ class Controller {
      * @param $signature : signature de l'administrateur (optionnel).
      * @return string
      */
-    protected function requireToVar($incfile, $subject, $message, $hashed_email)
+    protected function requireToVar($incfile, $subject, $message, $var3)
     {
         ob_start();
         require($incfile);

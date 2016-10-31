@@ -166,14 +166,10 @@ if(isset($msg) && $msg!=""){
     <div class="content">
         <div class="container">
             <div class="alert alert-info">
-                <strong>Info!</strong> <?php echo $msg;?>
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Info ! </strong> <?php echo $msg;?>
             </div>
         </div>
     </div>
 
 <?php }
-
-
-
-
-

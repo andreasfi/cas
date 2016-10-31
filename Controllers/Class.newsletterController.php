@@ -133,8 +133,7 @@ class newsletterController extends Controller
         foreach ($emailAddresses as $email) {
 
             $hashed_email = md5(SALT_NEWSLETTER . $email);
-            $incfile = ROOT_DIR . "views/mail.inc";
-            error_log($incfile);
+            $incfile = ROOT_DIR . "views/mail_newsletter.inc";
             $template_message = $this::requireToVar($incfile, $subject, $message, $hashed_email);
 
             try {

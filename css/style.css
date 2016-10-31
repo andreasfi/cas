@@ -205,6 +205,25 @@ ul{
 	background: #d82829 !important;
 }
 
+
+/* Details */
+
+#details-table th
+{
+	font-weight: bold;
+}
+
+#details-table td
+{
+	vertical-align: middle !important;
+}
+
+#details_save_button
+{
+	margin-bottom: 15px !important;
+	border: 4px solid midnightblue;
+}
+
 /* Label colors */
 
 .label.label-success,

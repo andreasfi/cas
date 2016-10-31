@@ -202,7 +202,8 @@ class User implements JsonSerializable {
         $allUsers[0] = null;
         $allUsers[1] = null;
         $allUsers[2] = null;
-        $query = "Select * from eventusers as eu, users as u where fk_idEvent = '$idEvent' AND eu.fk_idUser = u.idUser";
+        //Le select récupérera les événements dans l'ordre ascendant des status. Les nouvelles requêtes seront toujours en haut.
+        $query = "Select * from eventusers as eu, users as u where fk_idEvent = '$idEvent' AND eu.fk_idUser = u.idUser ORDER BY fk_idStatus ASC";
         $result = MySqlConn::getInstance()->selectDB($query);
         $row = $result->fetchAll();
 

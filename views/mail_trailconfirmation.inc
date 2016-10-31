@@ -8,6 +8,7 @@ $message
 
 -->
 
+<?php $event = $var3 ?>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -83,7 +84,8 @@ $message
                             <tbody>
                             <tr>
                                 <td style="padding:10px 20px" class="center">
-                                    <a href="#"><img src="<?php echo ROOT_DIR ."img/cas_logo.PNG" ?>" alt="La cabane CAS." border="0"></a>
+                                    <a href="#"><img src="<?php echo ROOT_DIR . "img/cas_logo.PNG" ?>"
+                                                     alt="La cabane CAS." border="0"></a>
                                 </td>
                             </tr>
                             </tbody>
@@ -94,8 +96,10 @@ $message
                         <table border="0" cellpadding="0" cellspacing="0" align="right" class="deviceWidth">
                             <tbody>
                             <tr>
-                                <td class="center" style="font-size: 13px; color: #272727; font-weight: lighter; text-align: right; font-family: Georgia, Times, serif; line-height: 20px; vertical-align: middle; padding:10px 20px; font-style:italic">
-                                    <a href="<?php echo ROOT_DIR . "sorties" ?>" style="text-decoration: none; color: #3b3b3b;">Prochaines excursions</a>
+                                <td class="center"
+                                    style="font-size: 13px; color: #272727; font-weight: lighter; text-align: right; font-family: Georgia, Times, serif; line-height: 20px; vertical-align: middle; padding:10px 20px; font-style:italic">
+                                    <a href="<?php echo ROOT_DIR . "sorties" ?>"
+                                       style="text-decoration: none; color: #3b3b3b;">Prochaines excursions</a>
                                 </td>
                             </tr>
                             </tbody>
@@ -109,7 +113,8 @@ $message
             <!-- End Header -->
 
             <!-- One Column -->
-            <table width="580" class="deviceWidth" border="0" cellpadding="0" cellspacing="0" align="center" bgcolor="#eeeeed" style="margin:0 auto;">
+            <table width="580" class="deviceWidth" border="0" cellpadding="0" cellspacing="0" align="center"
+                   bgcolor="#eeeeed" style="margin:0 auto;">
                 <tbody>
                 <tr>
                     <td style="font-size: 13px; color: #959595; font-weight: normal; text-align: left; font-family: Georgia, Times, serif; line-height: 24px; vertical-align: top; padding:10px 8px 10px 8px"
@@ -126,16 +131,55 @@ $message
                             </tbody>
                         </table>
                         <?php echo $message ?>
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td valign="middle">Récapitulatif de l'event</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Titre
+                                </td>
+                                <td>
+                                    <?php echo $event->getTitle() ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Description
+                                </td>
+                                <td>
+                                    <?php echo $event->getDescription() ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Difficulté
+                                </td>
+                                <td>
+                                    <?php echo $event->getDifficulty(); ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Date début
+                                </td>
+                                <td>
+                                    <?php echo $event->getStartDate() ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Date fin
+                                </td>
+                                <td>
+                                    <?php echo $event->getEndDate(); ?>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </td>
                 </tr>
-
-                <tr>
-                    <td style="font-size: 12px; color: #959595; font-weight: normal; text-align: left; font-family: Georgia, Times, serif; line-height: 24px; vertical-align: top; padding:10px 8px 10px 8px"
-                        bgcolor="#eeeeed">
-                        <a href="<?php echo 'localhost/cas/newsletter/unsubscribe/'.$hashed_email ?>">Unsubscribe from the newsletter</a>
-                    </td>
-                </tr>
-
                 </tbody>
             </table>
     </tbody>
