@@ -173,3 +173,14 @@ if(isset($msg) && $msg!=""){
     </div>
 
 <?php }
+
+if(isset($msg_err) && $msg_err != "") { ?>
+    <div class="content">
+        <div class="container">
+            <div class="alert alert-danger">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Erreur ! </strong> <?php echo $msg_err;?>
+            </div>
+        </div>
+    </div>
+    <?php }

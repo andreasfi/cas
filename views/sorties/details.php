@@ -9,7 +9,6 @@
 
 $msg = $this->vars['msg'];
 $msg_err = $this->vars['msg_err'];
-var_dump($msg_err);
 $pageTitle = $this->vars['pageTitle'];
 $pageMessage = $this->vars['pageMessage'];
 $owner = $this->vars['owner'];
