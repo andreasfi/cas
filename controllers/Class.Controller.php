@@ -149,6 +149,7 @@ class Controller {
         $mail->Username = "casphphes@gmail.com"; // GMAIL username
         $mail->Password = "qwertzuio"; // GMAIL password
         $mail->IsHtml(true);
+        $mail->CharSet = 'UTF-8';
 
 
         //Typical mail data
