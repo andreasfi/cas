@@ -56,6 +56,8 @@ include_once ROOT_DIR . 'views/header.inc'; ?>
     var event_type_color = ["#fa3031", "#52b9e9"];
     var event_type_textcolor = 'white';
 
+    var event_ids = [];
+
     var datatable_data = [];
     var calendar_data = [];
 
@@ -64,15 +66,13 @@ include_once ROOT_DIR . 'views/header.inc'; ?>
         var json_events = '<?php echo $this->vars['propositions']; ?>';
 		//convert newline elements to <br/>
 		json_events = json_events.replace(/(?:\r\n|\r|\n)/g, '&nbsp');
-		console.log(json_events);
         //Parse the string to JSON.
         json_events = JSON.parse(json_events);
-		console.log(json_events);
         for (var i = 0; i < json_events.length; i++) {
             //0. Fetch the first event
             var event = json_events[i];
+
             var row_dataset = [];
-			
 
             //init rows for the datatable
             row_dataset[0] = event['title'];
@@ -81,6 +81,8 @@ include_once ROOT_DIR . 'views/header.inc'; ?>
             row_dataset[3] = event['difficulty'];
             row_dataset[4] = event['event_type'];
             row_dataset[5] = event['event_category'];
+
+            event_ids[i] = event['id'];
 
             var color = event_type_color[1];
             if(event['event_type'] == 'sortie')
@@ -166,10 +168,16 @@ include_once ROOT_DIR . 'views/header.inc'; ?>
 
     function initDataTable() {
 
-        $('#datatable').DataTable({
+        var table = $('#datatable').DataTable({
             paging: true,
             scrollY: 300,
             data: datatable_data
+        });
+
+        $('#datatable').on('click', 'tr', function()
+        {
+            var index = table.row(this).index();
+            window.location.replace("<?php echo URL_DIR; ?>/sorties/details/"+event_ids[index]);
         });
     }
 
