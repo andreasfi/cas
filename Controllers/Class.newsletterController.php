@@ -32,7 +32,7 @@ class newsletterController extends Controller
 
             //Check if the previousURL is from our website. If it's not the case, redirect the user to our landing page.
             if (!strpos($_SERVER['HTTP_REFERER'], SITE_NAME)) {
-                header('Location: ' . ROOT_DIR);
+                $this->redirect('');
                 exit();
             } else {
                 if ($rowID > 0) {

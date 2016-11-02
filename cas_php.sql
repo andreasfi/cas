@@ -1,12 +1,11 @@
 -- phpMyAdmin SQL Dump
 -- version 4.5.2
 -- http://www.phpmyadmin.net
--- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: Oct 10, 2016 at 09:33 AM
--- Server version: 5.7.9
--- PHP Version: 5.6.16
+-- Client :  127.0.0.1
+-- Généré le :  Mer 02 Novembre 2016 à 14:03
+-- Version du serveur :  5.7.9
+-- Version de PHP :  7.0.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -18,13 +17,28 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `cas_php`
+-- Base de données :  `cas_php`
 --
+
+DELIMITER $$
+--
+-- Procédures
+--
+DROP PROCEDURE IF EXISTS `pc_login`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pc_login` (IN `Email` VARCHAR(50))  BEGIN
+  set @var  =(SELECT COUNT(id)
+    FROM players
+    where players.email=@Email); 
+    
+
+END$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `difficulties`
+-- Structure de la table `difficulties`
 --
 
 DROP TABLE IF EXISTS `difficulties`;
@@ -35,7 +49,7 @@ CREATE TABLE IF NOT EXISTS `difficulties` (
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `difficulties`
+-- Contenu de la table `difficulties`
 --
 
 INSERT INTO `difficulties` (`id`, `differenceName`) VALUES
@@ -48,7 +62,7 @@ INSERT INTO `difficulties` (`id`, `differenceName`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `eventcategory`
+-- Structure de la table `eventcategory`
 --
 
 DROP TABLE IF EXISTS `eventcategory`;
@@ -59,7 +73,7 @@ CREATE TABLE IF NOT EXISTS `eventcategory` (
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `eventcategory`
+-- Contenu de la table `eventcategory`
 --
 
 INSERT INTO `eventcategory` (`idEventCategory`, `category`) VALUES
@@ -75,7 +89,7 @@ INSERT INTO `eventcategory` (`idEventCategory`, `category`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `events`
+-- Structure de la table `events`
 --
 
 DROP TABLE IF EXISTS `events`;
@@ -100,7 +114,7 @@ CREATE TABLE IF NOT EXISTS `events` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `events`
+-- Contenu de la table `events`
 --
 
 INSERT INTO `events` (`idEvent`, `description`, `startDate`, `endDate`, `maxParticipants`, `fk_idEventType`, `fk_idOwner`, `title`, `fk_idEventCategory`, `fk_idDifficulty`, `fk_idPath`) VALUES
@@ -109,7 +123,7 @@ INSERT INTO `events` (`idEvent`, `description`, `startDate`, `endDate`, `maxPart
 -- --------------------------------------------------------
 
 --
--- Table structure for table `eventtypes`
+-- Structure de la table `eventtypes`
 --
 
 DROP TABLE IF EXISTS `eventtypes`;
@@ -120,7 +134,7 @@ CREATE TABLE IF NOT EXISTS `eventtypes` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `eventtypes`
+-- Contenu de la table `eventtypes`
 --
 
 INSERT INTO `eventtypes` (`idEventType`, `type`) VALUES
@@ -130,7 +144,7 @@ INSERT INTO `eventtypes` (`idEventType`, `type`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `eventusers`
+-- Structure de la table `eventusers`
 --
 
 DROP TABLE IF EXISTS `eventusers`;
@@ -149,7 +163,7 @@ CREATE TABLE IF NOT EXISTS `eventusers` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `password_change_requests`
+-- Structure de la table `password_change_requests`
 --
 
 DROP TABLE IF EXISTS `password_change_requests`;
@@ -162,7 +176,7 @@ CREATE TABLE IF NOT EXISTS `password_change_requests` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `password_change_requests`
+-- Contenu de la table `password_change_requests`
 --
 
 INSERT INTO `password_change_requests` (`idRequest`, `Time`, `fk_idUser`) VALUES
@@ -172,7 +186,7 @@ INSERT INTO `password_change_requests` (`idRequest`, `Time`, `fk_idUser`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `paths`
+-- Structure de la table `paths`
 --
 
 DROP TABLE IF EXISTS `paths`;
@@ -183,7 +197,7 @@ CREATE TABLE IF NOT EXISTS `paths` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `paths`
+-- Contenu de la table `paths`
 --
 
 INSERT INTO `paths` (`idPath`, `coordinatesJSON`) VALUES
@@ -193,7 +207,7 @@ INSERT INTO `paths` (`idPath`, `coordinatesJSON`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `status`
+-- Structure de la table `status`
 --
 
 DROP TABLE IF EXISTS `status`;
@@ -205,7 +219,7 @@ CREATE TABLE IF NOT EXISTS `status` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `status`
+-- Contenu de la table `status`
 --
 
 INSERT INTO `status` (`idStatus`, `statusname`) VALUES
@@ -216,7 +230,28 @@ INSERT INTO `status` (`idStatus`, `statusname`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Structure de la table `subscribers`
+--
+
+DROP TABLE IF EXISTS `subscribers`;
+CREATE TABLE IF NOT EXISTS `subscribers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `emailAddress` varchar(120) NOT NULL,
+  PRIMARY KEY (`id`,`emailAddress`),
+  UNIQUE KEY `emailAddress` (`emailAddress`)
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `subscribers`
+--
+
+INSERT INTO `subscribers` (`id`, `emailAddress`) VALUES
+(7, 'evgueni.chakhtarine@students.hevs.ch');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `users`
 --
 
 DROP TABLE IF EXISTS `users`;
@@ -231,10 +266,10 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`idUser`),
   UNIQUE KEY `mail` (`mail`),
   KEY `fk_idUserTypes` (`fk_idUserTypes`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `users`
+-- Contenu de la table `users`
 --
 
 INSERT INTO `users` (`idUser`, `mail`, `firstname`, `lastname`, `tel`, `pwd`, `fk_idUserTypes`) VALUES
@@ -242,12 +277,13 @@ INSERT INTO `users` (`idUser`, `mail`, `firstname`, `lastname`, `tel`, `pwd`, `f
 (2, 'a@a', 'a', 'a', '041241', '7c4a8d09ca3762af61e59520943dc26494f8941b', 2),
 (4, 'pierre.baran@students.hevs.ch', 'a', 'a', '423423', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 3),
 (9, 'calixtemayoraz@gmail.com', 'Calixte', 'Mayoraz', '0786298541', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 3),
-(12, 'tewt@google.cok', 'bob', 'bab', '23', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 1);
+(12, 'tewt@google.cok', 'bob', 'bab', '23', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 1),
+(14, 'shakhtarine.evgueni@gmail.com', 'Admin', 'Istrator', '0797831703', '81fe8bfe87576c3ecb22426f8e57847382917acf', 3);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `usertypes`
+-- Structure de la table `usertypes`
 --
 
 DROP TABLE IF EXISTS `usertypes`;
@@ -258,7 +294,7 @@ CREATE TABLE IF NOT EXISTS `usertypes` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `usertypes`
+-- Contenu de la table `usertypes`
 --
 
 INSERT INTO `usertypes` (`idUserType`, `role`) VALUES
@@ -267,11 +303,11 @@ INSERT INTO `usertypes` (`idUserType`, `role`) VALUES
 (3, 'trailMaster');
 
 --
--- Constraints for dumped tables
+-- Contraintes pour les tables exportées
 --
 
 --
--- Constraints for table `events`
+-- Contraintes pour la table `events`
 --
 ALTER TABLE `events`
   ADD CONSTRAINT `Events_ibfk_1` FOREIGN KEY (`fk_idEventType`) REFERENCES `eventtypes` (`idEventType`) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -281,7 +317,7 @@ ALTER TABLE `events`
   ADD CONSTRAINT `Events_ibfk_5` FOREIGN KEY (`fk_idPath`) REFERENCES `paths` (`idPath`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `eventusers`
+-- Contraintes pour la table `eventusers`
 --
 ALTER TABLE `eventusers`
   ADD CONSTRAINT `EventUsers_ibfk_1` FOREIGN KEY (`fk_idEvent`) REFERENCES `events` (`idEvent`) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -289,13 +325,13 @@ ALTER TABLE `eventusers`
   ADD CONSTRAINT `EventUsers_ibfk_3` FOREIGN KEY (`fk_idStatus`) REFERENCES `status` (`idStatus`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `password_change_requests`
+-- Contraintes pour la table `password_change_requests`
 --
 ALTER TABLE `password_change_requests`
   ADD CONSTRAINT `password_change_requests_ibfk_1` FOREIGN KEY (`fk_idUser`) REFERENCES `users` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `users`
+-- Contraintes pour la table `users`
 --
 ALTER TABLE `users`
   ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`fk_idUserTypes`) REFERENCES `usertypes` (`idUserType`) ON DELETE CASCADE ON UPDATE CASCADE;
