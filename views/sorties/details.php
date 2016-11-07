@@ -94,7 +94,7 @@ include_once 'views/header.inc'; ?>
                                     <?php if (isset($distance) && $distance != 0) {
                                         echo round($distance, 2).' km';
                                     } else {
-                                        echo "No Data";
+                                        echo "-";
                                     }; ?>
                                 </span>
                                 </div>
@@ -422,11 +422,12 @@ if ($response != false) {
                                     $('input[name=from]').attr('placeholder', 'From');
                                     $(data.stations).each(function (i, station) {
                                         if (!$('input[name=from]').val()) {
-                                        if (!$('input[name=from]').val()){
-                                            $('input[name=from]').val(station.name);
-                                        }
-                                        return false;
-                                    });
+											if (!$('input[name=from]').val()){
+												$('input[name=from]').val(station.name);
+											}
+                                        	return false;
+                                    	}
+									});
                                 });
                             }
                         }, function (error) {
@@ -435,7 +436,8 @@ if ($response != false) {
                             enableHighAccuracy: true,
                             maximumAge: 10000,
                             timeout: 30000
-                        });
+						}
+                        );
                     }
                 }
 
@@ -678,6 +680,10 @@ if ($response != false) {
             PlanCoordinates = <?php echo(strlen($path) > 0 ? $path : '[]'); ?>;
             if (PlanCoordinates.length > 0)
                 google.charts.load('current', {'packages': ['corechart'], 'callback': drawCharts});
+			else
+            	document.getElementById('elevation').innerHTML = '-';
+			
+				
 
             var mapOptions = {
                 center: (PlanCoordinates.length > 0 ? PlanCoordinates[0] : {lat: 46.307174, lng: 7.473367}),
@@ -694,9 +700,11 @@ if ($response != false) {
                 strokeColor: '#FF0000',
                 map: map
             });
+			
 
             //center map and zoom to fit path
 			var bounds = new google.maps.LatLngBounds();
+			console.log(PlanCoordinates);
 			if(PlanCoordinates.length > 1){
 				for(var i = 0; i < PlanCoordinates.length; i++){
 					bounds.extend(PlanCoordinates[i]);
@@ -774,7 +782,6 @@ if ($response != false) {
             });
 
             this.calculateDenivele(elevations);
-
         }
 
         function calculateDenivele(elevations) {
