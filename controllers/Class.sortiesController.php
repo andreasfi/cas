@@ -364,7 +364,7 @@ class sortiesController extends Controller
             // update userevent where idevent and user
         }
 
-        $_SESSION['msg'] = '<span class="error">Les participants ont été mise à jour</span>';
+        $_SESSION['msg'] = '<span class="error">Les participants ont été mis à jour</span>';
         $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
         $this->redirect('/sorties/details/' . $idevent);
     }
