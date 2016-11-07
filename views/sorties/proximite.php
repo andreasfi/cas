@@ -24,6 +24,24 @@ include_once ROOT_DIR.'views/header.inc';
                 
             </div>
         </div>
+		<div class="container" style="margin-top:10px">
+			<div class="row">
+				<div class="col-md-3"></div>
+				<div class="col-md-2">
+					<img src="../img/hikeicon.png" width="15px">
+					<?php echo $lang['RANDONNEES'];?>
+				</div>
+				<div class="col-md-2">
+					<img src="../img/tripicon.png" width="15px">
+					<?php echo $lang['SORTIES'];?>
+				</div>
+				<div class="col-md-2">
+					<img src="../img/oldicon.png" width="15px">
+					<?php echo $lang['ANCIENEVENT'];?>
+				</div>
+				<div class="col-md-3"></div>
+			</div>
+		</div>
     </div>
 <script>
 	var infowindow;

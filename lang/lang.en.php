@@ -73,6 +73,7 @@ $lang['CREATE_ACCOUNT'] = "Create your account";
 //SORTIES
 $lang['RANDONNEES'] = "Hikes";
 $lang['SORTIES'] = "Trips";
+$lang['ANCIENEVENT'] = "Past Event";
 
 
 // DETAILS
