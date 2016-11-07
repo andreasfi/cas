@@ -92,8 +92,8 @@ $lang = $this->lang;
             <div class="row">
                 <div class="col-md-3 col-sm-4">
                     <div class="logo">
-                        <div class="logo-image">
-                            <a href="<?php echo URL_DIR;?>/home"><i class="fa fa-photo blue"></i></a>
+                        <div>
+                            <a href="<?php echo URL_DIR;?>/home"><img class="logo-image" src="<?php echo URL_DIR;?>/img/caslogoOriginal.png"></a>
                         </div>
                         <div class="logo-text">
                             <h1><a href="<?php echo URL_DIR;?>/home">CA<span class="lightblue">S</span></a></h1>

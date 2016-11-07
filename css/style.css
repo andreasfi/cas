@@ -414,17 +414,9 @@ header .logo{
 	margin: 0px;
 }
 
-header .logo .logo-image{
-	width: 50px;
+.logo-image {
+	width: 120px;
 	float: left;
-}
-
-header .logo .logo-image i{
-	width: 50px;
-	height: 50px;
-	line-height: 50px;
-	font-size: 50px;
-	margin-top: 30px;
 }
 
 header .logo .logo-text{
