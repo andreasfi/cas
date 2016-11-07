@@ -16,14 +16,14 @@ include_once ROOT_DIR . 'views/header.inc'; ?>
         </div>
 		<div class="row" style="margin:1em 1em;">
 			<div class="col-md-1"></div>
-			<div class="col-md-1">
+			<div class="col-md-2">
 				<div style="background: #52b9e9; width: 0.5em; height: 0.5em; display: inline-block;"></div>
-				<b>randos</b>
+				<b><?php echo $lang['RANDONNEES'];?></b>
 			</div>
 			<div class="col-md-1"></div>
 			<div class="col-md-2">
 				<div style="background: #fa3031; width: 0.5em; height: 0.5em; display: inline-block;"></div>
-				<b>sorties</b>
+				<b><?php echo $lang['SORTIES'];?></b>
 			</div>
 			<div class="col-md-2 text-center">
 				<?php

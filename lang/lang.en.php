@@ -69,6 +69,12 @@ $lang['CAS_PWD_RECOVERY'] = "CAS password recovery";
 $lang['CREATE_ACCOUNT'] = "Create your account";
 
 //SORTIE CONTROLLER
+
+//SORTIES
+$lang['RANDONNEES'] = "Hikes";
+$lang['SORTIES'] = "Trips";
+
+
 // DETAILS
 $lang['BUTTON_PARTICIPATION_REQUEST'] = "I want to participate ";
 $lang['BUTTON_FIND_ROUTE'] = "Find a route ";
