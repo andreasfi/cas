@@ -296,14 +296,24 @@ class sortiesController extends Controller
         $this->vars['pageTitle'] = "Inscription";
         $this->vars['pageMessage'] = "";
 
+        // Get infos
+        $result = Event::fetch_event_by_id($GLOBALS['value']);
+
+        $_SESSION['difficulty'] = $result->getDifficulty();
+
         if (!isset($_Session['user'])) {
-            $_SESSION['msg'] = '<span class="error">Vous devez vous connecter pour vous inscrire a une sortie</span>';
+            $_SESSION['msg'] = '<span class="error">Vous devez vous connecter pour vous inscrire à une sortie</span>';
             $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
             //$this->redirect('../../login'); //too many redirects
 
         }
-        // Get infos
-        $result = Event::fetch_event_by_id($GLOBALS['value']);
+
+        if($_SESSION['difficulty'] == 'très avancé' || $_SESSION['difficulty'] == 'professionnel')
+        {
+            $_SESSION['msg'] = '<span class="error">Haute difficulté</span>';
+            $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
+        }
+
 
         $this->vars['eventId'] = $result->getId();
         $this->vars['title'] = $result->getTitle();
@@ -315,8 +325,6 @@ class sortiesController extends Controller
         $this->vars['difficulty'] = $result->getDifficulty();
         $this->vars['path'] = $result->getPath();
         $this->vars['description'] = $result->getDescription();
-
-        $_SESSION['difficulty'] = $result->getDifficulty();
 
         if (isset($_POST['numPeople'])) {
             var_dump($_POST);

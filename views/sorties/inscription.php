@@ -1,6 +1,7 @@
 <?php
 $pageTitle = $this->vars['pageTitle'];
 $pageMessage = $this->vars['pageMessage'];
+$msg = $this->vars['msg'];
 $eventId = $this->vars['eventId'];
 include_once ROOT_DIR.'views/header.inc';
 
@@ -47,14 +48,7 @@ include_once ROOT_DIR.'views/header.inc';
 
     </script>
     <form action="<?php echo URL_DIR.'/sorties/details/'.$eventId;?>" method="post">
-		<?php
-			if($_SESSION['difficulty'] == 'très avancé' || $_SESSION['difficulty'] == 'professionnel'){
-				echo('<div class="f-block bred">
-							C\'EST DUR!!!
-						</div>');
-			}
 
-		?>
     	<div class="content" style="display:block">
 			<div class="container">
 				<div class="row">

@@ -120,6 +120,9 @@ $lang['S_PASSWORD_CHANGE_SUCCESSFUL'] = "Password change successful.";
 $lang['S_REGISTRATION_SUCCESSFUL'] = "Registration successful";
 $lang['S_CHANGES_SUCCESSFUL'] = "Changes successful";
 
+//WARNING MESSAGES
+$lang['W_DIFFICULTY_TRAIL'] = "High difficulty";
+
 //Mail content
 $lang['REGISTRATION_MAIL_TITLE'] = "Welcome on the CAS website !";
 $lang['REGISTRATION_MAIL_BODY'] = "This is an automatic email to inform you of your registration on our website.";
