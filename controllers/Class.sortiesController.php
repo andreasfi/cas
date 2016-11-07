@@ -67,8 +67,11 @@ class sortiesController extends Controller
                         $subject = '';
                         $status_old == 0 ? $subject = "Votre demande de participation a été traitée." : "Modification de votre participation.";
 
+
                         $accepted_message = "Votre demande a été acceptée par le guide.";
-                        $refused_message = "Le guide a refusé votre demande.";
+                        $accepted_msg_sms = "Votre demande pour l'événement ".$event->getOwner()." a été accepté par le guide.";
+                        $refused_message = "Le guide a refusé votre demande. Un SMS ";
+                        $refused_msg_mail = "";
 
                         $incfile = ROOT_DIR . "views/mail_trailconfirmation.inc";
 
@@ -78,12 +81,14 @@ class sortiesController extends Controller
                                 break;
                             case 2 :
                                 $template_message = $this::requireToVar($incfile, $subject, $accepted_message, $event);
-                                $this->sendMail($USER->getMail(), $USER->getFirstname() + " " + $USER->getLastname(), $subject, $template_message, null);
+                                $this->sendMail($USER->getMail(), $USER->getFirstname() . " " . $USER->getLastname(), $subject, $template_message, null);
+                                $this->sendSms($USER->getPhone(), "Bonjour ".$USER->getFirstname()." ". $USER->getLastname() . " " . $accepted_message);
                                 $nbupdates++;
                                 break;
                             case 3 :
                                 $template_message = $this::requireToVar($incfile, $subject, $refused_message, $event);
-                                $this->sendMail($USER->getMail(), $USER->getFirstname() + " " + $USER->getLastname(), $subject, $template_message, null);
+                                $this->sendMail($USER->getMail(), $USER->getFirstname() . " " . $USER->getLastname(), $subject, $template_message, null);
+                                $this->sendSms($USER->getPhone(), "Bonjour ".$USER->getFirstname()." ". $USER->getLastname() . " " . $refused_message);
                                 $nbupdates++;
                                 break;
                         }
