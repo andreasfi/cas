@@ -134,7 +134,11 @@ class sortiesController extends Controller
         $this->vars['eventId'] = $result->getId();
         $this->vars['title'] = $result->getTitle();
         $this->vars['startDate'] = $result->getStartDate();
-        $this->vars['endDate'] = $result->getEndDate();
+
+        $endate2 = strtotime($result->getEndDate());
+        $newformat2 = date('m.d.y, H:i',$endate2);
+        $this->vars['endDate'] = $newformat2;
+
         $this->vars['maxParticipants'] = $result->getMaxParticipants();
         $this->vars['owner'] = $result->getOwner();
         $this->vars['eventCategory'] = $result->getEventCategory();
@@ -144,7 +148,10 @@ class sortiesController extends Controller
         $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
         $this->vars['msg_err'] = isset($_SESSION['msg_err']) ? $_SESSION['msg_err'] : '';
         $this->vars['pageTitle'] = $result->getTitle();
-        $this->vars['pageMessage'] = $result->getStartDate();
+
+        $time = strtotime($result->getStartDate());
+        $newformat = date('m.d.y, H:i',$time);
+        $this->vars['pageMessage'] = $newformat;
 
 
         // Calcul de la distance
