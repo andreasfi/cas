@@ -73,6 +73,7 @@ $lang['CREATE_ACCOUNT'] ="Créez votre compte";
 //SORTIES
 $lang['RANDONNEES'] = "Randonnées";
 $lang['SORTIES'] = "Sorties";
+$lang['ANCIENEVENT'] = "Evènement passé";
 
 // DETAILS
 $lang['BUTTON_PARTICIPATION_REQUEST'] = "Je veux participer !";
