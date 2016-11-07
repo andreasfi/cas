@@ -704,7 +704,6 @@ if ($response != false) {
 
             //center map and zoom to fit path
 			var bounds = new google.maps.LatLngBounds();
-			console.log(PlanCoordinates);
 			if(PlanCoordinates.length > 1){
 				for(var i = 0; i < PlanCoordinates.length; i++){
 					bounds.extend(PlanCoordinates[i]);
@@ -724,6 +723,7 @@ if ($response != false) {
 				});
 				map.setCenter(PlanCoordinates[0]);
 				map.setZoom(12);
+                document.getElementById('elevation').innerHTML = '-';
 			}
 
         }
@@ -785,7 +785,7 @@ if ($response != false) {
         }
 
         function calculateDenivele(elevations) {
-            if (elevations.length > 0) {
+            if (elevations.length > 1) {
                 var lowest = elevations[0].elevation;
                 var highest = lowest;
 
