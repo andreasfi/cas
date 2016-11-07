@@ -17,11 +17,13 @@ include_once ROOT_DIR . 'views/header.inc'; ?>
 		<div class="row" style="margin:1em 1em;">
 			<div class="col-md-1"></div>
 			<div class="col-md-1">
-				<b style="color:#52b9e9;">randonnées</b>
+				<div style="background: #52b9e9; width: 0.5em; height: 0.5em; display: inline-block;"></div>
+				<b>randos</b>
 			</div>
 			<div class="col-md-1"></div>
 			<div class="col-md-2">
-				<b style="color:#fa3031;">sorties</b>
+				<div style="background: #fa3031; width: 0.5em; height: 0.5em; display: inline-block;"></div>
+				<b>sorties</b>
 			</div>
 			<div class="col-md-2 text-center">
 				<?php
