@@ -69,6 +69,12 @@ $lang['CAS_PWD_RECOVERY'] = "CAS Récupération de mot de passe";
 $lang['CREATE_ACCOUNT'] ="Créez votre compte";
 
 //SORTIE CONTROLLER
+
+//SORTIES
+$lang['RANDONNEES'] = "Randonnées";
+$lang['SORTIES'] = "Sorties";
+$lang['ANCIENEVENT'] = "Evènement passé";
+
 // DETAILS
 $lang['BUTTON_PARTICIPATION_REQUEST'] = "Je veux participer !";
 $lang['BUTTON_FIND_ROUTE'] = "Trouver les transports ";

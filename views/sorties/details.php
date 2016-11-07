@@ -91,16 +91,15 @@ include_once 'views/header.inc'; ?>
                             <div class="service-social bblack">
                                 <div class="service-box bviolet">
                                     <?php echo $lang['FIELD_DISTANCE']; ?> <span class="pull-right">
-                                    <?php if (isset($distance)) {
-                                        echo round($distance, 2);
+                                    <?php if (isset($distance) && $distance != 0) {
+                                        echo round($distance, 2).' km';
                                     } else {
-                                        echo "No Data";
-                                    }; ?> km
+                                        echo "-";
+                                    }; ?>
                                 </span>
                                 </div>
                                 <div class="service-box bviolet">
-                                    <?php echo $lang['FIELD_ALTITUDE']; ?> <span id="elevation"
-                                                                                 class="pull-right"></span>
+                                    <?php echo $lang['FIELD_ALTITUDE']; ?> <span id="elevation" class="pull-right"></span>
                                 </div>
                                 <div class="service-box bviolet">
                                     <?php echo $lang['FIELD_DIFFICULTY']; ?> <span class="pull-right">
@@ -150,6 +149,12 @@ include_once 'views/header.inc'; ?>
                                         } else {
                                             echo "No Data";
                                         }; ?></h3></a>
+                                <p>
+                                    <?php
+                                    echo $pageMessage.' - '. $endDate;
+
+                                    ?>
+                                </p>
                                 <p>
                                     <?php if (isset($description)) {
                                         echo $description;
@@ -229,7 +234,7 @@ include_once 'views/header.inc'; ?>
 
                                                     ?>
                                                     <tr <?php echo "class='$class'"; ?>>
-                                                        <td class="service-icon">
+                                                        <td style="width: 100%;" class="service-icon">
                                                             <i class="fa fa-user bblue"></i>
                                                         </td>
                                                         <td><?php echo $it->getFirstname() . " " . $it->getLastname(); ?></td>
@@ -301,29 +306,52 @@ include_once 'views/header.inc'; ?>
                         <?php
                     } else {
                         ?>
-                        <div class="row">
-                            <div class="col-md-12 service-list col-no-margin">
-                                <?php
-                                foreach ($allParticipants as $key => $item) {
-                                    if (isset($item)) {
-                                        foreach ($item as $keyuser => $it) {
+                <div class="row">
+                    <div class="col-md-6  col-no-margin">
+                        <table id="details-table" class="table table-responsive">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th><?php echo $lang['PARTICIPANTS_NAME'] ?></th>
+                            </tr>
+                            </thead>
+                            <?php
+
+                            foreach ($allParticipants as $key => $item) {
+                                if (isset($item)) {
+                                    foreach ($item as $keyuser => $it) {
+
+                                        if($key == 0){
+                                            $class = 'info';
+
+                                            if ($key == 1) {
+                                                $class = 'success';
+                                            } elseif ($key == 2) {
+                                                $class = 'danger';
+                                            }
+
                                             ?>
-                                            <div class="service-icon">
-                                                <i class="fa fa-user bblue"></i>
-                                            </div>
-                                            <div class="service-content">
-                                                <div class="service-home-meta">
-                                                    Participant <?php echo $keyuser + 1; ?></div>
-                                                <h4><?php echo $it->getFirstname() . " " . $it->getLastname(); ?></h4>
-                                                <p></p>
-                                            </div>
-                                            <hr/>
-                                        <?php }
+                                            <tbody>
+                                            <tr <?php echo "class='$class'"; ?>>
+                                                <td class="" style="padding: 8px;">
+                                                    <i class="fa fa-user bblue" style="font-size:20px; width: 45px; height: 45px; text-align: center; line-height: 45px;" ></i>
+                                                </td>
+                                                <td><?php echo $it->getFirstname() . " " . $it->getLastname(); ?></td>
+
+                                            </tr>
+                                            </tbody>
+
+                                            <?php
+                                        }
+
                                     }
-                                } ?>
-                                <div class="clearfix"></div>
-                            </div>
-                        </div>
+                                }
+                            } ?>
+
+                        </table>
+                    </div>
+                </div>
+
                         <?php
                     }
 
@@ -394,11 +422,12 @@ if ($response != false) {
                                     $('input[name=from]').attr('placeholder', 'From');
                                     $(data.stations).each(function (i, station) {
                                         if (!$('input[name=from]').val()) {
-                                        if (!$('input[name=from]').val()){
-                                            $('input[name=from]').val(station.name);
-                                        }
-                                        return false;
-                                    });
+											if (!$('input[name=from]').val()){
+												$('input[name=from]').val(station.name);
+											}
+                                        	return false;
+                                    	}
+									});
                                 });
                             }
                         }, function (error) {
@@ -407,7 +436,8 @@ if ($response != false) {
                             enableHighAccuracy: true,
                             maximumAge: 10000,
                             timeout: 30000
-                        });
+						}
+                        );
                     }
                 }
 
@@ -650,6 +680,10 @@ if ($response != false) {
             PlanCoordinates = <?php echo(strlen($path) > 0 ? $path : '[]'); ?>;
             if (PlanCoordinates.length > 0)
                 google.charts.load('current', {'packages': ['corechart'], 'callback': drawCharts});
+			else
+            	document.getElementById('elevation').innerHTML = '-';
+			
+				
 
             var mapOptions = {
                 center: (PlanCoordinates.length > 0 ? PlanCoordinates[0] : {lat: 46.307174, lng: 7.473367}),
@@ -666,6 +700,7 @@ if ($response != false) {
                 strokeColor: '#FF0000',
                 map: map
             });
+			
 
             //center map and zoom to fit path
 			var bounds = new google.maps.LatLngBounds();
@@ -688,6 +723,7 @@ if ($response != false) {
 				});
 				map.setCenter(PlanCoordinates[0]);
 				map.setZoom(12);
+                document.getElementById('elevation').innerHTML = '-';
 			}
 
         }
@@ -746,11 +782,10 @@ if ($response != false) {
             });
 
             this.calculateDenivele(elevations);
-
         }
 
         function calculateDenivele(elevations) {
-            if (elevations.length > 0) {
+            if (elevations.length > 1) {
                 var lowest = elevations[0].elevation;
                 var highest = lowest;
 

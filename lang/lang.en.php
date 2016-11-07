@@ -13,7 +13,7 @@ $lang = array();
 
 //misc
 
-$lang['WEBSITE_NAME'] = "Alpine club Switzerland";
+$lang['WEBSITE_NAME'] = "Swiss Alpine Club";
 $lang['CAS_HOMETOWN'] = "Crans-Montana";
 $lang['CAS_MAIL'] = "casphphes@gmail.com";
 $lang['CAS_PHONE'] = "+41 27 000 00 00";
@@ -69,6 +69,13 @@ $lang['CAS_PWD_RECOVERY'] = "CAS password recovery";
 $lang['CREATE_ACCOUNT'] = "Create your account";
 
 //SORTIE CONTROLLER
+
+//SORTIES
+$lang['RANDONNEES'] = "Hikes";
+$lang['SORTIES'] = "Trips";
+$lang['ANCIENEVENT'] = "Past Event";
+
+
 // DETAILS
 $lang['BUTTON_PARTICIPATION_REQUEST'] = "I want to participate ";
 $lang['BUTTON_FIND_ROUTE'] = "Find a route ";
