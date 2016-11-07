@@ -27,7 +27,8 @@ $lang = $this->lang;
         <link type="text/css" rel="stylesheet" href="<?php echo URL_DIR;?>/css/fullcalendar.css">
 
 
-        <link rel="shortcut icon" href="#">
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+		<link rel="icon" href="favicon.ico" type="image/x-icon">
 
         <script src="<?php echo URL_DIR;?>/js/jquery.js"></script>
 		<!-- Bootstrap JS -->

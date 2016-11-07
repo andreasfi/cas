@@ -51,10 +51,24 @@ include_once ROOT_DIR.'views/header.inc';
 	}
 	
 	function addPoint(event){
+		var icon = '';
+		
+		if(event.event_type == 'rando')
+			icon = '../img/hikeicon.png';
+		else
+			icon = '../img/tripicon.png';
+		
+		var date = Date.parse(event.start_date);
+
+		if(date < Date.now()){
+			icon = '../img/oldicon.png';
+		}
+		
 		var pin = new google.maps.Marker({
 					position: event.path[0],
 					map: map,
-					title: decodeHTML(event.title)
+					title: decodeHTML(event.title),
+					icon : icon
 				});
 				
 				google.maps.event.addListener(pin, 'click', function(){
