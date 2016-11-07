@@ -71,6 +71,8 @@ $lang['CREATE_ACCOUNT'] ="Créez votre compte";
 //SORTIE CONTROLLER
 // DETAILS
 $lang['BUTTON_PARTICIPATION_REQUEST'] = "Je veux participer !";
+$lang['BUTTON_PARTICIPATION_REQUEST_ALREADY'] = "Je participe déjà ";
+$lang['BUTTON_PARTICIPATION_REQUEST_ALREADY_TOOLTIP'] = "Vous participez déjà à cet évènement";
 $lang['BUTTON_FIND_ROUTE'] = "Trouver les transports ";
 $lang['FIELD_DISTANCE'] = "Distance ";
 $lang['FIELD_ALTITUDE'] = "Dénivelé ";
@@ -95,6 +97,9 @@ $lang['PARTICIPANTS_PHONE'] = "Téléphone";
 $lang['PARTICIPANTS_EMAIL'] = "E-mail";
 $lang['PARTICIPANTS_STATUS'] = "Statut";
 $lang['PARTICIPANTS_MODIFY'] = "Modifier";
+$lang['PARTICIPANTS_SELECT_SUBMITTED'] = "Soumis";
+$lang['PARTICIPANTS_SELECT_REFUSED'] = "Refusé";
+$lang['PARTICIPANTS_SELECT_ACCEPTED'] = "Accepté";
 
 //Save new user
 

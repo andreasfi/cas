@@ -71,6 +71,8 @@ $lang['CREATE_ACCOUNT'] = "Create your account";
 //SORTIE CONTROLLER
 // DETAILS
 $lang['BUTTON_PARTICIPATION_REQUEST'] = "I want to participate ";
+$lang['BUTTON_PARTICIPATION_REQUEST_ALREADY'] = "Already participating ";
+$lang['BUTTON_PARTICIPATION_REQUEST_ALREADY_TOOLTIP'] = "You are already attending this event";
 $lang['BUTTON_FIND_ROUTE'] = "Find a route ";
 $lang['FIELD_DISTANCE'] = "Distance ";
 $lang['FIELD_ALTITUDE'] = "Altitude difference ";
@@ -95,6 +97,9 @@ $lang['PARTICIPANTS_PHONE'] = "Phone";
 $lang['PARTICIPANTS_EMAIL'] = "E-mail";
 $lang['PARTICIPANTS_STATUS'] = "Status";
 $lang['PARTICIPANTS_MODIFY'] = "Modify";
+$lang['PARTICIPANTS_SELECT_SUBMITTED'] = "Submitted";
+$lang['PARTICIPANTS_SELECT_REFUSED'] = "Refused";
+$lang['PARTICIPANTS_SELECT_ACCEPTED'] = "Accepted";
 
 //Save new user
 
