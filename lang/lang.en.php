@@ -13,7 +13,7 @@ $lang = array();
 
 //misc
 
-$lang['WEBSITE_NAME'] = "Alpine club Switzerland";
+$lang['WEBSITE_NAME'] = "Swiss Alpine Club";
 $lang['CAS_HOMETOWN'] = "Crans-Montana";
 $lang['CAS_MAIL'] = "casphphes@gmail.com";
 $lang['CAS_PHONE'] = "+41 27 000 00 00";
