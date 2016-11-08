@@ -18,6 +18,7 @@ class sortiesController extends Controller
 
     function saveNewStatuses()
     {
+
         //Only the trailmaster can access to this function
         $this->checkUser(3, "/error/http404");
         $event_id= '';
@@ -28,6 +29,7 @@ class sortiesController extends Controller
         //If the user is not from the domain, redirect him to the landing page.
         if (!strpos($_SERVER['HTTP_REFERER'], SITE_NAME)) {
             $this->redirect('/sortie/details/'.$event_id,'');
+            exit;
         }
 
 
@@ -124,6 +126,7 @@ class sortiesController extends Controller
         $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
 
         $this->redirect('/sorties/details/' . $event_id);
+        exit;
     }
 
     function details()
