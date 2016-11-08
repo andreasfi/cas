@@ -21,6 +21,12 @@ include_once ROOT_DIR.'views/header.inc';
 
                     <!-- Formulaire de contact -->
 
+                    <div id="success_video_message" class="alert alert-success" style="display: none;">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>Succès ! </strong> Votre message vidéo a bien été envoyé.
+                    </div>
+
+
                     <div class="cwell col-md-6">
                         <h3 class="title"><?php echo $lang['CONTACT_FORM'] ?></h3>
 
@@ -334,7 +340,10 @@ include_once ROOT_DIR.'views/header.inc';
                 }
                 xhr.open('POST', 'contact/sendVideo', true);
                 xhr.send(blob_to_send);
-
+                //Close the modal
+                $('#modal_video_preview').modal('hide');
+                //Display a success message.
+                $('#success_video_message').show();
             }
 
         </script>

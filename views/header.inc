@@ -149,7 +149,6 @@ $seo_description = $this->vars['seo_description'];
                                 <?php
                                 if ($_SESSION['user'] != null) {
                                     if ($_SESSION['user']->getMemberType() == 4) { ?>
-
                                         <li><a href="<?php echo URL_DIR; ?>/newsletter/newsletter" class=""> <i
                                                     class="fa fa-newspaper-o"></i><?php echo $lang['NEWSLETTER']; ?>
                                             </a></li>

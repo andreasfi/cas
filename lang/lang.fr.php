@@ -137,6 +137,7 @@ $lang['S_CONTACT_MAIL_SENT'] = "Un e-mail de contact a été envoyé, nous y ré
 $lang['S_PASSWORD_CHANGE_SUCCESSFUL'] = "Mot de passe changé.";
 $lang['S_REGISTRATION_SUCCESSFUL'] = "Enregistrement terminé";
 $lang['S_CHANGES_SUCCESSFUL'] = "Changements effectués";
+$lang['S_CHANGES_ERROR'] = "Une erreur de syntaxe est survenue dans l'un des champs du formulaire.";
 
 //WARNING MESSAGES
 $lang['W_DIFFICULTY_TRAIL'] = "Grande difficulté";
