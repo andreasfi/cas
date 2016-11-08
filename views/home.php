@@ -82,8 +82,49 @@
     <span class="sr-only">Next</span>
   </a>
 </div>
+    <div class="content">
+        <div class="container features-two">
+            <div class="row">
+                <div class="col-md-4 col-sm-4">
+                    <div class="f-block bblue">
+                        <a href="#"><i class="fa fa-blind"></i></a>
+                        <a href="#"><h3>Notre club</h3></a>
+                        <p>Bénéficiez de notre réseau de montagnards pour organisert et participer</p>
+                    </div>
+                </div>
 
+                <div class="col-md-4 col-sm-4">
+                    <div class="f-block bblue">
+                        <a href="#"><i class="fa fa-building"></i></a>
+                        <a href="#"><h3>Outil de gestion</h3></a>
+                        <p>Avec notre outil de gestion des sorties nous pouvons garantir </p>
+                    </div>
+                </div>
 
+                <div class="col-md-4 col-sm-4">
+                    <div class="f-block bblue">
+                        <a href="#"><i class="fa fa-thumbs-up"></i></a>
+                        <a href="#"><h3>Nos avantages membres</h3></a>
+                        <p>Postulez en tant que memebre pour pouvoir bénéficier de tous nos avantages</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="foot blightblue">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <!-- User icon -->
+                    <span class="twitter-icon text-center"><i class="fa fa-user"></i></span>
+                    <p><em>"Le club alpin suisse de montana est vraiment bien"</em><br>Pierre Baran, Trailmaster CAS Montana</p>
+
+                </div>
+            </div>
+        </div>
+    </div>
 
 <?php include_once ROOT_DIR.'views/footer.inc';
 ?>
