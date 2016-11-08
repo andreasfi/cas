@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 08, 2016 at 04:31 PM
+-- Generation Time: Nov 08, 2016 at 04:44 PM
 -- Server version: 5.5.47-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.14
 
@@ -103,8 +103,7 @@ INSERT INTO `events` (`idEvent`, `description`, `startDate`, `endDate`, `maxPart
 (3, 'La Course Sierre-Zinal aussi appel&#xE9;e la Course des cinq 4000, a souvent &#xE9;t&#xE9; consid&#xE9;r&#xE9;e comme l&#x2019;une des plus belles courses de montagne du monde. On a &#xE9;crit qu&#x2019;elle &#xE9;tait &#xE0; la course de montagne ce que le marathon de New York est au marathon. Elle est aussi la doyenne des grandes &#xE9;preuves de montagne d&#x2019;Europe. Sierre-Zinal, au coeur des Alpes valaisannes, pr&#xE9;sente un parcours tr&#xE8;s engageant .\r\nCes paysages exceptionnels, son ambiance chaleureuse, et son organisation soign&#xE9;e expliquent le succ&#xE8;s et la long&#xE9;vit&#xE9; de Sierre-Zinal', '2016-11-18 07:00:00', '2016-11-18 18:00:00', 85, 1, 1, 'Sierre Zinal', 1, 3, 3),
 (4, 'La Patrouille des Glaciers (PdG) est une course militaire internationale de ski alpinisme de l&#x2019;Arm&#xE9;e Suisse, ouverte &#xE9;galement aux patrouilles civiles. \r\nLa course se d&#xE9;roule de Zermatt &#xE0; Verbier (Parcours Z) respectivement d&#x27;Arolla &#xE0; Verbier (Parcours A). Elle doit &#xEA;tre accomplie en une seule &#xE9;tape. \r\nCette course unique se caract&#xE9;rise par la longueur et l&#x2019;altitude du profil du parcours ainsi que les exigences du milieu alpin.', '2016-11-25 04:00:00', '2016-11-25 21:00:00', 250, 1, 1, 'PDG', 2, 5, 5),
 (5, 'Le parcours a pour cadre une des plus belles vall&#xE9;es des Alpes Valaisannes. Le trac&#xE9; suit des routes et des chemins de montagne sous le regard majestueux de montagnes telles que la Dent-Blanche ou le Cervin.\r\nLes participants foulent tour &#xE0; tour les berges d&#x2019;un petit lac d&#x2019;altitude ou des rochers plus escarp&#xE9;s en restant &#xE0; une altitude comprise entre 2100 et 2450 m. La longueur du parcours est de 16km 350 pour une d&#xE9;nivellation positive de 700 m.\r\nLe but de ce parcours dans le Val des Dix peut &#xEA;tre aper&#xE7;u d&#xE8;s le d&#xE9;part : le barrage de la Grande Dixence. L&#x2019;arriv&#xE9;e se situe sur le mur du barrage, au milieu de celui-ci.', '2016-11-28 09:00:00', '2016-11-28 16:00:00', 65, 1, 1, 'Thyon Dixence', 1, 3, 6),
-(6, 'Le Grand Raid Cristalp renomm&#xE9; en 2016 Grand Raid BCVS est une course de VTT organis&#xE9;e chaque ann&#xE9;e depuis 1990 entre Verbier et Grimentz en Valais. Cette course valorise les c&#xF4;t&#xE9;s aventure et mythique d&#x27;une &#xE9;preuve sans comparaison qui se d&#xE9;roule &#xE0; l&#x27;&#xE9;chelle d&#x27;une r&#xE9;gion des alpes valaisannes.', '2016-12-02 05:00:00', '2016-12-03 17:00:00', 200, 2, 1, 'Le Grand Raid', 1, 4, 7),
-(7, 'Lorem ipsum?? ', '2016-11-16 13:32:00', '2016-11-16 17:00:00', 1000, 1, 4, 'Test a effacer@%&amp;?? ', 2, 4, 8);
+(6, 'Le Grand Raid Cristalp renomm&#xE9; en 2016 Grand Raid BCVS est une course de VTT organis&#xE9;e chaque ann&#xE9;e depuis 1990 entre Verbier et Grimentz en Valais. Cette course valorise les c&#xF4;t&#xE9;s aventure et mythique d&#x27;une &#xE9;preuve sans comparaison qui se d&#xE9;roule &#xE0; l&#x27;&#xE9;chelle d&#x27;une r&#xE9;gion des alpes valaisannes.', '2016-12-02 05:00:00', '2016-12-03 17:00:00', 200, 2, 1, 'Le Grand Raid', 1, 4, 7);
 
 -- --------------------------------------------------------
 
@@ -152,8 +151,7 @@ INSERT INTO `eventusers` (`fk_idEvent`, `fk_idUser`, `fk_idStatus`, `submitDate`
 (3, 1, 2, '2016-11-08 09:46:00', 1),
 (3, 2, 2, '2016-11-08 04:15:15', 6),
 (3, 4, 3, '2016-11-08 10:11:12', 12),
-(4, 4, 1, '2016-11-08 10:27:16', 1),
-(7, 4, 1, '2016-11-08 13:30:59', 0);
+(4, 4, 1, '2016-11-08 10:27:16', 1);
 
 -- --------------------------------------------------------
 
@@ -235,7 +233,15 @@ CREATE TABLE IF NOT EXISTS `subscribers` (
   `emailAddress` varchar(120) NOT NULL,
   PRIMARY KEY (`id`,`emailAddress`),
   UNIQUE KEY `emailAddress` (`emailAddress`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+
+--
+-- Dumping data for table `subscribers`
+--
+
+INSERT INTO `subscribers` (`id`, `emailAddress`) VALUES
+(9, 'calixte.mayoraz@students.hevs.ch'),
+(8, 'pierre.baran@students.hevs.ch');
 
 -- --------------------------------------------------------
 
@@ -266,7 +272,7 @@ INSERT INTO `users` (`idUser`, `mail`, `firstname`, `lastname`, `tel`, `pwd`, `f
 (3, 'evgueni.chaktarine@students.hevs.ch', 'Evgueni', 'Chaktarine', '0797831703', '7c4a8d09ca3762af61e59520943dc26494f8941b', 1),
 (4, 'andreas.fischer@students.hevs.ch', 'Andreas', 'Fischer', '0794279580', '7c4a8d09ca3762af61e59520943dc26494f8941b', 3),
 (5, 'calixte.mayoraz@students.hevs.ch', 'Calixte', 'Mayoraz', '0786298541', '7c4a8d09ca3762af61e59520943dc26494f8941b', 3),
-(15, 'admin@admin.ch', 'admin', 'admin', '00000000000', 'admin', 4);
+(15, 'comm@cas.ch', 'Dieu', 'Toutpuissant', '00000000000', 'd033e22ae348aeb5660fc2140aec35850c4da997', 4);
 
 -- --------------------------------------------------------
 
