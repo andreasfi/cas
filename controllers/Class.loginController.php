@@ -234,12 +234,17 @@ class loginController extends Controller
 
         if((!preg_match($this->NAME_PATTERN, $fname)) || (!preg_match($this->NAME_PATTERN, $lname)))
         {
+            error_log("Firstname or lastname doesn't match");
             $error = true;
+        }else
+        {
+            error_log("Firstname and lastname match");
         }
 
         if(!filter_var($mail, FILTER_VALIDATE_EMAIL))
         {
             $error = true;
+            error_log("Email not valid");
         }else
         {
             $arr = explode("@", $mail);
@@ -248,11 +253,16 @@ class loginController extends Controller
             {
                 $error = true;
             }
+            error_log("E-mail valid");
         }
 
         if(!preg_match($this->PHONE_PATTERN, $phone))
         {
+            error_log("Phone doesn't match");
             $error = true;
+        }else
+        {
+            error_log("Phone matches");
         }
 
 
