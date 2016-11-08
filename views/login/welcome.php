@@ -45,7 +45,7 @@ include_once ROOT_DIR . 'views/header.inc';
 
                 <?php if ($events_msg != 'rien') {
                     echo "<div id=\"message\" class=\"col-md-12\">
-        <p> $events_msg  </p>
+      
     </div>";
                 } ?>
 
