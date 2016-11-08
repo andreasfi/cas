@@ -3,10 +3,11 @@ $msg = $this->vars['msg'];
 $pageTitle = $this->vars['pageTitle'];
 $pageMessage = $this->vars['pageMessage'];
 include_once ROOT_DIR.'views/header.inc';
+$requestUri = explode('/', $_SERVER['REQUEST_URI']);
 ?>
 
     <br><br>
-    <form action="<?php echo URL_DIR.'/login/changePassword';?>" method="post">
+    <form action="<?php echo URL_DIR.'/login/changePassword/'.$requestUri[4];?>" method="post">
         <table align="center">
             <tr>
                 <td>
