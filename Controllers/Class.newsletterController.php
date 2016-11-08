@@ -56,6 +56,8 @@ class newsletterController extends Controller
     {
         //TODO : Display forbidden in case the user is not an admin.
 
+        $this->checkUser(4, '/home/home');
+
         $this->vars['subject'] = "";
         $this->vars['message'] = "";
 
@@ -94,6 +96,13 @@ class newsletterController extends Controller
     function sendnewsletter()
     {
         //0. Check : the previous page should be newsletter/newsletter
+        $this->checkUser(4, '/home/home');
+
+        if (!strpos($_SERVER['HTTP_REFERER'], SITE_NAME))
+        {
+            $this->redirect('home', 'home');
+            exit();
+        }
 
         $error_subject = false;
         $error_message = false;
@@ -117,7 +126,8 @@ class newsletterController extends Controller
             $_SESSION['message'] = $message;
 
             //Redirect to the previous page.
-            header('Location: ' . ROOT_DIR . '/' . SITE_NAME . '/newsletter/newsletter');
+            $this->redirect('newsletter', 'newsletter');
+            //header('Location: ' . ROOT_DIR . '/' . SITE_NAME . '/newsletter/newsletter');
             exit();
         }
 
@@ -128,7 +138,8 @@ class newsletterController extends Controller
 
         $this->vars['sending_success'] = 0;
         $this->vars['sending_errors'] = array();
-
+        $this->vars['msg_errors'] = "";
+        $this->vars['msg_success'] = "";
 
         foreach ($emailAddresses as $email) {
 
@@ -165,13 +176,11 @@ class newsletterController extends Controller
             }
         }
 
-        /*
         if(!$found)
         {
             //TODO : À changer par la métode redirect après le déploiement.
-            header('Location: http://localhost/cas/error/http404');
+            $this->redirect('/home', 'home');
             exit();
         }
-        */
     }
 }

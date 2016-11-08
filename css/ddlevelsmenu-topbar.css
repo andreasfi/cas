@@ -24,17 +24,17 @@ margin: 0;
 padding: 6px 8px; /*padding inside each tab*/
 border-right: 1px solid white; /*right divider between tabs*/
 color: white;
-background: #414141;
+
 }
 
 .mattblackmenu li a:visited{
 color: white;
 }
 
-.mattblackmenu li a:hover{
-background: black; /*background of tabs for hover state */
+.mattblenu li a:hover{
+background:#0C4E70; /*background of tabs for hover state */
 }
 
 .mattblackmenu a.selected{
-background: black; /*background of tab with "selected" class assigned to its LI */
+background: #0C4E70; /*background of tab with "selected" class assigned to its LI */
 }
