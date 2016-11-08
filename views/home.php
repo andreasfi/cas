@@ -87,16 +87,16 @@
             <div class="row">
                 <div class="col-md-4 col-sm-4">
                     <div class="f-block bblue">
-                        <a href="#"><i class="fa fa-blind"></i></a>
-                        <a href="#"><h3>Notre club</h3></a>
+                        <i class="fa fa-blind"></i>
+                        <h3>Notre club</h3>
                         <p>Bénéficiez de notre réseau de montagnards pour organisert et participer</p>
                     </div>
                 </div>
 
                 <div class="col-md-4 col-sm-4">
                     <div class="f-block bblue">
-                        <a href="#"><i class="fa fa-building"></i></a>
-                        <a href="#"><h3>Outil de gestion</h3></a>
+                        <i class="fa fa-building"></i>
+                        <h3>Outil de gestion</h3>
                         <p>Avec notre outil de gestion des sorties nous pouvons garantir </p>
                     </div>
                 </div>
