@@ -5,6 +5,7 @@
 $msg = $this->vars['msg'];
 $user = $_SESSION['user'];
 $events = $this->vars['user_events']; //Declared in the controller
+$eventusers = $this->vars['eventUsers']; //Declared in the controller
 $events_msg = $this->vars['user_events_msg'];
 $pageTitle = $this->vars['pageTitle'];
 $pageMessage = $this->vars['pageMessage'];
@@ -15,6 +16,7 @@ include_once ROOT_DIR . 'views/header.inc';
         <div class="row">
             <section id="sorties_container" class="row col-lg-12">
                 <h1><?php echo $lang['WELCOME_H1_LISTEVENTS']; ?></h1>
+
                 <table class="table table-striped col-lg-5">
                     <tr>
                         <th>Date start</th>
@@ -24,6 +26,24 @@ include_once ROOT_DIR . 'views/header.inc';
                     </tr>
                     <?php
 
+                    foreach($eventusers as $e) {
+
+                        $user_id = $e->getUser()->getId();
+                        $status = null;
+                        $startDate = $e->getEvent()->getStartDate();
+                        $endDate = $e->getEvent()->getEndDate();
+                        $title = $e->getEvent()->getTitle();
+                        $description = $e->getEvent()->getDescription();
+
+                        if($_SESSION['user']->getId() == $e->getEvent()->getOwner())
+                        {
+                            $status = "<b style='color: orange;'>Trailmaster</b>";
+                        }else
+                        {
+                            $status = $e->getStatus()->getStatusName();
+                        }
+
+                    /*
                     foreach ($events as $e) {
                         $status = $e->getStatus();
                         $startDate = $e->getStartDate();
@@ -34,7 +54,6 @@ include_once ROOT_DIR . 'views/header.inc';
                         /*$startDate = $startDate->format('Y-m-d H:i:s');
                         $endDate = $endDate->format('Y-m-d H:i:s');
                         */
-
 
                         echo "<tr><td>$startDate</td><td>$endDate</td><td>$status</td><td>$title</td></tr>";
                     }
