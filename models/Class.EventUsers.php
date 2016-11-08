@@ -115,12 +115,7 @@ class EventUsers
 
         foreach($rows as $row)
         {
-            $eu = new EventUsers();
-            $eu->setEvent($row[0]);
-            $eu->setUser($row[1]);
-            $eu->setStatus($row[2]);
-            $eu->setSubmitDate($row[3]);
-            $eu->setNbParticipants($row[4]);
+            $eu = new EventUsers($row[0], $row[1], $row[2], $row[3], $row[4]);
             array_push($eventUsers, $eu);
         }
         return $eventUsers;
