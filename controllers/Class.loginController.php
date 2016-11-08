@@ -20,7 +20,7 @@ class loginController extends Controller
             $this->redirect('/login');
         } else {
             //Load user from DB if exists
-            $result = User::connect($mail, $pwd);
+            $result = User::connect(htmlentities($mail), htmlentities($pwd));
 
             //Put user in session if exists or return error msg
             if (!$result) {
