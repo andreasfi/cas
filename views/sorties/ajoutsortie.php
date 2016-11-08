@@ -274,6 +274,9 @@ if(isset($_SESSION['event'])){
 	will do the actual plotting of the elevation.
 	*/
 	function calculateElevation(points){
+		//if we have more than 512 points, we trim the data to have only 512 points.
+		if(points.length > 512)
+			points = trimTo512(points);
 		if(elevator){
 			elevator.getElevationAlongPath({
 				'path': points,
@@ -281,6 +284,24 @@ if(isset($_SESSION['event'])){
 			}, plotElevation);
 		}
 	}
+	
+	
+		function trimTo512(coordinates){
+			//since google elevation services only allows 512 points, if there are more, we have to remove points
+			//evenly throughout the data to still represent it as evenly as possible
+			
+			//figure out how many data points are overflow
+			var overflow = coordinates.length - 512;
+			
+			//we're going to divide the data into n chunks, for each chunk, we remove the middlemost value.
+			var chunksize = 512 / overflow;
+			
+			for(var i = 0 ; i < overflow; i++){
+				coordinates.pop(i*chunksize - chunksize/2);
+			}
+			
+			return coordinates;
+		}
 	
 	function plotElevation(elevations, status) {
 		//get the canvas
