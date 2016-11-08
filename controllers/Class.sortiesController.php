@@ -157,6 +157,7 @@ class sortiesController extends Controller
         }
 
         // api transport
+        // get all infos
         $from = isset($_POST['from']) ? $_POST['from'] : false;
         $response = isset($_POST['response']) ? $_POST['response'] : false;
         $to = isset($_POST['to']) ? $_POST['to'] : false;
@@ -182,9 +183,10 @@ class sortiesController extends Controller
             if ($via) {
                 $query['via'] = $via;
             }
-            $url = 'http://transport.opendata.ch/v1/connections?' . http_build_query($query);
+            $url = 'http://transport.opendata.ch/v1/connections?' . http_build_query($query); // query the server
             $url = filter_var($url, FILTER_VALIDATE_URL);
-            $response = json_decode(file_get_contents($url));
+            $response = json_decode(file_get_contents($url)); // decode the json
+            // Set the vars
             if ($response->from) {
                 $from = $response->from->name;
             }
