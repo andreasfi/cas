@@ -19,10 +19,10 @@ include_once ROOT_DIR . 'views/header.inc';
 
                 <table class="table table-striped table-hover col-lg-5">
                     <tr>
-                        <th>Date start</th>
-                        <th>Date end</th>
-                        <th>Status</th>
-                        <th>Title</th>
+                        <th><?php echo $lang['WELCOME_DATE_START'] ?></th>
+                        <th><?php echo $lang['WELCOME_DATE_END'] ?></th>
+                        <th><?php echo $lang['WELCOME_STATUS'] ?></th>
+                        <th><?php echo $lang['WELCOME_TITLE'] ?></th>
                     </tr>
                     <?php
 
