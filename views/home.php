@@ -103,8 +103,8 @@
 
                 <div class="col-md-4 col-sm-4">
                     <div class="f-block bblue">
-                        <a href="#"><i class="fa fa-thumbs-up"></i></a>
-                        <a href="#"><h3>Member advantages</h3></a>
+                        <i class="fa fa-thumbs-up"></i>
+                        <h3>Member advantages</h3>
                         <p>Apply as a member to benefit of all our advantages</p>
                     </div>
                 </div>
