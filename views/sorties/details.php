@@ -224,6 +224,10 @@ include_once 'views/header.inc'; ?>
                                             if (isset($item)) {
                                                 foreach ($item as $keyuser => $it) {
 
+                                                    //The trailmaster is accepted by default.
+                                                    if($_SESSION['user']->getId() == $it->getId())
+                                                        continue;
+
                                                     $class = 'info';
 
                                                     if ($key == 1) {
@@ -343,7 +347,6 @@ include_once 'views/header.inc'; ?>
 
                                             <?php
                                         }
-
                                     }
                                 }
                             } ?>
@@ -351,7 +354,6 @@ include_once 'views/header.inc'; ?>
                         </table>
                     </div>
                 </div>
-
                         <?php
                     }
 

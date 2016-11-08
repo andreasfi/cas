@@ -25,7 +25,7 @@ include_once ROOT_DIR . 'views/header.inc';
                     <?php
 
                     foreach ($events as $e) {
-                        $status = "Coming soon.."; //TODO : Add status in the DB
+                        $status = $e->getStatus();
                         $startDate = $e->getStartDate();
                         $endDate = $e->getEndDate();
                         $title = $e->getTitle();

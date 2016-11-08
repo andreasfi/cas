@@ -116,6 +116,16 @@ class EventUsers
         return $eventUsers;
     }
 
+    /***
+     * Returns the EventUsers with objects instead of fk.
+     * @param $eventID
+     */
+    public static function getEventUsersByEventID_obj($eventID)
+    {
+        //TODO : continue this query.
+        $query = "SELECT * FROM ";
+    }
+
     public function updateStatus()
     {
         $query = "UPDATE `eventusers` SET `fk_idStatus`= $this->status WHERE `fk_idUser`= $this->user ORDER BY fk_idUser ASC ";
