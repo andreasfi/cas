@@ -100,9 +100,18 @@ class loginController extends Controller
     function changePassword()
     {
 
+
         $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
         $this->vars['pageTitle'] = "Changement de mot de passe";
         $this->vars['pageMessage'] = "";
+
+        if (!$this->getActiveUser()) {
+
+            $this->redirect('/login','');
+
+            exit;
+        }
+
 
         /*
          * This bit of code does so
@@ -143,7 +152,7 @@ class loginController extends Controller
             //check if fields are empty
             if (empty($newPassword) or empty($newPasswordConfirmation)) {
 
-                $_SESSION['msg'] = '<span class="error">' . $this->lang['E_REQUIRED_FILED_EMPTY'] . '</span>';
+                $_SESSION['msg'] = '<span class="error">' . $this->lang['E_REQUIRED_FIELD_EMPTY'] . '</span>';
                 $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
                 return;
             }
@@ -155,17 +164,19 @@ class loginController extends Controller
             } else {
                 $loggeduser = $this->getActiveUser();
                 $result = $loggeduser->changePwd($newPassword);
+
                 if (is_string($result)) {
                     $_SESSION['msg'] = '<span class="error">' . $result . '</span>';
                 } else {
+
                     $_SESSION['msg'] = '<span class="success">' . $this->lang['S_PASSWORD_CHANGE_SUCCESSFUL'] . '</span>';
+
                     $this->getActiveUser()->setPassword(sha1($newPassword));
 
                 }
 
                 $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
-
-                $this->redirect('/login/welcome');
+                $this->redirect('/login/','welcome');
             }
 
 
@@ -272,7 +283,7 @@ class loginController extends Controller
         }
 
 
-        $this->redirect('/login', 'newuser');
+        $this->redirect('/login');
     }
 
     /**
@@ -282,6 +293,7 @@ class loginController extends Controller
     {
         $this->vars['pageTitle'] = "Profil";
         $this->vars['pageMessage'] = "";
+        $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
         $this->vars['eventUsers'] = EventUsers::getEventUsersByUserID_obj($_SESSION['user']->getId());
 
         //The page cannot be displayed if no user connected
