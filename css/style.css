@@ -205,7 +205,16 @@ ul{
 	background: #d82829 !important;
 }
 
-
+.usericon {
+	font-size: 20px;
+	display: block;
+	margin-top: 5px;
+	color: #fff;
+	width: 45px;
+	height: 45px;
+	text-align: center;
+	line-height: 45px;
+}
 /* Details */
 
 #details-table th
