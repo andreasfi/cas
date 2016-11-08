@@ -200,7 +200,7 @@ class Controller {
     */
     function sendSms($destinationNumber, $message)
     {
-        /*
+
         $destinationNumber = substr($destinationNumber, 1);
         $sender = "CAS";
         $mobile_number = "$destinationNumber";
@@ -250,7 +250,7 @@ class Controller {
                $alert_success = "We sent you a verification code to: +41" . htmlspecialchars($mobile_number) . '.';
             }
             curl_close($curl);
-*/
+
 
         var_dump("SMS envoyé à ".$this->getActiveUser()->getPhone());
     }
