@@ -216,11 +216,11 @@ include_once 'views/header.inc'; ?>
                                         </tr>
                                         </thead>
                                         <?php
-
+                                        $count1 = 0;
                                         foreach ($allParticipants as $key => $item) {
                                             if (isset($item)) {
                                                 foreach ($item as $keyuser => $it) {
-
+                                                    $count1++;
                                                     //The trailmaster is accepted by default.
                                                     if($_SESSION['user']->getId() == $it->getId())
                                                         continue;
@@ -277,9 +277,18 @@ include_once 'views/header.inc'; ?>
                                                     </tr>
                                                 <?php }
                                             }
-                                        } ?>
+                                        }
+
+
+                                        ?>
 
                                     </table>
+
+                                    <?php
+                                    if(isset($count1) && $count1 <= 1){
+                                        echo 'No Data';
+                                    }
+                                    ?>
                                     <div id="btn_save_container" class="row col-md-12">
                                         <button id="details_save_button" type="submit"
                                                 class="btn btn-large bblue col-md-2"
@@ -306,19 +315,15 @@ include_once 'views/header.inc'; ?>
                             </tr>
                             </thead>
                             <?php
+                            $count = 0;
 
                             foreach ($allParticipants as $key => $item) {
                                 if (isset($item)) {
                                     foreach ($item as $keyuser => $it) {
 
-                                        if($key == 0){
-                                            $class = 'info';
-
-                                            if ($key == 1) {
-                                                $class = 'success';
-                                            } elseif ($key == 2) {
-                                                $class = 'danger';
-                                            }
+                                        if($key == 1){
+                                            $class = 'success';
+                                            $count++;
 
                                             ?>
                                             <tbody>
@@ -335,13 +340,19 @@ include_once 'views/header.inc'; ?>
                                         }
                                     }
                                 }
-                            } ?>
+                            }
+
+                            ?>
 
                         </table>
                     </div>
                 </div>
                         <?php
                     }
+                    if(isset($count) && $count == 0){
+                        echo 'No Data';
+                    }
+
 
                 } ?>
             </div>
