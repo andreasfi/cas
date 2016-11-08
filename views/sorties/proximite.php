@@ -19,20 +19,16 @@ include_once ROOT_DIR.'views/header.inc';
 	}
 </style>
     <div class="content">
-        <div class="container">
-            <div class="row" id="map">
-                
-            </div>
-        </div>
-		<div class="container" style="margin-top:10px">
+        
+		<div class="container" style="margin-bottom:10px">
 			<div class="row">
 				<div class="col-md-3"></div>
 				<div class="col-md-2">
-					<img src="../img/hikeicon.png" width="15px">
+					<img src="../img/bluemarker.png" width="15px">
 					<?php echo $lang['RANDONNEES'];?>
 				</div>
 				<div class="col-md-2">
-					<img src="../img/tripicon.png" width="15px">
+					<img src="../img/redmarker.png" width="15px">
 					<?php echo $lang['SORTIES'];?>
 				</div>
 				<div class="col-md-2">
@@ -42,6 +38,11 @@ include_once ROOT_DIR.'views/header.inc';
 				<div class="col-md-3"></div>
 			</div>
 		</div>
+		<div class="container">
+            <div class="row" id="map">
+                
+            </div>
+        </div>
     </div>
 <script>
 	var infowindow;
@@ -72,9 +73,9 @@ include_once ROOT_DIR.'views/header.inc';
 		var icon = '';
 		
 		if(event.event_type == 'rando')
-			icon = '../img/hikeicon.png';
+			icon = '../img/bluemarker.png';
 		else
-			icon = '../img/tripicon.png';
+			icon = '../img/redmarker.png';
 		
 		var date = Date.parse(event.start_date);
 
