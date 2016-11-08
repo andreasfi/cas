@@ -39,31 +39,17 @@ $allParticipants = $this->vars['allParticipants'];
 $participating = $this->vars['participating'];
 
 include_once 'views/header.inc'; ?>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
-    <style>
-        .graphical {
-            width: 100%;
-            height: 292px;
-        }
-
-        .graphicalalt {
-            height: auto;
-            width: 100%;
-        }
-    </style>
     <div class="content">
         <div class="container">
             <div class="row">
+                <div class="col-lg-6"></div>
                 <div class="col-lg-6">
-
-                </div>
-                <div class="col-lg-6">
-                    <?php if ($participating) { ?>
+                    <?php if ($participating) { // Check if the user il already participating ?>
                         <button data-toggle="tooltip" data-placement="top" title="<?php echo $lang['BUTTON_PARTICIPATION_REQUEST_ALREADY_TOOLTIP']; ?>"
                                 style=""
                                 class="btn btn-default btn-large pull-right"><?php echo $lang['BUTTON_PARTICIPATION_REQUEST_ALREADY']; ?> <i
                                 class="fa fa-angle-double-right"></i></button>
-                    <?php } else if (isset($userLevel) && $userLevel >= 2) { ?>
+                    <?php } else if (isset($userLevel) && $userLevel >= 2) { // Check if user is authorzized to participate ?>
                         <a href="<?php echo URL_DIR ?>/sorties/inscription/<?php if (isset($eventId)) {
                             echo $eventId;
                         }; ?>"

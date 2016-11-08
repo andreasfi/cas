@@ -25,7 +25,7 @@ $lang['DISCONNECT_MENU_BUTTON'] = "Déconnection";
 $lang['PROXIMITY_MENU_BUTTON'] = "Carte";
 $lang['ACTIVITIES_MENU_BUTTON'] = "Excursions";
 $lang['CONTACT_MENU_BUTTON'] = "Contact";
-
+$lang['PROFIL_MENU_BUTTON'] = "Profil";
 //Home
 
 $lang['WELCOME_MESSAGE'] = "Bienvenue les montagnards!";
