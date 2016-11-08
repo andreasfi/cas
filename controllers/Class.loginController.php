@@ -124,17 +124,16 @@ class loginController extends Controller
 
 
             } catch (Exception $e) {
+                if (!($_SESSION['user']->getId() != 0)) {
+                   
+                    unset($_SESSION['user']);
+                    $_SESSION['msg'] = '<span class="error">' . $this->lang['E_KEY_REJECTED'] . '</span>';
+                    $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
 
+                }
             }
-            if (!($_SESSION['user']->getId() != 0)) {
 
-                unset($_SESSION['user']);
-                $_SESSION['msg'] = '<span class="error">' . $this->lang['E_KEY_REJECTED'] . '</span>';
-                $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
-            }
 
-        } else {
-            $this->redirect('/login','');
         }
 
         /*
@@ -168,7 +167,13 @@ class loginController extends Controller
 
                     $_SESSION['msg'] = '<span class="success">' . $this->lang['S_PASSWORD_CHANGE_SUCCESSFUL'] . '</span>';
 
+                    if (isset($requestUri[4])) {
+                        $_SESSION['user'] = User::getUserCorrespondingToSecretKey($requestUri[4]);
+                    }
+
                     $this->getActiveUser()->setPassword(sha1($newPassword));
+
+
 
                 }
 
