@@ -246,8 +246,8 @@ class sortiesController extends Controller
         $this->vars['msg_err'] = isset($_SESSION['msg_err']) ? $_SESSION['msg_err'] : '';
         $this->vars['pageTitle'] = $result->getTitle();
         // Formate dates
-        $this->vars['endDate'] = date('d.m,y H:i',strtotime($result->getEndDate()));
-        $this->vars['pageMessage'] = date('y, H:i',strtotime($result->getStartDate()));
+        $this->vars['endDate'] = date('d.m.Y H:i',strtotime($result->getEndDate()));
+        $this->vars['pageMessage'] = date('d.m.Y, H:i',strtotime($result->getStartDate()));
 
         $this->vars['participating'] = $participating;
 
