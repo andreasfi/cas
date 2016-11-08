@@ -294,7 +294,7 @@ class loginController extends Controller
 
         //$this->sendSms($this->getActiveUser()->getPhone(), 'Salut monsieur X, ici c est Club alpin suisse. ca va?');
 
-        if (!empty($_POST)) {
+        if (!empty($_POST['firstname'])) {
             $newFirstname = $_POST['firstname'];
             $newLastname = $_POST['lastname'];
             $newPhone = $_POST['phone'];

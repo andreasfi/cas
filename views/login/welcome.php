@@ -25,7 +25,7 @@ include_once ROOT_DIR . 'views/header.inc';
                     <?php
 
                     foreach ($events as $e) {
-                        $status = "Coming soon.."; //TODO : Add status in the DB
+                        $status = $e->getStatus();
                         $startDate = $e->getStartDate();
                         $endDate = $e->getEndDate();
                         $title = $e->getTitle();
@@ -45,7 +45,7 @@ include_once ROOT_DIR . 'views/header.inc';
 
                 <?php if ($events_msg != 'rien') {
                     echo "<div id=\"message\" class=\"col-md-12\">
-        <p> $events_msg  </p>
+      
     </div>";
                 } ?>
 
@@ -55,7 +55,6 @@ include_once ROOT_DIR . 'views/header.inc';
             <table align="center">
                 <tr>
                     <td>
-                        <?php echo $msg; ?>
                         <h1><?php echo $lang['WELCOME'], ' ' . $user->getFirstname() . ' ' . $user->getLastname(); ?></h1>
                         <h3><?php echo $lang['MY_PERSONNAL_DATA']; ?></h3>
                         <form action="<?php echo URL_DIR . '/login/welcome'; ?>" method="post">

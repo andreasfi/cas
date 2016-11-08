@@ -69,7 +69,7 @@ class sortiesController extends Controller
 
 
                         $accepted_message = "Votre demande a été acceptée par le guide.";
-                        $accepted_msg_sms = "Votre demande pour l'événement ".$event->getOwner()." a été accepté par le guide.";
+                        $accepted_msg_sms = "Votre demande pour l'événement ".$event->getDescription()." a été accepté par le guide.";
                         $refused_message = "Le guide a refusé votre demande. Un SMS ";
                         $refused_msg_mail = "";
 
