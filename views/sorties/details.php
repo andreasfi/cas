@@ -368,16 +368,16 @@ if ($response != false) {
     ?>
     <script type="text/javascript">
         $(window).load(function () {
-            $('#itineraire').modal('show');
+            $('#itineraire').modal('show'); /* Show modal if asked to */
         });
     </script>
 <?php } ?>
 
     <script>
         $(function () {
-
+            /* Transport api */
             function reset() {
-                $('table.connections tr.connection').show();
+                $('table.connections tr.connection').show(); /* If reset show connection and hide section */
                 $('table.connections tr.section').hide();
             }
 
@@ -396,10 +396,10 @@ if ($response != false) {
                     that.setSelectionRange(0, 9999);
                 }, 10);
             });
-            $('#itineraire').on('shown.bs.modal', function () {
+            $('#itineraire').on('shown.bs.modal', function () { /* Try geoloc when modal open */
                 if (navigator.geolocation) {
                     if (!$('input[name=from]').val()) {
-                        $('input[name=from]').attr('placeholder', 'Locating...');
+                        $('input[name=from]').attr('placeholder', 'Locating...'); /* Set location... text */
                         var i = 0;
                         var interval = setInterval(function () {
                             i = (i + 1) % 4;
@@ -652,6 +652,8 @@ if ($response != false) {
 
                     <?php $datetime = $datetime ?: date('Y-m-d H:i:s'); ?>
                 </div>
+
+                <!-- Input for transport api -->
                 <form class="pager">
                     <input type="hidden" name="from" value="<?php echo htmlentities($from, ENT_QUOTES, 'UTF-8'); ?>"/>
                     <input type="hidden" name="to" value="<?php echo htmlentities($to, ENT_QUOTES, 'UTF-8'); ?>"/>
