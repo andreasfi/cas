@@ -157,6 +157,9 @@ $lang['TRAIL_MAP'] = "Course";
 $lang['TRAIL_MAP_INSTRUCTIONS'] = "Cliquez sur la carte pour dessinner la course";
 $lang['TRAIL_MAP_DELETELAST'] = "Supprimer le dernier point";
 $lang['TRAIL_MAP_DELETEALL'] = "Supprimer tous les points";
+$lang['TRAIL_MAP_DELETETRAIL'] = "Supprimer l'évènement";
+$lang['TRAIL_MAP_UPDATETRAIL'] = "Sauvegarder les modifications";
+$lang['TRAIL_MAP_SAVETRAIL'] = "Sauvegarder l'évènement";
 
 //catégories de courses
 $lang['TRAIL_CAT_1'] = "Marche";

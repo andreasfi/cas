@@ -117,14 +117,14 @@ if(isset($_SESSION['event'])){
 			<?php if ($event!= null){ ?>
 			<input class="btn btn-success" name="edit_event" type=hidden value="<?php echo $event->getId(); ?>">
 			<?php } ?>
-			<input class="btn btn-success" type="submit" <?php echo(isset($event) ? "value='UPDATE'" : ""); ?>>
+			<input class="btn btn-success" type="submit" value="<?php echo(isset($event) ? $lang['TRAIL_MAP_UPDATETRAIL']  : $lang['TRAIL_MAP_SAVETRAIL']); ?>">
 			</form>
 		</div>
 		<?php if(isset($event)){ ?>
 			<div class="col-md-2 text-center">
 				<form method="post" action="<?php echo URL_DIR.'/sorties/ajoutsortie'?>">
 					<input type=hidden name="delete_event" value="<?php echo $event->getId(); ?>">
-					<input type="submit" value="DELETE">
+					<input type="submit" class="btn btn-danger" value="<?php echo $lang['TRAIL_MAP_DELETETRAIL'];?>">
 				</form>
 			</div>
 		<?php } ?>
