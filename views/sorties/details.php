@@ -44,6 +44,7 @@ include_once 'views/header.inc'; ?>
             <div class="row">
                 <div class="col-lg-6"></div>
                 <div class="col-lg-6">
+
                     <?php if ($participating) { // Check if the user il already participating ?>
                         <button data-toggle="tooltip" data-placement="top" title="<?php echo $lang['BUTTON_PARTICIPATION_REQUEST_ALREADY_TOOLTIP']; ?>"
                                 style=""
@@ -880,4 +881,5 @@ if ($response != false) {
             async defer></script>
 
 <?php
+unset($_SESSION['msg']);
 include_once 'views/footer.inc';
