@@ -28,7 +28,6 @@ class sortiesController extends Controller
         //If the user is not from the domain, redirect him to the landing page.
         if (!strpos($_SERVER['HTTP_REFERER'], SITE_NAME)) {
             $this->redirect('/sortie/details/'.$event_id,'');
-            exit();
         }
 
 

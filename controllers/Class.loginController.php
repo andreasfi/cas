@@ -105,12 +105,6 @@ class loginController extends Controller
         $this->vars['pageTitle'] = "Changement de mot de passe";
         $this->vars['pageMessage'] = "";
 
-        if (!$this->getActiveUser()) {
-
-            $this->redirect('/login','');
-
-            exit;
-        }
 
 
         /*
@@ -139,7 +133,10 @@ class loginController extends Controller
                 $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
             }
 
+        } else {
+            $this->redirect('/login','');
         }
+
         /*
          * If something is in the post, and the 2 passowrds aren't empty and match, the user logged password is updated in the database.
          */
