@@ -29,7 +29,7 @@ include_once ROOT_DIR.'views/header.inc';
 </form>
 <br/><br/><br/><br/>
 
-<?php 
+<?php
 unset($_SESSION['msg']);
 include_once ROOT_DIR.'views/footer.inc';
 
