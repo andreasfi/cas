@@ -124,53 +124,24 @@ class sortiesController extends Controller
         $this->checkUser(0, "/error/http404");
         $this->checkParam($GLOBALS['value'], "/home");
 
+        $userId = null;
+        if (isset($_SESSION['user'])) {
+            $userId = $_SESSION['user']->getId();
+        }
+
         // Get infos
         $result = Event::fetch_event_by_id($GLOBALS['value']);
 
-        // Variables depuis BD
-
-        $description = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
-
-        $this->vars['eventId'] = $result->getId();
-        $this->vars['title'] = $result->getTitle();
-        $this->vars['startDate'] = $result->getStartDate();
-
-        $endate2 = strtotime($result->getEndDate());
-        $newformat2 = date('m.d.y, H:i',$endate2);
-        $this->vars['endDate'] = $newformat2;
-
-        $this->vars['maxParticipants'] = $result->getMaxParticipants();
-        $this->vars['owner'] = $result->getOwner();
-        $this->vars['eventCategory'] = $result->getEventCategory();
-        $this->vars['difficulty'] = $result->getDifficulty();
-        $this->vars['path'] = $result->getPath();
-        $this->vars['description'] = $result->getDescription();
-        $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
-        $this->vars['msg_err'] = isset($_SESSION['msg_err']) ? $_SESSION['msg_err'] : '';
-        $this->vars['pageTitle'] = $result->getTitle();
-
-        $time = strtotime($result->getStartDate());
-        $newformat = date('m.d.y, H:i',$time);
-        $this->vars['pageMessage'] = $newformat;
-
-
-        // Calcul de la distance
+        // Calcul de la distance 
         $path = $result->getPath();
-        // Faire un json valide
-        $json = preg_replace('/([{,])(\s*)([A-Za-z0-9_\-]+?)\s*:/', '$1"$3":', $path);
+        $json = preg_replace('/([{,])(\s*)([A-Za-z0-9_\-]+?)\s*:/', '$1"$3":', $path); // Faire un json valide
         $pathArrays = json_decode($json);
         $pathDistance = 0;
-        // incrementer la distance entre tous les points
-        for ($i = 0; $i < count($pathArrays) - 1; $i++) { 
+        for ($i = 0; $i < count($pathArrays) - 1; $i++) { // incrementer la distance entre tous les points
             $pathDistance += $this->distance($pathArrays[$i]->lat, $pathArrays[$i]->lng, $pathArrays[$i + 1]->lat, $pathArrays[$i + 1]->lng);
         }
-        $this->vars['distance'] = $pathDistance;
-
-        // Calcul du denivele
-
 
         // api transport
-
         $from = isset($_POST['from']) ? $_POST['from'] : false;
         $response = isset($_POST['response']) ? $_POST['response'] : false;
         $to = isset($_POST['to']) ? $_POST['to'] : false;
@@ -182,7 +153,6 @@ class sortiesController extends Controller
         $stationsTo = [];
         $search = $from && $to;
         $userLevel = isset($_SESSION['user']) ? $_SESSION['user']->getMemberType() : false;
-
         if ($search) {
             $query = [
                 'from' => $from,
@@ -225,34 +195,13 @@ class sortiesController extends Controller
                 }
             }
         }
-
         if (isset($response)) {
             $this->vars['response'] = $response;
         } else {
             $response = null;
         }
-        $this->vars['from'] = $from;
-        $this->vars['to'] = $to;
-        $this->vars['via'] = $via;
-        $this->vars['datetime'] = $datetime;
-        $this->vars['c'] = $c;
-        $this->vars['stationsFrom'] = $stationsFrom;
-        $this->vars['stationsTo'] = $stationsTo;
-        $this->vars['search'] = $search;
-        $this->vars['userLevel'] = $userLevel;
 
-
-        if (isset($_POST['numParticipants'])) {
-
-            $_SESSION['user']->addUserToEvent($this->vars['eventId'], $_POST['numParticipants']);
-
-            $this->vars['msg'] = "VOUS AVEZ ETE INSCRIT";
-        }
-        $userId = null;
-        if (isset($_SESSION['user'])) {
-            $userId = $_SESSION['user']->getId();
-        }
-
+        // Get who attends the event
         $participating = false;
         if ($userLevel >= 0) {
             $userByEvent = User::getUserByEventId($GLOBALS['value']);
@@ -267,14 +216,46 @@ class sortiesController extends Controller
                 }
             }
         }
+
+        // Pass variables from db to the view
+        $this->vars['eventId'] = $result->getId();
+        $this->vars['title'] = $result->getTitle();
+        $this->vars['startDate'] = $result->getStartDate();
+        $this->vars['maxParticipants'] = $result->getMaxParticipants();
+        $this->vars['owner'] = $result->getOwner();
+        $this->vars['eventCategory'] = $result->getEventCategory();
+        $this->vars['difficulty'] = $result->getDifficulty();
+        $this->vars['path'] = $result->getPath();
+        $this->vars['description'] = $result->getDescription();
+        $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
+        $this->vars['msg_err'] = isset($_SESSION['msg_err']) ? $_SESSION['msg_err'] : '';
+        $this->vars['pageTitle'] = $result->getTitle();
+        // Formate dates
+        $this->vars['endDate'] = date('m.d.y',strtotime($result->getEndDate()));
+        $this->vars['pageMessage'] = date('m.d.y, H:i',strtotime($result->getStartDate()));
+
         $this->vars['participating'] = $participating;
 
+        // API transport
+        $this->vars['from'] = $from;
+        $this->vars['to'] = $to;
+        $this->vars['via'] = $via;
+        $this->vars['datetime'] = $datetime;
+        $this->vars['c'] = $c;
+        $this->vars['stationsFrom'] = $stationsFrom;
+        $this->vars['stationsTo'] = $stationsTo;
+        $this->vars['search'] = $search;
+        $this->vars['userLevel'] = $userLevel;
 
-        //if($userLevel >= 0){
-        //$userByEvent = User::getUserByEventId(2);
-        //$this->vars['allParticipants'] = $userByEvent;
-        //}
+        $this->vars['distance'] = $pathDistance;
 
+        // Log message
+        if (isset($_POST['numParticipants'])) {
+
+            $_SESSION['user']->addUserToEvent($this->vars['eventId'], $_POST['numParticipants']);
+
+            $this->vars['msg'] = "VOUS AVEZ ETE INSCRIT";
+        }
 
     }
 
