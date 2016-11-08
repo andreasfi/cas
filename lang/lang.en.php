@@ -25,6 +25,7 @@ $lang['DISCONNECT_MENU_BUTTON'] = "Disconnect";
 $lang['PROXIMITY_MENU_BUTTON'] = "Map";
 $lang['ACTIVITIES_MENU_BUTTON'] = "Excursions";
 $lang['CONTACT_MENU_BUTTON'] = "Contact";
+$lang['PROFIL_MENU_BUTTON'] = "Profil";
 
 //Home
 
