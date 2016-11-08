@@ -133,7 +133,7 @@ class EventUsers
     public static function getEventUsersByUserID_obj($userID)
     {
         //TODO : continue this query.
-        $query = "SELECT * FROM eventusers, events, users, status WHERE eventusers.fk_idUser = users.idUser AND eventusers.fk_idUser = users.idUser AND eventusers.fk_idStatus = status.idStatus AND eventusers.fk_idUser = $userID ORDER BY events.startDate;";
+        $query = "SELECT * FROM eventusers, events, users, status WHERE eventusers.fk_idUser = users.idUser AND eventusers.fk_idEvent = events.idEvent AND eventusers.fk_idStatus = status.idStatus AND eventusers.fk_idUser = $userID ORDER BY events.startDate;";
 
         $result = MySqlConn::getInstance()->selectDB($query);
         $rows = $result->fetchAll();
