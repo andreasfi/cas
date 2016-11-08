@@ -173,10 +173,20 @@ include_once ROOT_DIR . 'views/header.inc'; ?>
 
     function initDataTable() {
 
+        var locale = "<?php echo $_SESSION['lang'] ?>";
+        var url = "//cdn.datatables.net/plug-ins/1.10.12/i18n/English.json";
+        if(locale == "fr")
+        {
+            url = "//cdn.datatables.net/plug-ins/1.10.12/i18n/French.json";
+        }
+
         var table = $('#datatable').DataTable({
             paging: true,
             scrollY: 300,
-            data: datatable_data
+            data: datatable_data,
+            "language": {
+                "url": url
+            }
         });
 
         $('#datatable').on('click', 'tr', function()
