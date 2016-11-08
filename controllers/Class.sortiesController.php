@@ -136,6 +136,16 @@ class sortiesController extends Controller
 
         // Get infos
         $result = Event::fetch_event_by_id($GLOBALS['value']);
+        $this->vars['eventId'] = $result->getId();
+
+
+        // Log message
+        if (isset($_POST['numParticipants'])) {
+
+            $_SESSION['user']->addUserToEvent($this->vars['eventId'], $_POST['numParticipants']);
+
+            $this->vars['msg'] = "VOUS AVEZ ETE INSCRIT";
+        }
 
         // Calcul de la distance
         $path = $result->getPath();
@@ -223,7 +233,7 @@ class sortiesController extends Controller
         }
 
         // Pass variables from db to the view
-        $this->vars['eventId'] = $result->getId();
+
         $this->vars['title'] = $result->getTitle();
         $this->vars['startDate'] = $result->getStartDate();
         $this->vars['maxParticipants'] = $result->getMaxParticipants();
@@ -237,7 +247,7 @@ class sortiesController extends Controller
         $this->vars['pageTitle'] = $result->getTitle();
         // Formate dates
         $this->vars['endDate'] = date('d.m,y H:i',strtotime($result->getEndDate()));
-        $this->vars['pageMessage'] = date('d.m.y, H:i',strtotime($result->getStartDate()));
+        $this->vars['pageMessage'] = date('y, H:i',strtotime($result->getStartDate()));
 
         $this->vars['participating'] = $participating;
 
@@ -254,13 +264,7 @@ class sortiesController extends Controller
 
         $this->vars['distance'] = $pathDistance;
 
-        // Log message
-        if (isset($_POST['numParticipants'])) {
 
-            $_SESSION['user']->addUserToEvent($this->vars['eventId'], $_POST['numParticipants']);
-
-            $this->vars['msg'] = "VOUS AVEZ ETE INSCRIT";
-        }
 
     }
 
