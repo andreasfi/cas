@@ -132,7 +132,7 @@ class sortiesController extends Controller
         // Get infos
         $result = Event::fetch_event_by_id($GLOBALS['value']);
 
-        // Calcul de la distance 
+        // Calcul de la distance
         $path = $result->getPath();
         $json = preg_replace('/([{,])(\s*)([A-Za-z0-9_\-]+?)\s*:/', '$1"$3":', $path); // Faire un json valide
         $pathArrays = json_decode($json);
