@@ -11,7 +11,7 @@ include_once ROOT_DIR.'views/header.inc';
             <strong><?php echo $lang['NEWSLETTER_ERR'] ?> </strong> <?php echo $lang['NEWSLETTER_ERR_INVALID']; ?>
         </div>
 
-        <form class="form-horizontal" method="post" action="<?php echo URL_DIR.'newsletter/sendnewsletter' ?>">
+        <form class="form-horizontal" method="post" action="<?php echo URL_DIR.'/newsletter/sendnewsletter' ?>">
             <!-- Name -->
             <div class="form-group">
                 <label class="control-label col-md-2" for="name"><?php echo $lang['NEWSLETTER_SUBJECT'] ?></label>

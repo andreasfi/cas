@@ -94,10 +94,7 @@ class loginController extends Controller
                 $_SESSION['msg'] = '<span class="error">' . $this->lang['E_FAILED_TO_DELIVER_EMAIL'] . '</span>';
                 $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
             }
-
         }
-
-
     }
 
     function changePassword()

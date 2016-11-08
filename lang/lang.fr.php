@@ -201,7 +201,7 @@ $lang['DOWNLOAD_FIREFOX'] = "Télécharger Firefox";
 $lang['UNSUPPORTED_API'] = "Votre navigateur ne supporte pas l'API webcam";
 
 //NEWSLETTER
-$lang['NEWSLETTER'] = "Nouveau bulletin d'information";
+$lang['NEWSLETTER'] = "Newsletter";
 $lang['NEWSLETTER_SUBJECT'] = "Sujet";
 $lang['NEWSLETTER_MSG'] = "Message";
 $lang['NEWSLETTER_SENDBUTTON'] = "Envoyer";
@@ -209,12 +209,20 @@ $lang['NEWSLETTER_ERR'] = "Erreur";
 $lang['NEWSLETTER_ERR_INVALID']= "Un ou plusieurs champs sont invalides.";
 $lang['NEWSLETTER_ERR_SUBJECT_MAXCHAR'] = "Assurez-vous que le sujet n'est pas vide et qu'il n'excède pas 120 caractères.";
 $lang['NEWSLETTER_ERR_MSG_MAXCHAR'] = "Assurez-vous que le message n'est pas vide et qu'il n'excède pas 3000 caractères.";
+$lang['NEWSLETTER_SENT'] = "Newsletter envoyée !";
+
+$lang['NEWSLETTER_SENT_NOSUBSCRIBERS'] = "Aucune newsletter envoyée. Il se peut que personne ne soit souscrit à votre site ou des erreurs d'envoi se sont produites.";
+$lang['NEWSLETTER_SENTSUCCESS_0'] = "La newsletter a été remise avec succès à ";
+$lang['NEWSLETTER_SENTSUCCESS_1_SING'] = "personne.";
+$lang['NEWSLETTER_SENTSUCCESS_1_PL'] = "personnes.";
+$lang['NEWSLETTER_NO_ERROR'] = "Aucune erreur d'envoi détectée.";
+$lang['NEWSLETTER_SENTERROR_SING'] = "La newsletter n'a pas été remise à l'adresse suivante";
+$lang['NEWSLETTER_SENTERROR_PL'] = "La newsletter n'a pas été remise aux adresses suivantes";
 
 //FOOTER
 $lang['PAGES'] = "Pages";
 $lang['HOME'] = "Home";
 $lang['EXCURSIONS_CALENDAR'] = "Excursions - Calendrier";
-$lang['NEWSLETTER'] = "Newsletter";
 $lang['SUBSCRIBE_NEWSLETTER'] ="Inscrivez vous à notre newsletter.";
 $lang['SUBSCRIBE_BUTTON'] = "S'inscrire";
 $lang['BECOME_MEMBER'] = "Devenir membre";

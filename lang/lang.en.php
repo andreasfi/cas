@@ -202,7 +202,7 @@ $lang['DOWNLOAD_FIREFOX'] = "Download Firefox";
 $lang['UNSUPPORTED_API'] = "Your browser does not support the webcam API.";
 
 //NEWSLETTER
-$lang['NEWSLETTER'] = "New newsletter";
+$lang['NEWSLETTER'] = "Newsletter";
 $lang['NEWSLETTER_SUBJECT'] = "Subject";
 $lang['NEWSLETTER_MSG'] = "Message";
 $lang['NEWSLETTER_SENDBUTTON'] = "Send";
@@ -210,13 +210,19 @@ $lang['NEWSLETTER_ERR'] = "Error";
 $lang['NEWSLETTER_ERR_INVALID']= "One or more invalid inputs";
 $lang['NEWSLETTER_ERR_SUBJECT_MAXCHAR'] = "Make sure the subject is not empty and it doesn't exceed 120 characters.";
 $lang['NEWSLETTER_ERR_MSG_MAXCHAR'] = "Make sure the message is not empty and it doesn't exceed 3000 characters.";
+$lang['NEWSLETTER_SENT'] = "Newsletter sent !";
 
+$lang['NEWSLETTER_SENTSUCCESS_0'] = "Newsletter successfully sent to the following to ";
+$lang['NEWSLETTER_SENTSUCCESS_1_SING'] = "person.";
+$lang['NEWSLETTER_SENTSUCCESS_1_PL'] = "people.";
+$lang['NEWSLETTER_NO_ERROR'] = "No error detected.";
+$lang['NEWSLETTER_SENTERROR_SING'] = "Failed to deliver to the following e-mail address";
+$lang['NEWSLETTER_SENTERROR_PL'] = "Failed to deliver to the following e-mail addresses";
 
 //FOOTER
 $lang['PAGES'] = "Pages";
 $lang['HOME'] = "Home";
 $lang['EXCURSIONS_CALENDAR'] = "Excursions - Calendar";
-$lang['NEWSLETTER'] = "Newsletter";
 $lang['SUBSCRIBE_NEWSLETTER'] ="Subscribe to our newsletter.";
 $lang['SUBSCRIBE_BUTTON'] = "Subscribe";
 $lang['BECOME_MEMBER'] = "Become member";
