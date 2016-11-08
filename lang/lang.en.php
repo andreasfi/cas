@@ -138,6 +138,7 @@ $lang['S_CONTACT_MAIL_SENT'] = "A contact mail has been sent, we'll get to you A
 $lang['S_PASSWORD_CHANGE_SUCCESSFUL'] = "Password change successful.";
 $lang['S_REGISTRATION_SUCCESSFUL'] = "Registration successful";
 $lang['S_CHANGES_SUCCESSFUL'] = "Changes successful";
+$lang['S_CHANGES_ERROR'] = "A syntax error occured in the form.";
 
 //WARNING MESSAGES
 $lang['W_DIFFICULTY_TRAIL'] = "High difficulty";
