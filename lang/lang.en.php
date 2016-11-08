@@ -157,6 +157,9 @@ $lang['TRAIL_MAP'] = "Trail";
 $lang['TRAIL_MAP_INSTRUCTIONS'] = "Click on the map to draw the trail";
 $lang['TRAIL_MAP_DELETELAST'] = "Delete last point";
 $lang['TRAIL_MAP_DELETEALL'] = "Delete all points";
+$lang['TRAIL_MAP_DELETETRAIL'] = "Delete event";
+$lang['TRAIL_MAP_UPDATETRAIL'] = "Save changes";
+$lang['TRAIL_MAP_SAVETRAIL'] = "Save event";
 
 //catégories de courses
 $lang['TRAIL_CAT_1'] = "Hiking";
