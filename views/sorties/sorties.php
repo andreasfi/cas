@@ -11,6 +11,17 @@ include_once ROOT_DIR . 'views/header.inc'; ?>
 
 <div class="content">
     <div class="container">
+		<?php
+		if(isset($_SESSION['user'])){
+			if($_SESSION['user']->getMemberType() == 3){?>
+				<div class="row" style="margin:1em">
+					<div class="col-md-9"></div>
+					<div class="col-md-3 text-right">
+						<a class="btn btn-primary" href="sorties/ajoutsortie">Ajouter une sortie</a>
+					</div>
+				</div>
+			<?php }
+		}?>
         <div class="row">
             <div id="calendar" class="fc fc-unthemed fc-ltr col-md-offset-1 col-md-10"></div>
         </div>
@@ -25,16 +36,7 @@ include_once ROOT_DIR . 'views/header.inc'; ?>
 				<div style="background: #fa3031; width: 0.5em; height: 0.5em; display: inline-block;"></div>
 				<b><?php echo $lang['SORTIES'];?></b>
 			</div>
-			<div class="col-md-2 text-center">
-				<?php
-
-                if(isset($_SESSION['user'])){
-                if($_SESSION['user']->getMemberType() == 3){?>
-				<a class="btn btn-primary" href="sorties/ajoutsortie">Ajouter une sortie</a>
-				<?php }
-                }?>
-			</div>
-			<div class="col-md-5"></div>
+			<div class="col-md-6 text-center"></div>
 		</div>
         <table id="datatable">
             <thead>
