@@ -17,7 +17,8 @@ $lang['WEBSITE_NAME'] = "Swiss Alpine Club";
 $lang['CAS_HOMETOWN'] = "Crans-Montana";
 $lang['CAS_MAIL'] = "casphphes@gmail.com";
 $lang['CAS_PHONE'] = "+41 27 000 00 00";
-
+$lang['SEO_TITLE'] = "Swiss alpine club";
+$lang['SEO_DESCRIPTION'] = "The swiss alpine club is...";
 //menu
 
 $lang['CONNECT_MENU_BUTTON'] = "Connect";
@@ -26,7 +27,6 @@ $lang['PROXIMITY_MENU_BUTTON'] = "Map";
 $lang['ACTIVITIES_MENU_BUTTON'] = "Excursions";
 $lang['CONTACT_MENU_BUTTON'] = "Contact";
 $lang['PROFIL_MENU_BUTTON'] = "Profil";
-
 //Home
 
 $lang['WELCOME_MESSAGE'] = "Welcome mountaineers!";

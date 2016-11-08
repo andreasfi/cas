@@ -1,13 +1,15 @@
 <?php
 
 $lang = $this->lang;
+$seo_title = $this->vars['seo_title'];
+$seo_description = $this->vars['seo_description'];
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<title>cas</title>
+		<title><?php if(isset($seo_title)) {echo $seo_title;}?></title>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
 
-        <meta name="description" content=" ">
+        <meta name="description" content="<?php if(isset($seo_description)) {echo $seo_description;}?>">
         <meta name="keywords" content=" ">
         <meta name="author" content="605_F">
 

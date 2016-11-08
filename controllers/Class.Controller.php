@@ -21,7 +21,7 @@ class Controller {
      * @param string $controller
      * @param string $method
      */
-        function __construct($controller, $method) {
+    function __construct($controller, $method) {
 
 
             if(isset($_POST['lang'])) {
@@ -54,6 +54,10 @@ class Controller {
         include("lang/lang.$clang.php");
 
         $this->lang = $lang;
+
+        $this->vars['seo_title'] = $lang['SEO_TITLE'];
+        $this->vars['seo_description'] = $lang['SEO_DESCRIPTION'];
+
     }
 
 
