@@ -55,7 +55,6 @@ include_once ROOT_DIR . 'views/header.inc';
             <table align="center">
                 <tr>
                     <td>
-                        <?php echo $msg; ?>
                         <h1><?php echo $lang['WELCOME'], ' ' . $user->getFirstname() . ' ' . $user->getLastname(); ?></h1>
                         <h3><?php echo $lang['MY_PERSONNAL_DATA']; ?></h3>
                         <form action="<?php echo URL_DIR . '/login/welcome'; ?>" method="post">
