@@ -147,16 +147,15 @@ $seo_description = $this->vars['seo_description'];
                                     </a></li>
 
                                 <?php
-                                if($_SESSION['user']->getMemberType() == 4){ ?>
+                                if ($_SESSION['user'] != null) {
+                                    if ($_SESSION['user']->getMemberType() == 4) { ?>
 
-                                    <li><a href="<?php echo URL_DIR; ?>/newsletter/newsletter" class=""> <i
-                                                class="fa fa-newspaper-o"></i><?php echo $lang['NEWSLETTER']; ?>
-                                        </a></li>
+                                        <li><a href="<?php echo URL_DIR; ?>/newsletter/newsletter" class=""> <i
+                                                    class="fa fa-newspaper-o"></i><?php echo $lang['NEWSLETTER']; ?>
+                                            </a></li>
 
-                                    <?php } ?>
-
-
-
+                                    <?php }
+                                } ?>
 
                                 <li><a href="<?php echo URL_DIR; ?>/contact" class=""> <i
                                             class="fa fa-envelope-o"></i><?php echo $lang['CONTACT_MENU_BUTTON']; ?></a>

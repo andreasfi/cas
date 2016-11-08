@@ -96,6 +96,13 @@ class newsletterController extends Controller
     function sendnewsletter()
     {
         //0. Check : the previous page should be newsletter/newsletter
+        $this->checkUser(4, '/home/home');
+
+        if (!strpos($_SERVER['HTTP_REFERER'], SITE_NAME))
+        {
+            $this->redirect('home', 'home');
+            exit();
+        }
 
         $error_subject = false;
         $error_message = false;
@@ -169,13 +176,11 @@ class newsletterController extends Controller
             }
         }
 
-        /*
         if(!$found)
         {
             //TODO : À changer par la métode redirect après le déploiement.
-            header('Location: http://localhost/cas/error/http404');
+            $this->redirect('/home', 'home');
             exit();
         }
-        */
     }
 }
