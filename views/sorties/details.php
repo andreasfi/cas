@@ -67,6 +67,7 @@ include_once 'views/header.inc'; ?>
                             class="fa fa-angle-double-right"></i></a>
 					<!-- EDIT EVENT -->
 					<?php
+					if(isset($_SESSION['user']))
 					if ($_SESSION['user']->getId() == $owner->getId()) { ?>
 						<form action="<?php echo URL_DIR . '/sorties/ajoutsortie' ?>" method="post">
 							<input type=hidden name="id" value="<?php echo $eventId; ?>">
