@@ -144,7 +144,7 @@ if(isset($_SESSION['event'])){
 	var trailShape = null;
 	var elevator = null;
 	var chart = null;
-	
+
 	//on document load, do a few things:
 	$(document).ready(function(){
 		
@@ -158,7 +158,7 @@ if(isset($_SESSION['event'])){
 		});
 		
 		//look if we already have some data in the JSON trail (we are editing the event)
-		if($('#form_json').val() != null){
+		if($('#form_json').val() != ""){
 			
 			//load them into the trailPoints
 			trailPoints = loadJSON($('#form_json').val());
