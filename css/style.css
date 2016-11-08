@@ -64,7 +64,7 @@ h1,h2,h3,h4,h5,h6{
 	font-family: "Open Sans", sans-serif;
 }
 
-a{
+a, .pick-input{
 	color: #333;
 	text-decoration: none !important;
 	cursor:url('../img/iceaxe_active.png')3 22, auto !important;

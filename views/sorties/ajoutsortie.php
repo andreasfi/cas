@@ -40,22 +40,24 @@ if(isset($_SESSION['event'])){
 	
 	<form method="post" action="<?php echo URL_DIR.'/sorties/ajoutsortie' ?>">
 	<div class="row">
-		<div class="col-md-5 col-xs-1">
+		<br>
+		<div class="col-md-5 col-xs-1 cwell">
+
 				<div class="row">
-					<div class="col-md-6 formgroup">
-						<p><?php echo $lang['TRAIL_TITLE'] ?></p>
-						<input id="title" name="title" type="text" required style="width:100%" value="<?php echo ($event==null ? "" : $event->getTitle()); ?>">
+					<div class="col-md-8 formgroup">
+						<label><?php echo $lang['TRAIL_TITLE'] ?></label>
+						<input id="title" class="form-control" name="title" type="text" required style="width:100%" value="<?php echo ($event==null ? "" : $event->getTitle()); ?>">
 					</div>
-					<div class="col-md-6 formgroup">
-						<p><?php echo $lang['TRAIL_MAX_PEOPLE'] ?></p>
-						<input id="maxParticipants" name="maxParticipants" type="number" min="1" required style="width:50px" value="<?php echo($event==null?"":$event->getMaxParticipants()); ?>">
+					<div class="col-md-4 formgroup">
+						<label><?php echo $lang['TRAIL_MAX_PEOPLE'] ?></label>
+						<input id="maxParticipants" class="form-control" name="maxParticipants" type="number" min="1" required style="width:100%;" value="<?php echo($event==null?"":$event->getMaxParticipants()); ?>">
 					</div>
 				</div>
 				<div class="row">
 					<div class="formgroup col-sm-6">
-						<p><?php echo $lang['TRAIL_CATEGORY'] ?></p>
+						<label><?php echo $lang['TRAIL_CATEGORY'] ?></label>
 						
-						<select id="category" name="category" required>
+						<select id="category" class="form-control pick-input" name="category" required>
 							<option value="1" <?php echo($event!=null && $event->getEventCategory() == 'Marche' ? "selected='selected'": ""); ?>><?php echo $lang['TRAIL_CAT_1'] ?></option>
 							<option value="2" <?php echo($event!=null && $event->getEventCategory() == 'Peau de Phoque' ? "selected='selected'": ""); ?>><?php echo $lang['TRAIL_CAT_2'] ?></option>
 							<option value="3" <?php echo($event!=null && $event->getEventCategory() == 'Grimpe' ? "selected='selected'": ""); ?>><?php echo $lang['TRAIL_CAT_3'] ?></option>
@@ -67,8 +69,8 @@ if(isset($_SESSION['event'])){
 						</select>
 					</div>
 					<div class="formgroup col-sm-6">
-						<p><?php echo $lang['TRAIL_DIFFICULTY']?></p>
-						<select id="difficulty" name="difficulty" required>
+						<label><?php echo $lang['TRAIL_DIFFICULTY']?></label>
+						<select id="difficulty" class="form-control pick-input" name="difficulty" required>
 							<option value="1" <?php echo($event!=null && $event->getDifficulty() == 'débutant' ? "selected='selected'": ""); ?>><?php echo $lang['TRAIL_DIFF_1'] ?></option>
 							<option value="2" <?php echo($event!=null && $event->getDifficulty() == 'modéré' ? "selected='selected'": ""); ?>><?php echo $lang['TRAIL_DIFF_2'] ?></option>
 							<option value="3" <?php echo($event!=null && $event->getDifficulty() == 'avancé' ? "selected='selected'": ""); ?>><?php echo $lang['TRAIL_DIFF_3'] ?></option>
@@ -77,18 +79,21 @@ if(isset($_SESSION['event'])){
 						</select>
 					</div>
 				</div>
-				<div class="formgroup">
-					<p><?php echo $lang['TRAIL_STARTDATE']?></p>
-					<input id="startDate" name="startDate" type="text" required onchange="adjustEndTime()" value="<?php echo($event==null?"":$event->getStartDateFormattedJS()); ?>">
+				<div class="row">
+					<div class="formgroup col-sm-6">
+						<p><?php echo $lang['TRAIL_STARTDATE']?></p>
+						<input id="startDate" class="form-control" name="startDate" type="text" required onchange="adjustEndTime()" value="<?php echo($event==null?"":$event->getStartDateFormattedJS()); ?>">
+					</div>
+					<div class="formgroup col-sm-6">
+						<p><?php echo $lang['TRAIL_ENDDATE']?></p>
+						<input id="endDate" class="form-control" name="endDate" type="text" required required value="<?php
+						echo($event==null?"":$event->getEndDateFormattedJS()); ?>">
+					</div>
 				</div>
-				<div class="formgroup">
-					<p><?php echo $lang['TRAIL_ENDDATE']?></p>
-					<input id="endDate" name="endDate" type="text" required required value="<?php 
-	echo($event==null?"":$event->getEndDateFormattedJS()); ?>">
-				</div>
+
 				<div class="formgroup">
 					<p><?php echo $lang['TRAIL_DESCRIPTION']?></p>
-					<textarea id="description" rows="6" cols="50" name="description"><?php 
+					<textarea id="description" class="form-control" rows="6" cols="50" name="description"><?php
 	echo($event==null?"":$event->getDescription()); ?></textarea>
 				</div>
 		</div>
@@ -97,8 +102,8 @@ if(isset($_SESSION['event'])){
 				<h2><?php echo $lang['TRAIL_MAP']?></h2>
 				<div id="trailIndication">
 					<p style="font-size:12px !important;"><?php echo $lang['TRAIL_MAP_INSTRUCTIONS']?></p>
-					<button type="button" onclick="removeLastPoint()"><?php echo $lang['TRAIL_MAP_DELETELAST']?></button>
-					<button type="button" onclick="removeAllPoints()"><?php echo $lang['TRAIL_MAP_DELETEALL']?></button>
+					<button type="button" class="btn btn-warning" onclick="removeLastPoint()"><?php echo $lang['TRAIL_MAP_DELETELAST']?></button>
+					<button type="button" onclick="removeAllPoints()" class="btn btn-danger"><?php echo $lang['TRAIL_MAP_DELETEALL']?></button>
 				</div>
 				<div id="map" class="graphical"></div>
 				<div id="chart" class="graphical" style="height:150px;"></div>
@@ -110,9 +115,9 @@ if(isset($_SESSION['event'])){
 		<div class="col-md-<?php echo(isset($event) ? 2 : 4) ?> text-center">
 			<input id="form_json" name="JSON" type="hidden" value='<?php echo($event==null?"":$event->getPath()); ?>'>
 			<?php if ($event!= null){ ?>
-			<input name="edit_event" type=hidden value="<?php echo $event->getId(); ?>">
+			<input class="btn btn-success" name="edit_event" type=hidden value="<?php echo $event->getId(); ?>">
 			<?php } ?>
-			<input type="submit" <?php echo(isset($event) ? "value='UPDATE'" : ""); ?>>
+			<input class="btn btn-success" type="submit" <?php echo(isset($event) ? "value='UPDATE'" : ""); ?>>
 			</form>
 		</div>
 		<?php if(isset($event)){ ?>
