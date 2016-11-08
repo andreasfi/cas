@@ -122,6 +122,6 @@ $lang = $this->lang;
 </html>
 <?php
 
-$_SESSION['msg']="";
+
 
 ?>
