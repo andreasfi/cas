@@ -59,9 +59,9 @@ include_once 'views/header.inc'; ?>
                 </div>
                 <div class="col-lg-6">
                     <?php if ($participating) { ?>
-                        <button data-toggle="tooltip" data-placement="top" title="You are already attending this event"
+                        <button data-toggle="tooltip" data-placement="top" title="<?php echo $lang['BUTTON_PARTICIPATION_REQUEST_ALREADY_TOOLTIP']; ?>"
                                 style=""
-                                class="btn btn-default btn-large pull-right"><?php echo 'Already participating'; ?> <i
+                                class="btn btn-default btn-large pull-right"><?php echo $lang['BUTTON_PARTICIPATION_REQUEST_ALREADY']; ?> <i
                                 class="fa fa-angle-double-right"></i></button>
                     <?php } else if (isset($userLevel) && $userLevel >= 2) { ?>
                         <a href="<?php echo URL_DIR ?>/sorties/inscription/<?php if (isset($eventId)) {
@@ -106,7 +106,7 @@ include_once 'views/header.inc'; ?>
                                 <?php if (isset($difficulty)) {
                                     echo $difficulty;
                                 } else {
-                                    echo "No Data";
+                                    echo "-";
                                 }; ?>
                             </span>
                                 </div>
@@ -115,7 +115,7 @@ include_once 'views/header.inc'; ?>
                                 <?php if (isset($maxParticipants)) {
                                     echo $maxParticipants;
                                 } else {
-                                    echo "No Data";
+                                    echo "-";
                                 }; ?>
                             </span>
                                 </div>
@@ -124,7 +124,7 @@ include_once 'views/header.inc'; ?>
                                 <?php if (isset($eventCategory)) {
                                     echo $eventCategory;
                                 } else {
-                                    echo "No Data";
+                                    echo "-";
                                 }; ?>
                             </span>
                                 </div>
@@ -253,15 +253,15 @@ include_once 'views/header.inc'; ?>
                                                             } ?>>
                                                                 <option value="1" <?php if ($key == 0) {
                                                                     echo "selected";
-                                                                } ?>>Submitted
+                                                                } ?>><?php echo $lang['PARTICIPANTS_SELECT_SUBMITTED']; ?>
                                                                 </option>
                                                                 <option value="2" <?php if ($key == 1) {
                                                                     echo "selected";
-                                                                } ?>>Accepted
+                                                                } ?>><?php echo $lang['PARTICIPANTS_SELECT_ACCEPTED']; ?>
                                                                 </option>
                                                                 <option value="3" <?php if ($key == 2) {
                                                                     echo "selected";
-                                                                } ?>>Refused
+                                                                } ?>><?php echo $lang['PARTICIPANTS_SELECT_REFUSED']; ?>
                                                                 </option>
                                                             </select>
                                                         </td>
