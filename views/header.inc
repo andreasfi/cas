@@ -9,19 +9,19 @@ $lang = $this->lang;
 
         <meta name="description" content=" ">
         <meta name="keywords" content=" ">
-        <meta name="author" content="605">
+        <meta name="author" content="605_F">
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <link rel="stylesheet" href="<?php echo URL_DIR;?>/css/styles.css" type="text/css">
-        <link href="<?php echo URL_DIR;?>/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="<?php echo URL_DIR;?>/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="<?php echo URL_DIR;?>/css/settings.css" media="screen" />
         <link rel="stylesheet" href="<?php echo URL_DIR;?>/css/ddlevelsmenu-base.css">
         <link rel="stylesheet" href="<?php echo URL_DIR;?>/css/ddlevelsmenu-topbar.css">
         <link rel="stylesheet" href="<?php echo URL_DIR;?>/css/prettyPhoto.css">
         <link rel="stylesheet" href="<?php echo URL_DIR;?>/css/slider.css">
-        <link href="<?php echo URL_DIR;?>/css/font-awesome.min.css" rel="stylesheet">
-        <link href="<?php echo URL_DIR;?>/css/style.css" rel="stylesheet">
+        <link rel="stylesheet" href="<?php echo URL_DIR;?>/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="<?php echo URL_DIR;?>/css/style.css" rel="stylesheet">
         <link rel="stylesheet" href="<?php echo URL_DIR;?>/css/contact.css">
         <!-- FULLCALENDAR JQUERY PLUGIN -->
         <link type="text/css" rel="stylesheet" href="<?php echo URL_DIR;?>/css/fullcalendar.css">
@@ -97,7 +97,7 @@ $lang = $this->lang;
                             <a href="<?php echo URL_DIR;?>/home"><img class="logo-image" src="<?php echo URL_DIR;?>/img/caslogoOriginal.png"></a>
                         </div>
                         <div class="logo-text">
-                            <h1><a href="<?php echo URL_DIR;?>/home">CA<span class="lightblue">S</span></a></h1>
+                            <h1><a href="<?php echo URL_DIR;?>/home">CA<span class="" style="color:#1171A3;">S</span></a></h1>
                             <div class="logo-meta"><?php echo $lang['WEBSITE_NAME'];?></div>
                         </div>
                         <div class="clearfix"></div>
@@ -112,20 +112,20 @@ $lang = $this->lang;
                                 <?php
                                 if(isset($_SESSION['user'])) {
                                     ?>
-                                    <li><a href="<?php echo URL_DIR;?>/login/welcome" rel="submenu" class="bblue"><i class="fa fa-lock"></i>
+                                    <li><a href="<?php echo URL_DIR;?>/login/welcome" rel="submenu" class=""><i class="fa fa-lock"></i>
                                             <?php echo $_SESSION['user']->getFirstname() . ' ' . $_SESSION['user']->getLastname() . '<br>' . $lang['DISCONNECT_MENU_BUTTON'];?>
                                         </a>
                                         <ul id="submenu" class="ddsubmenustyle">
-                                            <li><a href="<?php echo URL_DIR;?>/login"><?php echo 'Welcome';?></a></li>
+                                            <li><a href="<?php echo URL_DIR;?>/login"><?php echo $lang['PROFIL_MENU_BUTTON'];?></a></li>
                                             <li><a href="<?php echo URL_DIR . '/login/logout'; ?>"><?php echo $lang['DISCONNECT_MENU_BUTTON']; ?></a></li>
                                         </ul>
                                     </li>
                                 <?php } else { ?>
-                                    <li><a href="<?php echo URL_DIR;?>/login" class="bblue"><i class="fa fa-lock"></i><?php echo $lang['CONNECT_MENU_BUTTON'];?></a></li>
+                                    <li><a href="<?php echo URL_DIR;?>/login" class=""><i class="fa fa-lock"></i><?php echo $lang['CONNECT_MENU_BUTTON'];?></a></li>
                                 <?php } ?>
-                                <li><a href="<?php echo URL_DIR;?>/sorties/proximite" class="bblue"> <i class="fa fa-map-marker"></i><?php echo $lang['PROXIMITY_MENU_BUTTON']; ?></a></li>
-                                <li><a href="<?php echo URL_DIR;?>/sorties" class="bblue"> <i class="fa fa-calendar"></i><?php echo $lang['ACTIVITIES_MENU_BUTTON']; ?></a></li>
-                                <li><a href="<?php echo URL_DIR;?>/contact" class="bblue"> <i class="fa fa-envelope-o"></i><?php echo $lang['CONTACT_MENU_BUTTON']; ?></a></li>
+                                <li><a href="<?php echo URL_DIR;?>/sorties/proximite" class=""> <i class="fa fa-map-marker"></i><?php echo $lang['PROXIMITY_MENU_BUTTON']; ?></a></li>
+                                <li><a href="<?php echo URL_DIR;?>/sorties" class=""> <i class="fa fa-calendar"></i><?php echo $lang['ACTIVITIES_MENU_BUTTON']; ?></a></li>
+                                <li><a href="<?php echo URL_DIR;?>/contact" class=""> <i class="fa fa-envelope-o"></i><?php echo $lang['CONTACT_MENU_BUTTON']; ?></a></li>
 
                                         <div class="menu-lang bblue">
                                             <a  id="frButton" class="bblue"><img src ="<?php echo URL_DIR;?>/img/French_Flag_Small_Icon.jpg"></a>

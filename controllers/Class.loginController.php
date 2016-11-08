@@ -284,7 +284,7 @@ class loginController extends Controller
      */
     function welcome()
     {
-        $this->vars['pageTitle'] = "Welcome";
+        $this->vars['pageTitle'] = "Profil";
         $this->vars['pageMessage'] = "";
         //The page cannot be displayed if no user connected
         if (!$this->getActiveUser()) {
