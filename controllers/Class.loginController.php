@@ -286,6 +286,8 @@ class loginController extends Controller
     {
         $this->vars['pageTitle'] = "Profil";
         $this->vars['pageMessage'] = "";
+        $this->vars['eventUsers'] = EventUsers::getEventUsersByUserID_obj($_SESSION['user']->getId());
+
         //The page cannot be displayed if no user connected
         if (!$this->getActiveUser()) {
             $this->redirect('/login');

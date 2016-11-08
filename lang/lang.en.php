@@ -60,7 +60,7 @@ $lang['CHANGE'] = "Change";
 //WELCOME
 $lang['WELCOME'] = "Welcome";
 $lang['CHANGE_DATA'] = "Change data";
-$lang['MY_PERSONNAL_DATA'] = "My personnal data";
+$lang['MY_PERSONNAL_DATA'] = "My personal data";
 $lang['LOGOUT'] = "Logout";
 
 //LOGIN CONTROLLER
@@ -118,6 +118,10 @@ $lang['SUBJECT_MODIFICATION'] = "Modification of your participation.";
 //Welcome
 $lang['USER_EVENTS_NO_DATA'] = "No events to show.";
 $lang['WELCOME_H1_LISTEVENTS'] = "List of events you are subscribed to.";
+$lang['WELCOME_DATE_START'] = "Start date";
+$lang['WELCOME_DATE_END'] = "End date";
+$lang['WELCOME_STATUS'] = "Status";
+$lang['WELCOME_TITLE'] = "Title";
 
 //ERROR MESSAGES
 $lang['E_REQUIRED_FIELD_EMPTY'] = "A reqired field is empty.";

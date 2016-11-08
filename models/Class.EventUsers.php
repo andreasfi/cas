@@ -14,6 +14,16 @@ class EventUsers
     private $submit_date;
     private $nb_participants;
 
+    public function __construct($event, $user, $status, $submit_date, $nb_participants)
+    {
+        $this->setEvent($event);
+        $this->setUser($user);
+        $this->setStatus($status);
+        $this->setSubmitDate($submit_date);
+        $this->setNbParticipants($nb_participants);
+    }
+
+
     /**
      * @return mixed
      */
@@ -120,10 +130,26 @@ class EventUsers
      * Returns the EventUsers with objects instead of fk.
      * @param $eventID
      */
-    public static function getEventUsersByEventID_obj($eventID)
+    public static function getEventUsersByUserID_obj($userID)
     {
         //TODO : continue this query.
-        $query = "SELECT * FROM ";
+        $query = "SELECT * FROM eventusers, events, users, status WHERE eventusers.fk_idUser = users.idUser AND eventusers.fk_idUser = users.idUser AND eventusers.fk_idStatus = status.idStatus AND eventusers.fk_idUser = $userID ORDER BY events.startDate;";
+
+        $result = MySqlConn::getInstance()->selectDB($query);
+        $rows = $result->fetchAll();
+
+        $eventUsers = array();
+
+        foreach($rows as $row)
+        {
+            $USER = new User($row['idUser'], $row['firstname'], $row['lastname'], $row['mail'], $row['phone'], $row['fk_idUserTypes'], null);
+            $EVENT = new Event($row['idEvent'], $row['description'], DateTime::createFromFormat('Y-m-d H:i:s', $row['startDate']), DateTime::createFromFormat('Y-m-d H:i:s', $row['endDate']), $row['maxParticipants'], $row['fk_idUserTypes'], $row['fk_idOwner'], $row['title'], $row['fk_idEventCategory'], $row['fk_idDifficulty'], null, $row['fk_idPath']);
+            $STATUS = new Status($row['fk_idStatus'], $row['statusname']);
+
+            $EventUsers = new EventUsers($EVENT, $USER, $STATUS, $row['submitDate'], $row['numberParticipants']);
+            array_push($eventUsers, $EventUsers);
+        }
+        return $eventUsers;
     }
 
     public function updateStatus()

@@ -61,6 +61,11 @@ $lang['WELCOME'] = "Bienvenue";
 $lang['CHANGE_DATA'] = "Changer les données";
 $lang['MY_PERSONNAL_DATA'] = "Mes données personnelles";
 $lang['LOGOUT'] = "Se déconnecter";
+$lang['WELCOME_DATE_START'] = "Date début";
+$lang['WELCOME_DATE_END'] = "Date fin";
+$lang['WELCOME_STATUS'] = "Statut";
+$lang['WELCOME_TITLE'] = "Titre";
+
 
 //LOGIN CONTROLLER
 $lang['LOGIN_TO_ACCESS_EVENTS'] = "Connectez vous pour accéder aux excursions.";
