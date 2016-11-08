@@ -65,12 +65,12 @@ class sortiesController extends Controller
                         }
 
                         $subject = '';
-                        $status_old == 0 ? $subject = "Votre demande de participation a été traitée." : "Modification de votre participation.";
+                        $status_old == 0 ? $subject = "Your participation request has been processed." : "Modification of your request";
 
 
-                        $accepted_message = "Votre demande a été acceptée par le guide.";
+                        $accepted_message = "Your request for the event ".$event->getTitle()." has been accepted.";
                         $accepted_msg_sms = "Votre demande pour l'événement ".$event->getDescription()." a été accepté par le guide.";
-                        $refused_message = "Le guide a refusé votre demande. Un SMS ";
+                        $refused_message = "The trail master has refused your request for the event: ".$event->getTitle();
                         $refused_msg_mail = "";
 
                         $incfile = ROOT_DIR . "views/mail_trailconfirmation.inc";
@@ -82,7 +82,7 @@ class sortiesController extends Controller
                             case 2 :
                                 $template_message = $this::requireToVar($incfile, $subject, $accepted_message, $event);
                                 $this->sendMail($USER->getMail(), $USER->getFirstname() . " " . $USER->getLastname(), $subject, $template_message, null);
-                                $this->sendSms($USER->getPhone(), "Bonjour ".$USER->getFirstname()." ". $USER->getLastname() . " " . $accepted_message);
+                                $this->sendSms($USER->getPhone(), "Hello ".$USER->getFirstname()." ". $USER->getLastname() . " " . $accepted_message);
                                 $nbupdates++;
                                 break;
                             case 3 :
