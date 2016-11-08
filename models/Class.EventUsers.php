@@ -142,7 +142,7 @@ class EventUsers
 
         foreach($rows as $row)
         {
-            $USER = new User($row['idUser'], $row['firstname'], $row['lastname'], $row['mail'], $row['phone'], $row['fk_idUserTypes'], null);
+            $USER = new User($row['idUser'], $row['firstname'], $row['lastname'], $row['mail'], $row['tel'], $row['fk_idUserTypes'], null);
             $EVENT = new Event($row['idEvent'], $row['description'], DateTime::createFromFormat('Y-m-d H:i:s', $row['startDate']), DateTime::createFromFormat('Y-m-d H:i:s', $row['endDate']), $row['maxParticipants'], $row['fk_idUserTypes'], $row['fk_idOwner'], $row['title'], $row['fk_idEventCategory'], $row['fk_idDifficulty'], null, $row['fk_idPath']);
             $STATUS = new Status($row['fk_idStatus'], $row['statusname']);
 
