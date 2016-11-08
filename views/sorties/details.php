@@ -236,8 +236,8 @@ include_once 'views/header.inc'; ?>
 
                                                     ?>
                                                     <tr <?php echo "class='$class'"; ?>>
-                                                        <td style="width: 100%;" class="service-icon">
-                                                            <i class="fa fa-user bblue"></i>
+                                                        <td>
+                                                            <i class="fa fa-user bblue usericon"></i>
                                                         </td>
                                                         <td><?php echo $it->getFirstname() . " " . $it->getLastname(); ?></td>
                                                         <td><?php echo $it->getPhone(); ?></td>
