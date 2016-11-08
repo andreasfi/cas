@@ -147,7 +147,7 @@ $seo_description = $this->vars['seo_description'];
                                     </a></li>
 
                                 <?php
-                                if ($_SESSION['user'] != null) {
+                                if (isset($_SESSION['user'])) {
                                     if ($_SESSION['user']->getMemberType() == 4) { ?>
 
                                         <li><a href="<?php echo URL_DIR; ?>/newsletter/newsletter" class=""> <i
