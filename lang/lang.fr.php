@@ -200,6 +200,15 @@ $lang['DOWNLOAD_CHROME'] = "Télécharger Google Chrome";
 $lang['DOWNLOAD_FIREFOX'] = "Télécharger Firefox";
 $lang['UNSUPPORTED_API'] = "Votre navigateur ne supporte pas l'API webcam";
 
+//NEWSLETTER
+$lang['NEWSLETTER'] = "Nouveau bulletin d'information";
+$lang['NEWSLETTER_SUBJECT'] = "Sujet";
+$lang['NEWSLETTER_MSG'] = "Message";
+$lang['NEWSLETTER_SENDBUTTON'] = "Envoyer";
+$lang['NEWSLETTER_ERR'] = "Erreur";
+$lang['NEWSLETTER_ERR_INVALID']= "Un ou plusieurs champs sont invalides.";
+$lang['NEWSLETTER_ERR_SUBJECT_MAXCHAR'] = "Assurez-vous que le sujet n'est pas vide et qu'il n'excède pas 120 caractères.";
+$lang['NEWSLETTER_ERR_MSG_MAXCHAR'] = "Assurez-vous que le message n'est pas vide et qu'il n'excède pas 3000 caractères.";
 
 //FOOTER
 $lang['PAGES'] = "Pages";
