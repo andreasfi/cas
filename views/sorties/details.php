@@ -657,31 +657,39 @@ if ($response != false) {
 
     <script>
 
+		//similar to ajoutSortie, add a few constants
         var map = null;
         var trailShape = null;
         var elevator = null;
         var PlanCoordinates = null;
 
         function initMap() {
+			//get the canvas, create the elevation service, and load the coordinates from the PHP variable
             var mapCanvas = document.getElementById('map');
             elevator = new google.maps.ElevationService();
             PlanCoordinates = <?php echo(strlen($path) > 0 ? $path : '[]'); ?>;
-            if (PlanCoordinates.length > 0)
-                google.charts.load('current', {'packages': ['corechart'], 'callback': drawCharts});
-			else
-            	document.getElementById('elevation').innerHTML = '-';
 			
+			//if we have a trail, load that in the charts
+            if (PlanCoordinates.length > 0){
+                google.charts.load('current', {'packages': ['corechart'], 'callback': drawCharts});
+			}else{
 				
-
+				//otherwise, just set the "elevation" html tag to none.
+            	document.getElementById('elevation').innerHTML = '-';
+			}
+				
+			//a few options for the map (center and zoom on Valais)
             var mapOptions = {
                 center: (PlanCoordinates.length > 0 ? PlanCoordinates[0] : {lat: 46.307174, lng: 7.473367}),
                 mapTypeId: 'terrain',
                 zoom: 9
             };
 
+			//draw the map
             map = new google.maps.Map(mapCanvas, mapOptions);
         }
 
+		//draws the path and the chart
         function drawCharts() {
             trailShape = new google.maps.Polyline({
                 path: PlanCoordinates,
@@ -692,6 +700,8 @@ if ($response != false) {
 
             //center map and zoom to fit path
 			var bounds = new google.maps.LatLngBounds();
+			
+			//add each point to the bounds, and reevaluate the map center
 			if(PlanCoordinates.length > 1){
 				for(var i = 0; i < PlanCoordinates.length; i++){
 					bounds.extend(PlanCoordinates[i]);
@@ -700,11 +710,14 @@ if ($response != false) {
 					map.fitBounds(bounds);
 					map.setZoom(map.getZoom() + 1);
 			
+				//get the elevation, and plot it in the chart below the map (plotElevation callback)
 				elevator.getElevationAlongPath({
 					'path': PlanCoordinates,
 					'samples': 256
 				}, plotElevation);
 			}else{
+				
+				//if we only have one point, zoom on that point, and set elevation difference HTML to none.
 				var marker = new google.maps.Marker({
 					position: PlanCoordinates[0],
 					map: map
@@ -717,12 +730,14 @@ if ($response != false) {
         }
 
         function plotElevation(elevations, status) {
+			//if we have an error, display it in the chart area
             var chartCanvas = document.getElementById("chart");
             if (status !== 'OK') {
                 chartCanvas.innerHTML = "error " + status;
                 return;
             }
 
+			//create the chart from the canvas, and prepare a dataTable to load the data to be plotted
             var chart = new google.visualization.ComboChart(chartCanvas);
             var data = new google.visualization.DataTable();
             data.addColumn('string', 'title');
@@ -736,7 +751,7 @@ if ($response != false) {
                 if (elevations[i].elevation > elevations[max].elevation)
                     max = i;
 
-            //draw chart
+            //draw chart, with title, altitude, if we're at the summit, the summit, and if we're at the start, the starting point.
             for (var i = 0; i < elevations.length; i++) {
                 data.addRow([(i == max || i == 0 ? 'Altitude' : ''),
                     Math.round(elevations[i].elevation),
@@ -755,12 +770,12 @@ if ($response != false) {
                     0: {color: '#1171A3'},
 
                     1: {
-                        type: 'scatter',
+                        type: 'scatter',		//make the summit a star
                         pointShape: 'star',
                         pointSize: 15
                     },
                     2: {
-                        type: 'scatter',
+                        type: 'scatter',		//make the start a green circle
                         color: 'green',
                         pointShape: 'circle',
                         pointSize: 10
@@ -769,9 +784,12 @@ if ($response != false) {
                 backgroundColor: '#E4E4E4'
             });
 
+			//calculate altitude difference from the elevations points.
             this.calculateDenivele(elevations);
         }
 
+		//this function gets the highest and lowest points from the elevations array,
+		//and writes that calculated value in the "elevation" HTML next to the map.
         function calculateDenivele(elevations) {
             if (elevations.length > 1) {
                 var lowest = elevations[0].elevation;
@@ -784,10 +802,13 @@ if ($response != false) {
                         lowest = elevations[i].elevation;
                     }
                 }
+				
+				//round it, to make it pretty.
                 document.getElementById('elevation').innerHTML = Math.round(highest - lowest) + "m";
             }
         }
 
+		
         $('.select_status').change(function () {
             //Display the save button
             $('#details_save_button').css('display', 'inline-block');
