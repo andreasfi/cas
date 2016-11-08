@@ -97,6 +97,7 @@ $lang['FIELD_TELEPHONE'] = "Tel. ";
 $lang['SAVE_BUTTON'] = "Save changes";
 $lang['MODIFY_BUTTON'] = "Modify the trail";
 
+$lang['SELECT_MODIFY'] = "Modify";
 $lang['SELECT_ACCEPTED'] = "Accepted";
 $lang['SELECT_REFUSED'] = "Refused";
 $lang['SELECT_SUBMITTED'] = "Submitted";

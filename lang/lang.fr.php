@@ -101,6 +101,7 @@ $lang['FIELD_TELEPHONE'] = "N°tel. ";
 $lang['SAVE_BUTTON'] = "Sauvegarder les changements";
 $lang['MODIFY_BUTTON'] = "Modifier la course";
 
+$lang['SELECT_MODIFY'] = "Modifier";
 $lang['SELECT_SUBMITTED'] = "En attente";
 $lang['SELECT_ACCEPTED'] = "Accepté";
 $lang['SELECT_REFUSED'] = "Refusé";
