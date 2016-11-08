@@ -16,25 +16,25 @@ include_once ROOT_DIR . 'views/header.inc';
         <div class="row">
             <section id="sorties_container" class="row col-lg-12">
                 <div class="col-lg-5">
-                    <table align="center">
-                        <tr>
-                            <td>
+                    <div class="cwell">
+                        <div>
+                            <div>
                                 <h1><?php echo $lang['WELCOME'], ' ' . $user->getFirstname() . ' ' . $user->getLastname(); ?></h1>
                                 <h3><?php echo $lang['MY_PERSONNAL_DATA']; ?></h3>
                                 <form action="<?php echo URL_DIR . '/login/welcome'; ?>" method="post">
-                                    <?php echo $lang['FIRSTNAME']; ?> :<br><input type="text" name="firstname" size="25"
-                                                                                  value="<?php echo $user->getFirstname(); ?>"/><br>
-                                    <?php echo $lang['LASTNAME']; ?> :<br><input type="text" name="lastname" size="25"
-                                                                                 value="<?php echo $user->getLastname(); ?>"/><br>
-                                    <?php echo $lang['PHONE']; ?> :<br><input type="text" name="phone" size="25"
-                                                                              value="<?php echo $user->getPhone(); ?>"/><br><br>
-                                    <input class="btn btn-primary" type="submit" name="action" value="<?php echo $lang['CHANGE_DATA']; ?>"><br><br>
+                                    <label><?php echo $lang['FIRSTNAME']; ?></label> :<br><input class="form-control" type="text" name="firstname" size="25"
+                                                                                  value="<?php echo $user->getFirstname(); ?>"/>
+                                    <label><?php echo $lang['LASTNAME']; ?></label> :<br><input class="form-control" type="text" name="lastname" size="25"
+                                                                                 value="<?php echo $user->getLastname(); ?>"/>
+                                    <label><?php echo $lang['PHONE']; ?></label> :<br><input class="form-control" type="text" name="phone" size="25"
+                                                                              value="<?php echo $user->getPhone(); ?>"/><br>
+                                    <input class="btn btn-primary" type="submit" name="action" value="<?php echo $lang['CHANGE_DATA']; ?>"><br>
                                 </form>
                                 <a href="<?php echo URL_DIR . '/login/logout'; ?>"><?php echo $lang['LOGOUT']; ?></a><br>
                                 <a href="<?php echo URL_DIR . '/login/changepassword'; ?>"><?php echo $lang['PASSWORD_CHANGE']; ?></a>
-                            </td>
-                        </tr>
-                    </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-lg-7">
                     <h1><?php echo $lang['WELCOME_H1_LISTEVENTS']; ?></h1>
