@@ -210,7 +210,7 @@ class loginController extends Controller
     function register()
     {
 
-        //Get data posted by the form
+        //Sanitize les champs
         $fname = htmlentities($_POST['firstname'], ENT_QUOTES, "UTF-8");
         $lname = htmlentities($_POST['lastname'], ENT_QUOTES, "UTF-8");
         $mail = htmlentities($_POST['mail'], ENT_QUOTES, "UTF-8");
@@ -232,19 +232,14 @@ class loginController extends Controller
 
         $error = false;
 
-        if((!preg_match($this->NAME_PATTERN, $fname)) || (!preg_match($this->NAME_PATTERN, $lname)))
+        if((!preg_match($this->NAME_PATTERN, $_POST['firstname'])) || (!preg_match($this->NAME_PATTERN, $_POST['lastname'])))
         {
-            error_log("Firstname or lastname doesn't match");
             $error = true;
-        }else
-        {
-            error_log("Firstname and lastname match");
         }
 
-        if(!filter_var($mail, FILTER_VALIDATE_EMAIL))
+        if(!filter_var($_POST['mail'], FILTER_VALIDATE_EMAIL))
         {
             $error = true;
-            error_log("Email not valid");
         }else
         {
             $arr = explode("@", $mail);
@@ -253,18 +248,12 @@ class loginController extends Controller
             {
                 $error = true;
             }
-            error_log("E-mail valid");
         }
 
-        if(!preg_match($this->PHONE_PATTERN, $phone))
+        if(!preg_match($this->PHONE_PATTERN, $_POST['phone']))
         {
-            error_log("Phone doesn't match");
             $error = true;
-        }else
-        {
-            error_log("Phone matches");
         }
-
 
         //Check if data valid
         if (empty($fname) or empty($lname) or empty($mail) or empty($pwd) or empty($phone) or $error) {
