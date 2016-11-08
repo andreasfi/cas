@@ -65,6 +65,16 @@ include_once 'views/header.inc'; ?>
                     <a href="#" data-toggle="modal" data-target="#itineraire"
                        class="btn btn-info btn-large pull-right"><?php echo $lang['BUTTON_FIND_ROUTE']; ?> <i
                             class="fa fa-angle-double-right"></i></a>
+					<!-- EDIT EVENT -->
+					<?php
+					if ($_SESSION['user']->getId() == $owner->getId()) { ?>
+						<form action="<?php echo URL_DIR . '/sorties/ajoutsortie' ?>" method="post">
+							<input type=hidden name="id" value="<?php echo $eventId; ?>">
+							<button type="submit"
+									class="btn btn-large bgreen pull-right"><?php echo $lang['MODIFY_BUTTON'] ?>
+								<i class="fa fa-angle-double-right"></i></button>
+						</form>
+					<?php } ?>
                 </div>
             </div>
             <div class="service-home">
@@ -259,7 +269,7 @@ include_once 'views/header.inc'; ?>
                                                             <?php if ($key != 0) { ?>
                                                                 <button type="button"
                                                                         onclick="modifyStatus(<?php echo $selectID ?>)"
-                                                                        class="btn btn-primary">Modifier
+                                                                        class="btn btn-primary"><?php echo $lang['SELECT_MODIFY'] ?>
                                                                 </button>
                                                             <?php }; ?>
                                                         </td>
@@ -278,18 +288,7 @@ include_once 'views/header.inc'; ?>
                                     </div>
 
                                 </form>
-                                <!-- EDIT EVENT -->
-                                <?php
-                                if ($_SESSION['user']->getId() == $owner->getId()) { ?>
-                                    <form action="<?php echo URL_DIR . '/sorties/ajoutsortie' ?>" method="post">
-                                        <input type=hidden name="id" value="<?php echo $eventId; ?>">
-                                        <div class="row col-md-12">
-                                        <button type="submit"
-                                                class="btn btn-large bgreen col-md-2"><?php echo $lang['MODIFY_BUTTON'] ?>
-                                            <i class="fa fa-angle-double-right"></i></button>
-                                        </div>
-                                    </form>
-                                <?php } ?>
+                                
                                 <div class="clearfix"></div>
                             </div>
                         </div>
@@ -775,7 +774,7 @@ if ($response != false) {
 
             //draw chart, with title, altitude, if we're at the summit, the summit, and if we're at the start, the starting point.
             for (var i = 0; i < elevations.length; i++) {
-                data.addRow([(i == max || i == 0 ? 'Altitude' : ''),
+                data.addRow([null,
                     Math.round(elevations[i].elevation),
                     (i == max ? Math.round(elevations[max].elevation) : null),
                     (i == 0 ? Math.round(elevations[0].elevation) : null)]);
