@@ -69,6 +69,13 @@ $lang['CAS_PWD_RECOVERY'] = "CAS password recovery";
 $lang['CREATE_ACCOUNT'] = "Create your account";
 
 //SORTIE CONTROLLER
+
+//SORTIES
+$lang['RANDONNEES'] = "Hikes";
+$lang['SORTIES'] = "Trips";
+$lang['ANCIENEVENT'] = "Past Event";
+
+
 // DETAILS
 $lang['BUTTON_PARTICIPATION_REQUEST'] = "I want to participate ";
 $lang['BUTTON_PARTICIPATION_REQUEST_ALREADY'] = "Already participating ";
@@ -124,6 +131,9 @@ $lang['S_CONTACT_MAIL_SENT'] = "A contact mail has been sent, we'll get to you A
 $lang['S_PASSWORD_CHANGE_SUCCESSFUL'] = "Password change successful.";
 $lang['S_REGISTRATION_SUCCESSFUL'] = "Registration successful";
 $lang['S_CHANGES_SUCCESSFUL'] = "Changes successful";
+
+//WARNING MESSAGES
+$lang['W_DIFFICULTY_TRAIL'] = "High difficulty";
 
 //Mail content
 $lang['REGISTRATION_MAIL_TITLE'] = "Welcome on the CAS website !";

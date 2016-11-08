@@ -19,7 +19,26 @@ include_once ROOT_DIR.'views/header.inc';
 	}
 </style>
     <div class="content">
-        <div class="container">
+        
+		<div class="container" style="margin-bottom:10px">
+			<div class="row">
+				<div class="col-md-3"></div>
+				<div class="col-md-2">
+					<img src="../img/bluemarker.png" width="15px">
+					<?php echo $lang['RANDONNEES'];?>
+				</div>
+				<div class="col-md-2">
+					<img src="../img/redmarker.png" width="15px">
+					<?php echo $lang['SORTIES'];?>
+				</div>
+				<div class="col-md-2">
+					<img src="../img/oldicon.png" width="15px">
+					<?php echo $lang['ANCIENEVENT'];?>
+				</div>
+				<div class="col-md-3"></div>
+			</div>
+		</div>
+		<div class="container">
             <div class="row" id="map">
                 
             </div>
@@ -51,10 +70,24 @@ include_once ROOT_DIR.'views/header.inc';
 	}
 	
 	function addPoint(event){
+		var icon = '';
+		
+		if(event.event_type == 'rando')
+			icon = '../img/bluemarker.png';
+		else
+			icon = '../img/redmarker.png';
+		
+		var date = Date.parse(event.start_date);
+
+		if(date < Date.now()){
+			icon = '../img/oldicon.png';
+		}
+		
 		var pin = new google.maps.Marker({
 					position: event.path[0],
 					map: map,
-					title: decodeHTML(event.title)
+					title: decodeHTML(event.title),
+					icon : icon
 				});
 				
 				google.maps.event.addListener(pin, 'click', function(){

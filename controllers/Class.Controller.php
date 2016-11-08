@@ -9,6 +9,12 @@ class Controller {
     protected $vars = array();
     protected $controller;
     protected $method;
+
+    //REGEX
+
+    protected $NAME_PATTERN = "/^[ \x{00C0}-\x{01FF}a-zA-Z'\-.]{2,100}$/u";
+    protected $PHONE_PATTERN = "/^07[6-9]\d{7}$/";
+
    
     /**
      * Constructor
@@ -191,6 +197,7 @@ class Controller {
     function sendSms($destinationNumber, $message)
     {
         /*
+        $destinationNumber = substr($destinationNumber, 1);
         $sender = "CAS";
         $mobile_number = "$destinationNumber";
         $msg = "$message";
@@ -237,10 +244,11 @@ class Controller {
                 echo "<br>" . $alert_error;
             } else {
                $alert_success = "We sent you a verification code to: +41" . htmlspecialchars($mobile_number) . '.';
-                echo "<br>" . $alert_success;
             }
             curl_close($curl);
-            */
+*/
+
+        var_dump("SMS envoyé à ".$this->getActiveUser()->getPhone());
     }
 
     /***

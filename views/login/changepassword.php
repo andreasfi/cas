@@ -10,7 +10,6 @@ include_once ROOT_DIR.'views/header.inc';
         <table align="center">
             <tr>
                 <td>
-                    <?php echo $msg;?>
                     <h1><?php echo $lang['PASSWORD_CHANGE']; ?> :</h1>
                     <?php echo $lang['NEW_PASSWORD']; ?> :<br><input type="password" name="newPassword" size="25"/><br><br>
                     <?php echo $lang['NEW_PASSWORD']; ?> :<br><input type="password" name="newPasswordConfirmation" size="25"/><br><br>

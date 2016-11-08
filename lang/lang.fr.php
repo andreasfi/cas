@@ -69,6 +69,12 @@ $lang['CAS_PWD_RECOVERY'] = "CAS Récupération de mot de passe";
 $lang['CREATE_ACCOUNT'] ="Créez votre compte";
 
 //SORTIE CONTROLLER
+
+//SORTIES
+$lang['RANDONNEES'] = "Randonnées";
+$lang['SORTIES'] = "Sorties";
+$lang['ANCIENEVENT'] = "Evènement passé";
+
 // DETAILS
 $lang['BUTTON_PARTICIPATION_REQUEST'] = "Je veux participer !";
 $lang['BUTTON_PARTICIPATION_REQUEST_ALREADY'] = "Je participe déjà ";
@@ -124,6 +130,9 @@ $lang['S_CONTACT_MAIL_SENT'] = "Un e-mail de contact a été envoyé, nous y ré
 $lang['S_PASSWORD_CHANGE_SUCCESSFUL'] = "Mot de passe changé.";
 $lang['S_REGISTRATION_SUCCESSFUL'] = "Enregistrement terminé";
 $lang['S_CHANGES_SUCCESSFUL'] = "Changements effectués";
+
+//WARNING MESSAGES
+$lang['W_DIFFICULTY_TRAIL'] = "Grande difficulté";
 
 //Mail content
 $lang['REGISTRATION_MAIL_TITLE'] = "Bienvenue sur le site du CAS !";
