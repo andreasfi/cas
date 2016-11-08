@@ -125,7 +125,7 @@ class loginController extends Controller
 
             } catch (Exception $e) {
                 if (!($_SESSION['user']->getId() != 0)) {
-                   
+
                     unset($_SESSION['user']);
                     $_SESSION['msg'] = '<span class="error">' . $this->lang['E_KEY_REJECTED'] . '</span>';
                     $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';

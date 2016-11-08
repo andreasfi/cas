@@ -300,7 +300,7 @@ class sortiesController extends Controller
         $_SESSION['difficulty'] = $result->getDifficulty();
 
         if (!isset($_Session['user'])) {
-            $_SESSION['msg'] = '<span class="error">Vous devez vous connecter pour vous inscrire à une sortie</span>';
+            $_SESSION['msg'] = '<span class="error">You need to be logged in to register for an excursion.</span>';
             $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
             //$this->redirect('../../login'); //too many redirects
 
@@ -308,7 +308,7 @@ class sortiesController extends Controller
 
         if($_SESSION['difficulty'] == 'très avancé' || $_SESSION['difficulty'] == 'professionnel')
         {
-            $_SESSION['msg'] = '<span class="error">Haute difficulté</span>';
+            $_SESSION['msg'] = '<span class="error">High Difficulty</span>';
             $this->vars['msg'] = isset($_SESSION['msg']) ? $_SESSION['msg'] : '';
         }
 
