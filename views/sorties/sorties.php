@@ -139,7 +139,7 @@ include_once ROOT_DIR . 'views/header.inc'; ?>
             header: {
                 left: 'prev,next,today',
                 center: 'title',
-                right: 'month,listYear'
+                right: 'month'
             },
             eventRender: function(event, element) {
                 $(element).tooltip({title: initTooltip(event.description, event.difficulty, "fr"), container: "body", html: true})
@@ -153,6 +153,8 @@ include_once ROOT_DIR . 'views/header.inc'; ?>
                 window.location.replace("<?php echo URL_DIR; ?>/sorties/details/"+calEvent.idEvent);
             }
         });
+
+        $('.fc-today-button'). click();
     }
 
     /***
