@@ -81,6 +81,7 @@ $lang['ANCIENEVENT'] = "Past Event";
 $lang['BUTTON_PARTICIPATION_REQUEST'] = "I want to participate ";
 $lang['BUTTON_PARTICIPATION_REQUEST_ALREADY'] = "Already participating ";
 $lang['BUTTON_PARTICIPATION_REQUEST_ALREADY_TOOLTIP'] = "You are already attending this event";
+$lang['BUTTON_PARTICIPATION_REQUEST_MEMBER_TOOLTIP'] = "You need to be a member to attend this event";
 $lang['BUTTON_FIND_ROUTE'] = "Find a route ";
 $lang['FIELD_DISTANCE'] = "Distance ";
 $lang['FIELD_ALTITUDE'] = "Altitude difference ";

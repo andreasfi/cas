@@ -57,7 +57,7 @@ include_once 'views/header.inc'; ?>
                             <i class="fa fa-angle-double-right"></i></a>
                     <?php } else { ?>
                         <button data-toggle="tooltip" data-placement="top"
-                                title="Vous devez être membre pour vous inscrire" style=""
+                                title="<?php echo $lang['BUTTON_PARTICIPATION_REQUEST_MEMBER_TOOLTIP']; ?>" style=""
                                 class="btn btn-default btn-large pull-right"><?php echo $lang['BUTTON_PARTICIPATION_REQUEST']; ?>
                             <i class="fa fa-angle-double-right"></i></button>
                     <?php } ?>
