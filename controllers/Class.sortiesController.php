@@ -20,14 +20,18 @@ class sortiesController extends Controller
     {
         //Only the trailmaster can access to this function
         $this->checkUser(3, "/error/http404");
+        $event_id= '';
+        if(isset($_POST['event_id'])){
+            $event_id = $_POST['event_id'];
+        }
 
         //If the user is not from the domain, redirect him to the landing page.
         if (!strpos($_SERVER['HTTP_REFERER'], SITE_NAME)) {
-            $this->redirect('');
+            $this->redirect('/sortie/details/'.$event_id,'');
             exit();
         }
 
-        $event_id = $_POST['event_id'];
+
 
         ksort($_POST);
 
