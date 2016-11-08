@@ -131,15 +131,19 @@ if(isset($_SESSION['event'])){
 
 <script>
 	
+	
+	//declare all our JS objects for the map and elevation chart
 	var map = null;
-	var geocoder = null;
 	var addressMarker = null;
 	var trailPoints = [];
 	var trailShape = null;
 	var elevator = null;
 	var chart = null;
 	
+	//on document load, do a few things:
 	$(document).ready(function(){
+		
+		//datepickers set to current day
 		jQuery('#startDate').datetimepicker({
 			minDate: '0'
 		});
@@ -147,11 +151,17 @@ if(isset($_SESSION['event'])){
 		jQuery('#endDate').datetimepicker({
 			minDate: '0'
 		});
+		
+		//look if we already have some data in the JSON trail (we are editing the event)
 		if($('#form_json').val() != null){
+			
+			//load them into the trailPoints
 			trailPoints = loadJSON($('#form_json').val());
 			
+			//draw elevation chart
 			google.charts.load('current', {'packages':['corechart'], 'callback': drawCoordinates});//drawCoordinates();
 			
+			//fit map to bounds
 			fitMapToBounds();
 		}
 		
@@ -159,69 +169,91 @@ if(isset($_SESSION['event'])){
 	
 	//all things Google Maps:
 	function initMap() {
-		  
+		//initialize map canvas, and elevation services
 		var mapCanvas = document.getElementById('map');
-		geocoder = new google.maps.Geocoder();
 		elevator = new google.maps.ElevationService();
+		
+		//center map in center of valais, and zoom to fit
 		var mapOptions = {
 			center: {lat: 46.307174, lng: 7.473367},
 			zoom: 9,
-			mapTypeId: 'terrain'
+			mapTypeId: 'terrain' //so we can see altitude lines (better for mountaineers)
 		};
+		
+		//create map from options
 		map = new google.maps.Map(mapCanvas, mapOptions);
+		
+		//add click listeners to add points
 		google.maps.event.addListener(map, 'click', function(event){
 			clickMap(event.latLng);
 		});
 		      
+		//load google charts library to draw elevation chart
 		google.charts.load('current', {'packages':['corechart']});
-		
-		
       }
 	
 	function drawCoordinates(){
+		//draw the trail on the map, first check if trail exists
+		//if it does, set map to null so we get a clean start
 		if(trailShape)
 			trailShape.setMap(null);
+			
+		//draw the line again with the new path
 		trailShape = new google.maps.Polyline({
 			path: trailPoints,
 			strokeColor: '#FF0000',
 			map: map
 		});
 		
+		//same with the address marker, clean start
 		if(addressMarker)
 			addressMarker.setMap(null);
+		
+		//set it to the last point of the list of points
 		addressMarker = new google.maps.Marker({
 			position: trailPoints[trailPoints.length-1],
 			map: map
 		});
 		
+		//update the JSON in the HTML form if the user wants to save.
 		document.getElementById('form_json').value = JSON.stringify(trailPoints);
 		
-		
+		//if we have more than 2 points, we calculate the elevation graph
 		if (trailPoints.length >= 2)
 			calculateElevation(getJSON(trailPoints));
 	}
     
+	//listener for click
 	function clickMap(clickedPoint){
+		//add point to list of points
 		trailPoints.push(clickedPoint);
+		
+		//update the trail drawing on the map
 		drawCoordinates();
 	}
 	
+	//method to convert the list of GooglePoints to a properly formatted JSON.
 	function getJSON(points){
 		var output = [];
+		
+		//convert each point to a nice JSON object
 		for(var i = 0; i < points.length; i++){
 			var line = null;
 			line = {
 				lat: points[i].lat(),
 				lng: points[i].lng()
 			};
+			//add it to the array
 			output.push(line);
 		}
 		return output;
 	}
 	
+	//inverse of the previous method, load JSON into GooglePoints.
 	function loadJSON(points){
 		var output = [];
 		var pointsJSON = JSON.parse(points);
+		//loop over each point, and load lat / lng 
 		for(var i = 0; i < pointsJSON.length; i++){
 			var pt = new google.maps.LatLng(pointsJSON[i].lat, pointsJSON[i].lng)
 			output.push(pt);
@@ -229,6 +261,11 @@ if(isset($_SESSION['event'])){
 		return output;
 	}
 	
+	/*this method calls the google elevation service, asking
+	to get the elevation along the path we have. the service returns
+	256 points and their respective elevation. The callback method 
+	will do the actual plotting of the elevation.
+	*/
 	function calculateElevation(points){
 		if(elevator){
 			elevator.getElevationAlongPath({
@@ -239,46 +276,53 @@ if(isset($_SESSION['event'])){
 	}
 	
 	function plotElevation(elevations, status) {
-            var chartCanvas = document.getElementById("chart");
-            if (status !== 'OK') {
-                chartCanvas.innerHTML = "error " + status;
-                return;
-            }
+		//get the canvas
+		var chartCanvas = document.getElementById("chart");
+		
+		//if the response is not ok, write the error in the canvas
+		if (status !== 'OK') {
+			chartCanvas.innerHTML = "error " + status;
+			return;
+		}
 
-            var chart = new google.visualization.ComboChart(chartCanvas);
-            var data = new google.visualization.DataTable();
-            data.addColumn('string', 'Sample');
-            data.addColumn('number', 'Altitude');
-            data.addColumn('number', 'Sommet');
-			
-			//get highest point
-			var max = 0;
-			for (var i = 0; i < elevations.length; i++)
-				if(elevations[i].elevation > elevations[max].elevation)
-					max = i;
-			
-			//draw chart
-            for (var i = 0; i < elevations.length; i++) {
-                data.addRow([(i == max ? 'Altitude' : ''), elevations[i].elevation, (i == max ? elevations[max].elevation : null)]);
-            }
+		//we use a comboChart to combine line and scatter plots.
+		var chart = new google.visualization.ComboChart(chartCanvas);
+		
+		//and the data needs to be fed into a dataTable before being plotted
+		var data = new google.visualization.DataTable();
+		data.addColumn('string', 'Sample'); 	//name
+		data.addColumn('number', 'Altitude'); 	//altitude
+		data.addColumn('number', 'Sommet');		//only summit gets a value in there
 
-            chart.draw(data, {
-                height: 150,
-                legend: 'none',
-                titleY: 'Altitude (m)',
-				seriesType: 'line',
-                series: {
-                    0: {color: '#1171A3'},
-					1: {type: 'scatter',
-						pointShape: 'star',
-						pointSize: 15,}
-						},
-                backgroundColor: '#E4E4E4'
-            });
+		//get highest point of elevations
+		var max = 0;
+		for (var i = 0; i < elevations.length; i++)
+			if(elevations[i].elevation > elevations[max].elevation)
+				max = i;
 
-        }
+		//draw chart, with name, elevation, and if we're at the summit, the top
+		for (var i = 0; i < elevations.length; i++) {
+			data.addRow([(i == max ? 'Altitude' : ''), elevations[i].elevation, (i == max ? elevations[max].elevation : null)]);
+		}
+
+		//customize the plots to make the scatter prettier
+		chart.draw(data, {
+			height: 150,
+			legend: 'none',
+			titleY: 'Altitude (m)',
+			seriesType: 'line',
+			series: {
+				0: {color: '#1171A3'},
+				1: {type: 'scatter',
+					pointShape: 'star',		//make it a star!
+					pointSize: 15,}
+					},
+			backgroundColor: '#E4E4E4'
+		});
+	}
 	
 	function removeLastPoint(){
+		//remove last point, redraw coordinates, and if we're above two points, recalculate charts.
 		trailPoints.pop();
 		drawCoordinates();
 		if (trailPoints.length >= 2)
@@ -288,31 +332,39 @@ if(isset($_SESSION['event'])){
 	}
 	
 	function removeAllPoints(){
+		//clear array, map, and chart
 		trailPoints = [];
 		drawCoordinates();
 		chart.clearChart();
 	}
-
-	//all things date time
-	function adjustEndTime(){
-		jQuery('#endDate').datetimepicker({
-			minDate: $('#startDate').val()
-		});
-	}
 	
+	//fits the map to show all the points on the map
 	function fitMapToBounds(){
 		var bounds = new google.maps.LatLngBounds();
+		
+			//if we have many points, add points to bounds, and extend bounds
 			if(trailPoints.length > 1){
 				for(var i = 0; i < trailPoints.length; i++){
 					bounds.extend(trailPoints[i]);
 				}
 				map.fitBounds(bounds);
 			}else if(trailPoints.length == 1){
+				
+				//if we have just one point, center and zoom on that point.
 				map.setCenter({lat:trailPoints[0].lat(), lng: trailPoints[0].lng()});
 				map.setZoom(12);
 			}
 		
 	}
+
+	//when startTime is set, adjust end time to not go below start time.
+	function adjustEndTime(){
+		jQuery('#endDate').datetimepicker({
+			minDate: $('#startDate').val()
+		});
+	}
+	
+	
 	
 </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfHSiXZQseH8j-pPHb9PiWwvGvpOUSDGw&callback=initMap"
