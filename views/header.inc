@@ -119,6 +119,8 @@ $seo_description = $this->vars['seo_description'];
                             <ul>
 
                                 <?php
+								if(!isset($_SESSION['lang']))
+									$_SESSION['lang'] = 'fr';
                                 if (isset($_SESSION['user'])) {
                                     ?>
                                     <li><a href="<?php echo URL_DIR; ?>/login/welcome" rel="submenu" class=""><i
