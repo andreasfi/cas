@@ -20,20 +20,6 @@ SET time_zone = "+00:00";
 -- Base de données :  `cas_php`
 --
 
-DELIMITER $$
---
--- Procédures
---
-DROP PROCEDURE IF EXISTS `pc_login`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `pc_login` (IN `Email` VARCHAR(50))  BEGIN
-  set @var  =(SELECT COUNT(id)
-    FROM players
-    where players.email=@Email); 
-    
-
-END$$
-
-DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -239,7 +225,7 @@ CREATE TABLE IF NOT EXISTS `subscribers` (
   `emailAddress` varchar(120) NOT NULL,
   PRIMARY KEY (`id`,`emailAddress`),
   UNIQUE KEY `emailAddress` (`emailAddress`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `subscribers`
