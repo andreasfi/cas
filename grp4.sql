@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.10deb1
+-- version 4.5.2
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Nov 08, 2016 at 11:10 AM
--- Server version: 5.5.47-0ubuntu0.14.04.1
--- PHP Version: 5.5.9-1ubuntu4.14
+-- Host: 127.0.0.1
+-- Generation Time: Nov 08, 2016 at 10:25 AM
+-- Server version: 5.7.9
+-- PHP Version: 5.6.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,11 +14,26 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `grp4`
+-- Database: `cas_php`
 --
+
+DELIMITER $$
+--
+-- Procedures
+--
+DROP PROCEDURE IF EXISTS `pc_login`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pc_login` (IN `Email` VARCHAR(50))  BEGIN
+  set @var  =(SELECT COUNT(id)
+    FROM players
+    where players.email=@Email); 
+    
+
+END$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -26,11 +41,12 @@ SET time_zone = "+00:00";
 -- Table structure for table `difficulties`
 --
 
+DROP TABLE IF EXISTS `difficulties`;
 CREATE TABLE IF NOT EXISTS `difficulties` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `differenceName` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `difficulties`
@@ -49,11 +65,12 @@ INSERT INTO `difficulties` (`id`, `differenceName`) VALUES
 -- Table structure for table `eventcategory`
 --
 
+DROP TABLE IF EXISTS `eventcategory`;
 CREATE TABLE IF NOT EXISTS `eventcategory` (
   `idEventCategory` int(11) NOT NULL AUTO_INCREMENT,
   `category` varchar(25) NOT NULL,
   PRIMARY KEY (`idEventCategory`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `eventcategory`
@@ -75,6 +92,7 @@ INSERT INTO `eventcategory` (`idEventCategory`, `category`) VALUES
 -- Table structure for table `events`
 --
 
+DROP TABLE IF EXISTS `events`;
 CREATE TABLE IF NOT EXISTS `events` (
   `idEvent` int(11) NOT NULL AUTO_INCREMENT,
   `description` text NOT NULL,
@@ -93,16 +111,16 @@ CREATE TABLE IF NOT EXISTS `events` (
   KEY `fk_idEventCategory` (`fk_idEventCategory`),
   KEY `fk_idDifficulty` (`fk_idDifficulty`),
   KEY `idPath` (`fk_idPath`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `events`
 --
 
 INSERT INTO `events` (`idEvent`, `description`, `startDate`, `endDate`, `maxParticipants`, `fk_idEventType`, `fk_idOwner`, `title`, `fk_idEventCategory`, `fk_idDifficulty`, `fk_idPath`) VALUES
-(3, 'La Course Sierre-Zinal aussi appel&#xE9;e la Course des cinq 4000, a souvent &#xE9;t&#xE9; consid&#xE9;r&#xE9;e comme l&#x2019;une des plus belles courses de montagne du monde. On a &#xE9;crit qu&#x2019;elle &#xE9;tait &#xE0; la course de montagne ce que le marathon de New York est au marathon. Elle est aussi la doyenne des grandes &#xE9;preuves de montagne d&#x2019;Europe. Sierre-Zinal, au coeur des Alpes valaisannes, pr&#xE9;sente un parcours tr&#xE8;s engageant .\r\nCes paysages exceptionnels, son ambiance chaleureuse, et son organisation soign&#xE9;e expliquent le succ&#xE8;s et la long&#xE9;vit&#xE9; de Sierre-Zinal', '2016-11-18 07:00:00', '2016-11-18 18:00:00', 85, 2, 1, 'Sierre Zinal', 1, 3, 3),
-(4, 'La Patrouille des Glaciers (PdG) est une course militaire internationale de ski alpinisme de l&#x2019;Arm&#xE9;e Suisse, ouverte &#xE9;galement aux patrouilles civiles. \r\nLa course se d&#xE9;roule de Zermatt &#xE0; Verbier (Parcours Z) respectivement d&#x27;Arolla &#xE0; Verbier (Parcours A). Elle doit &#xEA;tre accomplie en une seule &#xE9;tape. \r\nCette course unique se caract&#xE9;rise par la longueur et l&#x2019;altitude du profil du parcours ainsi que les exigences du milieu alpin.', '2016-11-25 04:00:00', '2016-11-25 21:00:00', 250, 2, 1, 'PDG', 2, 5, 5),
-(5, 'Le parcours a pour cadre une des plus belles vall&#xE9;es des Alpes Valaisannes. Le trac&#xE9; suit des routes et des chemins de montagne sous le regard majestueux de montagnes telles que la Dent-Blanche ou le Cervin.\r\nLes participants foulent tour &#xE0; tour les berges d&#x2019;un petit lac d&#x2019;altitude ou des rochers plus escarp&#xE9;s en restant &#xE0; une altitude comprise entre 2100 et 2450 m. La longueur du parcours est de 16km 350 pour une d&#xE9;nivellation positive de 700 m.\r\nLe but de ce parcours dans le Val des Dix peut &#xEA;tre aper&#xE7;u d&#xE8;s le d&#xE9;part : le barrage de la Grande Dixence. L&#x2019;arriv&#xE9;e se situe sur le mur du barrage, au milieu de celui-ci.', '2016-11-28 09:00:00', '2016-11-28 16:00:00', 65, 2, 1, 'Thyon Dixence', 1, 3, 6),
+(3, 'La Course Sierre-Zinal aussi appel&#xE9;e la Course des cinq 4000, a souvent &#xE9;t&#xE9; consid&#xE9;r&#xE9;e comme l&#x2019;une des plus belles courses de montagne du monde. On a &#xE9;crit qu&#x2019;elle &#xE9;tait &#xE0; la course de montagne ce que le marathon de New York est au marathon. Elle est aussi la doyenne des grandes &#xE9;preuves de montagne d&#x2019;Europe. Sierre-Zinal, au coeur des Alpes valaisannes, pr&#xE9;sente un parcours tr&#xE8;s engageant .\r\nCes paysages exceptionnels, son ambiance chaleureuse, et son organisation soign&#xE9;e expliquent le succ&#xE8;s et la long&#xE9;vit&#xE9; de Sierre-Zinal', '2016-11-18 07:00:00', '2016-11-18 18:00:00', 85, 1, 1, 'Sierre Zinal', 1, 3, 3),
+(4, 'La Patrouille des Glaciers (PdG) est une course militaire internationale de ski alpinisme de l&#x2019;Arm&#xE9;e Suisse, ouverte &#xE9;galement aux patrouilles civiles. \r\nLa course se d&#xE9;roule de Zermatt &#xE0; Verbier (Parcours Z) respectivement d&#x27;Arolla &#xE0; Verbier (Parcours A). Elle doit &#xEA;tre accomplie en une seule &#xE9;tape. \r\nCette course unique se caract&#xE9;rise par la longueur et l&#x2019;altitude du profil du parcours ainsi que les exigences du milieu alpin.', '2016-11-25 04:00:00', '2016-11-25 21:00:00', 250, 1, 1, 'PDG', 2, 5, 5),
+(5, 'Le parcours a pour cadre une des plus belles vall&#xE9;es des Alpes Valaisannes. Le trac&#xE9; suit des routes et des chemins de montagne sous le regard majestueux de montagnes telles que la Dent-Blanche ou le Cervin.\r\nLes participants foulent tour &#xE0; tour les berges d&#x2019;un petit lac d&#x2019;altitude ou des rochers plus escarp&#xE9;s en restant &#xE0; une altitude comprise entre 2100 et 2450 m. La longueur du parcours est de 16km 350 pour une d&#xE9;nivellation positive de 700 m.\r\nLe but de ce parcours dans le Val des Dix peut &#xEA;tre aper&#xE7;u d&#xE8;s le d&#xE9;part : le barrage de la Grande Dixence. L&#x2019;arriv&#xE9;e se situe sur le mur du barrage, au milieu de celui-ci.', '2016-11-28 09:00:00', '2016-11-28 16:00:00', 65, 1, 1, 'Thyon Dixence', 1, 3, 6),
 (6, 'Le Grand Raid Cristalp renomm&#xE9; en 2016 Grand Raid BCVS est une course de VTT organis&#xE9;e chaque ann&#xE9;e depuis 1990 entre Verbier et Grimentz en Valais. Cette course valorise les c&#xF4;t&#xE9;s aventure et mythique d&#x27;une &#xE9;preuve sans comparaison qui se d&#xE9;roule &#xE0; l&#x27;&#xE9;chelle d&#x27;une r&#xE9;gion des alpes valaisannes.', '2016-12-02 05:00:00', '2016-12-03 17:00:00', 200, 2, 1, 'Le Grand Raid', 1, 4, 7);
 
 -- --------------------------------------------------------
@@ -111,11 +129,12 @@ INSERT INTO `events` (`idEvent`, `description`, `startDate`, `endDate`, `maxPart
 -- Table structure for table `eventtypes`
 --
 
+DROP TABLE IF EXISTS `eventtypes`;
 CREATE TABLE IF NOT EXISTS `eventtypes` (
   `idEventType` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(50) NOT NULL,
   PRIMARY KEY (`idEventType`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `eventtypes`
@@ -131,6 +150,7 @@ INSERT INTO `eventtypes` (`idEventType`, `type`) VALUES
 -- Table structure for table `eventusers`
 --
 
+DROP TABLE IF EXISTS `eventusers`;
 CREATE TABLE IF NOT EXISTS `eventusers` (
   `fk_idEvent` int(11) NOT NULL,
   `fk_idUser` int(11) NOT NULL,
@@ -159,6 +179,7 @@ INSERT INTO `eventusers` (`fk_idEvent`, `fk_idUser`, `fk_idStatus`, `submitDate`
 -- Table structure for table `password_change_requests`
 --
 
+DROP TABLE IF EXISTS `password_change_requests`;
 CREATE TABLE IF NOT EXISTS `password_change_requests` (
   `idRequest` varchar(100) NOT NULL,
   `Time` datetime NOT NULL,
@@ -173,11 +194,12 @@ CREATE TABLE IF NOT EXISTS `password_change_requests` (
 -- Table structure for table `paths`
 --
 
+DROP TABLE IF EXISTS `paths`;
 CREATE TABLE IF NOT EXISTS `paths` (
   `idPath` int(11) NOT NULL AUTO_INCREMENT,
   `coordinatesJSON` longtext NOT NULL,
   PRIMARY KEY (`idPath`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `paths`
@@ -197,12 +219,13 @@ INSERT INTO `paths` (`idPath`, `coordinatesJSON`) VALUES
 -- Table structure for table `status`
 --
 
+DROP TABLE IF EXISTS `status`;
 CREATE TABLE IF NOT EXISTS `status` (
   `idStatus` int(11) NOT NULL AUTO_INCREMENT,
   `statusname` varchar(30) NOT NULL,
   PRIMARY KEY (`idStatus`),
   KEY `idStatus` (`idStatus`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `status`
@@ -219,12 +242,13 @@ INSERT INTO `status` (`idStatus`, `statusname`) VALUES
 -- Table structure for table `subscribers`
 --
 
+DROP TABLE IF EXISTS `subscribers`;
 CREATE TABLE IF NOT EXISTS `subscribers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `emailAddress` varchar(120) NOT NULL,
   PRIMARY KEY (`id`,`emailAddress`),
   UNIQUE KEY `emailAddress` (`emailAddress`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -232,6 +256,7 @@ CREATE TABLE IF NOT EXISTS `subscribers` (
 -- Table structure for table `users`
 --
 
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `idUser` int(11) NOT NULL AUTO_INCREMENT,
   `mail` varchar(100) NOT NULL,
@@ -243,7 +268,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`idUser`),
   UNIQUE KEY `mail` (`mail`),
   KEY `fk_idUserTypes` (`fk_idUserTypes`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
@@ -262,11 +287,12 @@ INSERT INTO `users` (`idUser`, `mail`, `firstname`, `lastname`, `tel`, `pwd`, `f
 -- Table structure for table `usertypes`
 --
 
+DROP TABLE IF EXISTS `usertypes`;
 CREATE TABLE IF NOT EXISTS `usertypes` (
   `idUserType` int(11) NOT NULL AUTO_INCREMENT,
   `role` varchar(50) NOT NULL,
   PRIMARY KEY (`idUserType`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `usertypes`
