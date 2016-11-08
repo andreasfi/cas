@@ -219,6 +219,15 @@ $lang['NEWSLETTER_NO_ERROR'] = "No error detected.";
 $lang['NEWSLETTER_SENTERROR_SING'] = "Failed to deliver to the following e-mail address";
 $lang['NEWSLETTER_SENTERROR_PL'] = "Failed to deliver to the following e-mail addresses";
 
+//DATATABLE
+
+$lang['DATATABLE_TITLE'] = "Title";
+$lang['DATATABLE_START'] = "Start";
+$lang['DATATABLE_END'] = "End";
+$lang['DATATABLE_DIFFICULTY'] = "Difficulty";
+$lang['DATATABLE_TYPE'] = "Type";
+$lang['DATATABLE_CATEGORY'] = "Category";
+
 //FOOTER
 $lang['PAGES'] = "Pages";
 $lang['HOME'] = "Home";

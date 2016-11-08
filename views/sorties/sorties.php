@@ -39,12 +39,12 @@ include_once ROOT_DIR . 'views/header.inc'; ?>
         <table id="datatable">
             <thead>
             <tr>
-                <th>Title</th>
-                <th>Start</th>
-                <th>End</th>
-                <th>Difficulty</th>
-                <th>Type</th>
-                <th>Category</th>
+                <th><?php echo $lang['DATATABLE_TITLE'] ?></th>
+                <th><?php echo $lang['DATATABLE_START'] ?></th>
+                <th><?php echo $lang['DATATABLE_END'] ?></th>
+                <th><?php echo $lang['DATATABLE_DIFFICULTY'] ?></th>
+                <th><?php echo $lang['DATATABLE_TYPE'] ?></th>
+                <th><?php echo $lang['DATATABLE_CATEGORY'] ?></th>
             </tr>
             </thead>
         </table>
@@ -101,7 +101,7 @@ include_once ROOT_DIR . 'views/header.inc'; ?>
             item_calendar['constraint'] = 'businessHours';
             item_calendar['color'] = color;
             item_calendar['textcolor'] = event_type_textcolor;
-            item_calendar['description'] = "Very cool event";
+            item_calendar['description'] = event['description'];
             item_calendar['difficulty'] = event['difficulty'];
 
             calendar_data.push(item_calendar);
@@ -109,12 +109,11 @@ include_once ROOT_DIR . 'views/header.inc'; ?>
         }
     }
 	
-	
-
 
     $(document).ready(function () {
         loadEvents();
-        initCalendar('fr')
+        var locale = "<?php echo $_SESSION['lang'] ?>"
+        initCalendar(locale)
         initDataTable();
     });
 	

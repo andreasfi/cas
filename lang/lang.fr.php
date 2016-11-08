@@ -219,6 +219,15 @@ $lang['NEWSLETTER_NO_ERROR'] = "Aucune erreur d'envoi détectée.";
 $lang['NEWSLETTER_SENTERROR_SING'] = "La newsletter n'a pas été remise à l'adresse suivante";
 $lang['NEWSLETTER_SENTERROR_PL'] = "La newsletter n'a pas été remise aux adresses suivantes";
 
+//DATATABLE
+
+$lang['DATATABLE_TITLE'] = "Titre";
+$lang['DATATABLE_START'] = "Début";
+$lang['DATATABLE_END'] = "Fin";
+$lang['DATATABLE_DIFFICULTY'] = "Difficulté";
+$lang['DATATABLE_TYPE'] = "Type";
+$lang['DATATABLE_CATEGORY'] = "Catégorie";
+
 //FOOTER
 $lang['PAGES'] = "Pages";
 $lang['HOME'] = "Home";

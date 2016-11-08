@@ -75,7 +75,7 @@ $seo_description = $this->vars['seo_description'];
         <script type="text/javascript" src="<?php echo URL_DIR; ?>/js/fullcalendar/fullcalendar.js"></script>
         <script type="text/javascript" src="<?php echo URL_DIR; ?>/js/fullcalendar/locale/fr.js"></script>
         <script type="text/javascript" src="<?php echo URL_DIR; ?>/js/fullcalendar/locale/de.js"></script>
-        <script type="text/javascript" src="<?php echo URL_DIR; ?>/js/fullcalendar/locale/en-gb.js"></script>
+        <script type="text/javascript" src="<?php echo URL_DIR; ?>/js/fullcalendar/locale/en.js"></script>
 
         <!-- DATATABLES -->
 
