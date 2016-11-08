@@ -88,24 +88,24 @@
                 <div class="col-md-4 col-sm-4">
                     <div class="f-block bblue">
                         <i class="fa fa-blind"></i>
-                        <h3>Notre club</h3>
-                        <p>Bénéficiez de notre réseau de montagnards pour organisert et participer</p>
+                        <h3>Our club</h3>
+                        <p>Benefit from our mountaineers network to organize events and meet new people</p>
                     </div>
                 </div>
 
                 <div class="col-md-4 col-sm-4">
                     <div class="f-block bblue">
                         <i class="fa fa-building"></i>
-                        <h3>Outil de gestion</h3>
-                        <p>Avec notre outil de gestion des sorties nous pouvons garantir </p>
+                        <h3>Management tool</h3>
+                        <p>With our output management tool we can easily organise events </p>
                     </div>
                 </div>
 
                 <div class="col-md-4 col-sm-4">
                     <div class="f-block bblue">
                         <a href="#"><i class="fa fa-thumbs-up"></i></a>
-                        <a href="#"><h3>Nos avantages membres</h3></a>
-                        <p>Postulez en tant que memebre pour pouvoir bénéficier de tous nos avantages</p>
+                        <a href="#"><h3>Member advantages</h3></a>
+                        <p>Apply as a member to benefit of all our advantages</p>
                     </div>
                 </div>
             </div>
@@ -119,7 +119,7 @@
 
                     <!-- User icon -->
                     <span class="twitter-icon text-center"><i class="fa fa-user"></i></span>
-                    <p><em>"Le club alpin suisse de montana est vraiment bien"</em><br>Pierre Baran, Trailmaster CAS Montana</p>
+                    <p><em>"This Swiss Alpine Club is really really good"</em><br>Pierre Baran, Trailmaster at CAS Montana</p>
 
                 </div>
             </div>
