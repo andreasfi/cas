@@ -20,7 +20,7 @@ $lang = $this->lang;
 						<hr />
 						<i class="fa fa-phone"></i> &nbsp;<?php echo $lang['CAS_PHONE']; ?>
 						<hr />
-						<i class="fa fa-envelope-o"></i> &nbsp; <a href="mailto:#"><?php echo $lang['CAS_MAIL']; ?></a>
+						<i class="fa fa-envelope-o"></i> &nbsp; <a href="mailto:<?php echo $lang['CAS_MAIL']; ?>"><?php echo $lang['CAS_MAIL']; ?></a>
 						<hr />
 						<div class="social">
 							<a href="#" class="bblue"><i class="fa fa-facebook"></i></a>
