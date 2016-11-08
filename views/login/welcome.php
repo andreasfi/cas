@@ -17,7 +17,7 @@ include_once ROOT_DIR . 'views/header.inc';
             <section id="sorties_container" class="row col-lg-12">
                 <h1><?php echo $lang['WELCOME_H1_LISTEVENTS']; ?></h1>
 
-                <table class="table table-striped col-lg-5">
+                <table class="table table-striped table-hover col-lg-5">
                     <tr>
                         <th>Date start</th>
                         <th>Date end</th>
@@ -37,7 +37,7 @@ include_once ROOT_DIR . 'views/header.inc';
 
                         if($_SESSION['user']->getId() == $e->getEvent()->getOwner())
                         {
-                            $status = "<b style='color: orange;'>Trailmaster</b>";
+                            $status = "<b style='color: darkblue;'>Trailmaster</b>";
                         }else
                         {
                             $status = $e->getStatus()->getStatusName();
@@ -54,9 +54,13 @@ include_once ROOT_DIR . 'views/header.inc';
                         /*$startDate = $startDate->format('Y-m-d H:i:s');
                         $endDate = $endDate->format('Y-m-d H:i:s');
                         */
+                        ?>
 
-                        echo "<tr><td>$startDate</td><td>$endDate</td><td>$status</td><td>$title</td></tr>";
+                        <tr onclick='redirectToEvent("<?php echo $e->getEvent()->getId() ?>")'><td><?php echo $startDate ?></td><td><?php echo $endDate ?></td><td><?php echo $status ?></td><td><?php echo $title ?></td></tr>
+
+                    <?php
                     }
+
 
                     ?>
 
@@ -95,6 +99,17 @@ include_once ROOT_DIR . 'views/header.inc';
         </div>
     </div>
 </div>
+
+
+<script type="text/javascript">
+
+    function redirectToEvent(eventID)
+    {
+        window.location.href = "<?php echo URL_DIR . '/sorties/details/' ?>"+eventID;
+    }
+
+</script>
+
 
 
 <?php
