@@ -106,7 +106,7 @@ if(isset($_SESSION['event'])){
 					<button type="button" onclick="removeAllPoints()" class="btn btn-danger"><?php echo $lang['TRAIL_MAP_DELETEALL']?></button>
 				</div>
 				<div id="map" class="graphical"></div>
-				<div id="chart" class="graphical" style="height:150px;"></div>
+				<div id="chart" class="graphical" style="height:150px; display: none"></div>
 			</div>
 		</div>
 	</div>
@@ -224,8 +224,10 @@ if(isset($_SESSION['event'])){
 		document.getElementById('form_json').value = JSON.stringify(trailPoints);
 		
 		//if we have more than 2 points, we calculate the elevation graph
-		if (trailPoints.length >= 2)
+		if (trailPoints.length >= 2){
+			$("#chart").slideDown(100);
 			calculateElevation(getJSON(trailPoints));
+		}
 	}
     
 	//listener for click
@@ -332,13 +334,16 @@ if(isset($_SESSION['event'])){
 		drawCoordinates();
 		if (trailPoints.length >= 2)
 			calculateElevation(getJSON(trailPoints));
-		else
+		else{
+			$("#chart").slideUp();
 			chart.clearChart();
+		}
 	}
 	
 	function removeAllPoints(){
 		//clear array, map, and chart
 		trailPoints = [];
+		$("#chart").slideUp();
 		drawCoordinates();
 		chart.clearChart();
 	}
